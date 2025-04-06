@@ -11,6 +11,9 @@
   --bg-header-color-1: 18, 18, 18, 1;
   --bg-header-color-2: 0, 0, 0, .90;
 
+  --bg-nav-color-1: 0, 0, 0, 1;
+  --bg-nav-color-2: 26, 26, 26, 1;
+
   --text-0: 255, 255, 255;
   --text-1: 206, 206, 251;
 
@@ -27,6 +30,9 @@
 
   --bg-header-color-1: 235, 236, 237, .25;
   --bg-header-color-2: 235, 236, 237, .75;
+
+  --bg-nav-color-1: 240, 240, 240, .80;
+  --bg-nav-shadow: 0px 70px 60px 5px rgba(0, 0, 0, 0.25);
 
   --text-0: 0, 0, 0;
   --text-1: 49, 49, 49;
@@ -60,7 +66,7 @@
 
 @layer utilities {
   .text-logo {
-    @apply font-guerrilla font-bold text-tale text-[30px] max-sm:text-[28px] tracking-widest;
+    @apply font-guerrilla font-bold text-tale text-[30px] max-sm:text-[26px] tracking-widest;
   }
 
   .text-gradient {
@@ -72,12 +78,43 @@
   }
 }
 
+body::-webkit-scrollbar {
+  width: 14px;
+}
+
+.nav__menu::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track,
+.nav__menu::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+body::-webkit-scrollbar-thumb,
+.nav__menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(145deg, rgba(41,43,48,1) 5%, rgba(21,21,21,1) 25%, rgba(26,26,26,1) 70%, rgba(73,77,87,1) 100%);
+  transition: background-color .20s ease-in;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.nav__menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(145deg, rgba(21,21,21,1) 50%, rgba(26,26,26,1) 80%, rgba(73,77,87,1) 100%);
+}
+
 .header-glass {
   background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 12%, rgba(var(--bg-header-color-2)) 32%);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   transition: all .5s ease-in-out;
+}
+
+.nav-glass {
+  background: linear-gradient(145deg, rgba(var(--bg-nav-color-1)) 50%, rgba(var(--bg-nav-color-2)) 75%);
+  box-shadow: var(--bg-nav-shadow);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
 }
 
 @media screen and (max-width: 1024px) {

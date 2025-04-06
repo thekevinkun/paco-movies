@@ -6,7 +6,7 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 
-const SearchBar = () => {
+const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async () => {
@@ -28,8 +28,8 @@ const SearchBar = () => {
   }
 
   return (
-    <div className="bg-white w-[576px] ml-6 px-1.5 border border-gray-700 
-                shadow-lg flex items-center max-lg:hidden">
+    <div className={`${widthClass} ${margin} bg-white w-[576px] ml-6 px-1.5 
+              border border-gray-700 shadow-lg flex items-center max-lg:hidden`}>
       <input
         type="text"
         placeholder="Search"
