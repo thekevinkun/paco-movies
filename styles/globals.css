@@ -5,6 +5,40 @@
 @tailwind components;
 @tailwind utilities;
 
+.dark {
+  --background: 18, 18, 18;
+  
+  --bg-header-color-1: 18, 18, 18, 1;
+  --bg-header-color-2: 0, 0, 0, .90;
+
+  --text-0: 255, 255, 255;
+  --text-1: 206, 206, 251;
+
+  --tale-0: 0, 128, 128;
+  --tale-1: 0, 128, 128, 0.20;
+
+  --danger: 179, 2, 2;
+
+  transition: all .5s ease-in-out;
+}
+
+.light {
+  --background: 255, 255, 255;
+
+  --bg-header-color-1: 235, 236, 237, .25;
+  --bg-header-color-2: 235, 236, 237, .75;
+
+  --text-0: 0, 0, 0;
+  --text-1: 49, 49, 49;
+
+  --tale-0: 0, 128, 128;
+  --tale-1: 0, 128, 128, 0.20;
+
+  --danger: 179, 2, 2;
+
+  transition: all .5s ease-in-out;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,8 +50,7 @@
   body {
     font-family: "Montserrat", serif;
     font-optical-sizing: auto;
-    background: #000000;
-    color: #fff;
+    background: rgba(var(--background));
   }
 }
 
@@ -27,11 +60,35 @@
 
 @layer utilities {
   .text-logo {
-    @apply font-guerrilla font-bold text-tale text-[30px] max-lg:text-xl tracking-widest;
+    @apply font-guerrilla font-bold text-tale text-[30px] max-sm:text-[28px] tracking-widest;
   }
 
   .text-gradient {
-    @apply bg-linear-to-r from-[#008080] to-[#171717] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#008080] to-[#171717] bg-clip-text text-transparent;
+  }
+
+  .search-input {
+    @apply block w-full text-sm font-medium bg-white py-1.5 px-1 text-dark rounded-md border border-gray-700 focus:border-gray-100 focus:outline-none focus:ring-0;
+  }
+}
+
+.header-glass {
+  background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 12%, rgba(var(--bg-header-color-2)) 32%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: all .5s ease-in-out;
+}
+
+@media screen and (max-width: 1024px) {
+  .header-glass {
+    background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 15%, rgba(var(--bg-header-color-2)) 80%);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .header-glass {
+    background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 10%, rgba(var(--bg-header-color-2)) 90%);
   }
 }
 

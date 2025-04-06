@@ -21,26 +21,25 @@ const config: Config = {
         montserrat: ["Montserrat", "sans-serif"]
       },
       colors: {
-        white: {
-          DEFAULT: "#FFFFFF",
-          1: "#CECEFB"
+        main: {
+          DEFAULT: "rgba(var(--text-0))",
+          1: "rgba(var(--text-1))"
         },
         dark: {
           DEFAULT: "#000",
-          2: "#313131"
+          1: "#313131"
         },
         tale: {
-          DEFAULT: "#008080",
-          1: "rgba(0, 128, 128, 0.20)"
+          DEFAULT: "rgba(var(--tale-0))",
+          1: "rgba(var(--tale-1))"
         },
-        red: {
-          DEFAULT: "#FF0F0F",
-          1: "#b30202"
+        danger: {
+          DEFAULT: "rgba(var(--danger))",
         }
       }
     },
   },
-  plugins: [require("@tailwindcss/typography")]
+  plugins: []
 };
 
 export default config;
