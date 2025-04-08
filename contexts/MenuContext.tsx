@@ -6,8 +6,10 @@ import { IMenuContext } from "@types";
 import { MEDIA_TYPE } from "@helpers/constants";
 
 const MenuContextDefaultValues: IMenuContext = {
-    activeMediaType: "trending",
-    handleChangeMediaType: (item: string) => {},
+    activeMediaType: "all",
+    activeCategory: "trending",
+    handleChangeMediaType: (mediaType: string) => {},
+    handleChangeCategory: (name: string) => {},
     showCategories: [],
     showGenres: []
 }
@@ -19,7 +21,8 @@ export function useMenu() {
 }
 
 export const MenuProvider = ({ children } : Readonly<{children: React.ReactNode;}>) => {
-    const [activeMediaType, setActiveMediaType] = useState<string>("");
+    const [activeMediaType, setActiveMediaType] = useState<string>("all");
+    const [activeCategory, setActiveCategory] = useState<string>("trending");
     const [showCategories, setShowCategories] = useState<{ id: string; title: string; icon: string; }[] | undefined>(undefined);
     const [showGenres, setShowGenres] = useState<{id: number, name: string}[] | undefined>(undefined);
 
@@ -31,21 +34,17 @@ export const MenuProvider = ({ children } : Readonly<{children: React.ReactNode;
         setShowCategories(getMediaTypeCategory);
     }
 
-    const handleChangeCategories = (item: { id: string; title: string; icon: string; }[]) => {
-        setShowCategories(item);
-    }
-
-    const handleChangeGenres = (item: []) => {
-        setShowGenres(item);
+    const handleChangeCategory = (name: string) => {
+        setActiveCategory(name);
     }
 
     const value = {
         activeMediaType,
         handleChangeMediaType,
+        activeCategory,
+        handleChangeCategory,
         showCategories,
-        handleChangeCategories,
-        showGenres,
-        handleChangeGenres
+        showGenres
     }
 
     return (

@@ -10,20 +10,11 @@ import { IShowMobileMenu } from "@types";
 import { MEDIA_TYPE } from "@helpers/constants";
 
 const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
-  const { activeMediaType, handleChangeMediaType, showCategories, showGenres } = useMenu();
-  
-  const [activeCategory, setActiveCategory] = useState("");
+  const { activeMediaType, activeCategory, showCategories, showGenres } = useMenu();
   
   const toggleMenu = () => {
     if (isShowMobileMenu && setIsShowMobileMenu)
       setIsShowMobileMenu(false);
-  }
-
-  const handleClickedMediaType = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    const mediaType = target.id;
-
-    handleChangeMediaType(mediaType);
   }
 
   return (
@@ -32,7 +23,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
         <Link key={item.id} id={item.id} href={`/${item.id}`}
             className={`w-full py-3 max-lg:px-3
             ${activeMediaType !== item.id ? "hover:bg-tale-1" : "pointer-events-none"}`}
-            onClick={(e) => {toggleMenu(); handleClickedMediaType(e);}}
+            onClick={(e) => {toggleMenu();}}
         >
             <div className="flex flex-col items-center 
                   max-lg:flex-row max-lg:items-center max-lg:gap-3 pointer-events-none"

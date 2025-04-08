@@ -19,14 +19,14 @@ export default function RootLayout({
     <html lang="en">
       <body className="dark">
         <Providers>
-          <Header />
-          <Navbar />
-          
-          <main>
-            {children}
+          <main className="flex max-lg:block">
+            <Header />
+            <Navbar />
+            <section className="grow">
+              {children}
+              <Footer />
+            </section>
           </main>
-
-          <Footer />
         </Providers>
       </body>
     </html>

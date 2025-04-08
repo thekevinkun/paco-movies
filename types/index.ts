@@ -7,7 +7,9 @@ export interface IShowMobileMenu {
 
 export interface IMenuContext {
     activeMediaType: string;
-    handleChangeMediaType: (item: string) => void;
+    activeCategory: string;
+    handleChangeMediaType: (mediaType: string) => void;
+    handleChangeCategory: (name: string) => void;
     showCategories?: {id: string, title: string, icon: string}[];
     showGenres?: {id: number, name: string}[];
 }
