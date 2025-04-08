@@ -3,6 +3,7 @@ import "@styles/globals.css";
 
 import { Header, Footer } from "@sections";
 import { Navbar } from "@components";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "PacoMovies",
@@ -17,14 +18,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark">
-        <Header />
-        <Navbar />
-        
-        <main>
-          {children}
-        </main>
+        <Providers>
+          <Header />
+          <Navbar />
+          
+          <main>
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -59,7 +59,6 @@ const Navbar = () => {
         ref={mobileMenu} 
         className={`${isShowMobileMenu && "nav-glass"} fixed top-0 left-0 transition-all z-50 
         ${isShowMobileMenu ? "w-96" : "w-0"}`}
-
       >
         <div className="nav__menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">
           <div className="mb-3 p-3">
