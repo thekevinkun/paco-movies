@@ -13,3 +13,32 @@ export interface IMenuContext {
     showCategories?: {id: string, title: string, icon: string}[];
     showGenres?: {id: number, name: string}[];
 }
+
+export interface IApiOptions {
+    method: string
+    cache: RequestCache | undefined;
+    headers: {
+        accept: string,
+        Authorization: string
+    }
+}
+
+export interface ICardMovieTop {
+    id: number
+    poster: string
+    backDrop: string
+    title: string
+    overview: string
+    mediaType: string
+    releaseDate: string
+    rating: number
+}
+
+export interface ICardMovie {
+    id: number
+    poster: string
+    title: string
+    mediaType: string
+    releaseDate: string
+    rating: number
+}

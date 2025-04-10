@@ -30,7 +30,7 @@ const Navbar = () => {
   }, [isShowMobileMenu])
 
   return (
-    <>
+    <div>
       {/* NAV DESKTOP */}
       <nav className="w-72 max-xl:w-64 max-lg:hidden">
         <div className="w-72 max-xl:w-64 fixed bottom-0 left-0 
@@ -45,8 +45,8 @@ const Navbar = () => {
       </nav>
 
       {/* MENU ICON FOR MOBILE */}
-      <div className="hidden h-16 max-sm:h-14 ml-6 max-sm:ml-4 
-            absolute top-0 left-0 z-50 max-lg:flex items-center">
+      <div className="hidden h-16 max-sm:h-14 ml-[18px] max-sm:ml-3 
+            fixed top-0 left-0 z-50 max-lg:flex items-center">
         <IoMdMenu 
           className="text-main text-[27px] max-sm:text-[25px] cursor-pointer hover:text-neutral-500 
                 transition-colors duration-200"
@@ -72,12 +72,13 @@ const Navbar = () => {
         </div>
 
         <RxCross2
-          className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} object-contain absolute top-[14px] right-[-45px] 
-                      text-[32px] text-danger bg-main/95 hover:bg-main/45 cursor-pointer`}
+          className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} 
+                    object-contain absolute top-[13px] right-[-45px] 
+                    text-[32px] text-danger bg-main/95 hover:bg-main/45 cursor-pointer`}
           onClick={() => setIsShowMobileMenu(false)}
         />
       </nav>
-    </>
+    </div>
   )
 }
 

@@ -133,3 +133,82 @@ body::-webkit-scrollbar-thumb:hover,
   }
 }
 
+.overview-line-clamp {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-line-clamp {
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.biograhpy-line-clamp {
+  display: -webkit-box;
+  line-clamp: 10;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-line-clamp {
+  display: -webkit-box;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+span.bullet-separator:last-child {
+  display: none;
+}
+
+.user-review-card {
+  position: relative;
+  padding: 1rem;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, .3);
+  border-width: 0;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-review-card::before {
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+  content: "";
+  display: block;
+  position: absolute;
+  transform-origin: top;
+  top: 100%;
+  height: calc(1.5rem + 2px);
+  left: calc(1.5rem - 1px);
+  width: calc(1.5rem + 2px);
+  background: rgba(0, 0, 0, .5);
+  filter: blur(20px);
+}
+
+.user-review-card::after {
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+  content: "";
+  display: block;
+  position: absolute;
+  transform-origin: top;
+  background: #fff;
+  top: calc(100% - 1px);
+  height: 1.5rem;
+  left: 1.5rem;
+  width: 1.5rem;
+}
+

@@ -28,8 +28,9 @@ const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) 
   }
 
   return (
-    <div className={`${widthClass} ${margin} bg-white w-[576px] ml-6 px-1.5 
-              border border-gray-700 shadow-lg flex items-center max-lg:hidden`}>
+    <div className={`${widthClass} ${margin} bg-white px-1.5 
+            border border-gray-700 shadow-lg flex items-center`}
+    >
       <input
         type="text"
         placeholder="Search"
