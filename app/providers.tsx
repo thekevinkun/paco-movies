@@ -1,11 +1,13 @@
 "use client"
 
-import { MenuProvider } from "@contexts/MenuContext";
+import { MenuProvider, MovieProvider } from "@contexts";
 
 export function Providers({ children } : Readonly<{children: React.ReactNode;}>) {
   return (
     <MenuProvider>
-      {children}
+      <MovieProvider>
+        {children}
+      </MovieProvider>
     </MenuProvider>
   );
 }

@@ -14,6 +14,14 @@ export interface IMenuContext {
     showGenres?: {id: number, name: string}[];
 }
 
+export interface IMovieContext {
+    results: any[];
+    page: number;
+    totalPages: number;
+    totalResults: number;
+    handleCollectData: (data: {page: number, results: [], total_pages: number, total_results: number}) => void;
+}
+
 export interface IApiOptions {
     method: string
     cache: RequestCache | undefined;

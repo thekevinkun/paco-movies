@@ -9,8 +9,6 @@ const Home = async ({mediaType="all", category="trending"}) => {
   if (!response.ok)
     throw new Error(data.error);
 
-  console.log(data);
-
   return (
     <ContentMovies 
       data={data}
