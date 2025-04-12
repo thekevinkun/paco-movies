@@ -1,20 +1,28 @@
 import { Metadata } from "next";
 
-import { ContentMovies } from "@sections";
+import { ContentStars } from "@sections";
+
+import { getCategory } from "@api";
 
 export const metadata: Metadata = {
   title: "Popular Stars — PacoMovies",
   description: "Popular stars collection's page"
 };
 
-const TvPopular = async ({mediaType="stars", category="popular"}) => {
+const StarsPopular = async ({mediaType="stars", category="popular"}) => {
+  const response = await getCategory(mediaType, category);
+  const data = await response.json();
+
+  if (!response.ok)
+    throw new Error(data.error);
 
   return (
-    <ContentMovies 
+    <ContentStars
+      data={data}
       mediaType={mediaType}
       category={category}
     />
   )
 }
 
-export default TvPopular;
+export default StarsPopular;

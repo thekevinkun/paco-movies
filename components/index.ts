@@ -4,6 +4,7 @@ import SearchBar from "@components/SearchBar";
 
 import CardMovieTop from "@components/CardMovieTop";
 import CardMovie from "@components/CardMovie";
+import CardPerson from "@components/CardPerson";
 
 import LoadMore from "@components/LoadMore";
 
@@ -16,6 +17,7 @@ export {
 
     CardMovieTop,
     CardMovie,
+    CardPerson,
 
     LoadMore,
 

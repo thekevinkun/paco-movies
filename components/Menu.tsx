@@ -89,6 +89,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
             <div className="pt-2">
               {showGenres.map((item) => (
                 <Link 
+                    key={item.id}
                     id={item.id.toString()} 
                     href={`/genre/${activeMediaType}/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
                     className={`p-3 flex items-center gap-3

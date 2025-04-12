@@ -36,14 +36,14 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
       </Link>
 
       {/* DETAILS */}
-      <div className="p-2 max-md:py-3 bg-dark bg-opacity-95 rounded-br-lg">
+      <div className="p-2 max-md:py-3 bg-card bg-opacity-95 rounded-br-lg">
         <div className="flex justify-between items-center">
           <Link 
             href={ mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson}  
             title={title} 
             className="inline-block w-fit"
           >
-            <h2 className="title-line-clamp text-white max-md:text-sm font-semibold hover:text-tale">
+            <h2 className="title-line-clamp text-main max-md:text-sm font-semibold hover:text-tale">
               {title}
             </h2>
           </Link>

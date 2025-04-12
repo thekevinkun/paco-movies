@@ -25,6 +25,9 @@ const config: Config = {
           DEFAULT: "rgba(var(--text-0))",
           1: "rgba(var(--text-1))"
         },
+        card: {
+          DEFAULT: "rgba(var(--bg-card-color))"
+        },
         dark: {
           DEFAULT: "#000",
           1: "#313131"

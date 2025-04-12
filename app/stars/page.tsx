@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 
-import { ContentMovies } from "@sections";
+import { ContentStars } from "@sections";
+
+import { getTrending } from "@api";
 
 export const metadata: Metadata = {
   title: "Stars — PacoMovies",
@@ -8,9 +10,15 @@ export const metadata: Metadata = {
 };
 
 const Stars = async ({mediaType="stars", category="trending"}) => {
+  const response = await getTrending(mediaType);
+  const data = await response.json();
+
+  if (!response.ok)
+    throw new Error(data.error);
 
   return (
-    <ContentMovies 
+    <ContentStars 
+      data={data}
       mediaType={mediaType}
       category={category}
     />

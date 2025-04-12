@@ -8,7 +8,7 @@ export interface IShowMobileMenu {
 export interface IMenuContext {
     activeMediaType: string;
     activeCategory: string;
-    handleChangeMediaType: (mediaType: string) => void;
+    handleChangeMediaType: (mediaType: string, genre?: any) => void;
     handleChangeCategory: (name: string) => void;
     showCategories?: {id: string, title: string, icon: string}[];
     showGenres?: {id: number, name: string}[];
@@ -49,4 +49,13 @@ export interface ICardMovie {
     mediaType: string
     releaseDate: string
     rating: number
+}
+
+export interface ICardPerson {
+    id: number
+    name: string
+    photo: string
+    department: string
+    popularity: number 
+    works: any
 }
