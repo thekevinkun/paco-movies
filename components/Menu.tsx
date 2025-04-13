@@ -107,7 +107,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                   />
 
                   <p className={`text-main text-sm font-semibold pt-2.5 
-                      ${activeCategory == item.id.toString() && "text-gray-700"}`}>
+                      ${activeCategory == item.id.toString() && "!text-gray-700"}`}>
                     {item.name}
                   </p>
                 </Link>
