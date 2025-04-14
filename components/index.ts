@@ -8,6 +8,7 @@ import CardPerson from "@components/CardPerson";
 
 import LoadMore from "@components/LoadMore";
 
+import { MotionDiv } from "@components/MotionDiv";
 import ThemeSwitcher from "@components/ThemeSwitcher";
 
 export {
@@ -21,5 +22,6 @@ export {
 
     LoadMore,
 
+    MotionDiv,
     ThemeSwitcher
 }

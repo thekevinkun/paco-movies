@@ -1,11 +1,11 @@
-"use client"
-
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { FaPlay } from "react-icons/fa";
+import { MotionDiv } from "@components";
+import { cardMovieVariants } from "@utils/motion";
 
+import { FaPlay } from "react-icons/fa";
 import { ICardMovieTop } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
 
@@ -16,7 +16,13 @@ const CardMovieTop = ({id, poster, backDrop, title,
   const routePerson = "/name" + `/${fullRoute}`;
 
   return (
-    <>
+    <MotionDiv 
+      variants={cardMovieVariants(0.25)}
+      initial="hidden"
+      animate="visible"
+      viewport={{ amount: 0 }}
+      className="flex h-[410px] max-md:hidden"
+    >
       {/* Poster on left side */}
       <div className="max-xl:hidden bg-dark rounded-l-md grow shrink-0 basis-auto w-72">
         <Image
@@ -114,7 +120,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
           }
         </div>
       </div>
-    </>
+    </MotionDiv>
   )
 }
 

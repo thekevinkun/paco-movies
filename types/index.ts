@@ -44,6 +44,7 @@ export interface ICardMovieTop {
 
 export interface ICardMovie {
     id: number
+    index: number
     poster: string
     title: string
     mediaType: string
@@ -53,6 +54,7 @@ export interface ICardMovie {
 
 export interface ICardPerson {
     id: number
+    index: number
     name: string
     photo: string
     department: string

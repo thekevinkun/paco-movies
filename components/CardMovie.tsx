@@ -2,18 +2,27 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { MotionDiv } from "@components";
+import { cardMovieVariants } from "@utils/motion";
 
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { ICardMovie } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
 
-const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
+const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
   const fullRoute = id + "-" + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-");
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
 
   return (
-    <div className="flex flex-col">
+    <MotionDiv 
+      variants={cardMovieVariants(index * 0.25)}
+      initial="hidden"
+      animate="visible"
+      viewport={{ amount: 0 }}
+      className="flex flex-col"
+    >
+
       {/* POSTER */}
       <Link
         href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
@@ -83,7 +92,7 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
           />
         </div>
       </div>
-    </div>
+    </MotionDiv>
   )
 }
 

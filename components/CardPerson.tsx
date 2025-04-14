@@ -2,12 +2,21 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { MotionDiv } from "@components";
+import { cardMovieVariants } from "@utils/motion";
+
 import { ICardPerson } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
 
-const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerson) => {
+const CardPerson = ({id, index, name, photo, department, popularity, works}: ICardPerson) => {
   return (
-    <div className="flex flex-col items-center">
+    <MotionDiv 
+        variants={cardMovieVariants(index * 0.25)}
+        initial="hidden"
+        animate="visible"
+        viewport={{ amount: 0 }}
+        className="flex flex-col items-center"
+    >
         {/* PHOTO */}
         <Link 
             href={`/name/${id + "-" + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
@@ -88,7 +97,7 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
             })}
         </div>
       </div>
-    </div>
+    </MotionDiv>
   )
 }
 

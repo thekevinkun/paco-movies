@@ -30,9 +30,10 @@ const ContentStars = ({ data, mediaType, category }:
       <div className="grid grid-rows-1 grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-3 
             max-md:grid-cols-2 gap-x-3 gap-y-10 max-md:gap-x-5 max-md:gap-y-7 pt-8 pb-12"
       >
-        {useData?.results.map((item: any) => (
+        {useData?.results.map((item: any, index: number) => (
           <CardPerson
             key={item.id}
+            index={index}
             id={item.id}
             name={item.name}
             photo={item.profile_path}
