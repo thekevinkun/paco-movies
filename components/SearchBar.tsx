@@ -2,21 +2,26 @@
 
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 
 const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async () => {
     const query = searchQuery.trim().replace(/\s/g, "-");
     
     setSearchQuery("");
+
+    router.push(`/search?query=${query}`);
   }
 
   const handleEnterSearch = (e: React.KeyboardEvent) => {
     const target = e.target as HTMLElement;
+
     if (e.key === "Enter") {
       target.blur();
       handleSearch();
@@ -29,7 +34,7 @@ const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) 
 
   return (
     <div className={`${widthClass} ${margin} bg-white px-1.5 
-            border border-gray-700 shadow-lg flex items-center`}
+        border border-gray-700 shadow-lg flex items-center`}
     >
       <input
         type="text"

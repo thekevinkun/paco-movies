@@ -5,6 +5,8 @@ import { useMenu } from "@contexts/MenuContext";
 
 import { CardPerson, LoadMore } from "@components";
 
+import { dedupeResults } from "@helpers/helpers";
+
 const ContentStars = ({ data, mediaType, category }: 
     {data: any, mediaType: string, category: string}) => {
 
@@ -16,6 +18,9 @@ const ContentStars = ({ data, mediaType, category }:
     
     data = newData;
     data.results = [...oldResults, ...newData.results];
+
+    const uniqueResults = dedupeResults(data.results);
+    data.results = uniqueResults;
 
     setUseData(data);
   }
@@ -44,7 +49,7 @@ const ContentStars = ({ data, mediaType, category }:
         ))}
       </div>
       
-      {useData.page < useData.total_pages &&
+      {useData?.page < useData?.total_pages &&
         <LoadMore 
             page={useData.page}
             mediaType={mediaType}

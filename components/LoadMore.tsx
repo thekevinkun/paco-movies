@@ -8,7 +8,10 @@ import Image from "next/image";
 import { getNextPage } from "@api";
 
 const LoadMore = ({page, mediaType, category, query, onNextPage}: 
-    {page: number, mediaType: string, category: string, query?: string, onNextPage: (items: any) => void}) => {
+    { 
+      page: number, mediaType: string, 
+      category: string, query?: string, onNextPage: (items: any) => void
+    }) => {
 
   const { ref, inView } = useInView();
   

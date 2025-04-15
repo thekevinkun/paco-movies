@@ -22,7 +22,7 @@ export default function RootLayout({
           <main className="flex max-lg:block">
             <Header />
             <Navbar />
-            <section className="grow">
+            <section className="min-h-screen flex flex-col grow">
               {children}
               <Footer />
             </section>

@@ -14,8 +14,13 @@ const roundedToFixed = (input: number, digits: number) => {
     return (Math.round(input * rounder) / rounder).toFixed(digits);
 }
 
+const dedupeResults = (results: any) => {
+    return results.filter((result: any, index: number, self: any) => index == self.findIndex((r: any) => r.id === result.id))
+}
+
 export {
     isNumeric,
     toTitleCase,
-    roundedToFixed
+    roundedToFixed,
+    dedupeResults
 }

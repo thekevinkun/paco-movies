@@ -82,7 +82,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
             </div>
         }
         
-        { (showGenres && showGenres.length > 0) && activeMediaType !== "stars" &&
+        { (showGenres && showGenres.length > 0) &&
           <div className="py-3 border-t-2 border-slate-200">
             <h2 className="px-3 text-gray-500">Genres</h2>
 
@@ -91,7 +91,9 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                 <Link 
                     key={item.id}
                     id={item.id.toString()} 
-                    href={`/genre/${activeMediaType}/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+                    href={`/genre/${activeMediaType}/${item.id + "-" 
+                      + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
+                    }
                     className={`p-3 flex items-center gap-3
                       ${activeCategory == item.id.toString() ? "pointer-events-none" : "hover:bg-tale-1"}`}
                     onClick={() => toggleMenu()}

@@ -5,6 +5,8 @@ import { useMenu } from "@contexts/MenuContext";
 
 import { CardMovieTop, CardMovie, LoadMore } from "@components";
 
+import { dedupeResults } from "@helpers/helpers";
+
 const ContentMovies = ({ data, genre, mediaType, category }: 
     {data: any, genre?: any, mediaType: string, category: string}) => {
 
@@ -17,6 +19,9 @@ const ContentMovies = ({ data, genre, mediaType, category }:
     data = newData;
     data.results = [...oldResults, ...newData.results];
 
+    const uniqueResults = dedupeResults(data.results);
+    data.results = uniqueResults;
+
     setUseData(data);
   }
 
@@ -28,14 +33,14 @@ const ContentMovies = ({ data, genre, mediaType, category }:
   return (
     <section className="relative z-20 mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
       <CardMovieTop 
-        id={useData.results[0].id}
-        poster={useData.results[0].poster_path}
-        backDrop={useData.results[0].backdrop_path}
-        title={useData.results[0].title || useData.results[0].name}
-        overview={useData.results[0].overview}
-        mediaType={useData.results[0].media_type || mediaType}
-        releaseDate={useData.results[0].release_date || useData.results[0].first_air_date}
-        rating={useData.results[0].vote_average}
+        id={useData?.results[0].id}
+        poster={useData?.results[0].poster_path}
+        backDrop={useData?.results[0].backdrop_path}
+        title={useData?.results[0].title || useData?.results[0].name}
+        overview={useData?.results[0].overview}
+        mediaType={useData?.results[0].media_type || mediaType}
+        releaseDate={useData?.results[0].release_date || useData?.results[0].first_air_date}
+        rating={useData?.results[0].vote_average}
       />
       
       <div className="grid grid-rows-1 grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 
@@ -54,7 +59,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
           ))}
       </div>
       
-      {useData.page < useData.total_pages &&
+      {useData?.page < useData?.total_pages &&
         <LoadMore 
           page={useData.page}
           mediaType={mediaType}

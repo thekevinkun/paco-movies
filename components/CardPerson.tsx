@@ -84,7 +84,7 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
                 
                 return (
                     <React.Fragment key={work.id}>
-                        <Link title={work.title || work.name} href={route} className="inline-block">
+                        <Link href={route} title={work.title || work.name} className="inline-block">
                             <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] text-gray-500 hover:text-tale
                                 text-xs max-md:text-[0.675rem]"
                             >

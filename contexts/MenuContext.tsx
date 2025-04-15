@@ -32,9 +32,7 @@ export const MenuProvider = ({ children } : Readonly<{children: React.ReactNode;
 
         setActiveMediaType(mediaType);
         setShowCategories(getMediaTypeCategory);
-
-        if (genre)
-            setShowGenres(genre);
+        setShowGenres(genre);
     }
 
     const handleChangeCategory = (name: string) => {

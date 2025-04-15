@@ -61,3 +61,16 @@ export interface ICardPerson {
     popularity: number 
     works: any
 }
+
+export interface ICardSearch { 
+    id: number
+    index: number
+    name: string
+    photo: string
+    mediaType: string
+    releaseDate: string
+    vote: number
+    overview: string
+    department: string
+    works: any
+}
