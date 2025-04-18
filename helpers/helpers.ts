@@ -14,6 +14,12 @@ const roundedToFixed = (input: number, digits: number) => {
     return (Math.round(input * rounder) / rounder).toFixed(digits);
 }
 
+const convertRuntime = (n: number) => {
+    var hours = Math.trunc(n / 60);
+    var minutes = n % 60;
+    return hours +"h"+ " " + minutes + "m";
+}
+
 const dedupeResults = (results: any) => {
     return results.filter((result: any, index: number, self: any) => index == self.findIndex((r: any) => r.id === result.id))
 }
@@ -22,5 +28,6 @@ export {
     isNumeric,
     toTitleCase,
     roundedToFixed,
+    convertRuntime,
     dedupeResults
 }

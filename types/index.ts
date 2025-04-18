@@ -30,7 +30,6 @@ export interface IApiOptions {
         Authorization: string
     }
 }
-
 export interface ICardMovieTop {
     id: number
     poster: string
@@ -73,4 +72,76 @@ export interface ICardSearch {
     overview: string
     department: string
     works: any
+}
+
+export interface IDetailsMovieMain {
+    id: number
+    mediaType: string
+    backdrop: string
+    poster: string
+    title: string
+    rating: number
+    releaseDate: any
+    country: any
+    certification: string
+    runtime: number
+    genres: any
+    tagline: string
+    overview: string
+    credits: any
+}
+
+export interface IDetailsMovieMore {
+    mediaType: string
+    details: any
+    releaseDate: any
+    videos: any
+    posters: any
+    backdrops: any
+    credits: any
+    externalIds: any
+    reviews: any
+    recommendations: any
+}
+
+export interface IDetailsTvMain {
+    id: number
+    mediaType: string
+    backdrop: string
+    poster: string
+    name: string
+    rating: number
+    releaseDate: any
+    tvrating: number
+    status: string
+    networks: any
+    genres: any
+    tagline: string
+    overview: string
+    creators: any
+    stars: any
+}
+
+export interface IDetailsTvMore {
+    mediaType: string
+    details: any
+    ratings: number
+    videos: any
+    posters: any
+    backdrops: any
+    credits: any
+    externalIds: any
+    reviews: any
+    recommendations: any
+}
+
+export interface IDetailsPersonMain {
+    details: any
+    externalIds: any
+}
+
+export interface IDetailsPersonMore {
+    details: any
+    credits: any
+    images: any
 }

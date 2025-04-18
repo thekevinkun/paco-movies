@@ -4,6 +4,7 @@ import { getGenre } from "@api/getGenre";
 import { getByGenre } from "./getByGenre";
 import { getSearch } from "./getSearch";
 import { getNextPage } from '@api/getNextPage';
+import { getMovieDetails } from "./getMovieDetails";
 
 export {
     getTrending,
@@ -11,5 +12,6 @@ export {
     getGenre,
     getByGenre,
     getSearch,
-    getNextPage
+    getNextPage,
+    getMovieDetails
 }
