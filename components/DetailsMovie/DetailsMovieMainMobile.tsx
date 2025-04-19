@@ -38,20 +38,23 @@ const getDirector = (crews: any) => {
 }
   
 const getWriters = (crews: any) => {
-    return crews.filter((person: any) => person.job.includes("Writer")).slice(0, 3).map((item: any) => (
-      <Fragment key={item.id}>
+    return crews.filter((person: any) => person.job === "Writer" || person.job === "Screenplay" 
+          || person.job === "Characters").slice(0, 3).map((item: any) => (
+      
+      <React.Fragment key={item.id}>
         <Link 
-            href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
-            className="hover:underline hover:text-tale"
+          href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+          className="hover:underline hover:text-tale"
         >
           <p className="text-sm max-sm:text-xs">
             {item.name}
           </p>
         </Link>
+  
         <span className="bullet-separator text-sm max-sm:text-xs"> &#8226; </span>
-      </Fragment>
+      </React.Fragment>
     ))
-}
+  }
   
 const getStars = (casts: any) => {
     return casts.slice(0, 3).map((item: any) => (

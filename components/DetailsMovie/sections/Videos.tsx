@@ -92,7 +92,7 @@ const getVideosMobile = (videos: any) => {
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`
       }}
       className="keen-slider__slide flex-shrink-0 rounded-xl
-        h-[187px] max-md:h-[185px] max-sm:h-[195px]" 
+        h-[187px] max-md:h-[185px] max-sm:h-[190px]" 
     >
       <div className="h-full flex items-center justify-center">
         <Link
@@ -164,7 +164,7 @@ const Videos = ({movieId, mediaType, title, videos}:
       
       {/* CAROUSEL MOBILE */}
       <div 
-        className="hidden max-lg:block relative pt-7 max-md:pt-5 overflow-hidden 
+        className="hidden max-lg:block relative pt-7 overflow-hidden 
           h-[18rem] max-md:h-full max-w-full"
       >
         {/* Slider */}

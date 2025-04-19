@@ -23,8 +23,8 @@ const getGenres = (mediaType: string, genres: any) => {
   ))
 }
 
-const getDirector = (crew: any) => {
-  const director = crew.find((person: any) => person.job === "Director");
+const getDirector = (crews: any) => {
+  const director = crews.find((person: any) => person.job === "Director");
 
   return (
     <Link 
@@ -36,8 +36,8 @@ const getDirector = (crew: any) => {
   )
 }
 
-const getWriters = (crew: any) => {
-  return crew.filter((person: any) => person.job === "Writer" || person.job === "Screenplay" 
+const getWriters = (crews: any) => {
+  return crews.filter((person: any) => person.job === "Writer" || person.job === "Screenplay" 
         || person.job === "Characters").slice(0, 3).map((item: any) => (
     
     <React.Fragment key={item.id}>
@@ -53,8 +53,8 @@ const getWriters = (crew: any) => {
   ))
 }
 
-const getStars = (cast: any) => {
-  return cast.slice(0, 3).map((item: any) => (
+const getStars = (casts: any) => {
+  return casts.slice(0, 3).map((item: any) => (
     <React.Fragment key={item.id}>
       <Link 
         href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
