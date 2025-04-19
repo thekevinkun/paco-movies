@@ -92,7 +92,7 @@ const getVideosMobile = (videos: any) => {
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`
       }}
       className="keen-slider__slide flex-shrink-0 rounded-xl
-        h-[187px] max-md:h-[185px] max-sm:h-[190px]" 
+        h-[187px] max-md:h-[185px] max-sm:h-[145px]" 
     >
       <div className="h-full flex items-center justify-center">
         <Link
@@ -120,16 +120,12 @@ const Videos = ({movieId, mediaType, title, videos}:
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
     breakpoints: {
-      
       "(max-width: 768px)": {
-        slides: { perView: 2.15, spacing: 12 },
-      },
-      "(max-width: 640px)": {
-        slides: { perView: 1.70, spacing: 12 },
-      },
+        slides: { perView: 2.25, spacing: 12 },
+      }
     },
     slides: {
-      perView: 3.15,
+      perView: 3.25,
       spacing: 13
     },
     mode: "free-snap",
