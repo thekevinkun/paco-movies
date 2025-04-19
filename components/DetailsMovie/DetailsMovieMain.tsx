@@ -79,7 +79,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
         backgroundRepeat: "no-repeat",
         backgroundImage: `url("https://image.tmdb.org/t/p/original${backdrop}")`,
       }}
-      className="relative w-full h-full max-h max-md:hidden"
+      className="relative w-full h-full max-md:hidden"
     >
       {/* Background image gradient */}
       <div

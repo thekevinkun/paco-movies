@@ -28,9 +28,14 @@ const config: Config = {
         card: {
           DEFAULT: "rgba(var(--bg-card-color))"
         },
+        light: {
+          DEFAULT: "#FFF",
+          1: "#CECEFB"
+        },
         dark: {
           DEFAULT: "#000",
-          1: "#313131"
+          1: "#313131",
+          2: "#18181b"
         },
         tale: {
           DEFAULT: "rgba(var(--tale-0))",

@@ -10,6 +10,7 @@ import CardSearch from "@components/Card/CardSearch";
 import LoadMore from "@components/LoadMore";
 
 import DetailsMovieMain from "@components/DetailsMovie/DetailsMovieMain";
+import DetailsMovieMainMobile from "@components/DetailsMovie/DetailsMovieMainMobile";
 import DetailsMovieMore from "@components/DetailsMovie/DetailsMovieMore";
 import DetailsPersonMain from "@components/DetailsPerson/DetailsPersonMain";
 import DetailsPersonMore from "@components/DetailsPerson/DetailsPersonMore";
@@ -32,6 +33,7 @@ export {
     LoadMore,
 
     DetailsMovieMain,
+    DetailsMovieMainMobile,
     DetailsMovieMore,
     DetailsPersonMain,
     DetailsPersonMore,
