@@ -79,7 +79,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
         backgroundRepeat: "no-repeat",
         backgroundImage: `url("https://image.tmdb.org/t/p/original${backdrop}")`,
       }}
-      className="relative w-full h-full max-md:hidden"
+      className="relative w-full h-svh max-md:hidden"
     >
       {/* Background image gradient */}
       <div
@@ -91,7 +91,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
       ></div>
 
       {/* ALL INFORMATION */}
-      <div className="relative pt-10 pb-16 max-lg:pb-20 px-5 z-40">
+      <div className="relative pt-10 pb-2 px-5 z-40">
         <div className="flex gap-10">
           {/* POSTER */}
           <Image
@@ -111,7 +111,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
           <div className="flex-1">
             {/* TITLE */}
             <Link href={`/title/${mediaType}/${id + "-" + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}>
-              <h2 className="text-white text-2xl font-extrabold capitalize hover:text-tale">
+              <h2 className="text-light text-2xl font-extrabold capitalize hover:text-tale">
                 {title}{" "}
                 <span className="font-light">
                   {releaseDate &&
@@ -121,11 +121,11 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
             </Link>
 
             {/* FACTS */}
-            <div className="pt-1 text-white font-normal flex items-center gap-2 max-xl:gap-1">
+            <div className="pt-1 text-light font-normal flex items-center gap-2 max-xl:gap-1">
               {/* MOVIE RATE & RELEASE DATE COUNTRY */}
               <div className="flex items-center gap-2 max-xl:gap-1">
                 <span className="text-sm max-lg:text-base 
-                    font-medium bg-dark border border-slate-100 px-1"
+                    font-medium bg-dark border border-gray-500 px-1"
                 >
                   {certification}
                 </span>
@@ -162,14 +162,14 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
                   className="relative object-contain bottom-[1.7px]"
                 />
     
-                <span className="text-white text-lg font-semibold">
+                <span className="text-light text-lg font-semibold">
                   {rating > 0 ? roundedToFixed(rating, 1) : "N"}
                 </span>
               </div>
 
               <Link
                 href={`/title/${mediaType}/${id + "-" + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}#`}
-                className="flex items-center gap-2 ml-10 text-white hover:text-gray-400"
+                className="flex items-center gap-2 ml-10 text-light hover:text-light-2"
               >
                 <FaPlay className="text-2xl"/>
                 <span className="font-semibold">Play Trailer</span>
@@ -178,19 +178,19 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
 
             {/* TAGLINE */}
             <div className="pt-7">
-              <h3 className="text-lg italic text-slate-200">{tagline}</h3>
+              <h3 className="text-lg italic text-light-1">{tagline}</h3>
             </div>
 
             {/* OVERVIEW */}
-            <div className="text-white pt-5">
+            <div className="text-light pt-5">
               <h3 className="text-lg font-semibold">Overview</h3>
               <p className="pt-2 font-normal">{overview}</p>
             </div>
 
             {/* CREDITS */}
-            <div className="pt-7 text-white">
+            <div className="pt-7 text-light">
               {/* DIRECTOR */}
-              <div className="py-2 flex items-center font-semibold border-b border-slate-100">
+              <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                 <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
                   Director
                 </h3>
@@ -199,7 +199,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
               </div>
               
               {/* WRITERS */}
-              <div className="py-2 flex items-center font-semibold border-b border-slate-100">
+              <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                 <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
                   Writers
                 </h3>
@@ -210,7 +210,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
               </div>
               
               {/* STARS */}
-              <div className="py-2 flex items-center font-semibold border-b border-slate-100">
+              <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                 <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
                   Stars
                 </h3>

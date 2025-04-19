@@ -66,7 +66,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
             title={title} 
             className="inline-block w-fit"
           >
-            <h2 className="text-2xl text-white font-extrabold capitalize hover:text-tale">
+            <h2 className="text-2xl text-light font-extrabold capitalize hover:text-tale">
               {title}{" "}
 
               <span className="font-light">
@@ -77,7 +77,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
 
           {/* Facts */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-white font-normal capitalize">
+            <span className="text-sm text-light-2 font-normal capitalize">
               {mediaType}
             </span>
           </div>
@@ -93,7 +93,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
                 className="relative object-contain bottom-[1.2px]"
               />
 
-              <span className="text-[17px] text-white font-semibold">
+              <span className="text-[17px] text-light font-semibold">
                 {rating > 0 ? roundedToFixed(rating, 1) : "N"}
               </span>
             </div>
@@ -101,7 +101,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
             {mediaType !== "person" &&
               <Link
                 href={`${routeMovie}#`}
-                className="flex items-center gap-2 ml-10 text-white hover:text-gray-500"
+                className="flex items-center gap-2 ml-10 text-light hover:text-light-2"
               >
                 <FaPlay className="text-lg "/>
                 <span className="font-semibold">Play Trailer</span>
@@ -112,8 +112,8 @@ const CardMovieTop = ({id, poster, backDrop, title,
           {/* Overview */}
           {mediaType !== "person" && 
             <div className="pt-8">
-              <h3 className="font-semibold text-lg text-white">Overview</h3>
-              <p className="overview-line-clamp text-white font-normal pt-2">
+              <h3 className="font-semibold text-lg text-light">Overview</h3>
+              <p className="overview-line-clamp text-light font-normal pt-2">
                 {overview}
               </p>
             </div>

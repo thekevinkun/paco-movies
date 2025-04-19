@@ -23,12 +23,12 @@ const CardSearch = ({ id, index, name, photo, mediaType,
         initial="hidden"
         animate="visible"
         viewport={{ amount: 0 }}
-        className="w-full h-52 flex mt-4 border border-slate-500 rounded-tr-lg"
+        className="w-full h-52 flex mt-4 border border-gray-500 rounded-tr-lg"
     >
         {/* PHOTO */}
         <Link 
             href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-            className="bg-black w-[138px] h-full"
+            className="bg-dark w-[138px] h-full"
         >
             <Image
                 priority
@@ -52,8 +52,8 @@ const CardSearch = ({ id, index, name, photo, mediaType,
             <div className="flex justify-between items-center">
                 <Link 
                     href={`/${mediaType === "person" ? "stars" : mediaType}`} 
-                    className="rounded-sm border border-slate-500 px-1">
-                    <p className="text-gray-500 text-[11px]"
+                    className="rounded-sm border border-gray-500 px-1">
+                    <p className="text-main-1 text-[11px]"
                 >
                     {mediaType}
                     </p>
@@ -69,7 +69,7 @@ const CardSearch = ({ id, index, name, photo, mediaType,
                             className="relative object-contain"
                         />
 
-                        <span className="text-gray-500 text-sm">
+                        <span className="text-main-1 text-sm">
                             {vote > 0 ? roundedToFixed(vote, 1) : "N"}
                         </span>
                     </div>
@@ -83,7 +83,7 @@ const CardSearch = ({ id, index, name, photo, mediaType,
                         className="relative object-contain bottom-[0.4px]"
                         />
 
-                        <span className="text-gray-500 text-sm">
+                        <span className="text-main-1 text-sm">
                             {vote > 0 ? roundedToFixed(vote, 1) : "N"}
                         </span>
                     </div>
@@ -101,13 +101,13 @@ const CardSearch = ({ id, index, name, photo, mediaType,
             </Link>
             
             {releaseDate && 
-                <p className="text-gray-500 text-xs">
+                <p className="text-main-1 text-xs">
                     {moment(releaseDate).format("Do MMMM YYYY")}
                 </p>
             }
 
             {department && 
-                <p className="text-gray-500 text-sm">
+                <p className="text-main-1 text-sm">
                     {department}
                 </p>
             }
@@ -132,11 +132,14 @@ const CardSearch = ({ id, index, name, photo, mediaType,
                                     title={work.title || work.name} 
                                     className="inline-block"
                                 >
-                                    <p className="truncate w-fit max-w-[155px] text-gray-500 text-xs hover:text-tale">
+                                    <p 
+                                        className="truncate w-fit max-w-[155px] 
+                                            text-main-1 text-xs hover:text-tale"
+                                    >
                                         {work.title || work.name}
                                     </p>
                                 </Link>
-                                <span className="bullet-separator align-top text-gray-500 text-xs"> &#8226; </span>
+                                <span className="bullet-separator align-top text-main-1 text-xs"> &#8226; </span>
                             </React.Fragment>
                         )
                     })}

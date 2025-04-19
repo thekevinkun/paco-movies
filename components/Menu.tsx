@@ -47,8 +47,8 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
 
       <div className="w-full pt-3">
         {showCategories && showCategories.length > 0 &&
-            <div className="py-3 border-t-2 border-slate-200">
-            <h2 className="px-3 text-gray-500">Categories</h2>
+            <div className="py-3 border-t-2 border-gray-500">
+            <h2 className="px-3 text-light-2">Categories</h2>
 
             <div className={`${activeMediaType !== "stars" && "grid grid-cols-2 items-center px-3"}
                 pt-2 max-lg:flex max-lg:flex-col max-lg:items-start max-lg:px-0`}>
@@ -83,8 +83,8 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
         }
         
         { (showGenres && showGenres.length > 0) &&
-          <div className="py-3 border-t-2 border-slate-200">
-            <h2 className="px-3 text-gray-500">Genres</h2>
+          <div className="py-3 border-t-2 border-gray-500">
+            <h2 className="px-3 text-light-2">Genres</h2>
 
             <div className="pt-2">
               {showGenres.map((item) => (

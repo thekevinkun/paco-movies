@@ -27,13 +27,13 @@ const ThemeSwitcher = () => {
     <div className="ml-auto mr-5 max-md:mr-[18px] max-sm:mr-3 max-lg:absolute max-lg:right-0">
       { whichTheme === "light" ? 
           <MdDarkMode 
-            className="text-[27px] max-sm:text-[24px] text-main cursor-pointer hover:text-neutral-500 
+            className="text-[27px] max-sm:text-[24px] text-main cursor-pointer hover:text-light-2 
                 transition-colors duration-200" 
             onClick={() => handleSwitchTheme()}
           />
         :
           <MdLightMode 
-            className="text-[27px] max-sm:text-[24px] text-main cursor-pointer hover:text-neutral-500 
+            className="text-[27px] max-sm:text-[24px] text-main cursor-pointer hover:text-light-2 
                 transition-colors duration-200" 
             onClick={() => handleSwitchTheme()}
           />

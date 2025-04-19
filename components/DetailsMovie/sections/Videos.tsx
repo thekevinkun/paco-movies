@@ -40,7 +40,7 @@ const getVideosDesktop = (videos: any) => {
             >
               <div className="w-[75px] h-[75px] flex items-center justify-center rounded-full 
                   bg-dark bg-opacity-70 group-hover:bg-opacity-100 transition-[background] duration-200">
-                <IoMdPlay className="text-white text-4xl"/>
+                <IoMdPlay className="text-light text-4xl"/>
               </div>
             </Link>
           </div>
@@ -71,7 +71,7 @@ const getVideosDesktop = (videos: any) => {
             >
               <div className="w-[50px] h-[50px] flex items-center justify-center rounded-full 
                   bg-dark bg-opacity-70 group-hover:bg-opacity-100 transition-[background] duration-200">
-                <IoMdPlay className="text-white text-2xl"/>
+                <IoMdPlay className="text-light text-2xl"/>
               </div>
             </Link>
           </div>
@@ -105,7 +105,7 @@ const getVideosMobile = (videos: any) => {
           <div className="w-[67px] h-[67px] max-md:w-[60px] max-md:h-[60px] max-sm:w-[55px] max-sm:h-[55px]
               flex items-center justify-center rounded-full 
               bg-dark bg-opacity-70 group-hover:bg-opacity-100 transition-[background] duration-200">
-            <IoMdPlay className="text-white text-4xl max-md:text-3xl max-sm:text-2xl"/>
+            <IoMdPlay className="text-light text-4xl max-md:text-3xl max-sm:text-2xl"/>
           </div>
         </Link>
       </div>
@@ -149,7 +149,7 @@ const Videos = ({movieId, mediaType, title, videos}:
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Videos</h3>
-        <span className="pl-3 text-xs text-gray-500">{videos.length}</span>
+        <span className="pl-3 text-xs text-main-1">{videos.length}</span>
 
         <MdArrowForwardIos 
           className="text-main text-3xl max-sm:text-2xl font-semibold 
@@ -177,7 +177,7 @@ const Videos = ({movieId, mediaType, title, videos}:
           {/* Left arrow */}
           <button
             onClick={scrollLeft}
-            className={`mr-3 bg-white/85 hover:bg-white/5 text-dark hover:text-tale 
+            className={`mr-3 bg-light/85 hover:bg-light/5 text-dark hover:text-tale 
                 p-3 rounded-full opacity-50 hover:opacity-100 transition-opacity duration-200
                 ${currentSlide < 1 && "pointer-events-none !opacity-10"}`}
           >
@@ -187,7 +187,7 @@ const Videos = ({movieId, mediaType, title, videos}:
           {/* Right arrow */}
           <button
               onClick={scrollRight}
-              className={`bg-white/85 hover:bg-white/5 text-dark hover:text-tale  
+              className={`bg-light/85 hover:bg-light/5 text-dark hover:text-tale  
                 p-3 rounded-full opacity-50 hover:opacity-100 transition-opacity duration-200
                 ${currentSlide > 6 && "pointer-events-none opacity-10"}`}
           >

@@ -59,9 +59,9 @@ const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: I
 
           <Link
             href={`/${mediaType}`}
-            className="rounded-sm border border-slate-500 px-1"
+            className="rounded-sm border border-gray-500 px-1"
           >
-            <span className="text-gray-500 text-[11px]">
+            <span className="text-main-1 text-[11px]">
               {mediaType}
             </span>
           </Link>
@@ -77,17 +77,17 @@ const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: I
               className="relative object-contain bottom-[0.4px]"
             />
 
-            <span className="text-gray-500 text-sm">
+            <span className="text-main-1 text-sm">
               {rating > 0 ? roundedToFixed(rating, 1) : "N"}
             </span>
           </div>
 
-          <p className="ml-auto text-gray-500 text-xs">
+          <p className="ml-auto text-main-1 text-xs">
             {releaseDate && `${moment(releaseDate).format("ll")}`}
           </p>
 
           <AiOutlineExclamationCircle
-            className="ml-2 text-lg text-gray-500 hover:text-gray-700 cursor-pointer"
+            className="ml-2 text-lg text-main-1 hover:text-gray-700 cursor-pointer"
             onClick={() => {}}
           />
         </div>

@@ -24,7 +24,7 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
                 max-lg:w-60 max-lg:h-60 
                 max-[867px]:w-56 max-[867px]:h-56
                 max-[576px]:w-48 max-[576px]:h-48 
-                bg-black rounded-full"
+                bg-dark rounded-full"
         >
             <Image
                 priority
@@ -66,12 +66,12 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
                     className="relative w-6 h-6 max-md:w-5 max-md:h-5 object-contain bottom-[0.4px]"
                 />
 
-                <span className="text-gray-500 text-sm max-[576px]:text-xs">
+                <span className="text-main-1 text-sm max-[576px]:text-xs">
                     {popularity > 0 ? roundedToFixed(popularity, 1) : "N"}
                 </span>
             </div>
 
-            <p className="text-gray-500 text-sm max-[576px]:text-xs">
+            <p className="text-main-1 text-sm max-[576px]:text-xs">
                 {department}
             </p>
         </div>
@@ -85,13 +85,13 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
                 return (
                     <React.Fragment key={work.id}>
                         <Link href={route} title={work.title || work.name} className="inline-block">
-                            <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] text-gray-500 hover:text-tale
-                                text-xs max-md:text-[0.675rem]"
+                            <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] 
+                                text-main-1 hover:text-tale text-xs max-md:text-[0.675rem]"
                             >
                                 {work.title || work.name}
                             </p>
                         </Link>
-                        <span className="bullet-separator align-top text-gray-500 text-xs"> &#8226; </span>
+                        <span className="bullet-separator align-top text-main-1 text-xs"> &#8226; </span>
                     </React.Fragment>
                 )
             })}

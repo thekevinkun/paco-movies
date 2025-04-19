@@ -137,7 +137,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
 
                 <Link
                     href={`/title/${mediaType}/${id + "-" + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}#`}
-                    className="flex items-center gap-2 ml-10 text-main hover:!text-gray-600"
+                    className="flex items-center gap-2 ml-10 text-main hover:text-light-2"
                 >
                     <FaPlay className="text-2xl"/>
                     <span className="font-semibold">Play Trailer</span>
@@ -148,7 +148,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
             <div className="mt-7 py-4 bg-dark-2 border-y border-dark 
                     text-light-1 font-normal flex flex-col items-center justify-center gap-1">
                 <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium bg-dark border px-1">
+                    <span className="text-sm font-medium bg-dark border border-gray-500 px-1">
                         {certification}
                     </span>
 
@@ -180,7 +180,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
 
                 {/* CREDITS */}
                 <div className="pt-7 text-main">
-                    <div className="py-2 flex items-center font-semibold border-b">
+                    <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                         <h3 className="basis-[20%]">
                             Director
                         </h3>
@@ -188,7 +188,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                         {getDirector(credits.crew)}
                     </div>
 
-                    <div className="py-2 flex items-center font-semibold border-b">
+                    <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                         <h3 className="basis-[20%]">
                             Writers
                         </h3>
@@ -198,7 +198,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                         </div>
                     </div>
 
-                    <div className="py-2 flex items-center font-semibold border-b">
+                    <div className="py-2 flex items-center font-semibold border-b border-gray-500">
                         <h3 className="basis-[20%]">
                             Stars
                         </h3>

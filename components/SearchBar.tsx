@@ -33,7 +33,7 @@ const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) 
   }
 
   return (
-    <div className={`${widthClass} ${margin} bg-white px-1.5 
+    <div className={`${widthClass} ${margin} bg-light px-1.5 
         border border-gray-700 shadow-lg flex items-center`}
     >
       <input
@@ -53,7 +53,7 @@ const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) 
       )}
 
       <IoSearch
-        className={`text-xl text-dark hover:text-gray-500 cursor-pointer ${
+        className={`text-xl text-dark hover:text-light-2 cursor-pointer ${
           !searchQuery && "pointer-events-none"
         }`}
         onClick={() => handleSearch()}
