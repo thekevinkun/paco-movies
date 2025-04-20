@@ -69,8 +69,12 @@ const CardSearch = ({ id, index, name, photo, mediaType,
                             className="relative object-contain"
                         />
 
-                        <span className="text-main-1 text-sm">
-                            {vote > 0 ? roundedToFixed(vote, 1) : "N"}
+                        
+                        <span 
+                            className={`text-main-1 text-sm
+                            ${vote > 0 ? "font-medium" : "font-normal italic"}`}
+                        >
+                            {vote > 0 ? roundedToFixed(vote, 2) : "NaN"}
                         </span>
                     </div>
                 :
@@ -83,8 +87,11 @@ const CardSearch = ({ id, index, name, photo, mediaType,
                         className="relative object-contain bottom-[0.4px]"
                         />
 
-                        <span className="text-main-1 text-sm">
-                            {vote > 0 ? roundedToFixed(vote, 1) : "N"}
+                        <span 
+                            className={`text-main-1 text-sm
+                            ${vote > 0 ? "font-medium" : "font-normal italic"}`}
+                        >
+                            {vote > 0 ? roundedToFixed(vote, 1) : "NaN"}
                         </span>
                     </div>
                 }
@@ -113,7 +120,7 @@ const CardSearch = ({ id, index, name, photo, mediaType,
             }
 
             {overview &&
-                <p className="overview-line-clamp mt-auto text-main text-sm font-normal">
+                <p className="line-clamp-3 mt-auto text-main text-sm font-normal">
                     {overview}
                 </p> 
             }

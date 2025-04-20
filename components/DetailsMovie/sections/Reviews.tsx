@@ -19,19 +19,31 @@ const Reviews = ({movieId, mediaType, title, reviews}:
   const [randomReview, setRandomReview] = useState<number>(0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const el = paragraphRef.current;
-      if (el) {
+    setRandomReview(Math.floor(Math.random() * reviews.length));
+  }, []);
+
+  useEffect(() => {
+    const el = paragraphRef.current;
+
+    if (el) {
+      // Temporarily remove line clamp
+      el.classList.remove("line-clamp-5");
+
+      requestAnimationFrame(() => {
         const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
         const lines = el.scrollHeight / lineHeight;
-        setShowReadMore(lines > 5);
-      }
-    }, 0);
-  
-    setRandomReview(Math.floor(Math.random() * reviews.length));
-  
-    return () => clearTimeout(timeout);
-  }, []);
+
+        if (lines > 5) {
+          setShowReadMore(true);
+        }
+
+        // Re-apply the clamp if needed
+        if (!readMore) {
+          el.classList.add("line-clamp-5");
+        }
+      });
+    }
+  }, [randomReview, readMore]);
 
   return (
     <div className="pt-16 max-sm:pt-12">
@@ -77,14 +89,18 @@ const Reviews = ({movieId, mediaType, title, reviews}:
                       <Image
                           src="/icons/star-2.svg"
                           alt="Rating Star"
-                          width={22}
-                          height={22}
+                          width={20}
+                          height={20}
                           className="relative object-contain bottom-[1.5px]"
                       />
           
-                      <span className="text-lg text-dark font-semibold">
+                      <span 
+                        className={`text-lg text-dark 
+                          ${reviews[randomReview]?.author_details?.rating > 0 ? 
+                          "font-medium" : "font-normal italic"}`}
+                      >
                           {reviews[randomReview]?.author_details?.rating > 0 
-                            ? roundedToFixed(reviews[randomReview]?.author_details?.rating, 1) : "N"}
+                            ? roundedToFixed(reviews[randomReview]?.author_details?.rating, 1) : "NaN"}
                       </span>
                   </div>
                 </div>
@@ -94,7 +110,7 @@ const Reviews = ({movieId, mediaType, title, reviews}:
                   <p 
                     ref={paragraphRef}
                     dangerouslySetInnerHTML={{__html : reviews[randomReview]?.content}}
-                    className={`max-md:text-sm ${!readMore ? 'review-line-clamp' : ''}`}
+                    className={`max-md:text-sm ${!readMore && showReadMore ? "line-clamp-5" : ""}`}
                   />
                   
                   {readMore ?

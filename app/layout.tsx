@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@styles/globals.css";
+import "@styles/utilities.css";
 
 import { Header, Footer } from "@sections";
 import { Navbar } from "@components";

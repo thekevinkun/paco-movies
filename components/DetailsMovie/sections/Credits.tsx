@@ -21,7 +21,7 @@ const getCasts = (casts: any) => {
               unoptimized
               loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
               src={cast.profile_path ? `https://image.tmdb.org/t/p/w500${cast.profile_path}` 
-                : "/assets/images/not-found-person.png"}
+                : "/images/not-found-person.png"}
               alt="Poster"
               width={0}
               height={0}
@@ -63,7 +63,7 @@ const getCastsMobile = (casts: any) => {
             unoptimized
             loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
             src={cast.profile_path ? `https://image.tmdb.org/t/p/w500${cast.profile_path}` 
-              : "/assets/images/not-found-person.png"}
+              : "/images/not-found-person.png"}
             alt="Poster"
             width={0}
             height={0}

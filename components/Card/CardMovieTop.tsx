@@ -77,7 +77,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
 
           {/* Facts */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-light-2 font-normal capitalize">
+            <span className="text-sm text-light font-normal capitalize">
               {mediaType}
             </span>
           </div>
@@ -93,9 +93,12 @@ const CardMovieTop = ({id, poster, backDrop, title,
                 className="relative object-contain bottom-[1.2px]"
               />
 
-              <span className="text-[17px] text-light font-semibold">
-                {rating > 0 ? roundedToFixed(rating, 1) : "N"}
-              </span>
+               <span 
+                className={`text-[17px] text-light
+                  ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
+               >
+                  {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
+               </span>
             </div>
 
             {mediaType !== "person" &&
@@ -113,7 +116,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
           {mediaType !== "person" && 
             <div className="pt-8">
               <h3 className="font-semibold text-lg text-light">Overview</h3>
-              <p className="overview-line-clamp text-light font-normal pt-2">
+              <p className="line-clamp-3 text-light font-normal pt-2">
                 {overview}
               </p>
             </div>

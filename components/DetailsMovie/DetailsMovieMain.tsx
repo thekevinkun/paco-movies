@@ -162,8 +162,11 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
                   className="relative object-contain bottom-[1.7px]"
                 />
     
-                <span className="text-light text-lg font-semibold">
-                  {rating > 0 ? roundedToFixed(rating, 1) : "N"}
+                <span 
+                  className={`text-light text-lg
+                    ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
+                >
+                  {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
                 </span>
               </div>
 

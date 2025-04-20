@@ -63,11 +63,14 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className="relative w-6 h-6 max-md:w-5 max-md:h-5 object-contain bottom-[0.4px]"
+                    className="relative w-5 h-5 object-contain bottom-[0.4px]"
                 />
 
-                <span className="text-main-1 text-sm max-[576px]:text-xs">
-                    {popularity > 0 ? roundedToFixed(popularity, 1) : "N"}
+                <span 
+                    className={`text-main-1 text-sm max-[576px]:text-xs
+                    ${popularity > 0 ? "font-medium" : "font-normal italic"}`}
+                >
+                    {popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
                 </span>
             </div>
 

@@ -52,7 +52,7 @@ const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: I
             title={title} 
             className="inline-block w-fit"
           >
-            <h2 className="title-line-clamp text-main max-md:text-sm font-semibold hover:text-tale">
+            <h2 className="line-clamp-1 text-main max-md:text-sm font-semibold hover:text-tale">
               {title}
             </h2>
           </Link>
@@ -77,8 +77,11 @@ const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: I
               className="relative object-contain bottom-[0.4px]"
             />
 
-            <span className="text-main-1 text-sm">
-              {rating > 0 ? roundedToFixed(rating, 1) : "N"}
+            <span 
+              className={`text-main-1 text-sm
+                ${rating > 0 ? "font-medium" : "font-normal italic"}`}
+            >
+              {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
             </span>
           </div>
 

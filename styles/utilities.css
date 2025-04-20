@@ -1,0 +1,97 @@
+body::-webkit-scrollbar {
+  width: 14px;
+}
+
+.nav-menu::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track,
+.nav-menu::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+body::-webkit-scrollbar-thumb,
+.nav-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(145deg, rgba(41,43,48,1) 5%, rgba(21,21,21,1) 25%, rgba(26,26,26,1) 70%, rgba(73,77,87,1) 100%);
+  transition: background-color .20s ease-in;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.nav-menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(145deg, rgba(21,21,21,1) 50%, rgba(26,26,26,1) 80%, rgba(73,77,87,1) 100%);
+}
+
+.header-glass {
+  background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 12%, rgba(var(--bg-header-color-2)) 32%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: all .5s ease-in-out;
+}
+
+.nav-glass {
+  background: linear-gradient(145deg, rgba(var(--bg-nav-color-1)) 50%, rgba(var(--bg-nav-color-2)) 75%);
+  box-shadow: var(--bg-nav-shadow);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+}
+
+.footer-glass {
+  background: linear-gradient(145deg, rgba(10,10,10,1) 45%, rgba(54,54,54,1) 100%);
+}
+
+@media screen and (max-width: 1024px) {
+  .header-glass {
+    background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 15%, rgba(var(--bg-header-color-2)) 80%);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .header-glass {
+    background: linear-gradient(45deg, rgba(var(--bg-header-color-1)) 10%, rgba(var(--bg-header-color-2)) 90%);
+  }
+}
+
+span.bullet-separator:last-child {
+  display: none;
+}
+
+.user-review-card {
+  position: relative;
+  padding: 1rem;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, .3);
+  border-width: 0;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-review-card::before {
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+  content: "";
+  display: block;
+  position: absolute;
+  transform-origin: top;
+  top: 100%;
+  height: calc(1.75rem + 2px);
+  right: calc(1.5rem - 1px);
+  width: calc(1.65rem + 2px);
+  background: rgba(0, 0, 0, .5);
+  filter: blur(20px);
+}
+
+.user-review-card::after {
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+  content: "";
+  display: block;
+  position: absolute;
+  transform-origin: top;
+  background: #fff;
+  top: calc(100% - 1px);
+  height: 1.75rem;
+  right: 1.5rem;
+  width: 1.65rem;
+}
