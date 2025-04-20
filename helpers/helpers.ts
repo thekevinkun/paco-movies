@@ -20,6 +20,26 @@ const convertRuntime = (n: number) => {
     return hours +"h"+ " " + minutes + "m";
 }
 
+const formatCurrency = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
+const calculateAge = (date: string) => {
+    var today = new Date();
+    var birthDate = new Date(date);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
 const dedupeResults = (results: any) => {
     return results.filter((result: any, index: number, self: any) => index == self.findIndex((r: any) => r.id === result.id))
 }
@@ -29,5 +49,7 @@ export {
     toTitleCase,
     roundedToFixed,
     convertRuntime,
+    formatCurrency,
+    calculateAge,
     dedupeResults
 }

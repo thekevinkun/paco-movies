@@ -196,9 +196,9 @@ span.bullet-separator:last-child {
   position: absolute;
   transform-origin: top;
   top: 100%;
-  height: calc(1.5rem + 2px);
-  left: calc(1.5rem - 1px);
-  width: calc(1.5rem + 2px);
+  height: calc(1.75rem + 2px);
+  right: calc(1.5rem - 1px);
+  width: calc(1.65rem + 2px);
   background: rgba(0, 0, 0, .5);
   filter: blur(20px);
 }
@@ -211,8 +211,8 @@ span.bullet-separator:last-child {
   transform-origin: top;
   background: #fff;
   top: calc(100% - 1px);
-  height: 1.5rem;
-  left: 1.5rem;
-  width: 1.5rem;
+  height: 1.75rem;
+  right: 1.5rem;
+  width: 1.65rem;
 }
 
