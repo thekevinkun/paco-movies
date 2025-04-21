@@ -116,7 +116,8 @@ const getVideosMobile = (videos: any) => {
 const Videos = ({movieId, mediaType, title, videos}: 
       {movieId: number, mediaType: string, title: string, videos: any}) => {
   
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
     breakpoints: {
@@ -132,10 +133,8 @@ const Videos = ({movieId, mediaType, title, videos}:
     slideChanged: (s) => setCurrentSlide(s.track.details.rel)
   })
 
-  const totalSlides = Math.ceil(videos.slice(0, 10).length / 3)
-
-  const scrollLeft = () => slider.current?.prev()
-  const scrollRight = () => slider.current?.next()
+  const scrollLeft = () => slider.current?.prev();
+  const scrollRight = () => slider.current?.next();
 
   return (
     <div className="w-full overflow-x-hidden">
