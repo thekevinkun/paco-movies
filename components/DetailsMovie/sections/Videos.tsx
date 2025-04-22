@@ -14,7 +14,8 @@ const getMainVideos = (videos: any) => {
   return (
     <div 
       className="grid grid-cols-8 gap-x-[15px]
-        grid-rows-[275px] max-xl:grid-rows-[255px]"
+        grid-rows-[275px] max-xl:grid-rows-[255px] 
+        max-md:grid-rows-[220px] max-sm:grid-rows-[165px]"
     >
       {videos.slice(0, 2).map((video: any) => (
         <div key={video.key} className="relative bg-dark col-span-4 rounded-xl">
@@ -60,8 +61,8 @@ const getVideosSlider = (start: number, videos: any) => {
         backgroundPosition: "center",
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`
       }}
-      className="keen-slider__slide min-w-0 shrink-0 rounded-xl
-        h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px]" 
+      className={`${videos.length > 5 ? "keen-slider__slide min-w-0 shrink-0" : "w-full"}
+        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px]`}
     >
       <div className="h-full flex items-center justify-center">
         <Link
@@ -90,6 +91,8 @@ const Videos = ({movieId, mediaType, title, videos}:
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+      if (videos.length < 5) return;
+
       const handleResize = () => setIsMobile(window.innerWidth < 1024);
       handleResize(); // run once on mount
       window.addEventListener("resize", handleResize);
@@ -152,7 +155,7 @@ const Videos = ({movieId, mediaType, title, videos}:
     const scrollRight = () => slider.current?.next();
 
   return (
-    <div className="w-full">
+    <>
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
           + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/videogallery`} 
@@ -170,44 +173,51 @@ const Videos = ({movieId, mediaType, title, videos}:
       {/* DESKTOP VIDEOS */}
       <div>
           {/* Two main video */}
-          <div className="mb-5 max-lg:hidden">
+          <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
             {getMainVideos(videos)}
           </div>
           
-          {/* Slider */}
-          <div className="relative w-full px-3 max-md:px-0 max-w-[calc(100vw-(288px+55px))]
-            max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden"
-          >
-            {/* DESKTOP SLIDER */}
-            <div ref={sliderRef} className="keen-slider">
-              {getVideosSlider(startIndex, videos)}
+          {/* More video */}
+          {videos.length > 2 && videos.length <= 5 ?
+            /* LESS VIDEO */
+            <div className="relative w-full grid grid-cols-3 gap-[15px] max-md:gap-[12px]">
+              {getVideosSlider(3, videos)}
             </div>
-
-            {/* Arrow */}
-            {/* Left arrow */}
-            <button
-              onClick={scrollLeft}
-              className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-                bg-light/90 hover:bg-light/60 text-tale  
-                p-3 rounded-sm transition-opacity duration-200
-                  ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+          : videos.length > 5 &&
+            /* SLIDER */
+            <div className="relative w-full px-3 max-md:px-0 max-w-[calc(100vw-(288px+55px))]
+              max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden"
             >
-              <MdArrowBackIosNew className="font-bold text-2xl"/>
-            </button>
+              <div ref={sliderRef} className="keen-slider">
+                {getVideosSlider(startIndex, videos)}
+              </div>
 
-            {/* Right arrow */}
-            <button
-              onClick={scrollRight}
-              className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-                bg-light/90 hover:bg-light/60 text-tale  
-                p-3 rounded-sm transition-opacity duration-200
-                ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-            >
-              <MdArrowForwardIos className="font-bold text-2xl"/>
-            </button>
-          </div>
+              {/* Arrow */}
+              {/* Left arrow */}
+              <button
+                onClick={scrollLeft}
+                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
+                  bg-light/90 hover:bg-light/60 text-tale  
+                  p-3 rounded-sm transition-opacity duration-200
+                    ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+              >
+                <MdArrowBackIosNew className="font-bold text-2xl"/>
+              </button>
+
+              {/* Right arrow */}
+              <button
+                onClick={scrollRight}
+                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
+                  bg-light/90 hover:bg-light/60 text-tale  
+                  p-3 rounded-sm transition-opacity duration-200
+                  ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+              >
+                <MdArrowForwardIos className="font-bold text-2xl"/>
+              </button>
+            </div>
+          }
       </div>
-    </div>
+    </>
   )
 }
 

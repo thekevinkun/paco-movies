@@ -9,7 +9,7 @@ import { useMenu } from "@contexts/MenuContext";
 
 const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
-  
+
   useEffect(() => {
     handleChangeMediaType("");
     handleChangeCategory("");
@@ -26,9 +26,9 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     poster={data.details.poster_path}
                     title={data.details.title}
                     rating={data.details.vote_average}
-                    releaseDate={data.releaseDate?.release_date.release_date}
+                    releaseDate={data.releaseDate.date}
                     country={data.releaseDate.iso_3166_1}
-                    certification={data.releaseDate?.release_date.certification}
+                    certification={data.releaseDate.certification}
                     runtime={data.details.runtime}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
@@ -43,9 +43,9 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     poster={data.details.poster_path}
                     title={data.details.title}
                     rating={data.details.vote_average}
-                    releaseDate={data.releaseDate?.release_date.release_date}
+                    releaseDate={data.releaseDate.date}
                     country={data.releaseDate.iso_3166_1}
-                    certification={data.releaseDate?.release_date.certification}
+                    certification={data.releaseDate.certification}
                     runtime={data.details.runtime}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
@@ -57,6 +57,7 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     mediaType={mediaType} 
                     details={data.details}
                     releaseDate={data.releaseDate}
+                    originCountry={data.originCountry}
                     videos={data.media.videos}
                     posters={data.media.posters}
                     backdrops={data.media.backdrops}

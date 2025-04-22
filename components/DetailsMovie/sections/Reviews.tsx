@@ -46,7 +46,7 @@ const Reviews = ({movieId, mediaType, title, reviews}:
   }, [randomReview, readMore]);
 
   return (
-    <div className="pt-16 max-sm:pt-12">
+    <>
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
           + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/reviews`} 
@@ -148,7 +148,7 @@ const Reviews = ({movieId, mediaType, title, reviews}:
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

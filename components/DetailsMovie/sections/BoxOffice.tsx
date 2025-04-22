@@ -2,7 +2,7 @@ import { formatCurrency } from "@helpers/helpers";
 
 const BoxOffice = ({details}: any) => {
   return (
-    <div className="pt-16 max-sm:pt-12">
+    <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
         Box Office
       </h3>
@@ -30,7 +30,7 @@ const BoxOffice = ({details}: any) => {
           </p>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

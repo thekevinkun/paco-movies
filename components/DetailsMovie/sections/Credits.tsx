@@ -141,7 +141,7 @@ const Credits = ({movieId, mediaType, title, casts, crews}:
   })
   
   return (
-    <div className="pt-16 max-sm:pt-12">
+    <>
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
           + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullcredits`} 
@@ -205,7 +205,7 @@ const Credits = ({movieId, mediaType, title, casts, crews}:
           </Link>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

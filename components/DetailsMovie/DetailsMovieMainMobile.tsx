@@ -105,7 +105,8 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className="w-full h-full object-cover rounded-md opacity-95"
+                    className="w-full h-full object-cover 
+                        shadow-lg shadow-light/20 rounded-md opacity-95"
                 />
             </div>
         </div>
@@ -132,9 +133,12 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                         height={29}
                         className="relative object-contain bottom-[1.7px]"
                     />
-
-                    <span className="text-main text-lg font-semibold">
-                        {rating > 0  ? roundedToFixed(rating, 1) : "N"}
+                    
+                    <span 
+                        className={`text-main text-lg 
+                        ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
+                    >
+                        {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
                     </span>
                 </div>
 
@@ -151,9 +155,13 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
             <div className="mt-7 py-4 bg-dark-2 border-y border-dark 
                     text-light-1 font-normal flex flex-col items-center justify-center gap-1">
                 <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium bg-dark border border-gray-500 px-1">
-                        {certification}
-                    </span>
+                    {certification && 
+                        <span className="text-sm font-medium bg-dark 
+                            border border-gray-500 px-1"
+                        >
+                            {certification}
+                        </span>
+                    }
 
                     <span className="text-sm">
                         {releaseDate && `${moment(releaseDate).format("L")}`}    
@@ -161,9 +169,11 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                     </span>
                 </div>
                 
-                <span className="text-sm">
-                    {convertRuntime(runtime)}
-                </span>
+                {runtime > 0 &&
+                    <span className="text-sm">
+                        {convertRuntime(runtime)}
+                    </span>
+                }
 
                 <div>
                     {getGenres(mediaType, genres)}

@@ -29,7 +29,7 @@ const getDirector = (crews: any) => {
   return (
     <Link 
       href={`/name/${director.id + "-" + director.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-      className="hover:underline hover:text-tale"
+      className="max-xl:text-sm hover:underline hover:text-tale"
     > 
       <p>{director.name}</p>
     </Link>
@@ -43,12 +43,12 @@ const getWriters = (crews: any) => {
     <React.Fragment key={item.id}>
       <Link 
         href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-        className="hover:underline hover:text-tale"
+        className="max-xl:text-sm hover:underline hover:text-tale"
       >
         <p>{item.name}</p>
       </Link>
 
-      <span className="bullet-separator"> &#8226; </span>
+      <span className="max-xl:text-sm bullet-separator"> &#8226; </span>
     </React.Fragment>
   ))
 }
@@ -58,19 +58,19 @@ const getStars = (casts: any) => {
     <React.Fragment key={item.id}>
       <Link 
         href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-        className="hover:underline hover:text-tale"
+        className="max-xl:text-sm hover:underline hover:text-tale"
       >
         <p>{item.name}</p>
       </Link>
 
-      <span className="bullet-separator"> &#8226; </span>
+      <span className="max-xl:text-sm bullet-separator"> &#8226; </span>
     </React.Fragment>
   ))
 }
 
 const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
     country, certification, runtime, genres, tagline, overview, credits}: IDetailsMovieMain) => {
-  
+
   return (
     <section
       style={{
@@ -104,8 +104,9 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
             width={0}
             height={0}
             sizes="100vw"
-            className="w-[285px] h-[415px] max-lg:w-[235px] max-lg:h-[320px]
-              object-cover rounded-md opacity-95"
+            className="w-[285px] h-[415px] max-xl:w-[250px] max-xl:h-[345px]
+              max-lg:w-[235px] max-lg:h-[320px]
+              object-cover shadow-lg shadow-light/20 rounded-md opacity-95"
           />
 
           <div className="flex-1">
@@ -124,31 +125,37 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
             <div className="pt-1 text-light font-normal flex items-center gap-2 max-xl:gap-1">
               {/* MOVIE RATE & RELEASE DATE COUNTRY */}
               <div className="flex items-center gap-2 max-xl:gap-1">
-                <span className="text-sm max-lg:text-base 
-                    font-medium bg-dark border border-gray-500 px-1"
-                >
-                  {certification}
-                </span>
-
+                {certification && 
+                  <span className="text-sm max-lg:text-base 
+                      font-medium bg-dark border border-gray-500 px-1"
+                  >
+                    {certification}
+                  </span>
+                }
+                
                 <span className="text-sm max-xl:text-xs max-lg:text-sm">
                   {releaseDate && `${moment(releaseDate).format("L")}`}    
                   {` (${country.iso_3166_1})`}
                 </span>
               </div>
               
-              <span>|</span>
-              
               {/* SHOW GENRES */}
+              <span>|</span>
+            
               <div>
                 {getGenres(mediaType, genres)}
               </div>
-
-              <span>|</span>
               
               {/* RUNTIME */}
-              <span className="text-sm max-xl:text-xs max-lg:text-sm">
-                {convertRuntime(runtime)}
-              </span>
+              {runtime > 0 &&
+              <>
+                <span>|</span>
+                
+                <span className="text-sm max-xl:text-xs max-lg:text-sm">
+                  {convertRuntime(runtime)}
+                </span>
+              </>
+              }
             </div>
 
             {/* RATING & TRAILER */}
@@ -181,20 +188,24 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
 
             {/* TAGLINE */}
             <div className="pt-7">
-              <h3 className="text-lg italic text-light-1">{tagline}</h3>
+              <h3 className="text-lg max-xl:text-sm italic text-light-1">{tagline}</h3>
             </div>
 
             {/* OVERVIEW */}
             <div className="text-light pt-5">
               <h3 className="text-lg font-semibold">Overview</h3>
-              <p className="pt-2 font-normal">{overview}</p>
+              <p className="pt-2 font-normal max-xl:text-sm">
+                {overview}
+              </p>
             </div>
 
             {/* CREDITS */}
             <div className="pt-7 text-light">
               {/* DIRECTOR */}
               <div className="py-2 flex items-center font-semibold border-b border-gray-500">
-                <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
+                <h3 className="basis-[15%] max-xl:basis-[20%] max-lg:basis-[15%]
+                  text-lg max-xl:text-base"
+                >
                   Director
                 </h3>
 
@@ -203,7 +214,9 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
               
               {/* WRITERS */}
               <div className="py-2 flex items-center font-semibold border-b border-gray-500">
-                <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
+                <h3 className="basis-[15%] max-xl:basis-[20%] 
+                  max-lg:basis-[15%] text-lg max-xl:text-base"
+                >
                   Writers
                 </h3>
                 
@@ -214,7 +227,9 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
               
               {/* STARS */}
               <div className="py-2 flex items-center font-semibold border-b border-gray-500">
-                <h3 className="basis-[15%] max-xl:basis-[25%] max-lg:basis-[15%] text-lg max-xl:text-base">
+                <h3 className="basis-[15%] max-xl:basis-[20%] max-lg:basis-[15%]
+                  text-lg max-xl:text-base"
+                >
                   Stars
                 </h3>
 

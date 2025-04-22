@@ -9,11 +9,14 @@ import { MdArrowForwardIos } from "react-icons/md";
 const getPhotos = (movieId: number, mediaType: string, 
         title: string, posters: any, backdrops: any) => {
     return (
-      <div className="grid-photos">
+      <div className={`${(posters.length > 4 && backdrops.length > 4) ? "grid-photos" 
+          : "grid grid-cols-5 max-md:grid-cols-4 gap-[15px] max-md:gap-[12px]"}`}
+      >
         {posters.slice(0, 4).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-posters"} 
-            className={`photo-${index + 1} bg-dark rounded-md`}
+            className={`bg-dark rounded-md
+              ${posters.length > 4 && `photo-${index + 1}`}`}
           >
             <Image
               priority
@@ -32,7 +35,8 @@ const getPhotos = (movieId: number, mediaType: string,
         {backdrops.slice(0, 3).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-backdrops"} 
-            className={`backdrop-${index + 1} bg-black rounded-md`}
+            className={`bg-dark rounded-md 
+              ${backdrops.length > 4 && `backdrop-${index + 1}`}`}
           >
             <Image
               priority
@@ -48,30 +52,31 @@ const getPhotos = (movieId: number, mediaType: string,
           </div>
         ))}
 
-        {backdrops.slice(3, 4).map((item: any) => (
-          <Link 
-            key="last-backdrops"
-            href={`/title/${mediaType}/${movieId + "-" 
-              + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
-            className="last-backdrop relative group bg-dark rounded-md"
-          >
-            <Image
-              priority
-              unoptimized
-              loader={() => `https://image.tmdb.org/t/p/w500${item.file_path}`}
-              src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
-              alt="Poster"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-full object-cover rounded-md opacity-50 
-                transition-opacity duration-200 group-hover:opacity-30"
-            />
+        {backdrops.length > 4 &&
+          backdrops.slice(3, 4).map((item: any) => (
+            <Link 
+              key="last-backdrops"
+              href={`/title/${mediaType}/${movieId + "-" 
+                + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+              className="last-backdrop relative group bg-dark rounded-md"
+            >
+              <Image
+                priority
+                unoptimized
+                loader={() => `https://image.tmdb.org/t/p/w500${item.file_path}`}
+                src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
+                alt="Poster"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-full object-cover rounded-md opacity-50 
+                  transition-opacity duration-200 group-hover:opacity-30"
+              />
 
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <FiPlus className="text-light text-5xl"/>
-            </span>
-          </Link>
+              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <FiPlus className="text-light text-5xl"/>
+              </span>
+            </Link>
         ))}
       </div>
     )
@@ -81,7 +86,7 @@ const Photos = ({movieId, mediaType, title, posters, backdrops}:
     {movieId: number, mediaType: string, title: string, posters: any, backdrops: any}) => {
   
   return (
-    <div className="pt-16 max-sm:pt-12">
+    <>
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
           + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`} 
@@ -99,7 +104,7 @@ const Photos = ({movieId, mediaType, title, posters, backdrops}:
       <div className="pt-7">
         {getPhotos(movieId, mediaType, title, posters, backdrops)}
       </div>
-    </div>
+    </>
   )
 }
 

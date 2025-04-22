@@ -95,6 +95,7 @@ export interface IDetailsMovieMore {
     mediaType: string
     details: any
     releaseDate: any
+    originCountry: any
     videos: any
     posters: any
     backdrops: any

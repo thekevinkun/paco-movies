@@ -7,11 +7,11 @@ import { SiWikidata } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import { RxExternalLink } from "react-icons/rx";
 
-const Details = ({details, releaseDate, externaIds}: 
-      {details: any, releaseDate: any, externaIds: any}) => {
+const Details = ({details, releaseDate, originCountry, externalIds}: 
+      {details: any, releaseDate: any, originCountry: any, externalIds: any}) => {
   
   return (
-    <div className="pt-16 max-sm:pt-12">
+    <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
         Details
       </h3>
@@ -27,9 +27,9 @@ const Details = ({details, releaseDate, externaIds}:
 
           {releaseDate ? 
             <p className="max-md:text-sm max-sm:text-xs">
-              {moment(releaseDate.release_date.release_date).format("LL")}
+              {moment(releaseDate.date).format("LL")}
               <span>
-                {" "}({releaseDate.iso_3166_1.name})
+                {" "}({releaseDate.iso_3166_1.native_name})
               </span>
             </p>
           :
@@ -48,10 +48,10 @@ const Details = ({details, releaseDate, externaIds}:
           </h3>
 
           <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.origin_country.slice(0, 3).map((country: any) => (
-              <React.Fragment key={country}>
+            {originCountry.slice(0, 3).map((country: any) => (
+              <React.Fragment key={country.iso_3166_1}>
                 <p>
-                  {country}
+                  {country.native_name}
                 </p>
                 <span className="bullet-separator"> &#8226; </span>
               </React.Fragment>
@@ -90,45 +90,45 @@ const Details = ({details, releaseDate, externaIds}:
           </h3>
           
           <div className="flex items-center gap-5">
-            { externaIds.twitter_id &&
+            { externalIds.twitter_id &&
               <Link 
-                href={`https://twitter.com/${externaIds.twitter_id}`}
+                href={`https://twitter.com/${externalIds.twitter_id}`}
                 target="_blank"
               >
                 <FaXTwitter className="text-2xl"/>
               </Link>
             }
 
-            {externaIds.facebook_id &&
+            {externalIds.facebook_id &&
               <Link 
-                href={`https://facebook.com/${externaIds.facebook_id}`}
+                href={`https://facebook.com/${externalIds.facebook_id}`}
                 target="_blank"
               >
                 <FaFacebook className="text-2xl"/>
               </Link>
             }
 
-            {externaIds.instagram_id &&
+            {externalIds.instagram_id &&
               <Link 
-                href={`https://instagram.com/${externaIds.instagram_id}`}
+                href={`https://instagram.com/${externalIds.instagram_id}`}
                 target="_blank"
               >
                 <FaInstagram className="text-2xl"/>
               </Link>
             }
 
-            {externaIds.imdb_id &&
+            {externalIds.imdb_id &&
               <Link 
-                href={`https://imdb.com/title/${externaIds.imdb_id}`}
+                href={`https://imdb.com/title/${externalIds.imdb_id}`}
                 target="_blank"
               >
                 <FaImdb className="text-2xl"/>
               </Link>
             }
 
-            {externaIds.wikidata_id &&
+            {externalIds.wikidata_id &&
               <Link 
-                href={`https://wikidata.org/wiki/${externaIds.wikidata_id}`}
+                href={`https://wikidata.org/wiki/${externalIds.wikidata_id}`}
                 target="_blank"
               >
                 <SiWikidata className="text-2xl"/>
@@ -177,7 +177,7 @@ const Details = ({details, releaseDate, externaIds}:
           </div>
       </div>
       </div>
-    </div>
+    </>
   )
 }
 

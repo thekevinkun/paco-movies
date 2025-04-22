@@ -13,6 +13,17 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
             throw new Error(details.status_message);
         }
 
+        // Get origin country of movie
+        response = await fetch("https://api.themoviedb.org/3/configuration/countries?language=en-US", options);
+        let countries = await response.json();
+        if (countries.success === false) {
+            throw new Error(countries.status_message);
+        }
+
+        const originCountry = details.origin_country
+            .map((code: any) => countries.find((country: any) => country.iso_3166_1 === code))
+            .filter((country: any): country is typeof countries[number] => country !== undefined);
+
         // Get release date and certification
         response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${titleId}/release_dates`, options);
         let releaseDate = await response.json();
@@ -20,30 +31,37 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
             throw new Error(releaseDate.status_message);
         }
 
-        releaseDate = releaseDate.results.filter((item: any) => {
-            if (details.production_countries.some((c: any) => c.iso_3166_1 === "US")) {
-                return item.iso_3166_1 === "US";
-            } else {
-                return details.production_countries.some((c: any) => {
-                    if (c.iso_3166_1 === item.iso_3166_1) {
-                        let checkCertification = item.release_dates.filter((cr: any) => cr.certification !== "");
-                        if (checkCertification.length > 0)
-                            return item.iso_3166_1;
-                    }
-                    return false
-                })
-            }
-        });
-        let country = details.production_countries.filter((country: any) => {
-            if (country.iso_3166_1 === releaseDate[0].iso_3166_1)
-                return country
-            return false
-        })
-        releaseDate = {
-            iso_3166_1: country[0],
-            release_date: releaseDate[0].release_dates.filter((item: any) => item.certification !== "").slice(0, 1)[0]
+        if (releaseDate.results.length > 1) {
+            releaseDate = releaseDate.results.filter((item: any) => {
+                if (details.production_countries.some((c: any) => c.iso_3166_1 === "US")) {
+                    return item.iso_3166_1 === "US";
+                } else {
+                    return details.production_countries.some((c: any) => {
+                        if (c.iso_3166_1 === item.iso_3166_1) {
+                            let checkCertification = item.release_dates.filter((cr: any) => cr.certification !== "");
+                            if (checkCertification.length > 0)
+                                return item.iso_3166_1;
+                        }
+                        return false
+                    })
+                }
+            });
+        } else {
+            releaseDate = releaseDate.results;
         }
-
+      
+        const filterReleaseDate = releaseDate[0].release_dates.length > 1 ? 
+            releaseDate[0].release_dates.filter((item: any) => item.certification !== "").slice(0, 1)[0]
+            : releaseDate[0].release_dates[0];
+        
+        const releaseDateCountry = countries.find((c: any) => c.iso_3166_1 === releaseDate[0].iso_3166_1);
+    
+        releaseDate = {
+            iso_3166_1: releaseDateCountry,
+            date: filterReleaseDate.release_date,
+            certification: filterReleaseDate.certification
+        };
+        
         // Get credits
         response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${titleId}/credits?language=en-US`, options);
         const credits = await response.json();
@@ -89,6 +107,7 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
         const data = {
             details: details,
             releaseDate: releaseDate,
+            originCountry: originCountry,
             credits: credits,
             media: {
                 videos: videos.results.reverse(),
