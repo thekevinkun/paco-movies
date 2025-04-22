@@ -1,6 +1,6 @@
 import { options } from "@api/data";
 
-export const getGenre = async (mediaType: string) => {
+export const getGenres = async (mediaType: string) => {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/genre/${mediaType}/list?language=en`, options);
 

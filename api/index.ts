@@ -1,15 +1,15 @@
 import { getTrending } from "@api/getTrending";
 import { getCategory } from "@api/getCategory";
-import { getGenre } from "@api/getGenre";
-import { getByGenre } from "./getByGenre";
-import { getSearch } from "./getSearch";
+import { getGenres } from "@api/getGenres";
+import { getByGenre } from "@api/getByGenre";
+import { getSearch } from "@api/getSearch";
 import { getNextPage } from '@api/getNextPage';
-import { getMovieDetails } from "./getMovieDetails";
+import { getMovieDetails } from "@api/getMovieDetails";
 
 export {
     getTrending,
     getCategory,
-    getGenre,
+    getGenres,
     getByGenre,
     getSearch,
     getNextPage,

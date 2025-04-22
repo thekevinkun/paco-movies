@@ -7,7 +7,7 @@ import { getSearch } from "@api";
 export async function generateMetadata({ searchParams }: any): Promise<Metadata> {
     searchParams = await searchParams;
     const query = searchParams.query.replace(/-/g, "+");
-    const title = query.replace(/\+/g, " ") + " — PacoMovies";
+    const title = query.replace(/\+/g, " ");
   
     return {
       title: title + " — PacoMovies",
