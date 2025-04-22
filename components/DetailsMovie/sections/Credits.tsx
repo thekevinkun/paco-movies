@@ -135,7 +135,7 @@ const Credits = ({movieId, mediaType, title, casts, crews}:
     },
     slides: {
       perView: 4.25,
-      spacing: 13
+      spacing: 12
     },
     mode: "free-snap"
   })
