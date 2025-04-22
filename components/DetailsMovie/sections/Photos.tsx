@@ -81,7 +81,7 @@ const Photos = ({movieId, mediaType, title, posters, backdrops}:
     {movieId: number, mediaType: string, title: string, posters: any, backdrops: any}) => {
   
   return (
-    <div className="pt-16 max-lg:pt-12 max-md:pt-16 max-sm:pt-12">
+    <div className="pt-16 max-sm:pt-12">
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
           + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`} 

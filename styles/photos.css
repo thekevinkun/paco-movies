@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: 240px 200px;
-    gap: 12px;
+    gap: 15px;
 }
 
 .photo-1, .photo-3 {
@@ -52,6 +52,7 @@
 @media not all and (min-width: 768px) {
     .grid-photos {
         grid-template-rows: 195px 175px;
+        gap: 12px;
     }
 
     .photo-3,
@@ -83,6 +84,5 @@
 @media not all and (min-width: 640px) {
     .grid-photos {
         grid-template-rows: 150px 140px;
-        gap: 8px;
     }
 }
