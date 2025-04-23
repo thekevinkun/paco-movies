@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentSearch } from "@sections";
 
-import { getSearch } from "@server/api";
+import { getSearch } from "@lib/api";
 
 export async function generateMetadata({ searchParams }: any): Promise<Metadata> {
     searchParams = await searchParams;
@@ -18,12 +18,7 @@ export async function generateMetadata({ searchParams }: any): Promise<Metadata>
 const Search = async ({searchParams, mediaType="multi"}: {searchParams: any, mediaType: string}) => {
   searchParams = await searchParams;
   const query = searchParams.query.replace(/-/g, "+");
-
-  const searchResponse = await getSearch(mediaType, query);
-  const searchData = await searchResponse.json();
-  
-  if (!searchResponse.ok)
-    throw new Error(searchData.error);
+  const searchData = await getSearch(mediaType, query);
 
   return (
     <ContentSearch 

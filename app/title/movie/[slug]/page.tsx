@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentDetails } from "@sections";
 
-import { getCachedMovieDetails } from "@server/api";
+import { getCachedDetails } from "@lib/cache";
 import { isNumeric } from "@helpers/helpers";
 
 export async function generateMetadata({params, mediaType="movie"}: 
@@ -10,7 +10,7 @@ export async function generateMetadata({params, mediaType="movie"}:
   params = await params;
   const titleId = params.slug.substring(0, params.slug.indexOf("-"));
   
-  const data = await getCachedMovieDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
+  const data = await getCachedDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
   const title = data.details.title;
 
   return {
@@ -23,7 +23,7 @@ const TitleMovie = async ({params, mediaType="movie"}: {params: any, mediaType: 
   params = await params;
   const titleId = params.slug.substring(0, params.slug.indexOf("-"));
 
-  const data = await getCachedMovieDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
+  const data = await getCachedDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
 
   return (
     <ContentDetails 

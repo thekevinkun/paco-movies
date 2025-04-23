@@ -1,13 +1,9 @@
 import { ContentMovies } from "@sections";
 
-import { getTrending } from "@server/api";
+import { getCachedTrending } from "@lib/cache";
 
 const Home = async ({mediaType="all", category="trending"}) => {
-  const response = await getTrending(mediaType);
-  const data = await response.json();
-  
-  if (!response.ok)
-    throw new Error(data.error);
+  const data = await getCachedTrending(mediaType, category);
 
   return (
     <ContentMovies 

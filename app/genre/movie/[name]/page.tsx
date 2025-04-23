@@ -2,7 +2,8 @@ import { Metadata } from "next";
 
 import { ContentMovies } from "@sections";
 
-import { getByGenre, getCachedGenres } from "@server/api";
+import { getByGenre } from "@lib/api";
+import { getCachedGenres } from "@lib/cache";
 import { isNumeric } from "@helpers/helpers";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
@@ -23,12 +24,7 @@ const GenreMovie = async ({params, mediaType="movie"}: {params: any, mediaType: 
   params = await params;
   const genreId = await params.name.substring(0, params.name.indexOf("-"));
 
-  const movieResponse = await getByGenre(mediaType, !isNumeric(params.name) ? genreId : params.name);
-  const movieData = await movieResponse.json();
-
-  if (!movieResponse.ok)
-    throw new Error(movieData.error);
-
+  const movieData = await getByGenre(mediaType, !isNumeric(params.name) ? genreId : params.name);
   const genreData = await getCachedGenres(mediaType);
 
   return (

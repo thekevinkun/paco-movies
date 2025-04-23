@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentMovies } from "@sections";
 
-import { getTrending, getCachedGenres } from "@server/api";
+import { getCachedTrending, getCachedGenres } from "@lib/cache";
 
 export const metadata: Metadata = {
   title: "TV Shows — PacoMovies",
@@ -10,12 +10,7 @@ export const metadata: Metadata = {
 };
 
 const Tv = async ({mediaType="tv", category="trending"}) => {
-  const tvResponse = await getTrending(mediaType);
-  const tvData = await tvResponse.json();
-
-  if (!tvResponse.ok)
-    throw new Error(tvData.error);
-
+  const tvData = await getCachedTrending(mediaType, category);
   const genreData = await getCachedGenres(mediaType);
  
   return (
