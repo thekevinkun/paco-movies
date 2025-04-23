@@ -5,8 +5,6 @@ import { useInView } from "react-intersection-observer";
 
 import Image from "next/image";
 
-import { getNextPage } from "@server/api";
-
 const LoadMore = ({page, mediaType, category, query, onNextPage}: 
     { 
       page: number, mediaType: string, 
@@ -16,17 +14,25 @@ const LoadMore = ({page, mediaType, category, query, onNextPage}:
   const { ref, inView } = useInView();
   
   useEffect(() => {
-    const loadNextPage = async (page: number) => {
-      const data = await getNextPage(mediaType, category, query!, page);
-      
-      if (data.error)
-        throw new Error(data.error);
+    const loadNextPage = async () => {
+      try {
+        const response = await fetch(
+          `/api/next-page?mediaType=${mediaType}&category=${category}&query=${query || ""}&page=${page + 1}`
+        );
+        const data = await response.json();
 
-      onNextPage(data);
+        if (response.ok) {
+          onNextPage(data);
+        } else {
+          console.error(data.error);
+        }
+      } catch (error) {
+        console.error("Error fetching next page:", error);
+      }
     }
 
     if (inView) {
-      loadNextPage(page + 1);
+      loadNextPage();
     }
   }, [inView]);
 

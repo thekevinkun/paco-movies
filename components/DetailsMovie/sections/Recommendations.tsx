@@ -67,7 +67,7 @@ const getRecommendations = (data: any) => {
             title={item.title || item.name} 
             className="pt-3 inline-block w-fit"
           >
-            <h2 className="title-line-clamp text-dark 
+            <h2 className="line-clamp-1 text-dark 
                 max-md:text-sm font-semibold hover:text-tale"
             >
                 {item.title || item.name}

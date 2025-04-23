@@ -3,7 +3,7 @@ import Image from "next/image";
 import moment from "moment";
 
 import { MotionDiv } from "@components";
-import { cardMovieVariants } from "@utils/motion";
+import { cardMovieVariants } from "@lib/utils/motion";
 
 import { FaPlay } from "react-icons/fa";
 import { ICardMovieTop } from "@types";
@@ -28,8 +28,8 @@ const CardMovieTop = ({id, poster, backDrop, title,
         <Image
           priority
           unoptimized
-          loader={() => poster && `https://image.tmdb.org/t/p/original${poster}`}
-          src={poster ? `https://image.tmdb.org/t/p/original${poster}` : 
+          loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
+          src={poster ? `https://image.tmdb.org/t/p/w500${poster}` : 
             mediaType === "person" ? "/images/not-found-person.png" : "/images/not-found-poster.jpg"}
           alt="Poster"
           width={0}
@@ -45,7 +45,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundImage: `url("https://image.tmdb.org/t/p/original${backDrop}")`
+          backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backDrop}")`
         }}
         className="relative w-full rounded-r-md max-xl:rounded-md p-8"
       >

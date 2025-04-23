@@ -77,7 +77,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundImage: `url("https://image.tmdb.org/t/p/original${backdrop}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
       }}
       className="relative w-full h-svh max-md:hidden"
     >
@@ -97,8 +97,8 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
           <Image
             priority
             unoptimized
-            loader={() => poster && `https://image.tmdb.org/t/p/original${poster}`}
-            src={poster ? `https://image.tmdb.org/t/p/original${poster}` : 
+            loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
+            src={poster ? `https://image.tmdb.org/t/p/w500${poster}` : 
                   "/images/not-found-poster.jpg"}
             alt="Poster"
             width={0}

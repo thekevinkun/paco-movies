@@ -41,8 +41,8 @@ const getPhotos = (movieId: number, mediaType: string,
             <Image
               priority
               unoptimized
-              loader={() => `https://image.tmdb.org/t/p/w500${item.file_path}`}
-              src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
+              loader={() => `https://image.tmdb.org/t/p/w780${item.file_path}`}
+              src={`https://image.tmdb.org/t/p/w780${item.file_path}`}
               alt="Poster"
               width={0}
               height={0}
@@ -63,8 +63,8 @@ const getPhotos = (movieId: number, mediaType: string,
               <Image
                 priority
                 unoptimized
-                loader={() => `https://image.tmdb.org/t/p/w500${item.file_path}`}
-                src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
+                loader={() => `https://image.tmdb.org/t/p/w780${item.file_path}`}
+                src={`https://image.tmdb.org/t/p/w780${item.file_path}`}
                 alt="Poster"
                 width={0}
                 height={0}

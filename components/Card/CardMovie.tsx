@@ -3,7 +3,7 @@ import Image from "next/image";
 import moment from "moment";
 
 import { MotionDiv } from "@components";
-import { cardMovieVariants } from "@utils/motion";
+import { cardMovieVariants } from "@lib/utils/motion";
 
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { ICardMovie } from "@types";

@@ -7,7 +7,7 @@ import moment from "moment";
 import { MotionDiv } from "@components/MotionDiv";
 
 import { ICardSearch } from "@types";
-import { cardMovieVariants } from "@utils/motion";
+import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed } from "@helpers/helpers";
 
 const CardSearch = ({ id, index, name, photo, mediaType, 

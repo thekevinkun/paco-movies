@@ -61,8 +61,8 @@ const getCastsMobile = (casts: any) => {
           <Image
             priority
             unoptimized
-            loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-            src={cast.profile_path ? `https://image.tmdb.org/t/p/w500${cast.profile_path}` 
+            loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+            src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` 
               : "/images/not-found-person.png"}
             alt="Poster"
             width={0}

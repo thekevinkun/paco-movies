@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { MotionDiv } from "@components";
-import { cardMovieVariants } from "@utils/motion";
+import { cardMovieVariants } from "@lib/utils/motion";
 
 import { ICardPerson } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
@@ -29,8 +29,8 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
             <Image
                 priority
                 unoptimized
-                loader={() => `https://image.tmdb.org/t/p/w500${photo}`}
-                src={photo ? `https://image.tmdb.org/t/p/w500${photo}` 
+                loader={() => `https://image.tmdb.org/t/p/original${photo}`}
+                src={photo ? `https://image.tmdb.org/t/p/original${photo}` 
                     : `/images/not-found-person.png`}
                 alt="Poster"
                 width={0}
