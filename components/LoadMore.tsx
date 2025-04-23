@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 import Image from "next/image";
 
-import { getNextPage } from "@api";
+import { getNextPage } from "@server/api";
 
 const LoadMore = ({page, mediaType, category, query, onNextPage}: 
     { 

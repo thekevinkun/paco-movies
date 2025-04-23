@@ -1,4 +1,4 @@
-import { getGenres } from "@api";
+import { getGenres } from "@server/api";
 
 let genreCache: Record<string, any> = {};
 

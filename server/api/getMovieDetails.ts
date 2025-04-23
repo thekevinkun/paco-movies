@@ -1,6 +1,6 @@
 "use server"
 
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 
 export const getMovieDetails = async (mediaType: string, titleId: number) => {
     try {

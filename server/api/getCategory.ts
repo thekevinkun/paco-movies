@@ -1,14 +1,13 @@
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 
-export const getTrending = async (mediaType: string) => {
+export const getCategory = async (mediaType: string, category: string) => {
     try {
         if (mediaType === "stars") mediaType = "person";
-        
-        const response = await 
-            fetch(`https://api.themoviedb.org/3/trending/${mediaType}/day?language=en-US`, options);
+
+        const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US`, options);
 
         const data = await response.json();
-        
+
         if (data.success === false) {
             throw new Error(data.status_message);
         }

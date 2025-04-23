@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentDetails } from "@sections";
 
-import { getCachedMovieDetails } from "@cache";
+import { getCachedMovieDetails } from "@server/api";
 import { isNumeric } from "@helpers/helpers";
 
 export async function generateMetadata({params, mediaType="movie"}: 

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentStars } from "@sections";
 
-import { getCategory } from "@api";
+import { getCategory } from "@server/api";
 
 export const metadata: Metadata = {
   title: "Popular Stars — PacoMovies",

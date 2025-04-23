@@ -1,11 +1,14 @@
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 
-export const getSearch = async (mediaType: string, query: string) => {
+export const getTrending = async (mediaType: string) => {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/search/${mediaType}?query=${query}&include_adult=false&language=en-US`, options)
+        if (mediaType === "stars") mediaType = "person";
+        
+        const response = await 
+            fetch(`https://api.themoviedb.org/3/trending/${mediaType}/day?language=en-US`, options);
 
         const data = await response.json();
-
+        
         if (data.success === false) {
             throw new Error(data.status_message);
         }

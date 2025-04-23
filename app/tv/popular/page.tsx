@@ -2,9 +2,7 @@ import { Metadata } from "next";
 
 import { ContentMovies } from "@sections";
 
-import { getCategory } from "@api";
-
-import { getCachedGenres } from "@cache";
+import { getCategory, getCachedGenres } from "@server/api";
 
 export const metadata: Metadata = {
   title: "TV Shows Popular — PacoMovies",

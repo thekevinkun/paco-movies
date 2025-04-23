@@ -1,6 +1,6 @@
 import { ContentMovies } from "@sections";
 
-import { getTrending } from "@api";
+import { getTrending } from "@server/api";
 
 const Home = async ({mediaType="all", category="trending"}) => {
   const response = await getTrending(mediaType);

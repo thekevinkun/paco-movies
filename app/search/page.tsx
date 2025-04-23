@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentSearch } from "@sections";
 
-import { getSearch } from "@api";
+import { getSearch } from "@server/api";
 
 export async function generateMetadata({ searchParams }: any): Promise<Metadata> {
     searchParams = await searchParams;

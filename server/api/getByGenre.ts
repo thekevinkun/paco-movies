@@ -1,4 +1,4 @@
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 
 export const getByGenre = async (mediaType: string, genre: string) => {
     try {

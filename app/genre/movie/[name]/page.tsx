@@ -2,8 +2,7 @@ import { Metadata } from "next";
 
 import { ContentMovies } from "@sections";
 
-import { getByGenre } from "@api";
-import { getCachedGenres } from "@cache";
+import { getByGenre, getCachedGenres } from "@server/api";
 import { isNumeric } from "@helpers/helpers";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {

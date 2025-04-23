@@ -1,10 +1,8 @@
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 
-export const getCategory = async (mediaType: string, category: string) => {
+export const getSearch = async (mediaType: string, query: string) => {
     try {
-        if (mediaType === "stars") mediaType = "person";
-
-        const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US`, options);
+        const response = await fetch(`https://api.themoviedb.org/3/search/${mediaType}?query=${query}&include_adult=false&language=en-US`, options)
 
         const data = await response.json();
 

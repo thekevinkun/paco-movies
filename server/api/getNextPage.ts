@@ -1,4 +1,4 @@
-import { options } from "@api/data";
+import { options } from "@server/api/data";
 import { isNumeric } from "@helpers/helpers";
 
 export const getNextPage = async (mediaType: string, category: string, query: string, page: number) => {
