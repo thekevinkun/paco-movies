@@ -38,19 +38,17 @@ const LoadMore = ({page, mediaType, category, query, onNextPage}:
 
   return (
     <div
-      ref={ref}
       className="grow pb-10 flex flex-col items-center justify-center"
     >
-      <Image
-        priority
-        unoptimized
-        src="/icons/spinner.svg"
-        alt="spinner"
-        width={0}
-        height={0}
-        sizes="100vw"
-        className="w-[50px] h-[50px] max-sm:w-[45px] max-sm:h-[45px] object-contain"
-      />
+      <div ref={ref} className="relative w-[50px] h-[50px] max-sm:w-[45px] max-sm:h-[45px]">
+        <Image
+          src="/icons/spinner.svg"
+          alt="Spinner Loading"
+          fill
+          sizes="(max-width: 640px) 45px, 50px"
+          className="object-contain"
+        />
+      </div>
     </div>
   )
 }

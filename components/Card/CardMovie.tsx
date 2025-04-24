@@ -2,45 +2,37 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { MotionDiv } from "@components";
+import { FallbackImage, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { ICardMovie } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
 
-const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
+const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
   const fullRoute = id + "-" + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-");
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
 
   return (
-    <MotionDiv 
-      variants={cardMovieVariants(index * 0.25)}
-      initial="hidden"
-      animate="visible"
-      viewport={{ amount: 0 }}
+    <MotionDiv
+      variants={cardMovieVariants}
       className="flex flex-col"
     >
-
       {/* POSTER */}
       <Link
         href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-        className="bg-dark rounded-tr-lg h-full"
+        className="relative w-full aspect-[2/3] bg-dark rounded-tr-lg"
       >
-        <Image
-          priority
-          unoptimized
-          loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
-          src={poster ? `https://image.tmdb.org/t/p/w500${poster}` : 
-            mediaType === "person" ? "/assets/images/not-found-person.png" 
-            : "/assets/images/not-found-poster.jpg"
-          }
-          alt="Poster"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full h-full object-cover rounded-tr-lg opacity-90"
+        <FallbackImage
+          src={poster}
+          mediaType={mediaType}
+          alt="poster"
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33.33vw, 25vw"
+          placeholder="blur"
+          blurDataURL="/images/blur.jpg"
+          className="object-cover rounded-tr-lg opacity-90"
         />
       </Link>
 
@@ -71,7 +63,7 @@ const CardMovie = ({id, index, poster, title, mediaType, releaseDate, rating}: I
           <div className="flex items-center gap-1">
             <Image
               src="/icons/star.svg"
-              alt="Rating Star"
+              alt="rating star"
               width={18}
               height={18}
               className="relative object-contain bottom-[0.4px]"

@@ -3,9 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { FaPlay } from "react-icons/fa";
+import { FallbackImage } from "@components";
 
 import { IDetailsMovieMain } from "@types";
+import { FaPlay } from "react-icons/fa";
 import { convertRuntime, roundedToFixed } from "@helpers/helpers";
 
 const getGenres = (mediaType: string, genres: any) => {
@@ -94,20 +95,24 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
       <div className="relative pt-10 pb-2 px-5 z-40">
         <div className="flex gap-10">
           {/* POSTER */}
-          <Image
-            priority
-            unoptimized
-            loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
-            src={poster ? `https://image.tmdb.org/t/p/w500${poster}` : 
-                  "/images/not-found-poster.jpg"}
-            alt="Poster"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-[285px] h-[415px] max-xl:w-[250px] max-xl:h-[345px]
+          <div className="relative w-[285px] h-[415px] 
+              max-xl:w-[250px] max-xl:h-[345px]
               max-lg:w-[235px] max-lg:h-[320px]
-              object-cover shadow-lg shadow-light/20 rounded-md opacity-95"
-          />
+              shadow-lg shadow-light/20 rounded-md"
+          >
+            <FallbackImage
+              src={poster}
+              mediaType={mediaType}
+              alt="poster"
+              fill
+              sizes="(max-width: 1024px) 235px,
+                     (max-width: 1280px) 250px,
+                     285px"
+              placeholder="blur"
+              blurDataURL="/images/blur.jpg"
+              className="object-cover rounded-md opacity-95"
+            />
+          </div>
 
           <div className="flex-1">
             {/* TITLE */}
@@ -163,7 +168,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
               <div className="flex items-center gap-1">
                 <Image
                   src="/icons/star-2.svg"
-                  alt="Rating Star"
+                  alt="rating star"
                   width={32}
                   height={32}
                   className="relative object-contain bottom-[1.7px]"

@@ -1,13 +1,21 @@
-export const cardMovieVariants = (delay: number) => ({
-    hidden: {
-        opacity: 0
+export const parentStaggerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25,
+      staggerDirection: 1, // forward order
     },
-    visible: {
-        opacity: 1,
-        transition: {
-            delay,
-            ease: "easeInOut",
-            duration: 0.5
-        }
-    }
-})
+  },
+}
+
+export const cardMovieVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.5,
+    },
+  },
+}

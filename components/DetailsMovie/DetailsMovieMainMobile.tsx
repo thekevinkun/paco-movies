@@ -3,10 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { FaPlay } from "react-icons/fa";
+import { FallbackImage } from "@components";
 
-import { convertRuntime, roundedToFixed } from "@helpers/helpers";
 import { IDetailsMovieMain } from "@types";
+import { FaPlay } from "react-icons/fa";
+import { convertRuntime, roundedToFixed } from "@helpers/helpers";
 
 const getGenres = (mediaType: string, genres: any) => {
     return genres.map((genre: any) => (
@@ -83,7 +84,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
                 }}
-              className="relative w-full h-64"
+              className="relative w-full h-72 max-sm:h-64"
         >
             <div
                 style={{
@@ -92,23 +93,6 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                 }}
                 className="w-full h-full absolute top-0 right-0"
             ></div>
-
-            {/* POSTER */}
-            <div className="p-3 w-52 h-full max-sm:w-44">
-                <Image
-                    priority
-                    unoptimized
-                    loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
-                    src={poster ? `https://image.tmdb.org/t/p/w500${poster}` 
-                            : "/assets/images/not-found-poster.jpg"}
-                    alt="Poster"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full h-full object-cover 
-                        shadow-lg shadow-light/20 rounded-md opacity-95"
-                />
-            </div>
         </div>
 
         <div className="relative pt-4 z-40">
@@ -122,13 +106,29 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                     </span>
                 </h2>
             </Link>
+
+            {/* POSTER */}
+            <div className="mt-5 mx-auto relative w-48 h-60 
+                max-sm:w-40 max-sm:h-52 shadow-lg shadow-light/10 rounded-md"
+            >
+                <FallbackImage
+                    src={poster}
+                    mediaType={mediaType}
+                    alt="poster"
+                    fill
+                    sizes="(max-width: 640px) 160px, 192px"
+                    placeholder="blur"
+                    blurDataURL="/images/blur.jpg"
+                    className="object-cover rounded-md opacity-95"
+                />
+            </div>
             
             {/* RATING & TRAILER */}
             <div className="pt-7 flex items-center justify-center">
                 <div className="flex items-center gap-1">
                     <Image
                         src="/icons/star-2.svg"
-                        alt="Rating Star"
+                        alt="rating star"
                         width={29}
                         height={29}
                         className="relative object-contain bottom-[1.7px]"

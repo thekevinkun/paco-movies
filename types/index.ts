@@ -1,5 +1,5 @@
 import { MouseEventHandler, Dispatch, SetStateAction } from "react";
-
+import { ImageProps } from "next/image";
 export interface IShowMobileMenu {
     isShowMobileMenu?: boolean;
     setIsShowMobileMenu?: Dispatch<SetStateAction<boolean>>;
@@ -30,6 +30,13 @@ export interface IApiOptions {
         Authorization: string
     }
 }
+
+export interface FallbackImageProps extends Omit<ImageProps, "src"> {
+    src?: string | null
+    mediaType: string
+    sizes?: string
+}
+
 export interface ICardMovieTop {
     id: number
     poster: string
@@ -43,7 +50,6 @@ export interface ICardMovieTop {
 
 export interface ICardMovie {
     id: number
-    index: number
     poster: string
     title: string
     mediaType: string
@@ -53,7 +59,6 @@ export interface ICardMovie {
 
 export interface ICardPerson {
     id: number
-    index: number
     name: string
     photo: string
     department: string
@@ -63,7 +68,6 @@ export interface ICardPerson {
 
 export interface ICardSearch { 
     id: number
-    index: number
     name: string
     photo: string
     mediaType: string

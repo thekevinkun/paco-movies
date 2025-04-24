@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useMenu } from "@contexts/MenuContext";
 
-import { CardSearch, LoadMore } from "@components";
+import { CardSearch, MotionDiv, LoadMore } from "@components";
 
+import { parentStaggerVariants } from "@lib/utils/motion";
 import { dedupeResults } from "@helpers/helpers";
 
 const ContentSearch = ({ data, mediaType, query }: 
@@ -51,12 +52,15 @@ const ContentSearch = ({ data, mediaType, query }:
           </h2>
         </div>
       :
-        <div className="pt-4 pb-12 flex flex-col">
-          {useData?.results.map((item: any, index: number) => (
+        <MotionDiv 
+          variants={parentStaggerVariants}
+          initial="hidden"
+          animate="visible"className="pt-4 pb-12 flex flex-col"
+        >
+          {useData?.results.map((item: any) => (
             <CardSearch
               key={item.id}
               id={item.id}
-              index={index}
               name={item.title || item.name}
               photo={item.poster_path || item.profile_path}
               mediaType={item.media_type}
@@ -67,7 +71,7 @@ const ContentSearch = ({ data, mediaType, query }:
               works={item.known_for}
             />
           ))}
-        </div>
+        </MotionDiv>
       }
       
       { useData?.page < useData?.total_pages &&

@@ -2,41 +2,39 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { MotionDiv } from "@components";
+import { FallbackImage, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { ICardPerson } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
 
-const CardPerson = ({id, index, name, photo, department, popularity, works}: ICardPerson) => {
+const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerson) => {
   return (
     <MotionDiv 
-        variants={cardMovieVariants(index * 0.25)}
-        initial="hidden"
-        animate="visible"
-        viewport={{ amount: 0 }}
+        variants={cardMovieVariants}
         className="flex flex-col items-center"
     >
         {/* PHOTO */}
         <Link 
             href={`/name/${id + "-" + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-            className="w-72 h-72 
+            className="relative aspect-square w-72 h-72 
                 max-lg:w-60 max-lg:h-60 
                 max-[867px]:w-56 max-[867px]:h-56
                 max-[576px]:w-48 max-[576px]:h-48 
                 bg-dark rounded-full"
         >
-            <Image
-                priority
-                unoptimized
-                loader={() => `https://image.tmdb.org/t/p/original${photo}`}
-                src={photo ? `https://image.tmdb.org/t/p/original${photo}` 
-                    : `/images/not-found-person.png`}
-                alt="Poster"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="w-full h-full object-cover object-[55%_45%] rounded-full opacity-90"
+            <FallbackImage
+                src={photo}
+                mediaType="person"
+                alt="profile"
+                fill
+                sizes="(max-width: 576px) 192px,
+                (max-width: 867px) 224px,
+                (max-width: 1024px) 240px,
+                288px"
+                placeholder="blur"
+                blurDataURL="/images/blur.jpg"
+                className="object-cover object-[55%_45%] rounded-full opacity-90"
             />
       </Link>
 
@@ -56,13 +54,10 @@ const CardPerson = ({id, index, name, photo, department, popularity, works}: ICa
         <div className="pt-3 w-full flex items-center gap-5">
             <div className="flex items-center gap-1">
                 <Image
-                    priority
-                    unoptimized
                     src="/icons/popularity.svg"
-                    alt="Popularity"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
+                    alt="popularity"
+                    width={20}
+                    height={20}
                     className="relative w-5 h-5 object-contain bottom-[0.4px]"
                 />
 

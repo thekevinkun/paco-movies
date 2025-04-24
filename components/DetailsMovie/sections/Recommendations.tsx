@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { FallbackImage } from "@components";
+
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
@@ -23,21 +25,21 @@ const getRecommendations = (data: any) => {
         <Link
           href={`/title/${item.media_type}/${item.id + "-" + 
               (item.title || item.name)?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
-          className="bg-dark w-full h-[335px] max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
+          className="relative bg-dark w-full h-[335px] 
+            max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
         >
-          <Image
-            priority
-            unoptimized
-            loader={() => item.poster_path && `https://image.tmdb.org/t/p/w500${item.poster_path}`}
-            src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : 
-                item.media_type === "person" ? "/images/not-found-person.png" : 
-                "/images/not-found-poster.jpg"
-            }
-            alt="Poster"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full h-full object-cover opacity-90"
+          <FallbackImage
+            src={item.poster_path}
+            mediaType={item.media_type}
+            alt="poster"
+            fill
+            sizes="(max-width: 540px) 50vw,
+              (max-width: 768px) 32vw,
+              (max-width: 1024px) 26vw,
+              24vw"
+            placeholder="blur"
+            blurDataURL="/images/blur.jpg"
+            className="object-cover opacity-90"
           />
         </Link>
 
@@ -47,7 +49,7 @@ const getRecommendations = (data: any) => {
           <div className="flex items-center gap-1">
             <Image
               src="/icons/star.svg"
-              alt="Rating Star"
+              alt="rating star"
               width={18}
               height={18}
               className="relative object-contain bottom-[1px]"

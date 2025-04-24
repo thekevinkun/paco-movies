@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { MotionDiv } from "@components";
+import { FallbackImage, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { FaPlay } from "react-icons/fa";
@@ -17,25 +17,22 @@ const CardMovieTop = ({id, poster, backDrop, title,
 
   return (
     <MotionDiv 
-      variants={cardMovieVariants(0.25)}
-      initial="hidden"
-      animate="visible"
-      viewport={{ amount: 0 }}
+      variants={cardMovieVariants}
       className="flex h-[410px] max-md:hidden"
     >
       {/* Poster on left side */}
-      <div className="max-xl:hidden bg-dark rounded-l-md grow shrink-0 basis-auto w-72">
-        <Image
-          priority
-          unoptimized
-          loader={() => poster && `https://image.tmdb.org/t/p/w500${poster}`}
-          src={poster ? `https://image.tmdb.org/t/p/w500${poster}` : 
-            mediaType === "person" ? "/images/not-found-person.png" : "/images/not-found-poster.jpg"}
-          alt="Poster"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full h-full object-cover rounded-l-md opacity-90"
+      <div className="max-xl:hidden relative w-72 h-auto 
+        bg-dark rounded-l-md grow shrink-0 basis-auto"
+      >
+        <FallbackImage
+          src={poster}
+          mediaType={mediaType}
+          alt="poster"
+          fill
+          sizes="(min-width: 1280px) 288px"
+          placeholder="blur"
+          blurDataURL="/images/blur.jpg"
+          className="object-cover rounded-l-md opacity-90"
         />
       </div>
 
@@ -87,7 +84,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
             <div className="flex items-center gap-1.5">
               <Image
                 src="/icons/star.svg"
-                alt="Rating Star"
+                alt="rating star"
                 width={25}
                 height={25}
                 className="relative object-contain bottom-[1.2px]"

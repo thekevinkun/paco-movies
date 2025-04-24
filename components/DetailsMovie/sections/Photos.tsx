@@ -1,7 +1,8 @@
 import "@styles/photos.css";
 
 import Link from "next/link";
-import Image from "next/image";
+
+import { FallbackImage } from "@components";
 
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -15,19 +16,18 @@ const getPhotos = (movieId: number, mediaType: string,
         {posters.slice(0, 4).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-posters"} 
-            className={`bg-dark rounded-md
+            className={`relative bg-dark rounded-md
               ${posters.length > 4 && `photo-${index + 1}`}`}
           >
-            <Image
-              priority
-              unoptimized
-              loader={() => `https://image.tmdb.org/t/p/w500${item.file_path}`}
-              src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
-              alt="Poster"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-full object-cover rounded-md opacity-80"
+            <FallbackImage
+              src={item.file_path}
+              mediaType={mediaType}
+              alt="poster"
+              fill
+              sizes="(max-width: 768px) 50vw, 30vw"
+              placeholder="blur"
+              blurDataURL="/images/blur.jpg"
+              className="object-cover rounded-md opacity-80"
             />
           </div>
         ))}
@@ -35,19 +35,18 @@ const getPhotos = (movieId: number, mediaType: string,
         {backdrops.slice(0, 3).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-backdrops"} 
-            className={`bg-dark rounded-md 
+            className={`relative bg-dark rounded-md 
               ${backdrops.length > 4 && `backdrop-${index + 1}`}`}
           >
-            <Image
-              priority
-              unoptimized
-              loader={() => `https://image.tmdb.org/t/p/w780${item.file_path}`}
-              src={`https://image.tmdb.org/t/p/w780${item.file_path}`}
-              alt="Poster"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-full object-cover rounded-md opacity-80"
+            <FallbackImage
+              src={item.file_path}
+              mediaType={mediaType}
+              alt="backdrop"
+              fill
+              sizes="(max-width: 768px) 50vw, 30vw"
+              placeholder="blur"
+              blurDataURL="/images/blur.jpg"
+              className="object-cover rounded-md opacity-80"
             />
           </div>
         ))}
@@ -60,16 +59,15 @@ const getPhotos = (movieId: number, mediaType: string,
                 + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
               className="last-backdrop relative group bg-dark rounded-md"
             >
-              <Image
-                priority
-                unoptimized
-                loader={() => `https://image.tmdb.org/t/p/w780${item.file_path}`}
-                src={`https://image.tmdb.org/t/p/w780${item.file_path}`}
-                alt="Poster"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="w-full h-full object-cover rounded-md opacity-50 
+              <FallbackImage
+                src={item.file_path}
+                mediaType={mediaType}
+                alt="backdrop"
+                fill
+                sizes="(max-width: 768px) 50vw, 30vw"
+                placeholder="blur"
+                blurDataURL="/images/blur.jpg"
+                className="object-cover rounded-md opacity-50 
                   transition-opacity duration-200 group-hover:opacity-30"
               />
 

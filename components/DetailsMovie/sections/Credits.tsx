@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { FallbackImage } from "@components";
+
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
@@ -14,19 +16,17 @@ const getCasts = (casts: any) => {
         <div key={cast.id} className="flex items-center gap-5">
           <Link 
             href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-            className="w-32 h-32 bg-dark rounded-full group"
+            className="relative w-32 h-32 bg-dark rounded-full group"
           >
-            <Image
-              priority
-              unoptimized
-              loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-              src={cast.profile_path ? `https://image.tmdb.org/t/p/w500${cast.profile_path}` 
-                : "/images/not-found-person.png"}
-              alt="Poster"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-full object-cover rounded-full 
+            <FallbackImage
+              src={cast.profile_path}
+              mediaType="person"
+              alt="Photo Profile"
+              fill
+              sizes="128px"
+              placeholder="blur"
+              blurDataURL="/images/blur.png"
+              className="object-cover rounded-full 
                 opacity-90 transition-opacity duration-200 group-hover:opacity-55"
             />
           </Link>
@@ -56,19 +56,17 @@ const getCastsMobile = (casts: any) => {
       <div className="flex flex-col gap-3">
         <Link 
           href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-          className="bg-black rounded-full group"
+          className="relative w-full aspect-square bg-black rounded-full group"
         >
-          <Image
-            priority
-            unoptimized
-            loader={() => cast.profile_path &&`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-            src={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` 
-              : "/images/not-found-person.png"}
-            alt="Poster"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full aspect-square object-cover rounded-full 
+          <FallbackImage
+            src={cast.profile_path}
+            mediaType="person"
+            alt="profile"
+            fill
+            sizes="(max-width: 640px) 32vw, 24vw"
+            placeholder="blur"
+            blurDataURL="/images/blur.jpg"
+            className="object-cover rounded-full 
               opacity-90 transition-opacity duration-200 group-hover:opacity-55"
           />
         </Link>

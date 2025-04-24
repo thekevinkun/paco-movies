@@ -1,10 +1,12 @@
 "use client"
 
 import React from "react";
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+
+import { FallbackImage } from "@components";
 
 import { MdArrowForwardIos } from "react-icons/md";
 import { roundedToFixed } from "@helpers/helpers";
@@ -68,21 +70,14 @@ const Reviews = ({movieId, mediaType, title, reviews}:
             <div className="grow">
               {/* USER AVATAR & RATING */}
               <div className="flex flex-col items-center justify-center gap-3">
-                  <Image
-                      priority
-                      unoptimized
-                      loader={() => reviews[randomReview]?.author_details?.avatar_path 
-                        && `https://image.tmdb.org/t/p/w500${reviews[randomReview]?.author_details?.avatar_path}`
-                      }
-                      src={reviews[randomReview]?.author_details?.avatar_path ? 
-                        `https://image.tmdb.org/t/p/w500${reviews[randomReview]?.author_details?.avatar_path}`
-                        : "/images/not-found-person.png"
-                      }
-                      alt="Poster"
-                      width={0}
-                      height={0}
+                  <FallbackImage
+                      src={reviews[randomReview]?.author_details?.avatar_path}
+                      mediaType="person"
+                      alt="avatar"
+                      width={62}
+                      height={62}
                       sizes="100vw"
-                      className="w-16 h-16 object-cover border border-gray-500 rounded-full"
+                      className="aspect-square object-cover border border-gray-500 rounded-full"
                   />
 
                   <div className="flex items-center gap-1">
