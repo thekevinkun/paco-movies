@@ -1,5 +1,3 @@
-import "@styles/photos.css";
-
 import Link from "next/link";
 
 import { FallbackImage } from "@components";
@@ -8,16 +6,19 @@ import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 
 const getPhotos = (movieId: number, mediaType: string, 
-        title: string, posters: any, backdrops: any) => {
+        name: string, posters: any, backdrops: any) => {
     return (
-      <div className={`${(posters.length > 4 && backdrops.length > 4) ? "grid-photos" 
-          : "grid grid-cols-5 max-md:grid-cols-4 gap-[15px] max-md:gap-[12px]"}`}
+      <div className={`grid gap-[15px] max-md:gap-[8px]
+          ${(posters.length > 6 && backdrops.length > 4) ? 
+          `grid-cols-12 grid-rows-[240px,200px]
+          max-xl:grid-rows-[200px,165px] max-lg:grid-rows-[190px,175px] 
+          max-md:grid-rows-[175px,150px] max-sm:grid-rows-[125px,135px]`
+          : "grid-cols-5 max-md:grid-cols-4"}`}
       >
-        {posters.slice(0, 4).map((item: any, index: number) => (
+        {posters.slice(0, 6).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-posters"} 
-            className={`relative bg-dark rounded-md
-              ${posters.length > 4 && `photo-${index + 1}`}`}
+            className={`relative bg-dark col-span-2 rounded-md`}
           >
             <FallbackImage
               src={item.file_path}
@@ -35,8 +36,8 @@ const getPhotos = (movieId: number, mediaType: string,
         {backdrops.slice(0, 3).map((item: any, index: number) => (
           <div 
             key={(index + 1) + "-backdrops"} 
-            className={`relative bg-dark rounded-md 
-              ${backdrops.length > 4 && `backdrop-${index + 1}`}`}
+            className={`relative bg-dark col-span-3 rounded-md
+              ${index === 1 && "!col-span-4 max-md:!col-span-3"}`}
           >
             <FallbackImage
               src={item.file_path}
@@ -56,8 +57,8 @@ const getPhotos = (movieId: number, mediaType: string,
             <Link 
               key="last-backdrops"
               href={`/title/${mediaType}/${movieId + "-" 
-                + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
-              className="last-backdrop relative group bg-dark rounded-md"
+                + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+              className="relative group bg-dark col-span-2 max-md:col-span-3 rounded-md"
             >
               <FallbackImage
                 src={item.file_path}
