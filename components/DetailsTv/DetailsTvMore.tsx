@@ -53,7 +53,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
         />
       </div>
         
-      {/* {reviews.length > 0 && 
+      {reviews.length > 0 && 
         <div className="pb-16 max-sm:pb-12">
           <Reviews 
             movieId={details.id}
@@ -73,7 +73,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
         />
       </div>
 
-      {recommendations.length > 0 &&
+      {/* {recommendations.length > 0 &&
         <div className="pb-16 max-sm:pb-12">
           <Recommendations 
             recommendations={recommendations}

@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
@@ -10,6 +13,32 @@ import { RxExternalLink } from "react-icons/rx";
 const Details = ({details, ratings, originCountry, externalIds}: 
       {details: any, ratings: any, originCountry: any, externalIds: any}) => {
   
+  // DYNAMIC RESIZE SCREEN SETUP
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 768px)").matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+  
+    const media = window.matchMedia("(max-width: 768px)");
+  
+    const handleChange = () => {
+      setIsMobile(media.matches);
+    };
+  
+    // Listen for changes
+    media.addEventListener("change", handleChange);
+  
+    // Clean up
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  const numOfItem = isMobile ? 2 : 3;
+
   return (
     <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
@@ -19,17 +48,17 @@ const Details = ({details, ratings, originCountry, externalIds}:
       <div className="pt-5 w-[90%] max-md:w-[100%]">
         {/* RELEASE DATE */}
         <div className="py-3 text-main flex items-center border-y border-gray-500">
-          <h3 className="basis-[30%] max-sm:basis-[40%] text-lg 
+          <h3 className="basis-[30%] max-lg:basis-[35%] text-lg 
                 max-md:text-base max-sm:text-sm font-semibold"
           >
               Release Date
           </h3>
 
-          {releaseDate ? 
+          {details.first_air_date ? 
             <p className="max-md:text-sm max-sm:text-xs">
-              {moment(releaseDate.date).format("LL")}
+              {moment(details.first_air_date).format("LL")}
               <span>
-                {" "}({releaseDate.iso_3166_1.native_name})
+                {" "}({ratings.iso_3166_1})
               </span>
             </p>
           :
@@ -41,14 +70,14 @@ const Details = ({details, ratings, originCountry, externalIds}:
         
         {/* MOVIE COUNTRIES */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-sm:basis-[40%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%] 
               text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
             Countries of Origin
           </h3>
 
           <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {originCountry.slice(0, 3).map((country: any) => (
+            {originCountry.slice(0, numOfItem).map((country: any) => (
               <React.Fragment key={country.iso_3166_1}>
                 <p>
                   {country.native_name}
@@ -62,7 +91,7 @@ const Details = ({details, ratings, originCountry, externalIds}:
         {/* MOVIE HOMEPAGE */}
         {details.homepage && 
           <div className="py-3 text-main flex items-center border-b border-gray-500">
-            <h3 className="basis-[30%] max-sm:basis-[40%] 
+            <h3 className="basis-[30%] max-lg:basis-[35%] 
                 text-lg max-md:text-base max-sm:text-sm font-semibold"
             >
               Official Site
@@ -83,7 +112,7 @@ const Details = ({details, ratings, originCountry, externalIds}:
 
         {/* MOVIE EXTERNAL SITES */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-sm:basis-[40%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%] 
               text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
             External Sites
@@ -139,7 +168,7 @@ const Details = ({details, ratings, originCountry, externalIds}:
 
         {/* MOVIE LANGUAGE */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-sm:basis-[40%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%] 
               text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
             Language
@@ -159,14 +188,14 @@ const Details = ({details, ratings, originCountry, externalIds}:
 
         {/* MOVIE COMPANIES */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-sm:basis-[40%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%] 
                 text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
               Production Companies
           </h3>
 
           <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.production_companies.slice(0, 3).map((company: any) => (
+            {details.production_companies.slice(0, numOfItem).map((company: any) => (
               <React.Fragment key={company.id}>
                 <p>
                   {company.name}
@@ -175,7 +204,7 @@ const Details = ({details, ratings, originCountry, externalIds}:
               </React.Fragment>
             ))}
           </div>
-      </div>
+        </div>
       </div>
     </>
   )

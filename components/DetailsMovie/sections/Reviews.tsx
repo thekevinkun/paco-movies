@@ -74,10 +74,11 @@ const Reviews = ({movieId, mediaType, title, reviews}:
                       src={reviews[randomReview]?.author_details?.avatar_path}
                       mediaType="person"
                       alt="avatar"
-                      width={62}
-                      height={62}
-                      sizes="100vw"
-                      className="aspect-square object-cover border border-gray-500 rounded-full"
+                      width={0}
+                      height={0}
+                      sizes="(min-width: 768px) 62px, 48px"
+                      className="w-[62px] max-md:w-[48px] aspect-square 
+                        object-cover border border-gray-500 rounded-full"
                   />
 
                   <div className="flex items-center gap-1">
@@ -86,6 +87,7 @@ const Reviews = ({movieId, mediaType, title, reviews}:
                           alt="Rating Star"
                           width={20}
                           height={20}
+                          sizes="20px"
                           className="relative object-contain bottom-[1.5px]"
                       />
           

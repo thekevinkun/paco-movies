@@ -70,61 +70,63 @@ const Reviews = ({movieId, mediaType, name, reviews}:
             <div className="grow">
               {/* USER AVATAR & RATING */}
               <div className="flex flex-col items-center justify-center gap-3">
-                  <FallbackImage
-                      src={reviews[randomReview]?.author_details?.avatar_path}
-                      mediaType="person"
-                      alt="avatar"
-                      width={62}
-                      height={62}
-                      sizes="100vw"
-                      className="aspect-square object-cover border border-gray-500 rounded-full"
-                  />
+                <FallbackImage
+                    src={reviews[randomReview]?.author_details?.avatar_path}
+                    mediaType="person"
+                    alt="avatar"
+                    width={0}
+                    height={0}
+                    sizes="(min-width: 768px) 62px, 48px"
+                    className="w-[62px] max-md:w-[48px] aspect-square
+                      object-cover border border-gray-500 rounded-full"
+                />
 
-                  <div className="flex items-center gap-1">
-                      <Image
-                          src="/icons/star-2.svg"
-                          alt="Rating Star"
-                          width={20}
-                          height={20}
-                          className="relative object-contain bottom-[1.5px]"
-                      />
-          
-                      <span 
-                        className={`text-lg text-dark 
-                          ${reviews[randomReview]?.author_details?.rating > 0 ? 
-                          "font-medium" : "font-normal italic"}`}
-                      >
-                          {reviews[randomReview]?.author_details?.rating > 0 
-                            ? roundedToFixed(reviews[randomReview]?.author_details?.rating, 1) : "NaN"}
-                      </span>
-                  </div>
-                </div>
-                
-                {/* USER REVIEW */}
-                <div className="pt-3">
-                  <p 
-                    ref={paragraphRef}
-                    dangerouslySetInnerHTML={{__html : reviews[randomReview]?.content}}
-                    className={`max-md:text-sm ${!readMore && showReadMore ? "line-clamp-5" : ""}`}
+                <div className="flex items-center gap-1">
+                  <Image
+                    src="/icons/star-2.svg"
+                    alt="Rating Star"
+                    width={20}
+                    height={20}
+                    sizes="20px"
+                    className="relative object-contain bottom-[1.5px]"
                   />
-                  
-                  {readMore ?
-                    <div 
-                      className="pt-3 w-fit ml-auto font-semibold 
-                        max-sm:text-sm hover:text-tale cursor-pointer"
-                      onClick={() => setReadMore(false)}
-                    >
-                      {" "}Hide
-                    </div>
-                  : (!readMore && showReadMore) &&
-                    <div 
-                      className="pt-3 w-fit ml-auto font-semibold 
-                        max-sm:text-sm hover:text-tale cursor-pointer"
-                      onClick={() => setReadMore(true)}
-                    >
-                        {" "}Read More
-                    </div>}
+      
+                  <span 
+                    className={`text-lg text-dark 
+                      ${reviews[randomReview]?.author_details?.rating > 0 ? 
+                      "font-medium" : "font-normal italic"}`}
+                  >
+                    {reviews[randomReview]?.author_details?.rating > 0 
+                      ? roundedToFixed(reviews[randomReview]?.author_details?.rating, 1) : "NaN"}
+                  </span>
                 </div>
+              </div>
+                
+              {/* USER REVIEW */}
+              <div className="pt-3">
+                <p 
+                  ref={paragraphRef}
+                  dangerouslySetInnerHTML={{__html : reviews[randomReview]?.content}}
+                  className={`max-md:text-sm ${!readMore && showReadMore ? "line-clamp-5" : ""}`}
+                />
+                
+                {readMore ?
+                  <div 
+                    className="pt-3 w-fit ml-auto font-semibold 
+                      max-sm:text-sm hover:text-tale cursor-pointer"
+                    onClick={() => setReadMore(false)}
+                  >
+                    {" "}Hide
+                  </div>
+                : (!readMore && showReadMore) &&
+                  <div 
+                    className="pt-3 w-fit ml-auto font-semibold 
+                      max-sm:text-sm hover:text-tale cursor-pointer"
+                    onClick={() => setReadMore(true)}
+                  >
+                      {" "}Read More
+                  </div>}
+              </div>
             </div>
           </div>
           
