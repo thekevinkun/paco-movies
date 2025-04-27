@@ -25,7 +25,7 @@ const getCasts = (casts: any) => {
               fill
               sizes="128px"
               placeholder="blur"
-              blurDataURL="/images/blur.png"
+              blurDataURL="/images/blur.jpg"
               className="object-cover rounded-full 
                 opacity-90 transition-opacity duration-200 group-hover:opacity-55"
             />
@@ -88,30 +88,13 @@ const getCastsMobile = (casts: any) => {
   ))
 }
 
-const getDirector = (crews: any) => {
-  const director = crews.find((person: any) => person.job === "Director");
-
-  return (
-    <Link 
-      href={`/name/${director.id + "-" 
-        + director.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-      className="text-main hover:underline hover:text-tale max-md:text-sm max-sm:text-xs"> 
-
-      <p>
-        {director.name}
-      </p>
-    </Link>
-  )
-}
-
-const getWriters = (crews: any) => {
-  return crews.filter((person: any) => person.job === "Writer" 
-      || person.job === "Screenplay" || person.job === "Characters").slice(0, 3)
-      .map((item: any) => (
+const getCreators = (creators: any) => {
+  return creators?.slice(0, 3).map((item: any) => (
     <React.Fragment key={item.id}>
       <Link 
-        href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-        className="text-main hover:underline hover:text-tale max-md:text-sm max-sm:text-xs">
+        href={`/name/${item.id + "-" 
+          + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+        className="text-main hover:underline hover:text-tale max-md:text-sm max-sm:text-xs"> 
 
         <p>{item.name}</p>
       </Link>
@@ -175,20 +158,11 @@ const Credits = ({movieId, mediaType, name, casts, creators}:
         <div className="py-3 flex items-center font-semibold border-y border-gray-500">
           <h3 className="basis-[17%] max-lg:basis-[20%] 
               text-main text-lg max-md:text-base max-sm:text-sm">
-            Director
+            Creators
           </h3>
 
-          {getDirector(crews)}
-        </div>
-
-        <div className="py-3 flex items-center font-semibold border-b border-gray-500">
-          <h3 className="basis-[17%] max-lg:basis-[20%]
-              text-main text-lg max-md:text-base max-sm:text-sm">
-            Writers
-          </h3>
-      
           <div className="flex items-center gap-2">
-            {getWriters(crews)}
+            {getCreators(creators)}
           </div>
         </div>
 

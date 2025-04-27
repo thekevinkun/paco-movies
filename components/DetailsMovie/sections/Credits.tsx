@@ -25,7 +25,7 @@ const getCasts = (casts: any) => {
               fill
               sizes="128px"
               placeholder="blur"
-              blurDataURL="/images/blur.png"
+              blurDataURL="/images/blur.jpg"
               className="object-cover rounded-full 
                 opacity-90 transition-opacity duration-200 group-hover:opacity-55"
             />
