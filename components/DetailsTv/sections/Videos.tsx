@@ -60,8 +60,8 @@ const getVideosSlider = (start: number, videos: any) => {
         backgroundPosition: "center",
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`
       }}
-      className={`${videos.length > 5 ? "keen-slider__slide min-w-0 shrink-0" : "w-full"}
-        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px]`}
+      className="keen-slider__slide min-w-0 shrink-0
+        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px]"
     >
       <div className="h-full flex items-center justify-center">
         <Link
@@ -83,22 +83,34 @@ const getVideosSlider = (start: number, videos: any) => {
   ));
 }
 
-const Videos = ({movieId, mediaType, title, videos}: 
-      {movieId: number, mediaType: string, title: string, videos: any}) => {
+const Videos = ({movieId, mediaType, name, videos}: 
+      {movieId: number, mediaType: string, name: string, videos: any}) => {
     
     // DYNAMIC RESIZE SCREEN SETUP
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(() => {
+      if (typeof window !== "undefined") {
+        return window.matchMedia("(max-width: 1024px)").matches;
+      }
+      return false;
+    });
 
     useEffect(() => {
-      if (videos.length < 5) return;
-
-      const handleResize = () => setIsMobile(window.innerWidth < 1024);
-      handleResize(); // run once on mount
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
+      if (typeof window === "undefined") return;
+    
+      const media = window.matchMedia("(max-width: 1024px)");
+    
+      const handleChange = () => {
+        setIsMobile(media.matches);
+      };
+    
+      // Listen for changes
+      media.addEventListener("change", handleChange);
+    
+      // Clean up
+      return () => media.removeEventListener("change", handleChange);
     }, []);
 
-    const startIndex = isMobile ? 0 : 3;
+    const startIndexVideoSlider = isMobile ? 0 : 2;
 
     // KEEN SLIDER SETUP
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -157,7 +169,7 @@ const Videos = ({movieId, mediaType, title, videos}:
     <>
       <Link 
         href={`/title/${mediaType}/${movieId + "-" 
-          + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/videogallery`} 
+          + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/videogallery`} 
         className="mb-7 group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Videos</h3>
@@ -169,51 +181,48 @@ const Videos = ({movieId, mediaType, title, videos}:
         />
       </Link>
 
+      {/* DESKTOP VIDEOS */}
       <div>
-          {/* Two main video */}
-          <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
-            {getMainVideos(videos)}
-          </div>
+        {/* Two main video */}
+        <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
+          {getMainVideos(videos)}
+        </div>
           
-          {/* More video */}
-          {videos.length > 2 && videos.length <= 5 ?
-            /* LESS VIDEO */
-            <div className="relative w-full grid grid-cols-3 gap-[15px] max-md:gap-[12px]">
-              {getVideosSlider(3, videos)}
-            </div>
-          : videos.length > 5 &&
-            /* SLIDER */
-            <div className="relative w-full px-3 max-md:px-0 max-w-[calc(100vw-(288px+55px))]
-              max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden"
-            >
-              <div ref={sliderRef} className="keen-slider">
-                {getVideosSlider(startIndex, videos)}
-              </div>
+        <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
+                    "px-3 max-md:px-0"}
+              relative w-full max-w-[calc(100vw-(288px+55px))]
+              max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
+        >
+          <div ref={sliderRef} className="keen-slider">
+            {getVideosSlider(startIndexVideoSlider, videos)}
+          </div>
 
-              {/* Arrow */}
-              {/* Left arrow */}
+          {/* Arrow */}
+          {/* Left arrow */}
+          {videos.length > 5 || (videos.length > 3 && isMobile) &&
+            <>
               <button
                 onClick={scrollLeft}
                 className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-                  bg-light/90 hover:bg-light/60 text-tale  
+                bg-light/90 hover:bg-light/60 text-tale  
                   p-3 rounded-sm transition-opacity duration-200
-                    ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+                  ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
               >
                 <MdArrowBackIosNew className="font-bold text-2xl"/>
               </button>
 
-              {/* Right arrow */}
               <button
                 onClick={scrollRight}
                 className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-                  bg-light/90 hover:bg-light/60 text-tale  
+                bg-light/90 hover:bg-light/60 text-tale  
                   p-3 rounded-sm transition-opacity duration-200
                   ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
               >
                 <MdArrowForwardIos className="font-bold text-2xl"/>
               </button>
-            </div>
+            </>
           }
+          </div>
       </div>
     </>
   )

@@ -171,6 +171,7 @@ const DetailsMovieMain = ({id, mediaType, backdrop, poster, title, rating, relea
                   alt="rating star"
                   width={32}
                   height={32}
+                  sizes="32px"
                   className="relative object-contain bottom-[1.7px]"
                 />
     

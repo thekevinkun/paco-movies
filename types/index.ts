@@ -131,6 +131,7 @@ export interface IDetailsTvMore {
     mediaType: string
     details: any
     ratings: number
+    originCountry: any
     videos: any
     posters: any
     backdrops: any

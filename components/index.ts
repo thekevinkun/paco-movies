@@ -16,6 +16,7 @@ import DetailsMovieMore from "@components/DetailsMovie/DetailsMovieMore";
 import DetailsPersonMain from "@components/DetailsPerson/DetailsPersonMain";
 import DetailsPersonMore from "@components/DetailsPerson/DetailsPersonMore";
 import DetailsTvMain from "@components/DetailsTv/DetailsTvMain";
+import DetailsTvMainMobile from "@components/DetailsTv/DetailsTvMainMobile";
 import DetailsTvMore from "@components/DetailsTv/DetailsTvMore";
 
 import { MotionDiv } from "@components/MotionDiv";
@@ -40,6 +41,7 @@ export {
     DetailsPersonMain,
     DetailsPersonMore,
     DetailsTvMain,
+    DetailsTvMainMobile,
     DetailsTvMore,
 
     MotionDiv,

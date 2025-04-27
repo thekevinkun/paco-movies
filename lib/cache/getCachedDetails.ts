@@ -1,4 +1,4 @@
-import { getMovieDetails } from "@lib/api";
+import { getMovieDetails, getTvDetails } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
 export const getCachedDetails = async (mediaType: string, id: number) => {
@@ -11,8 +11,15 @@ export const getCachedDetails = async (mediaType: string, id: number) => {
     
     try {
         // Try fetching from API
-        const data = await getMovieDetails(mediaType, id);
+        let data: any = {}
+
+        if (mediaType === "movie")
+            data = await getMovieDetails(mediaType, id);
+        else if (mediaType === "tv")
+            data = await getTvDetails(mediaType, id);
+        
         await saveToCache(subPath, cacheKey, data);
+
         return data;
     } catch(error) {
         // Fallback to expired cache if possible

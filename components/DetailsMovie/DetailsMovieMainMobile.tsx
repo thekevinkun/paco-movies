@@ -84,7 +84,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
                 }}
-              className="relative w-full h-72 max-sm:h-64"
+            className="relative w-full h-72 max-sm:h-64"
         >
             <div
                 style={{
@@ -131,6 +131,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                         alt="rating star"
                         width={29}
                         height={29}
+                        sizes="29px"
                         className="relative object-contain bottom-[1.7px]"
                     />
                     
@@ -152,8 +153,10 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
             </div>
 
             {/* FACTS */}
-            <div className="mt-7 py-4 bg-dark-2 border-y border-dark 
-                    text-light-1 font-normal flex flex-col items-center justify-center gap-1">
+            <div 
+                className="mt-7 py-4 bg-dark-2 border-y border-dark 
+                text-light-1 font-normal flex flex-col items-center justify-center gap-1"
+            >
                 <div className="flex items-center gap-2">
                     {certification && 
                         <span className="text-sm font-medium bg-dark 
