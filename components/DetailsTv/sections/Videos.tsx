@@ -38,9 +38,13 @@ const getMainVideos = (videos: any) => {
               data-id={video.key}
               data-title={video.name}
             >
-              <div className="w-[75px] h-[75px] flex items-center justify-center rounded-full 
-                  bg-dark bg-opacity-70 group-hover:bg-opacity-100 transition-[background] duration-200">
-                <IoMdPlay className="text-light text-4xl"/>
+              <div className="w-[75px] h-[75px] max-lg:w-[60px] 
+                  max-lg:h-[60px] max-sm:w-[50px] max-sm:h-[50px] 
+                  flex items-center justify-center rounded-full 
+                  bg-dark bg-opacity-70 group-hover:bg-opacity-100 
+                  transition-[background] duration-200"
+              >
+                <IoMdPlay className="text-light text-4xl max-lg:text-3xl max-sm:text-2xl"/>
               </div>
             </Link>
           </div>
@@ -188,41 +192,43 @@ const Videos = ({movieId, mediaType, name, videos}:
           {getMainVideos(videos)}
         </div>
           
-        <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
-                    "px-3 max-md:px-0"}
-              relative w-full max-w-[calc(100vw-(288px+55px))]
-              max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
-        >
-          <div ref={sliderRef} className="keen-slider">
-            {getVideosSlider(startIndexVideoSlider, videos)}
-          </div>
+        {videos.length > 2 &&
+          <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
+                      "px-3 max-md:px-0"}
+                relative w-full max-w-[calc(100vw-(288px+55px))]
+                max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
+          >
+            <div ref={sliderRef} className="keen-slider">
+              {getVideosSlider(startIndexVideoSlider, videos)}
+            </div>
 
-          {/* Arrow */}
-          {/* Left arrow */}
-          {videos.length > 5 || (videos.length > 3 && isMobile) &&
-            <>
-              <button
-                onClick={scrollLeft}
-                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-                bg-light/90 hover:bg-light/60 text-tale  
-                  p-3 rounded-sm transition-opacity duration-200
-                  ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-              >
-                <MdArrowBackIosNew className="font-bold text-2xl"/>
-              </button>
+            {/* Arrow */}
+            {/* Left arrow */}
+            {videos.length > 5 || (videos.length > 3 && isMobile) &&
+              <>
+                <button
+                  onClick={scrollLeft}
+                  className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
+                  bg-light/90 hover:bg-light/60 text-tale  
+                    p-3 rounded-sm transition-opacity duration-200
+                    ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+                >
+                  <MdArrowBackIosNew className="font-bold text-2xl"/>
+                </button>
 
-              <button
-                onClick={scrollRight}
-                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-                bg-light/90 hover:bg-light/60 text-tale  
-                  p-3 rounded-sm transition-opacity duration-200
-                  ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-              >
-                <MdArrowForwardIos className="font-bold text-2xl"/>
-              </button>
-            </>
-          }
+                <button
+                  onClick={scrollRight}
+                  className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
+                  bg-light/90 hover:bg-light/60 text-tale  
+                    p-3 rounded-sm transition-opacity duration-200
+                    ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+                >
+                  <MdArrowForwardIos className="font-bold text-2xl"/>
+                </button>
+              </>
+            }
           </div>
+        }
       </div>
     </>
   )

@@ -19,7 +19,7 @@ const getRecommendations = (data: any) => {
   return data.slice(0, 10).map((item: any) => (
     <div 
       key={item.id} 
-      className={`${data.length > 5 && "keen-slider__slide min-w-0 shrink-0"}`}
+      className="keen-slider__slide min-w-0 shrink-0"
     >
       <div className="flex flex-col">
         <Link
@@ -52,6 +52,7 @@ const getRecommendations = (data: any) => {
               alt="rating star"
               width={18}
               height={18}
+              sizes="18px"
               className="relative object-contain bottom-[1px]"
             />
 
@@ -176,50 +177,43 @@ const Recommendations = ({recommendations}: any) => {
 
   return (
     <>
-        <h3 className="mb-7 text-main text-2xl max-sm:text-xl font-semibold">
-            Recommendations
-        </h3>
+      <h3 className="mb-7 text-main text-2xl max-sm:text-xl font-semibold">
+          Recommendations
+      </h3>
 
-        {recommendations.length < 5 ?
-          // LESS MOVIE
-          <div className="relative w-full flex items-center">
-            {getRecommendations(recommendations)}
-          </div>
-        :
-          // SLIDER MOVIE
-          <div className="relative w-full px-3 max-md:px-0 
-            max-w-[calc(100vw-(288px+55px))]
-            max-xl:max-w-[calc(100vw-(256px+55px))]
-            max-lg:max-w-full overflow-hidden"
-          >
-            <div ref={sliderRef} className="keen-slider">
-              {getRecommendations(recommendations)}
-            </div>
+      {/* SLIDER MOVIE */}
+      <div className="relative w-full px-3 max-md:px-0 
+        max-w-[calc(100vw-(288px+55px))]
+        max-xl:max-w-[calc(100vw-(256px+55px))]
+        max-lg:max-w-full overflow-hidden"
+      >
+        <div ref={sliderRef} className="keen-slider">
+          {getRecommendations(recommendations)}
+        </div>
 
-            {/* Arrow */}
-            {/* Left arrow */}
-            <button
-              onClick={scrollLeft}
-              className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-              bg-light/90 hover:bg-light/60 text-tale  
-                p-4 rounded-sm transition-opacity duration-200
-                ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-            >
-              <MdArrowBackIosNew className="font-bold text-3xl"/>
-            </button>
+        {/* Arrow */}
+        {/* Left arrow */}
+        <button
+          onClick={scrollLeft}
+          className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
+          bg-light/90 hover:bg-light/60 text-tale  
+            p-4 rounded-sm transition-opacity duration-200
+            ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+        >
+          <MdArrowBackIosNew className="font-bold text-3xl"/>
+        </button>
 
-            {/* Right arrow */}
-            <button
-              onClick={scrollRight}
-              className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-              bg-light/90 hover:bg-light/60 text-tale  
-                p-4 rounded-sm transition-opacity duration-200
-                ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-            >
-              <MdArrowForwardIos className="font-bold text-3xl"/>
-            </button>
-          </div>
-        }
+        {/* Right arrow */}
+        <button
+          onClick={scrollRight}
+          className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
+          bg-light/90 hover:bg-light/60 text-tale  
+            p-4 rounded-sm transition-opacity duration-200
+            ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+        >
+          <MdArrowForwardIos className="font-bold text-3xl"/>
+        </button>
+      </div>
     </>
   )
 }

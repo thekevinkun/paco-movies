@@ -38,9 +38,13 @@ const getMainVideos = (videos: any) => {
               data-id={video.key}
               data-title={video.name}
             >
-              <div className="w-[75px] h-[75px] flex items-center justify-center rounded-full 
-                  bg-dark bg-opacity-70 group-hover:bg-opacity-100 transition-[background] duration-200">
-                <IoMdPlay className="text-light text-4xl"/>
+              <div className="w-[75px] h-[75px] max-lg:w-[60px] 
+                  max-lg:h-[60px] max-sm:w-[50px] max-sm:h-[50px] 
+                  flex items-center justify-center rounded-full 
+                  bg-dark bg-opacity-70 group-hover:bg-opacity-100 
+                  transition-[background] duration-200"
+              >
+                <IoMdPlay className="text-light text-4xl max-lg:text-3xl max-sm:text-2xl"/>
               </div>
             </Link>
           </div>
@@ -182,11 +186,12 @@ const Videos = ({movieId, mediaType, title, videos}:
       </Link>
 
       <div>
-          {/* Two main video */}
-          <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
-            {getMainVideos(videos)}
-          </div>
-          
+        {/* Two main video */}
+        <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
+          {getMainVideos(videos)}
+        </div>
+        
+        {videos.length > 2 &&
           <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
                   "px-3 max-md:px-0"}
               relative w-full max-w-[calc(100vw-(288px+55px))]
@@ -223,6 +228,7 @@ const Videos = ({movieId, mediaType, title, videos}:
               </>
             }
           </div>
+        }
       </div>
     </>
   )

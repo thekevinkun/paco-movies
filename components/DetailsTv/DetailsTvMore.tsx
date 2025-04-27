@@ -73,13 +73,13 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
         />
       </div>
 
-      {/* {recommendations.length > 0 &&
+      {recommendations.length > 0 &&
         <div className="pb-16 max-sm:pb-12">
           <Recommendations 
             recommendations={recommendations}
           />
         </div>
-      } */}
+      }
 
       <div className="mb-[-2rem]"></div>
     </section>

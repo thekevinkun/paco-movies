@@ -50,7 +50,7 @@ const getSeasonsSlider = (seasons: any) => {
                 {season.overview}
               </p>
             :
-              <p className="mt-auto italic text-gray-600">
+              <p className="mt-auto italic text-sm text-dark-1">
                 No Overview.
               </p>
             }
