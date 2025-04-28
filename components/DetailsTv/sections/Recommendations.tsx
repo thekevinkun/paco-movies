@@ -33,10 +33,7 @@ const getRecommendations = (data: any) => {
             mediaType={item.media_type}
             alt="poster"
             fill
-            sizes="(max-width: 540px) 50vw,
-              (max-width: 768px) 32vw,
-              (max-width: 1024px) 26vw,
-              24vw"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
             className="object-cover opacity-90"

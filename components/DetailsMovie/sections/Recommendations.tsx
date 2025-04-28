@@ -19,7 +19,7 @@ const getRecommendations = (data: any) => {
   return data.slice(0, 10).map((item: any) => (
     <div 
       key={item.id} 
-      className={`${data.length > 5 && "keen-slider__slide min-w-0 shrink-0"}`}
+      className="keen-slider__slide min-w-0 shrink-0"
     >
       <div className="flex flex-col">
         <Link
@@ -33,10 +33,7 @@ const getRecommendations = (data: any) => {
             mediaType={item.media_type}
             alt="poster"
             fill
-            sizes="(max-width: 540px) 50vw,
-              (max-width: 768px) 32vw,
-              (max-width: 1024px) 26vw,
-              24vw"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
             className="object-cover opacity-90"

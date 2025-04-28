@@ -26,7 +26,7 @@ const getMainVideos = (videos: any) => {
             alt="Video thumbnail"
             width={0}
             height={0}
-            sizes="100vw"
+            sizes="50vw"
             className="w-full h-full object-cover rounded-xl opacity-95"
           />
 
@@ -87,8 +87,8 @@ const getVideosSlider = (start: number, videos: any) => {
   ));
 }
 
-const Videos = ({movieId, mediaType, name, videos}: 
-      {movieId: number, mediaType: string, name: string, videos: any}) => {
+const Videos = ({tvId, mediaType, name, videos}: 
+      {tvId: number, mediaType: string, name: string, videos: any}) => {
     
     // DYNAMIC RESIZE SCREEN SETUP
     const [isMobile, setIsMobile] = useState(() => {
@@ -172,7 +172,7 @@ const Videos = ({movieId, mediaType, name, videos}:
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${movieId + "-" 
+        href={`/title/${mediaType}/${tvId + "-" 
           + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/videogallery`} 
         className="mb-7 group flex items-center w-fit"
       >
@@ -193,7 +193,7 @@ const Videos = ({movieId, mediaType, name, videos}:
         </div>
           
         {videos.length > 2 &&
-          <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
+          <div className={`${(videos.length > 5 || (videos.length > 3 && isMobile)) && 
                       "px-3 max-md:px-0"}
                 relative w-full max-w-[calc(100vw-(288px+55px))]
                 max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
@@ -204,7 +204,7 @@ const Videos = ({movieId, mediaType, name, videos}:
 
             {/* Arrow */}
             {/* Left arrow */}
-            {videos.length > 5 || (videos.length > 3 && isMobile) &&
+            {(videos.length > 5 || (videos.length > 3 && isMobile)) &&
               <>
                 <button
                   onClick={scrollLeft}

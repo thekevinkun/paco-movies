@@ -87,6 +87,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
                 alt="rating star"
                 width={25}
                 height={25}
+                sizes="25px"
                 className="relative object-contain bottom-[1.2px]"
               />
 

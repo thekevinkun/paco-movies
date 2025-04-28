@@ -29,7 +29,7 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
           mediaType={mediaType}
           alt="poster"
           fill
-          sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33.33vw, 25vw"
+          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           placeholder="blur"
           blurDataURL="/images/blur.jpg"
           className="object-cover rounded-tr-lg opacity-90"
@@ -42,9 +42,11 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
           <Link 
             href={ mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson}  
             title={title} 
-            className="inline-block w-fit"
+            className="inline-block w-fit pr-3"
           >
-            <h2 className="line-clamp-1 text-main max-md:text-sm font-semibold hover:text-tale">
+            <h2 className="line-clamp-1 text-main 
+              max-md:text-sm font-semibold hover:text-tale"
+            >
               {title}
             </h2>
           </Link>
@@ -66,6 +68,7 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
               alt="rating star"
               width={18}
               height={18}
+              sizes="18px"
               className="relative object-contain bottom-[0.4px]"
             />
 

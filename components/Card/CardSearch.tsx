@@ -61,6 +61,7 @@ const CardSearch = ({ id, name, photo, mediaType,
                                 alt="rating popularity"
                                 width={19}
                                 height={19}
+                                sizes="19px"
                                 className="relative object-contain"
                             />
 
@@ -79,6 +80,7 @@ const CardSearch = ({ id, name, photo, mediaType,
                                 alt="rating star"
                                 width={14}
                                 height={14}
+                                sizes="14px"
                                 className="relative object-contain bottom-[0.4px]"
                             />
 

@@ -5,8 +5,8 @@ import { useMenu } from "@contexts/MenuContext";
 
 import { CardMovieTop, CardMovie, MotionDiv, LoadMore } from "@components";
 
-import { parentStaggerVariants } from "@lib/utils/motion";
 import { dedupeResults } from "@helpers/helpers";
+import { parentStaggerVariants } from "@lib/utils/motion";
 
 const ContentMovies = ({ data, genre, mediaType, category }: 
     {data: any, genre?: any, mediaType: string, category: string}) => {
@@ -53,8 +53,9 @@ const ContentMovies = ({ data, genre, mediaType, category }:
         variants={parentStaggerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-rows-1 grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 
-          gap-x-3 gap-y-5 max-md:gap-x-3 max-md:gap-y-4 pt-8 pb-12"
+        className="grid grid-rows-1 pt-8 pb-12
+          grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
+          gap-x-3 gap-y-5 max-md:gap-y-4"
       >
           {useData?.results.slice(1).map((item: any) => (
             <CardMovie

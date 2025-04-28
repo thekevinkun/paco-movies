@@ -11,7 +11,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
       {videos.length > 0 &&
         <div className="pb-16 max-sm:pb-12">
           <Seasons 
-            movieId={details.id}
+            tvId={details.id}
             mediaType={mediaType} 
             name={details.name}
             seasons={details.number_of_seasons}
@@ -23,7 +23,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
       {videos.length > 0 &&
         <div className="pb-16 max-sm:pb-12">
           <Videos 
-            movieId={details.id}
+            tvId={details.id}
             mediaType={mediaType} 
             name={details.name}
             videos={videos} 
@@ -34,7 +34,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
       {(posters.length > 0 || backdrops.length > 0) &&
         <div className="pb-16 max-sm:pb-12">
           <Photos 
-            movieId={details.id}
+            tvId={details.id}
             mediaType={mediaType} 
             name={details.name}
             posters={posters} 
@@ -45,7 +45,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
 
       <div className="pb-16 max-sm:pb-12">
         <Credits
-          movieId={details.id}
+          tvId={details.id}
           mediaType={mediaType} 
           name={details.name}
           casts={credits.cast} 
@@ -56,7 +56,7 @@ const DetailsTvMore = ({mediaType, details, ratings, originCountry, videos, post
       {reviews.length > 0 && 
         <div className="pb-16 max-sm:pb-12">
           <Reviews 
-            movieId={details.id}
+            tvId={details.id}
             mediaType={mediaType} 
             name={details.name}
             reviews={reviews}

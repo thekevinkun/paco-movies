@@ -34,10 +34,10 @@ const Navbar = () => {
       {/* NAV DESKTOP */}
       <nav className="w-72 max-xl:w-64 max-lg:hidden">
         <div className="w-72 max-xl:w-64 fixed bottom-0 left-0 
-              flex grow shrink-0 basis-auto flex-col items-center z-50"
+            flex grow shrink-0 basis-auto flex-col items-center z-50"
         >
           <div className="nav-glass nav-menu w-full h-[calc(100vh-64px)] 
-              flex flex-col items-center pt-5 overflow-auto"
+            flex flex-col items-center pt-5 overflow-auto"
           >
               <Menu />
           </div>
@@ -73,8 +73,8 @@ const Navbar = () => {
 
         <RxCross2
           className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} 
-                    object-contain absolute top-[13px] right-[-45px] 
-                    text-[32px] text-danger bg-main/95 hover:bg-main/45 cursor-pointer`}
+                object-contain absolute top-[13px] right-[-45px] 
+                text-[32px] text-danger bg-main/95 hover:bg-main/45 cursor-pointer`}
           onClick={() => setIsShowMobileMenu(false)}
         />
       </nav>

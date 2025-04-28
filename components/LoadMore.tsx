@@ -44,9 +44,10 @@ const LoadMore = ({page, mediaType, category, query, onNextPage}:
         <Image
           src="/icons/spinner.svg"
           alt="Spinner Loading"
-          fill
-          sizes="(max-width: 640px) 45px, 50px"
-          className="object-contain"
+          width={0}
+          height={0}
+          sizes="(min-width: 640px) 50px, 45px"
+          className="w-full h-full object-contain"
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
@@ -29,7 +29,7 @@ const getSeasonsSlider = (seasons: any) => {
               alt="poster"
               width={0}
               height={0}
-              sizes="(min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               className="w-full h-full object-cover rounded-l-md opacity-90"
             />
           </div>
@@ -82,8 +82,8 @@ const getSeasonsSlider = (seasons: any) => {
   ))
 }
 
-const Seasons = ({movieId, mediaType, name, seasons, seasonList}: 
-        {movieId: string, mediaType: string, name: string, seasons: any, seasonList: any}) => {
+const Seasons = ({tvId, mediaType, name, seasons, seasonList}: 
+        {tvId: string, mediaType: string, name: string, seasons: any, seasonList: any}) => {
 
     // KEEN SLIDER SETUP
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -150,7 +150,7 @@ const Seasons = ({movieId, mediaType, name, seasons, seasonList}:
     return (
         <>
             <Link 
-              href={`/title/${mediaType}/${movieId + "-" 
+              href={`/title/${mediaType}/${tvId + "-" 
                   + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullseasons`} 
               className="group flex items-center w-fit"
               >

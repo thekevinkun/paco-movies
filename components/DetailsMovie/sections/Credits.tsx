@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { FallbackImage } from "@components";
 
@@ -63,7 +62,7 @@ const getCastsMobile = (casts: any) => {
             mediaType="person"
             alt="profile"
             fill
-            sizes="(max-width: 640px) 32vw, 24vw"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
             className="object-cover rounded-full 

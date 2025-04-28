@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import { FaPlay } from "react-icons/fa";
 
 import { FallbackImage } from "@components";
-import { FaPlay } from "react-icons/fa";
 
 import { IDetailsTvMain } from "@types";
 import { roundedToFixed } from "@helpers/helpers";
@@ -123,7 +123,7 @@ const DetailsTvMainMobile = ({id, mediaType, backdrop, poster, name, rating, rel
               mediaType={mediaType}
               alt="poster"
               fill
-              sizes="(max-width: 640px) 160px, 192px"
+              sizes="(min-width: 640px) 192px, 208px"
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
               className="object-cover rounded-md opacity-95"

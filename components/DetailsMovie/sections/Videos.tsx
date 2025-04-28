@@ -26,7 +26,7 @@ const getMainVideos = (videos: any) => {
             alt="Video thumbnail"
             width={0}
             height={0}
-            sizes="100vw"
+            sizes="50vw"
             className="w-full h-full object-cover rounded-xl opacity-95"
           />
 
@@ -192,7 +192,7 @@ const Videos = ({movieId, mediaType, title, videos}:
         </div>
         
         {videos.length > 2 &&
-          <div className={`${videos.length > 5 || (videos.length > 3 && isMobile) && 
+          <div className={`${(videos.length > 5 || (videos.length >= 3 && isMobile)) && 
                   "px-3 max-md:px-0"}
               relative w-full max-w-[calc(100vw-(288px+55px))]
               max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
@@ -203,7 +203,7 @@ const Videos = ({movieId, mediaType, title, videos}:
 
             {/* Arrow */}
             {/* Left arrow */}
-            {videos.length > 5 || (videos.length > 3 && isMobile) &&
+            {(videos.length > 5 || (videos.length > 3 && isMobile)) &&
               <>
                 <button
                   onClick={scrollLeft}

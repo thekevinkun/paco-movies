@@ -11,8 +11,8 @@ import { FallbackImage } from "@components";
 import { MdArrowForwardIos } from "react-icons/md";
 import { roundedToFixed } from "@helpers/helpers";
 
-const Reviews = ({movieId, mediaType, name, reviews}: 
-      {movieId: number, mediaType: string, name: string, reviews: any}) => {
+const Reviews = ({tvId, mediaType, name, reviews}: 
+      {tvId: number, mediaType: string, name: string, reviews: any}) => {
 
   const paragraphRef = useRef<HTMLParagraphElement | null>(null);
   
@@ -50,7 +50,7 @@ const Reviews = ({movieId, mediaType, name, reviews}:
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${movieId + "-" 
+        href={`/title/${mediaType}/${tvId + "-" 
           + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/reviews`} 
         className="group flex items-center w-fit"
       >

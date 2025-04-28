@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { FallbackImage } from "@components";
 
@@ -63,7 +62,7 @@ const getCastsMobile = (casts: any) => {
             mediaType="person"
             alt="profile"
             fill
-            sizes="(max-width: 640px) 32vw, 24vw"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
             className="object-cover rounded-full 
@@ -104,8 +103,8 @@ const getCreators = (creators: any) => {
   ))
 }
 
-const Credits = ({movieId, mediaType, name, casts, creators}: 
-    {movieId: number, mediaType: string, name: string, casts: any, creators: any}) => {
+const Credits = ({tvId, mediaType, name, casts, creators}: 
+    {tvId: number, mediaType: string, name: string, casts: any, creators: any}) => {
   
   const [sliderRef] = useKeenSlider({
     loop: false,
@@ -124,7 +123,7 @@ const Credits = ({movieId, mediaType, name, casts, creators}:
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${movieId + "-" 
+        href={`/title/${mediaType}/${tvId + "-" 
           + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullcredits`} 
         className="group flex items-center w-fit"
       >
@@ -168,7 +167,7 @@ const Credits = ({movieId, mediaType, name, casts, creators}:
 
         <div className="py-3 font-semibold border-b border-gray-500">
           <Link 
-            href={`/title/${mediaType}/${movieId + "-" 
+            href={`/title/${mediaType}/${tvId + "-" 
               + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullcredits`}
             className="text-main hover:text-tale max-sm:text-sm flex items-center justify-between"
           >

@@ -110,9 +110,8 @@ const DetailsTvMain = ({id, mediaType, backdrop, poster, name, rating, releaseDa
               mediaType={mediaType}
               alt="poster"
               fill
-              sizes="(max-width: 1024px) 235px,
-                      (max-width: 1280px) 250px,
-                      285px"
+              sizes="(min-width: 1280px) 285px,
+                    (min-width: 1024px) 250px, 235px"
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
               className="object-cover rounded-md opacity-95"

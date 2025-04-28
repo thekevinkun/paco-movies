@@ -32,6 +32,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                     alt="icon"
                     width={28}
                     height={28}
+                    sizes="28px"
                     className={`pointer-events-none object-contain 
                       ${activeMediaType === item.id && "opacity-50"}`}
                 />
@@ -63,6 +64,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                       alt="Icon"
                       width={28}
                       height={28}
+                      sizes="28px"
                       className={`object-contain 
                         ${activeCategory === item.id.replace(/-/g, "_") && "opacity-50"}`
                       }
@@ -102,6 +104,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                     alt="Icon"
                     width={28}
                     height={28}
+                    sizes="28px"
                     className={`object-contain 
                       ${activeCategory == item.id.toString() && "opacity-50"}`
                     }

@@ -5,8 +5,8 @@ import { useMenu } from "@contexts/MenuContext";
 
 import { CardPerson, MotionDiv, LoadMore } from "@components";
 
-import { parentStaggerVariants } from "@lib/utils/motion";
 import { dedupeResults } from "@helpers/helpers";
+import { parentStaggerVariants } from "@lib/utils/motion";
 
 const ContentStars = ({ data, mediaType, category }: 
     {data: any, mediaType: string, category: string}) => {
@@ -16,14 +16,13 @@ const ContentStars = ({ data, mediaType, category }:
 
   const handleNextPage = (newData: any) => {
     const oldResults = useData.results;
-    
-    data = newData;
-    data.results = [...oldResults, ...newData.results];
+    const combinedResults = [...oldResults, ...newData.results];
+    const uniqueResults = dedupeResults(combinedResults);
 
-    const uniqueResults = dedupeResults(data.results);
-    data.results = uniqueResults;
-
-    setUseData(data);
+    setUseData({
+      ...newData,
+      results: uniqueResults,
+    });
   }
 
   useEffect(() => {

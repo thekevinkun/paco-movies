@@ -28,10 +28,10 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
                 mediaType="person"
                 alt="profile"
                 fill
-                sizes="(max-width: 576px) 192px,
-                (max-width: 867px) 224px,
-                (max-width: 1024px) 240px,
-                288px"
+                sizes="(min-width: 1024px) 288px,
+                    (min-width: 867px) 240px,
+                    (min-width: 576px) 224px,
+                    192px"
                 placeholder="blur"
                 blurDataURL="/images/blur.jpg"
                 className="object-cover object-[55%_45%] rounded-full opacity-90"
@@ -56,8 +56,9 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
                 <Image
                     src="/icons/popularity.svg"
                     alt="popularity"
-                    width={20}
-                    height={20}
+                    width={0}
+                    height={0}
+                    sizes="20px"
                     className="relative w-5 h-5 object-contain bottom-[0.4px]"
                 />
 
