@@ -45,6 +45,12 @@ const config: Config = {
         danger: {
           DEFAULT: "rgba(var(--danger))",
         }
+      },
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10'
       }
     },
   },

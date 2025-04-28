@@ -4,7 +4,7 @@ import { getFromCache, saveToCache } from "@lib/cache/cache";
 export const getCachedTrending = async (mediaType: string, category: string) => {
     const subPath = `${mediaType}/${category}`; 
     const cacheKey = `${category}_1`; 
-    const maxAgeMs = 30 * 60 * 1000;
+    const maxAgeMs = 60 * 60 * 1000;
 
     const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;

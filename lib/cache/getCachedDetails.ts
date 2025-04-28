@@ -1,10 +1,11 @@
-import { getMovieDetails, getTvDetails } from "@lib/api";
+import { getMovieDetails, getTvDetails, getPersonDetails } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
 export const getCachedDetails = async (mediaType: string, id: number) => {
-    const subPath = `title/${mediaType}`;  // e.g., title/movie or title/movie
+    const subPath = mediaType === "person" 
+            ? `name` : `title/${mediaType}`;  // e.g., title/movie or title/movie
     const cacheKey = `${mediaType}_${id}`;   // e.g., movie_157336
-    const maxAgeMs = 60 * 60 * 1000;          // 60 minutes
+    const maxAgeMs = 24 * 60 * 60 * 1000;   // 24 hour
 
     const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;
@@ -17,7 +18,9 @@ export const getCachedDetails = async (mediaType: string, id: number) => {
             data = await getMovieDetails(mediaType, id);
         else if (mediaType === "tv")
             data = await getTvDetails(mediaType, id);
-        
+        else if (mediaType === "person")
+            data = await getPersonDetails(mediaType, id);
+
         await saveToCache(subPath, cacheKey, data);
 
         return data;

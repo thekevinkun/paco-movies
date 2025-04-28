@@ -136,14 +136,11 @@ const CardSearch = ({ id, name, photo, mediaType,
                                         title={work.title || work.name} 
                                         className="inline-block"
                                     >
-                                        <p 
-                                            className="truncate w-fit max-w-[155px] 
-                                                text-main-1 text-xs hover:text-tale"
-                                        >
+                                        <p className="text-main-1 text-xs hover:text-tale">
                                             {work.title || work.name}
                                         </p>
                                     </Link>
-                                    <span className="bullet-separator align-top text-main-1 text-xs"> &#8226; </span>
+                                    <span className="bullet-separator text-main-1 text-xs"> &#8226; </span>
                                 </React.Fragment>
                             )
                         })}

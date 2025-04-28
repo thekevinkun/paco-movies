@@ -6,6 +6,7 @@ import { getSearch } from "@lib/api/getSearch";
 import { getNextPage } from '@lib/api/getNextPage';
 import { getMovieDetails } from "@lib/api/getMovieDetails";
 import { getTvDetails } from "@lib/api/getTvDetails";
+import { getPersonDetails } from "@lib/api/getPersonDetails";
 
 export {    
     getTrending,
@@ -15,5 +16,6 @@ export {
     getSearch,
     getNextPage,
     getMovieDetails,
-    getTvDetails
+    getTvDetails,
+    getPersonDetails
 }
