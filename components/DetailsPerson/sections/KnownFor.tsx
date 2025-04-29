@@ -11,7 +11,7 @@ const KnownFor = ({works}: any) => {
       sort((a: any, b: any) => b.vote_count - a.vote_count || b.popularity - a.popularity);
 
   return (
-    <div className="pt-5">
+    <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
         Known For
       </h3>
@@ -119,7 +119,7 @@ const KnownFor = ({works}: any) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 

@@ -6,14 +6,14 @@ const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
   return (
     <section className="py-12 px-5 max-md:px-3">
       {credits.cast.length > 0 &&
-        <div className="pb-16 max-sm:pb-12">
+        <div className="pt-5 pb-16 max-sm:pb-12">
           <KnownFor 
             works={credits.cast}
           />
         </div>
       }
       
-      {/* {images.length > 0 &&
+      {images.length > 0 &&
         <div className="pb-16 max-sm:pb-12">
           <Photos 
             personId={details.id}
@@ -23,15 +23,15 @@ const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
         </div>
       }
       
-      <div className="pb-16 max-sm:pb-12">
+      {/* <div className="pb-16 max-sm:pb-12">
         <Credits 
           personId={details.id}
           name={details.name}
           credits={credits}
         />
-      </div>
+      </div> */}
       
-      <div className="mb-[-2rem]"></div> */}
+      <div className="mb-[-2rem]"></div>
     </section>
   )
 }
