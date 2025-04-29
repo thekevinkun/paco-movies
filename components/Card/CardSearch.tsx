@@ -20,12 +20,12 @@ const CardSearch = ({ id, name, photo, mediaType,
     return (
         <MotionDiv 
             variants={cardMovieVariants}
-            className="w-full h-52 flex mt-4 border border-gray-500 rounded-tr-lg"
+            className="w-full h-52 max-md:h-48 flex mt-4 border border-gray-500 rounded-tr-lg"
         >
             {/* PHOTO */}
             <Link 
                 href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-                className="relative bg-dark w-[138px] h-full"
+                className="relative bg-dark w-[138px] max-md:w-[127px] h-full"
             >
                 <FallbackImage
                     src={photo}
@@ -34,7 +34,7 @@ const CardSearch = ({ id, name, photo, mediaType,
                         || mediaType === "tv" ? "poster" : "profile"
                     }
                     fill
-                    sizes="138px"
+                    sizes="(min-width: 768px) 138px, 127px"
                     placeholder="blur"
                     blurDataURL="/images/blur.jpg"
                     className="object-cover opacity-90"
@@ -123,7 +123,7 @@ const CardSearch = ({ id, name, photo, mediaType,
                 }
                 
                 { works &&
-                    <div className="pt-3">
+                    <div className="pt-3 pr-7">
                         {works?.map((work: any) => {
                             const title = work.title || work.name
                             const route = "/title" + `/${work.media_type}` + 
@@ -136,11 +136,11 @@ const CardSearch = ({ id, name, photo, mediaType,
                                         title={work.title || work.name} 
                                         className="inline-block"
                                     >
-                                        <p className="text-main-1 text-xs hover:text-tale">
+                                        <p className="text-main-1 text-sm max-md:text-xs hover:text-tale">
                                             {work.title || work.name}
                                         </p>
                                     </Link>
-                                    <span className="bullet-separator text-main-1 text-xs"> &#8226; </span>
+                                    <span className="bullet-separator text-main-1 text-sm max-md:text-xs"> &#8226; </span>
                                 </React.Fragment>
                             )
                         })}

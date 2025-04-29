@@ -33,8 +33,7 @@ const getCredits = (creditsType: string, credits: any, endIndexNumber: number) =
   ))
 }
   
-const Credits = ({personId, name, credits}: 
-    {personId: string, name: string, credits: any}) => {
+const Credits = ({credits}: any) => {
   
   const [creditsType, setCreditsType] = useState("Actor");
   const [seeAllCredits, setSeeAllCredits] = useState(false);

@@ -21,12 +21,13 @@ const KnownFor = ({works}: any) => {
           max-lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] 
           gap-y-3 gap-x-[15px] max-md:gap-x-[8px]"
       >
-        {sortedWorks.slice(0, 4).map((work: any) => (
+        {sortedWorks.slice(0, 4).map((work: any, index: number) => (
           // POSTER
           <div 
             key={work.id} 
-            className="h-[130px] flex gap-2
-              bg-light-1 rounded-tr-xl rounded-bl-xl"
+            className={`h-[130px] flex gap-2
+              bg-light-1 rounded-tr-xl rounded-bl-xl
+              ${index >= 2 && "max-md:hidden"}`}
           >
             <Link 
               href={`/title/${work.media_type}/${work.id + "-" + 
@@ -57,7 +58,7 @@ const KnownFor = ({works}: any) => {
                       work.title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")
                       || work.name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
                   >
-                  <h4 className="font-semibold capitalize hover:text-tale">
+                  <h4 className="max-lg:text-sm font-semibold capitalize hover:text-tale">
                       {work.title || work.name}
                   </h4>
                 </Link>
@@ -101,7 +102,7 @@ const KnownFor = ({works}: any) => {
                   />
         
                   <span 
-                    className={`text-dark-1 ${work.vote_average > 0 ? 
+                    className={`text-dark-1 text-sm ${work.vote_average > 0 ? 
                         "font-semibold" : "font-normal italic"}`
                     }
                   >
@@ -114,7 +115,7 @@ const KnownFor = ({works}: any) => {
                 </div>
               </div>
               
-              <p className="pt-5 text-dark-1">{work.character}</p>
+              <p className="pt-4 text-dark-1 max-md:text-sm">{work.character}</p>
             </div>
           </div>
         ))}

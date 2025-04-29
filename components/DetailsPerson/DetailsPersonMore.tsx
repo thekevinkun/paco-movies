@@ -25,8 +25,6 @@ const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
       
       <div className="pb-16 max-sm:pb-12">
         <Credits 
-          personId={details.id}
-          name={details.name}
           credits={credits}
         />
       </div>
