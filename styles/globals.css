@@ -76,5 +76,13 @@
   .search-input {
     @apply block w-full text-sm font-medium bg-white py-1.5 px-1 text-dark rounded-md border border-gray-700 focus:border-gray-100 focus:outline-none focus:ring-0;
   }
+
+  .btn-person-credits {
+    @apply block rounded-md border border-tale bg-transparent py-1.5 px-5 text-tale text-sm transition-all duration-200 hover:bg-tale/10;
+  }
+
+  .btn-person-credits-active {
+    @apply bg-tale/10 pointer-events-none;
+  }
 }
 

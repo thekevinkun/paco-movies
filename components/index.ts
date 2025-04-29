@@ -5,6 +5,7 @@ import SearchBar from "@components/SearchBar";
 import CardMovieTop from "@components/Card/CardMovieTop";
 import CardMovie from "@components/Card/CardMovie";
 import CardPerson from "@components/Card/CardPerson";
+import CardPersonCredits from "@components/Card/CardPersonCredits";
 import CardSearch from "@components/Card/CardSearch";
 
 import FallbackImage from "@components/FallbackImage";
@@ -30,6 +31,7 @@ export {
     CardMovieTop,
     CardMovie,
     CardPerson,
+    CardPersonCredits,
     CardSearch,
 
     FallbackImage,

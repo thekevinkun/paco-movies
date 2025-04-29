@@ -78,6 +78,16 @@ export interface ICardSearch {
     works: any
 }
 
+export interface ICardPersonCredits {
+    id: number
+    mediaType: string
+    title: string
+    character: string 
+    releaseDate: string
+    poster: string
+    vote: number
+}
+
 export interface IDetailsMovieMain {
     id: number
     mediaType: string

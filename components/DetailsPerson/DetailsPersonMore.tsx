@@ -23,13 +23,13 @@ const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
         </div>
       }
       
-      {/* <div className="pb-16 max-sm:pb-12">
+      <div className="pb-16 max-sm:pb-12">
         <Credits 
           personId={details.id}
           name={details.name}
           credits={credits}
         />
-      </div> */}
+      </div>
       
       <div className="mb-[-2rem]"></div>
     </section>
