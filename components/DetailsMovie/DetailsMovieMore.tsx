@@ -1,5 +1,5 @@
 import { Videos, Photos, Credits, Reviews, 
-        Details, BoxOffice, Recommendations } from "./sections";
+        Details, BoxOffice, Recommendations } from "@components/DetailsMovie/sections";
 
 import { IDetailsMovieMore } from "@types";
 

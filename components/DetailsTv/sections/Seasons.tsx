@@ -30,6 +30,8 @@ const getSeasonsSlider = (seasons: any) => {
               width={0}
               height={0}
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+              placeholder="blur"
+              blurDataURL="/images/blur.jpg"
               className="w-full h-full object-cover rounded-l-md opacity-90"
             />
           </div>

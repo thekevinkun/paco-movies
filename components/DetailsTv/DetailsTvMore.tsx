@@ -1,5 +1,5 @@
 import { Seasons, Videos, Photos, Credits, Reviews, 
-        Details, Recommendations } from "./sections";
+        Details, Recommendations } from "@components/DetailsTv/sections";
 
 import { IDetailsTvMore } from "@types";
 

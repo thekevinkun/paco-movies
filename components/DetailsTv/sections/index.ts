@@ -1,4 +1,4 @@
-import Seasons from "@components/DetailsTv/sections//Seasons";
+import Seasons from "@components/DetailsTv/sections/Seasons";
 import Videos from "@components/DetailsTv/sections/Videos";
 import Photos from "@components/DetailsTv/sections/Photos";
 import Credits from "@components/DetailsTv/sections/Credits";
