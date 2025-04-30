@@ -25,8 +25,9 @@ const KnownFor = ({works}: any) => {
           // POSTER
           <div 
             key={work.id} 
-            className={`h-[130px] flex gap-2
-              bg-light-1 rounded-tr-xl rounded-bl-xl
+            className={`h-[138px] flex gap-2 bg-light
+              shadow-inner shadow-dark-1
+              rounded-tr-xl rounded-bl-xl
               ${index >= 2 && "max-md:hidden"}`}
           >
             <Link 
@@ -34,7 +35,7 @@ const KnownFor = ({works}: any) => {
                   work.title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-") 
                   || work.name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
               }
-              className="relative w-[20%] h-full bg-dark group rounded-bl-xl"
+              className="relative w-[20%] max-md:w-[25%] h-full bg-dark group rounded-bl-xl"
             >
               <FallbackImage
                 src={work.poster_path}
@@ -44,8 +45,8 @@ const KnownFor = ({works}: any) => {
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                 placeholder="blur"
                 blurDataURL="/images/blur.jpg"
-                className="object-cover rounded-bl-xl opacity-80
-                  transition-opacity duration-100 group-hover:opacity-30"
+                className="object-cover rounded-bl-xl opacity-90
+                  transition-opacity duration-100 group-hover:opacity-55"
               />
             </Link>
 
@@ -58,7 +59,8 @@ const KnownFor = ({works}: any) => {
                       work.title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")
                       || work.name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
                   >
-                  <h4 className="max-lg:text-sm font-semibold capitalize hover:text-tale">
+                  <h4 className="line-clamp-1 font-semibold
+                    capitalize hover:text-tale">
                       {work.title || work.name}
                   </h4>
                 </Link>
@@ -85,7 +87,7 @@ const KnownFor = ({works}: any) => {
               </div>
               
               {/* Release date */}
-              <div className="max-lg:hidden text-sm text-dark-1">
+              <div className="max-lg:hidden text-dark-1">
                 {moment(work.release_date || work.first_air_date).format("YYYY")}
               </div>
               
@@ -102,7 +104,7 @@ const KnownFor = ({works}: any) => {
                   />
         
                   <span 
-                    className={`text-dark-1 text-sm ${work.vote_average > 0 ? 
+                    className={`text-dark-1 ${work.vote_average > 0 ? 
                         "font-semibold" : "font-normal italic"}`
                     }
                   >
@@ -110,12 +112,12 @@ const KnownFor = ({works}: any) => {
                   </span>
                 </div>
 
-                <div className="text-sm text-dark-1">
+                <div className="text-dark-1">
                   {moment(work.release_date || work.first_air_date).format("YYYY")}
                 </div>
               </div>
               
-              <p className="pt-4 text-dark-1 max-md:text-sm">{work.character}</p>
+              <p className="pt-4 font-medium text-dark-1">{work.character}</p>
             </div>
           </div>
         ))}

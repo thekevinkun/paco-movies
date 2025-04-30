@@ -132,7 +132,7 @@ const Reviews = ({tvId, mediaType, name, reviews}:
           
           {/* AUTHOR USERNAME & DATE UPLOAD */}
           <div className="pt-5 font-normal text-main-1 
-                text-[0.925rem] max-sm:text-sm
+                text-[0.925rem] max-sm:text-sm max-xs:text-xs
                 flex items-center justify-end gap-2"
           >
             <p>

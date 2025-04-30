@@ -1,7 +1,4 @@
-"use client"
-
 import React from "react";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
@@ -12,32 +9,6 @@ import { RxExternalLink } from "react-icons/rx";
 
 const Details = ({details, ratings, originCountry, externalIds}: 
       {details: any, ratings: any, originCountry: any, externalIds: any}) => {
-  
-  // DYNAMIC RESIZE SCREEN SETUP
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(max-width: 768px)").matches;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-  
-    const media = window.matchMedia("(max-width: 768px)");
-  
-    const handleChange = () => {
-      setIsMobile(media.matches);
-    };
-  
-    // Listen for changes
-    media.addEventListener("change", handleChange);
-  
-    // Clean up
-    return () => media.removeEventListener("change", handleChange);
-  }, []);
-
-  const numOfItem = isMobile ? 2 : 3;
 
   return (
     <>
@@ -77,7 +48,7 @@ const Details = ({details, ratings, originCountry, externalIds}:
           </h3>
 
           <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {originCountry.slice(0, numOfItem).map((country: any) => (
+            {originCountry.slice(0, 3).map((country: any) => (
               <React.Fragment key={country.iso_3166_1}>
                 <p>
                   {country.native_name}
@@ -195,12 +166,12 @@ const Details = ({details, ratings, originCountry, externalIds}:
           </h3>
 
           <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.production_companies.slice(0, numOfItem).map((company: any) => (
+            {details.production_companies.slice(0, 3).map((company: any, index: number) => (
               <React.Fragment key={company.id}>
-                <p>
+                <p className={`${index >= 1 && "max-md:hidden"}`}>
                   {company.name}
                 </p>
-                <span className="bullet-separator"> &#8226; </span>
+                <span className={`${index >= 0 && "max-md:hidden"} bullet-separator`}> &#8226; </span>
               </React.Fragment>
             ))}
           </div>

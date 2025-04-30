@@ -41,7 +41,8 @@ const getRecommendations = (data: any) => {
         </Link>
 
         <div className="px-2 py-3 w-auto h-auto bg-light 
-          border border-t-0 border-gray-300 rounded-b-lg"
+          border-b border-gray-300 rounded-b-lg
+          shadow-inner shadow-dark-1"
         >
           <div className="flex items-center gap-1">
             <Image
@@ -193,7 +194,7 @@ const Recommendations = ({recommendations}: any) => {
         <button
           onClick={scrollLeft}
           className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-          bg-light/90 hover:bg-light/60 text-tale  
+            bg-main/90 hover:bg-main/60 text-tale  
             p-4 rounded-sm transition-opacity duration-200
             ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
         >
@@ -204,7 +205,7 @@ const Recommendations = ({recommendations}: any) => {
         <button
           onClick={scrollRight}
           className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-          bg-light/90 hover:bg-light/60 text-tale  
+            bg-main/90 hover:bg-main/60 text-tale  
             p-4 rounded-sm transition-opacity duration-200
             ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
         >

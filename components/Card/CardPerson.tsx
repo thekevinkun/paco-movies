@@ -20,7 +20,8 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
             className="relative aspect-square w-72 h-72 
                 max-lg:w-60 max-lg:h-60 
                 max-[867px]:w-56 max-[867px]:h-56
-                max-[576px]:w-48 max-[576px]:h-48 
+                max-[576px]:w-48 max-[576px]:h-48
+                max-xs:w-44 max-xs:h-44 
                 bg-dark rounded-full"
         >
             <FallbackImage
@@ -31,7 +32,7 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
                 sizes="(min-width: 1024px) 288px,
                     (min-width: 867px) 240px,
                     (min-width: 576px) 224px,
-                    192px"
+                    (min-width: 480px) 192px, 176px"
                 placeholder="blur"
                 blurDataURL="/images/blur.jpg"
                 className="object-cover object-[55%_45%] rounded-full opacity-90"
@@ -84,13 +85,13 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
                 return (
                     <React.Fragment key={work.id}>
                         <Link href={route} title={work.title || work.name} className="inline-block">
-                            <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] 
-                                text-main-1 hover:text-tale text-xs max-md:text-[0.675rem]"
+                            <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] max-sm:max-w-[105px]
+                                text-main-1 hover:text-tale text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"
                             >
                                 {work.title || work.name}
                             </p>
                         </Link>
-                        <span className="bullet-separator align-top text-main-1 text-xs"> &#8226; </span>
+                        <span className="bullet-separator align-top text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"> &#8226; </span>
                     </React.Fragment>
                 )
             })}

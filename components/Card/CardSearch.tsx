@@ -20,12 +20,15 @@ const CardSearch = ({ id, name, photo, mediaType,
     return (
         <MotionDiv 
             variants={cardMovieVariants}
-            className="w-full h-52 max-md:h-48 flex mt-4 border border-gray-500 rounded-tr-lg"
+            className="w-full h-52 max-md:h-48 flex 
+                mt-4 border border-gray-500 rounded-tr-lg
+                shadow-inner shadow-dark-1"
         >
             {/* PHOTO */}
             <Link 
                 href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-                className="relative bg-dark w-[138px] max-md:w-[127px] h-full"
+                className="relative group bg-dark 
+                    w-[138px] max-md:w-[127px] max-xs:w-[115px] h-full"
             >
                 <FallbackImage
                     src={photo}
@@ -37,7 +40,8 @@ const CardSearch = ({ id, name, photo, mediaType,
                     sizes="(min-width: 768px) 138px, 127px"
                     placeholder="blur"
                     blurDataURL="/images/blur.jpg"
-                    className="object-cover opacity-90"
+                    className="object-cover opacity-90 transition-opacity
+                        duration-100 group-hover:opacity-55"
                 />
             </Link>
 
@@ -105,19 +109,19 @@ const CardSearch = ({ id, name, photo, mediaType,
                 </Link>
                 
                 {releaseDate && 
-                    <p className="text-main-1 text-xs">
+                    <p className="italic text-main text-xs max-xs:text-[0.675rem]">
                         {moment(releaseDate).format("Do MMMM YYYY")}
                     </p>
                 }
 
                 {department && 
-                    <p className="text-main-1 text-sm">
+                    <p className="italic text-main text-sm max-xs:text-xs">
                         {department}
                     </p>
                 }
 
                 {overview &&
-                    <p className="line-clamp-3 mt-auto text-main text-sm font-normal">
+                    <p className="line-clamp-3 mt-auto text-main text-sm max-xs:text-xs font-normal">
                         {overview}
                     </p> 
                 }
@@ -136,11 +140,12 @@ const CardSearch = ({ id, name, photo, mediaType,
                                         title={work.title || work.name} 
                                         className="inline-block"
                                     >
-                                        <p className="text-main-1 text-sm max-md:text-xs hover:text-tale">
+                                        <p className="text-main text-sm max-md:text-xs max-xs:text-[0.675rem] hover:text-tale
+                                            max-xs:truncate max-xs:w-fit max-xs:max-w-[125px]">
                                             {work.title || work.name}
                                         </p>
                                     </Link>
-                                    <span className="bullet-separator text-main-1 text-sm max-md:text-xs"> &#8226; </span>
+                                    <span className="bullet-separator max-xs:align-top text-main text-sm max-md:text-xs max-xs:text-[0.675rem]"> &#8226; </span>
                                 </React.Fragment>
                             )
                         })}

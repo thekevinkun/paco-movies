@@ -28,7 +28,7 @@ const Photos = ({personId, name, images}:
       <div className="pt-7 grid gap-[15px] max-md:gap-[8px] w-full 
           grid-cols-10 grid-rows-[1fr] max-md:grid-cols-8
           h-[280px] max-xl:h-[250px] max-lg:h-[255px] 
-          max-md:h-[250px] max-sm:h-[195px]"
+          max-md:h-[250px] max-sm:h-[195px] max-xs:h-[180px]"
       >
         {images.slice(0, 4).map((item: any, index: number) => (
           <div 
@@ -69,7 +69,7 @@ const Photos = ({personId, name, images}:
             />
 
             <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <FiPlus className="text-light text-5xl max-md:text-4xl"/>
+              <FiPlus className="text-light text-5xl max-md:text-4xl max-xs:text-3xl"/>
             </span>
           </Link>
         ))}

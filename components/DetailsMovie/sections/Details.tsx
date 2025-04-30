@@ -1,7 +1,4 @@
-"use client"
-
 import React from "react";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
@@ -12,32 +9,6 @@ import { RxExternalLink } from "react-icons/rx";
 
 const Details = ({details, releaseDate, originCountry, externalIds}: 
       {details: any, releaseDate: any, originCountry: any, externalIds: any}) => {
-  
-  // DYNAMIC RESIZE SCREEN SETUP
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(max-width: 768px)").matches;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-  
-    const media = window.matchMedia("(max-width: 768px)");
-  
-    const handleChange = () => {
-      setIsMobile(media.matches);
-    };
-  
-    // Listen for changes
-    media.addEventListener("change", handleChange);
-  
-    // Clean up
-    return () => media.removeEventListener("change", handleChange);
-  }, []);
-
-  const numOfItem = isMobile ? 2 : 3;
 
   return (
     <>
@@ -48,8 +19,8 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
       <div className="pt-5 w-[90%] max-md:w-[100%]">
         {/* RELEASE DATE */}
         <div className="py-3 text-main flex items-center border-y border-gray-500">
-          <h3 className="basis-[30%] max-lg:basis-[35%] text-lg 
-                max-md:text-base max-sm:text-sm font-semibold"
+          <h3 className="basis-[30%] max-lg:basis-[35%] 
+                text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
               Release Date
           </h3>
@@ -70,14 +41,14 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
         
         {/* MOVIE COUNTRIES */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-lg:basis-[35%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%]
               text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
             Countries of Origin
           </h3>
 
-          <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {originCountry.slice(0, numOfItem).map((country: any) => (
+          <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
+            {originCountry.slice(0, 3).map((country: any) => (
               <React.Fragment key={country.iso_3166_1}>
                 <p>
                   {country.native_name}
@@ -97,7 +68,7 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
               Official Site
             </h3>
             
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1">
               <Link 
                 href={`${details?.homepage}`} 
                 className="text-tale max-md:text-sm max-sm:text-xs hover:underline"
@@ -112,13 +83,13 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
 
         {/* MOVIE EXTERNAL SITES */}
         <div className="py-3 text-main flex items-center border-b border-gray-500">
-          <h3 className="basis-[30%] max-lg:basis-[35%] 
+          <h3 className="basis-[30%] max-lg:basis-[35%]
               text-lg max-md:text-base max-sm:text-sm font-semibold"
           >
             External Sites
           </h3>
           
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             { externalIds.twitter_id &&
               <Link 
                 href={`https://twitter.com/${externalIds.twitter_id}`}
@@ -174,7 +145,7 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
             Language
           </h3>
           
-          <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
+          <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
             {details.spoken_languages.slice(0, 3).map((lang: any) => (
               <React.Fragment key={lang.name}>
                 <p>
@@ -194,13 +165,13 @@ const Details = ({details, releaseDate, originCountry, externalIds}:
               Production Companies
           </h3>
 
-          <div className="flex items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.production_companies.slice(0, numOfItem).map((company: any) => (
+          <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
+            {details.production_companies.slice(0, 3).map((company: any, index: number) => (
               <React.Fragment key={company.id}>
-                <p>
+                <p className={`${index >= 1 && "max-md:hidden"}`}>
                   {company.name}
                 </p>
-                <span className="bullet-separator"> &#8226; </span>
+                <span className={`${index >= 0 && "max-md:hidden"} bullet-separator`}> &#8226; </span>
               </React.Fragment>
             ))}
           </div>

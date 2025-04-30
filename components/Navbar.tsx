@@ -58,7 +58,7 @@ const Navbar = () => {
       <nav 
         ref={mobileMenu} 
         className={`${isShowMobileMenu && "nav-glass"} fixed top-0 left-0 transition-all z-50 
-        ${isShowMobileMenu ? "w-96" : "w-0"}`}
+        ${isShowMobileMenu ? "w-96 max-xs:w-80" : "w-0"}`}
       >
         <div className="nav-menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">
           <div className="mb-3 p-3">
@@ -74,7 +74,7 @@ const Navbar = () => {
         <RxCross2
           className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} 
                 object-contain absolute top-[13px] right-[-45px] 
-                text-[32px] text-danger bg-main/95 hover:bg-main/45 cursor-pointer`}
+                text-[32px] text-danger bg-main/85 hover:bg-main/75 cursor-pointer`}
           onClick={() => setIsShowMobileMenu(false)}
         />
       </nav>

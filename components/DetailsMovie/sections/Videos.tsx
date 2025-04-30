@@ -208,7 +208,7 @@ const Videos = ({movieId, mediaType, title, videos}:
                 <button
                   onClick={scrollLeft}
                   className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-                    bg-light/90 hover:bg-light/60 text-tale  
+                    bg-main/90 hover:bg-main/60 text-tale  
                     p-3 rounded-sm transition-opacity duration-200
                       ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
                 >
@@ -219,7 +219,7 @@ const Videos = ({movieId, mediaType, title, videos}:
                 <button
                   onClick={scrollRight}
                   className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-                    bg-light/90 hover:bg-light/60 text-tale  
+                    bg-main/90 hover:bg-main/60 text-tale  
                     p-3 rounded-sm transition-opacity duration-200
                     ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
                 >

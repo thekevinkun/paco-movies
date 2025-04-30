@@ -17,12 +17,13 @@ const getSeasonsSlider = (seasons: any) => {
       <div
         key={season.id}
         className="keen-slider__slide min-w-0 shrink-0
-          bg-light-1 text-dark rounded-xl
+            bg-light text-dark rounded-xl
+            shadow-inner shadow-dark-1
             h-[165px] max-xl:h-[150px] max-lg:h-[145px]
             max-md:h-[140px] max-sm:h-[130px]"
       >
         <div className="w-full h-full flex gap-3">
-          <div className="bg-black rounded-l-md w-[28%] h-full">
+          <div className="bg-dark rounded-l-md w-[28%] h-full">
             <FallbackImage
               src={season.poster_path}
               mediaType="tv"
@@ -185,7 +186,7 @@ const Seasons = ({tvId, mediaType, name, seasons, seasonList}:
                   <button
                     onClick={scrollLeft}
                     className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
-                      bg-light/90 hover:bg-light/60 text-tale  
+                      bg-main/90 hover:bg-main/60 text-tale  
                         p-3 rounded-sm transition-opacity duration-200
                         ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
                   >
@@ -196,7 +197,7 @@ const Seasons = ({tvId, mediaType, name, seasons, seasonList}:
                   <button
                     onClick={scrollRight}
                     className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
-                    bg-light/90 hover:bg-light/60 text-tale  
+                    bg-main/90 hover:bg-main/60 text-tale  
                         p-3 rounded-sm transition-opacity duration-200
                         ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
                   >

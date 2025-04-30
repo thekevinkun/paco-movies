@@ -87,7 +87,7 @@ const Credits = ({credits}: any) => {
                 <div 
                   className="px-3 py-1 text-tale font-medium bg-transparent rounded-full 
                       flex items-center gap-2 cursor-pointer transition-all duration-150 
-                      hover:bg-tale/10"
+                      hover:bg-tale/20"
                   onClick={() => setSeeAllCredits(true)}
                 >
                   See all
@@ -106,7 +106,7 @@ const Credits = ({credits}: any) => {
                   <div 
                     className="px-3 py-1 text-tale font-medium bg-transparent rounded-full 
                         flex items-center gap-2 cursor-pointer transition-all duration-150
-                        hover:bg-tale/10"
+                        hover:bg-tale/20"
                     onClick={() => setSeeAllCredits(false)}
                   >
                     Hide

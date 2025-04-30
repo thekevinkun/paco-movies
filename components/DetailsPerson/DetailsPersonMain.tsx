@@ -161,7 +161,7 @@ const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
                 <p 
                   className={`${!readMore ? "!line-clamp-10" : ""}
                     max-sm:px-2 font-normal 
-                    text-main text-justify leading-[26.5px]`}
+                    text-main text-justify leading-[26.75px]`}
                 >
                   {details.biography}
 

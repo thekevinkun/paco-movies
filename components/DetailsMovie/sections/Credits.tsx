@@ -26,7 +26,7 @@ const getCasts = (casts: any) => {
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
               className="object-cover rounded-full 
-                opacity-90 transition-opacity duration-200 group-hover:opacity-55"
+                opacity-90 transition-opacity duration-100 group-hover:opacity-55"
             />
           </Link>
 
@@ -66,19 +66,19 @@ const getCastsMobile = (casts: any) => {
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
             className="object-cover rounded-full 
-              opacity-90 transition-opacity duration-200 group-hover:opacity-55"
+              opacity-90 transition-opacity duration-100 group-hover:opacity-55"
           />
         </Link>
 
         <div className="text-center">
           <Link 
             href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
-            className="text-main hover:text-tale max-sm:text-sm"
+            className="line-clamp-1 text-main hover:text-tale max-sm:text-sm"
           >
             <p>{cast.name}</p>
           </Link>
 
-          <p className="pt-[2px] font-light text-main-1 text-xs max-sm:text-[0.65rem]">
+          <p className="line-clamp-1 pt-[2px] font-light text-main-1 text-xs max-sm:text-[0.65rem]">
             {cast.character}
           </p>
         </div>

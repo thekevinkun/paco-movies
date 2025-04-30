@@ -14,7 +14,7 @@ const CardPersonCredits = ({id, mediaType, title, character,
         <Link 
             href={`/title/${mediaType}/${id + "-" + 
                 title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
-            className="relative w-24 max-sm:w-[85px] h-full group "
+            className="relative group w-24 max-sm:w-[85px] h-full bg-dark"
         >
             <FallbackImage
                 src={poster}
@@ -24,8 +24,8 @@ const CardPersonCredits = ({id, mediaType, title, character,
                 sizes="(min-width: 640px) 96px, 85px"
                 placeholder="blur"
                 blurDataURL="/images/blur.jpg"
-                className="object-cover opacity-80 transition-opacity
-                    duration-100 group-hover:opacity-30"
+                className="object-cover opacity-90 transition-opacity
+                    duration-100 group-hover:opacity-55"
             />
         </Link>
 
@@ -36,7 +36,7 @@ const CardPersonCredits = ({id, mediaType, title, character,
                     className="p-1 w-fit flex items-center
                         rounded-sm border border-gray-500"
                 >
-                    <span className="text-main-1 text-[10px] max-sm:text-[8px]">
+                    <span className="text-main-1 text-[10px] max-sm:text-[8.5px]">
                         {mediaType}
                     </span>
                 </Link>
@@ -46,8 +46,8 @@ const CardPersonCredits = ({id, mediaType, title, character,
                         title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
                     className="pt-1"
                 >
-                    <h4 className="text-main max-sm:text-sm font-semibold
-                        capitalize hover:text-tale"
+                    <h4 className="line-clamp-1 text-main max-sm:text-sm
+                        font-semibold capitalize hover:text-tale"
                     >
                         {title}
                     </h4>
@@ -64,7 +64,7 @@ const CardPersonCredits = ({id, mediaType, title, character,
                     />
 
                     <span 
-                        className={`text-sm text-main ${vote > 0 ? 
+                        className={`text-sm text-main-1 ${vote > 0 ? 
                             "font-semibold" : "font-normal italic"}`
                     }
                     >
@@ -72,7 +72,9 @@ const CardPersonCredits = ({id, mediaType, title, character,
                     </span>
                 </div>
 
-                <p className="pt-2 max-sm:text-sm text-main">{character}</p>
+                <p className="pt-2 font-medium text-main-1 max-sm:text-sm">
+                    {character}
+                </p>
             </div>
 
             <div>
