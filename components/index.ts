@@ -9,6 +9,8 @@ import CardPersonCredits from "@components/Card/CardPersonCredits";
 import CardSearch from "@components/Card/CardSearch";
 
 import FallbackImage from "@components/FallbackImage";
+import VideoModal from "@components/VideoModal";
+import VideoAction from "@components/VideoAction";
 import LoadMore from "@components/LoadMore";
 
 import DetailsMovieMain from "@components/DetailsMovie/DetailsMovieMain";
@@ -35,6 +37,8 @@ export {
     CardSearch,
 
     FallbackImage,
+    VideoModal,
+    VideoAction,
     LoadMore,
 
     DetailsMovieMain,

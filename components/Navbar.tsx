@@ -34,7 +34,7 @@ const Navbar = () => {
       {/* NAV DESKTOP */}
       <nav className="w-72 max-xl:w-64 max-lg:hidden">
         <div className="w-72 max-xl:w-64 fixed bottom-0 left-0 
-            flex grow shrink-0 basis-auto flex-col items-center z-50"
+            flex grow shrink-0 basis-auto flex-col items-center z-30"
         >
           <div className="nav-glass nav-menu w-full h-[calc(100vh-64px)] 
             flex flex-col items-center pt-5 overflow-auto"
@@ -46,7 +46,7 @@ const Navbar = () => {
 
       {/* MENU ICON FOR MOBILE */}
       <div className="hidden h-16 max-sm:h-14 ml-[18px] max-sm:ml-3 
-            fixed top-0 left-0 z-50 max-lg:flex items-center">
+            fixed top-0 left-0 z-30 max-lg:flex items-center">
         <IoMdMenu 
           className="text-main text-[27px] max-sm:text-[25px] cursor-pointer hover:text-neutral-500 
                 transition-colors duration-200"
@@ -57,7 +57,7 @@ const Navbar = () => {
       {/* NAV MOBILE */}
       <nav 
         ref={mobileMenu} 
-        className={`${isShowMobileMenu && "nav-glass"} fixed top-0 left-0 transition-all z-50 
+        className={`${isShowMobileMenu && "nav-glass"} fixed top-0 left-0 transition-all z-30 
         ${isShowMobileMenu ? "w-96 max-xs:w-80" : "w-0"}`}
       >
         <div className="nav-menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">

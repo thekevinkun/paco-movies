@@ -6,9 +6,11 @@ import { FallbackImage, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { ICardPerson } from "@types";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerson) => {
+  const url = `/name/${id}-${slugify(name)}`
+  
   return (
     <MotionDiv 
         variants={cardMovieVariants}
@@ -16,7 +18,7 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
     >
         {/* PHOTO */}
         <Link 
-            href={`/name/${id + "-" + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+            href={url} 
             className="relative aspect-square w-72 h-72 
                 max-lg:w-60 max-lg:h-60 
                 max-[867px]:w-56 max-[867px]:h-56
@@ -79,8 +81,7 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
         <div className="mt-auto pt-5 leading-5">
             {works?.map((work: any) => {
                 const title = work.title || work.name
-                const route = "/title" + `/${work.media_type}` + 
-                    `/${work.media_type}-${title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
+                const route = `/title/${work.media_type}/${work.id}-${slugify(title)}`
                 
                 return (
                     <React.Fragment key={work.id}>

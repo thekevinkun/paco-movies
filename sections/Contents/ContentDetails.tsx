@@ -16,7 +16,7 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
   }, [])
 
   return (
-    <section className="relative z-20 mt-16 max-lg:mt-14">
+    <section className="relative mt-16 max-lg:mt-14">
         {mediaType === "movie" ?
             <div>
                 <DetailsMovieMain

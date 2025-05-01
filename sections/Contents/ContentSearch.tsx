@@ -35,7 +35,7 @@ const ContentSearch = ({ data, mediaType, query }:
   }, [])
 
   return (
-    <section className="flex-1 mt-20 max-md:mt-[72px] px-6 max-lg:px-5 max-md:px-3.5">
+    <section className="relative flex-1 mt-20 max-md:mt-[72px] px-6 max-lg:px-5 max-md:px-3.5">
       <h2 className="text-main text-lg font-normal">
         <span className="font-semibold">
             Results for: {" "}  

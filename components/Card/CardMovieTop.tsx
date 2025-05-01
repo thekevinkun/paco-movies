@@ -7,11 +7,12 @@ import { cardMovieVariants } from "@lib/utils/motion";
 
 import { FaPlay } from "react-icons/fa";
 import { ICardMovieTop } from "@types";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const CardMovieTop = ({id, poster, backDrop, title, 
       overview, mediaType, releaseDate, rating}: ICardMovieTop) => {
-  const fullRoute = id + "-" + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-");
+        
+  const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
 

@@ -10,7 +10,9 @@ import { useKeenSlider } from "keen-slider/react";
 import { IoMdPlay } from "react-icons/io";
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
-const getMainVideos = (videos: any) => {
+import { slugify } from "@helpers/helpers";
+
+const getMainVideos = (videos: any, route: string) => {
   return (
     <div 
       className="grid grid-cols-8 gap-x-[15px]
@@ -32,7 +34,7 @@ const getMainVideos = (videos: any) => {
 
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Link
-              href={`/video/play?key=${video.key}`}
+              href={`${route}#play=${video.key}`}
               className="group"
               data-site={video.site}
               data-id={video.key}
@@ -54,7 +56,7 @@ const getMainVideos = (videos: any) => {
   )
 }
 
-const getVideosSlider = (start: number, videos: any) => {
+const getVideosSlider = (start: number, videos: any, route: string) => {
   return videos.slice(start, 10).map((video: any) => (
     <div
       key={video.id}
@@ -69,7 +71,7 @@ const getVideosSlider = (start: number, videos: any) => {
     >
       <div className="h-full flex items-center justify-center">
         <Link
-          href={`/video/play?key=${video.key}`}
+          href={`${route}#play=${video.key}`}
           className="group"
           data-site={video.site}
           data-id={video.key}
@@ -90,90 +92,91 @@ const getVideosSlider = (start: number, videos: any) => {
 const Videos = ({tvId, mediaType, name, videos}: 
       {tvId: number, mediaType: string, name: string, videos: any}) => {
     
-    // DYNAMIC RESIZE SCREEN SETUP
-    const [isMobile, setIsMobile] = useState(() => {
-      if (typeof window !== "undefined") {
-        return window.matchMedia("(max-width: 1024px)").matches;
-      }
-      return false;
-    });
-
-    useEffect(() => {
-      if (typeof window === "undefined") return;
-    
-      const media = window.matchMedia("(max-width: 1024px)");
-    
-      const handleChange = () => {
-        setIsMobile(media.matches);
-      };
-    
-      // Listen for changes
-      media.addEventListener("change", handleChange);
-    
-      // Clean up
-      return () => media.removeEventListener("change", handleChange);
-    }, []);
-
-    const startIndexVideoSlider = isMobile ? 0 : 2;
-
-    // KEEN SLIDER SETUP
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [perView, setPerView] = useState(1);
-    const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
-  
-    const [sliderRef, slider] = useKeenSlider({
-      loop: false,
-      breakpoints: {
-        "(max-width: 768px)": {
-          slides: { perView: 2.25, spacing: 12 },
-        },
-      },
-      slides: {
-        perView: 3.25,
-        spacing: 15
-      },
-      mode: "free-snap",
-      created(s) {
-        updateArrows(s)
-      },
-      updated(s) {
-        updateArrows(s)
-      },
-      slideChanged(s) {
-        setCurrentSlide(s.track.details.rel);
-        updateArrows(s);
-      }
-    });
-  
-    const updateArrows = (s: any) => {
-      const rel = s.track.details.rel;
-      const slideCount = s.track.details.slides.length;
-  
-      let dynamicPerView = 1;
-      const slidesOption = s.options?.slides;
-  
-      if (typeof slidesOption?.perView === "number") {
-        dynamicPerView = slidesOption.perView;
-      } else if (typeof slidesOption?.perView === "function") {
-        dynamicPerView = slidesOption.perView(window.innerWidth, s.track.details.slides);
-      }
-  
-      setPerView(dynamicPerView);
-  
-      const atStart = rel === 0;
-      const atEnd = rel >= slideCount - Math.ceil(dynamicPerView - 1);
-  
-      setArrowDisabled({ prev: atStart, next: atEnd });
+  // DYNAMIC RESIZE SCREEN SETUP
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 1024px)").matches;
     }
+    return false;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
   
-    const scrollLeft = () => slider.current?.prev();
-    const scrollRight = () => slider.current?.next();
+    const media = window.matchMedia("(max-width: 1024px)");
+  
+    const handleChange = () => {
+      setIsMobile(media.matches);
+    };
+  
+    // Listen for changes
+    media.addEventListener("change", handleChange);
+  
+    // Clean up
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  const startIndexVideoSlider = isMobile ? 0 : 2;
+
+  // KEEN SLIDER SETUP
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [perView, setPerView] = useState(1);
+  const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
+
+  const [sliderRef, slider] = useKeenSlider({
+    loop: false,
+    breakpoints: {
+      "(max-width: 768px)": {
+        slides: { perView: 2.25, spacing: 12 },
+      },
+    },
+    slides: {
+      perView: 3.25,
+      spacing: 15
+    },
+    mode: "free-snap",
+    created(s) {
+      updateArrows(s)
+    },
+    updated(s) {
+      updateArrows(s)
+    },
+    slideChanged(s) {
+      setCurrentSlide(s.track.details.rel);
+      updateArrows(s);
+    }
+  });
+
+  const updateArrows = (s: any) => {
+    const rel = s.track.details.rel;
+    const slideCount = s.track.details.slides.length;
+
+    let dynamicPerView = 1;
+    const slidesOption = s.options?.slides;
+
+    if (typeof slidesOption?.perView === "number") {
+      dynamicPerView = slidesOption.perView;
+    } else if (typeof slidesOption?.perView === "function") {
+      dynamicPerView = slidesOption.perView(window.innerWidth, s.track.details.slides);
+    }
+
+    setPerView(dynamicPerView);
+
+    const atStart = rel === 0;
+    const atEnd = rel >= slideCount - Math.ceil(dynamicPerView - 1);
+
+    setArrowDisabled({ prev: atStart, next: atEnd });
+  }
+
+  const scrollLeft = () => slider.current?.prev();
+  const scrollRight = () => slider.current?.next();
+
+  const route = `/title/${mediaType}/${tvId}-${slugify(name)}`;
 
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${tvId + "-" 
-          + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/videogallery`} 
+        href={`${route}/videogallery`} 
         className="mb-7 group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Videos</h3>
@@ -189,7 +192,7 @@ const Videos = ({tvId, mediaType, name, videos}:
       <div>
         {/* Two main video */}
         <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
-          {getMainVideos(videos)}
+          {getMainVideos(videos, route)}
         </div>
           
         {videos.length > 2 &&
@@ -199,7 +202,7 @@ const Videos = ({tvId, mediaType, name, videos}:
                 max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
           >
             <div ref={sliderRef} className="keen-slider">
-              {getVideosSlider(startIndexVideoSlider, videos)}
+              {getVideosSlider(startIndexVideoSlider, videos, route)}
             </div>
 
             {/* Arrow */}

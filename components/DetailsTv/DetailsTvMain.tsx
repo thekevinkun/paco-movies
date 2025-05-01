@@ -7,13 +7,13 @@ import { FallbackImage } from "@components";
 import { FaPlay } from "react-icons/fa";
 
 import { IDetailsTvMain } from "@types";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const getGenres = (mediaType: string, genres: any) => {
   return genres.map((genre: any) => (
     <React.Fragment key={genre.id}>
       <Link
-        href={`/genre/${mediaType}/${genre.id + "-" + genre.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+        href={`/genre/${mediaType}/${genre.id}-${slugify(genre.name)}`}
         className="inline-block text-sm max-xl:text-xs max-lg:text-sm 
             font-normal hover:text-tale"
       >
@@ -48,7 +48,7 @@ const getCreators = (creators: any) => {
   return creators?.slice(0, 3).map((item: any) => (
     <React.Fragment key={item.id}>
       <Link 
-        href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+        href={`/name/${item.id}-${slugify(item.name)}`}
         className="max-xl:text-sm hover:underline hover:text-tale"
       >
         <p>{item.name}</p>
@@ -63,7 +63,7 @@ const getStars = (stars: any) => {
   return stars.slice(0, 3).map((item: any) => (
     <React.Fragment key={item.id}>
       <Link 
-        href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+        href={`/name/${item.id}-${slugify(item.name)}`} 
         className="max-xl:text-sm hover:underline hover:text-tale"
       >
         <p>{item.name}</p>
@@ -77,6 +77,8 @@ const getStars = (stars: any) => {
 const DetailsTvMain = ({id, mediaType, backdrop, poster, name, rating, releaseDate, 
       tvrating, status, networks, genres, tagline, overview, creators, stars}: IDetailsTvMain) => {
   
+  const url = `/title/${mediaType}/${id}-${slugify(name)}`;
+        
   return (
     <section
       style={{
@@ -97,7 +99,7 @@ const DetailsTvMain = ({id, mediaType, backdrop, poster, name, rating, releaseDa
       ></div>
 
       {/* ALL INFORMATION */}
-      <div className="relative pt-10 pb-2 px-5 z-40">
+      <div className="relative pt-10 pb-2 px-5 z-20">
         <div className="flex gap-10">
           {/* POSTER */}
           <div className="relative w-[285px] h-[415px] 
@@ -120,7 +122,7 @@ const DetailsTvMain = ({id, mediaType, backdrop, poster, name, rating, releaseDa
 
           <div className="flex-1">
             {/* TITLE */}
-            <Link href={`/title/${mediaType}/${id + "-" + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}>
+            <Link href={url}>
               <h2 className="text-light text-2xl font-extrabold capitalize hover:text-tale">
                 {name}{" "}
                 <span className="font-light">
@@ -179,7 +181,7 @@ const DetailsTvMain = ({id, mediaType, backdrop, poster, name, rating, releaseDa
               </div>
 
               <Link
-                href={`/title/${mediaType}/${id + "-" + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}#`}
+                href={`${url}#`}
                 className="flex items-center gap-2 ml-10 text-light hover:text-light-2"
               >
                 <FaPlay className="text-2xl"/>

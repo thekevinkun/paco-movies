@@ -5,8 +5,10 @@ import { FallbackImage } from "@components";
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 
+import { slugify } from "@helpers/helpers";
+
 const getLessPhotos = (tvId: number, mediaType: string, 
-  title: string, posters: any, backdrops: any) => {
+  title: string, posters: any, backdrops: any, route: string) => {
 
 return (
   <div className="grid grid-cols-11 max-md:grid-cols-10
@@ -35,8 +37,7 @@ return (
     {backdrops.slice(0, 1).map((item: any) => (
       <Link 
         key="last-backdrops"
-        href={`/title/${mediaType}/${tvId + "-" 
-          + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+        href={`${route}/photogallery`} 
         className="col-span-3 max-md:col-span-2 relative group bg-dark rounded-md"
       >
         <FallbackImage
@@ -61,7 +62,7 @@ return (
 }
 
 const getPhotos = (tvId: number, mediaType: string, 
-        name: string, posters: any, backdrops: any) => {
+        name: string, posters: any, backdrops: any, route: string) => {
     return (
       <div className="grid grid-cols-12 
           gap-[15px] max-md:gap-[8px] grid-rows-[240px,200px]
@@ -108,8 +109,7 @@ const getPhotos = (tvId: number, mediaType: string,
         {backdrops.slice(3, 4).map((item: any) => (
           <Link 
             key="last-backdrops"
-            href={`/title/${mediaType}/${tvId + "-" 
-              + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+            href={`${route}/photogallery`} 
             className="relative group bg-dark col-span-2 max-md:col-span-3 rounded-md"
           >
             <FallbackImage
@@ -136,11 +136,12 @@ const getPhotos = (tvId: number, mediaType: string,
 const Photos = ({tvId, mediaType, name, posters, backdrops}: 
     {tvId: number, mediaType: string, name: string, posters: any, backdrops: any}) => {
   
+  const route = `/title/${mediaType}/${tvId}-${slugify(name)}`;
+
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${tvId + "-" 
-          + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`} 
+        href={`${route}/photogallery`} 
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Photos</h3>
@@ -154,9 +155,9 @@ const Photos = ({tvId, mediaType, name, posters, backdrops}:
 
       <div className="pt-7">
         {(posters.length > 6 && backdrops.length > 4) ?
-          getPhotos(tvId, mediaType, name, posters, backdrops)
+          getPhotos(tvId, mediaType, name, posters, backdrops, route)
         :
-          getLessPhotos(tvId, mediaType, name, posters, backdrops) 
+          getLessPhotos(tvId, mediaType, name, posters, backdrops, route) 
         }
       </div>
     </>

@@ -18,7 +18,7 @@ const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
   const [readMore, setReadMore] = useState(false);
   
   return (
-    <section className="relative pt-8 px-5 max-md:pt-5 max-md:px-3 z-40">
+    <section className="relative pt-8 px-5 max-md:pt-5 max-md:px-3 z-20">
       {/* PERSON's PHOTO and CONTACTS */}
       <div className="flex max-sm:flex-col gap-x-8 max-sm:gap-y-3">
         <div className="flex flex-col max-sm:items-center gap-5">

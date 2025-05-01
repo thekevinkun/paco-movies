@@ -7,6 +7,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
 import { MdArrowForwardIos } from "react-icons/md";
+import { slugify } from "@helpers/helpers";
 
 const getCasts = (casts: any) => {
   return (
@@ -14,7 +15,7 @@ const getCasts = (casts: any) => {
       {casts.slice(0, 18).map((cast: any) => (
         <div key={cast.id} className="flex items-center gap-5">
           <Link 
-            href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+            href={`/name/${cast.id}-${slugify(cast.name)}`} 
             className="relative w-32 h-32 bg-dark rounded-full group"
           >
             <FallbackImage
@@ -32,7 +33,7 @@ const getCasts = (casts: any) => {
 
           <div>
             <Link 
-              href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+              href={`/name/${cast.id}-${slugify(cast.name)}`}
               className="text-main hover:text-tale"
             >
               <p>{cast.name}</p>
@@ -54,7 +55,7 @@ const getCastsMobile = (casts: any) => {
     >
       <div className="flex flex-col gap-3">
         <Link 
-          href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+          href={`/name/${cast.id}-${slugify(cast.name)}`} 
           className="relative w-full aspect-square bg-black rounded-full group"
         >
           <FallbackImage
@@ -72,7 +73,7 @@ const getCastsMobile = (casts: any) => {
 
         <div className="text-center">
           <Link 
-            href={`/name/${cast.id + "-" + cast.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+            href={`/name/${cast.id}-${slugify(cast.name)}`}
             className="line-clamp-1 text-main hover:text-tale max-sm:text-sm"
           >
             <p>{cast.name}</p>
@@ -92,8 +93,7 @@ const getDirector = (crews: any) => {
 
   return (
     <Link 
-      href={`/name/${director.id + "-" 
-        + director.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+      href={`/name/${director.id}-${slugify(director.name)}`}
       className="text-main hover:underline hover:text-tale max-md:text-sm max-sm:text-xs"> 
 
       <p>
@@ -109,7 +109,7 @@ const getWriters = (crews: any) => {
       .map((item: any) => (
     <React.Fragment key={item.id}>
       <Link 
-        href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+        href={`/name/${item.id}-${slugify(item.name)}`}
         className="text-main hover:underline hover:text-tale max-md:text-sm max-sm:text-xs">
 
         <p>{item.name}</p>
@@ -137,11 +137,12 @@ const Credits = ({movieId, mediaType, title, casts, crews}:
     mode: "free-snap"
   })
   
+  const route = `/title/${mediaType}/${movieId}-${slugify(title)}`;
+
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${movieId + "-" 
-          + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullcredits`} 
+        href={`${route}/fullcredits`} 
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Top Cast</h3>
@@ -193,8 +194,7 @@ const Credits = ({movieId, mediaType, title, casts, crews}:
 
         <div className="py-3 font-semibold border-b border-gray-500">
           <Link 
-            href={`/title/${mediaType}/${movieId + "-" 
-              + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullcredits`}
+            href={`${route}/fullcredits`}
             className="text-main hover:text-tale max-sm:text-sm flex items-center justify-between"
           >
             <h3>All cast & crew</h3>

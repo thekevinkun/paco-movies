@@ -44,6 +44,15 @@ const dedupeResults = (results: any) => {
     return results.filter((result: any, index: number, self: any) => index == self.findIndex((r: any) => r.id === result.id))
 }
 
+const slugify = (text: string): string => {
+    return text
+      .normalize("NFD")                      // Normalize accented characters (e.g., é → e + ́)
+      .replace(/[\u0300-\u036f]/g, "")       // Remove diacritical marks
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")           // Replace non-alphanumeric characters with hyphens
+      .replace(/^-+|-+$/g, "");              // Trim hyphens from start/end
+}
+
 export {
     isNumeric,
     toTitleCase,
@@ -51,5 +60,6 @@ export {
     convertRuntime,
     formatCurrency,
     calculateAge,
-    dedupeResults
+    dedupeResults,
+    slugify
 }

@@ -12,6 +12,8 @@ import { useKeenSlider } from "keen-slider/react";
 
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
+import { slugify } from "@helpers/helpers";
+
 const getSeasonsSlider = (seasons: any) => {
   return seasons.filter((item: any) => item.season_number !== 0).map((season: any) => (
       <div
@@ -150,11 +152,12 @@ const Seasons = ({tvId, mediaType, name, seasons, seasonList}:
     const scrollLeft = () => slider.current?.prev();
     const scrollRight = () => slider.current?.next();
 
+    const route = `/title/${mediaType}/${tvId}-${slugify(name)}`;
+
     return (
         <>
             <Link 
-              href={`/title/${mediaType}/${tvId + "-" 
-                  + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/fullseasons`} 
+              href={`${route}/fullseasons`} 
               className="group flex items-center w-fit"
               >
               <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Seasons</h3>

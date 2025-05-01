@@ -3,7 +3,7 @@ import "@styles/globals.css";
 import "@styles/utilities.css";
 
 import { Header, Footer } from "@sections";
-import { Navbar } from "@components";
+import { Navbar, VideoModal } from "@components";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
@@ -23,11 +23,13 @@ export default function RootLayout({
           <main className="flex max-lg:block">
             <Header />
             <Navbar />
-            <section className="min-h-screen flex flex-col grow">
+            <section className="relative z-10 min-h-screen flex flex-col grow">
               {children}
               <Footer />
             </section>
           </main>
+
+          <VideoModal />
         </Providers>
       </body>
     </html>

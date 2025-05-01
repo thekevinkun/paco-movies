@@ -31,7 +31,7 @@ const ContentStars = ({ data, mediaType, category }:
   }, [])
 
   return (
-    <section className="relative z-20 mt-14 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
+    <section className="relative mt-14 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv 
         variants={parentStaggerVariants}
         initial="hidden"

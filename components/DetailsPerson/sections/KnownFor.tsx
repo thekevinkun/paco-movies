@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { FallbackImage } from "@components";
 
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const KnownFor = ({works}: any) => {
   const sortedWorks = works.slice().
@@ -31,10 +31,7 @@ const KnownFor = ({works}: any) => {
               ${index >= 2 && "max-md:hidden"}`}
           >
             <Link 
-              href={`/title/${work.media_type}/${work.id + "-" + 
-                  work.title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-") 
-                  || work.name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
-              }
+              href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name)}`}
               className="relative w-[20%] max-md:w-[25%] h-full bg-dark group rounded-bl-xl"
             >
               <FallbackImage
@@ -55,10 +52,8 @@ const KnownFor = ({works}: any) => {
               <div className="flex justify-between">
                 {/* Title */}
                 <Link 
-                  href={`/title/${work.media_type}/${work.id + "-" + 
-                      work.title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")
-                      || work.name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
-                  >
+                  href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name)}`}
+                >
                   <h4 className="line-clamp-1 font-semibold
                     capitalize hover:text-tale">
                       {work.title || work.name}

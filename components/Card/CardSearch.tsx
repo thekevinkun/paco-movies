@@ -8,12 +8,12 @@ import { FallbackImage, MotionDiv } from "@components";
 
 import { ICardSearch } from "@types";
 import { cardMovieVariants } from "@lib/utils/motion";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const CardSearch = ({ id, name, photo, mediaType, 
     releaseDate, vote, overview, department, works }: ICardSearch) => {
 
-    const fullRoute = id + "-" + name?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-");
+    const fullRoute = id + "-" + `${slugify(name)}`;
     const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
     const routePerson = "/name" + `/${fullRoute}`;
     
@@ -130,8 +130,7 @@ const CardSearch = ({ id, name, photo, mediaType,
                     <div className="pt-3 pr-7">
                         {works?.map((work: any) => {
                             const title = work.title || work.name
-                            const route = "/title" + `/${work.media_type}` + 
-                                `/${work.id}-${title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
+                            const route = `/title/${work.media_type}/${work.id}-${slugify(title)}`
                             
                             return (
                                 <React.Fragment key={work.id}>

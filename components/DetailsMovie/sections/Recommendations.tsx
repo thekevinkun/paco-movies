@@ -13,7 +13,7 @@ import { FaPlay } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const getRecommendations = (data: any) => {
   return data.slice(0, 10).map((item: any) => (
@@ -23,8 +23,7 @@ const getRecommendations = (data: any) => {
     >
       <div className="flex flex-col">
         <Link
-          href={`/title/${item.media_type}/${item.id + "-" + 
-              (item.title || item.name)?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+          href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}`}
           className="relative bg-dark w-full h-[335px] 
             max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
         >
@@ -63,8 +62,7 @@ const getRecommendations = (data: any) => {
           </div>
 
           <Link 
-            href={`/title/${item.media_type}/${item.id + "-" + 
-                (item.title || item.name)?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+            href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}`}
             title={item.title || item.name} 
             className="pt-3 inline-block w-fit"
           >
@@ -79,8 +77,7 @@ const getRecommendations = (data: any) => {
               flex items-center justify-between"
           >
             <Link
-              href={`/title/${item.media_type}/${item.id + "-" + 
-                  (item.title || item.name)?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+              href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}#`}
               className="flex items-center gap-2 max-sm:text-sm text-dark hover:text-light-2"
             >
               <FaPlay/>

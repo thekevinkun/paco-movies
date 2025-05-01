@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useMenu } from "@contexts/MenuContext";
 
 import { IShowMobileMenu } from "@types";
+import { slugify } from "@helpers/helpers";
 import { MEDIA_TYPE } from "@helpers/constants";
 
 const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
@@ -92,9 +93,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                 <Link 
                     key={item.id}
                     id={item.id.toString()} 
-                    href={`/genre/${activeMediaType}/${item.id + "-" 
-                      + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`
-                    }
+                    href={`/genre/${activeMediaType}/${item.id}-${slugify(item.name)}`}
                     className={`p-3 flex items-center gap-3
                       ${activeCategory == item.id.toString() ? "pointer-events-none" : "hover:bg-tale-1"}`}
                     onClick={() => toggleMenu()}

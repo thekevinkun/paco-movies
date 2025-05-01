@@ -9,7 +9,7 @@ import moment from "moment";
 import { FallbackImage } from "@components";
 
 import { MdArrowForwardIos } from "react-icons/md";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const Reviews = ({tvId, mediaType, name, reviews}: 
       {tvId: number, mediaType: string, name: string, reviews: any}) => {
@@ -47,11 +47,12 @@ const Reviews = ({tvId, mediaType, name, reviews}:
     }
   }, [randomReview, readMore]);
 
+  const route = `/title/${mediaType}/${tvId}-${slugify(name)}`;
+
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${tvId + "-" 
-          + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/reviews`} 
+        href={`${route}/reviews`} 
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">User Reviews</h3>

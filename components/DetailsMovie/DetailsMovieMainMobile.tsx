@@ -7,13 +7,13 @@ import { FallbackImage } from "@components";
 
 import { IDetailsMovieMain } from "@types";
 import { FaPlay } from "react-icons/fa";
-import { convertRuntime, roundedToFixed } from "@helpers/helpers";
+import { convertRuntime, roundedToFixed, slugify } from "@helpers/helpers";
 
 const getGenres = (mediaType: string, genres: any) => {
     return genres.map((genre: any) => (
       <Fragment key={genre.id}>
         <Link
-          href={`/genre/${mediaType}/${genre.id + "-" + genre.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+          href={`/genre/${mediaType}/${genre.id}-${slugify(genre.name)}`}
           className="inline-block text-sm font-normal hover:text-tale"
         >
           {genre.name}
@@ -28,7 +28,7 @@ const getDirector = (crews: any) => {
   
     return (
       <Link 
-        href={`/name/${director.id + "-" + director.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+        href={`/name/${director.id}-${slugify(director.name)}`}
         className="hover:underline hover:text-tale"
       > 
         <p className="text-sm max-sm:text-xs">
@@ -44,7 +44,7 @@ const getWriters = (crews: any) => {
       
       <React.Fragment key={item.id}>
         <Link 
-          href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+          href={`/name/${item.id}-${slugify(item.name)}`} 
           className="hover:underline hover:text-tale"
         >
           <p className="text-sm max-sm:text-xs">
@@ -61,7 +61,7 @@ const getStars = (casts: any) => {
     return casts.slice(0, 3).map((item: any) => (
       <Fragment key={item.id}>
         <Link 
-            href={`/name/${item.id + "-" + item.name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
+            href={`/name/${item.id}-${slugify(item.name)}`}
             className="hover:underline hover:text-tale"
         >
           <p className="text-sm max-sm:text-xs">
@@ -75,6 +75,9 @@ const getStars = (casts: any) => {
 
 const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
     country, certification, runtime, genres, overview, credits}: IDetailsMovieMain) => {
+  
+  const url = `/title/${mediaType}/${id}-${slugify(title)}`;
+        
   return (
     <section className="hidden max-md:block">
         <div
@@ -83,7 +86,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
-                }}
+            }}
             className="relative w-full h-72 max-sm:h-64"
         >
             <div
@@ -95,9 +98,9 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
             ></div>
         </div>
 
-        <div className="relative pt-4 z-40">
+        <div className="relative pt-4 z-20">
             {/* TITLE */}
-            <Link href={`/title/${mediaType}/${id + "-" + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}>
+            <Link href={url}>
                 <h2 className="text-main text-2xl text-center font-extrabold capitalize hover:text-tale">
                     {title}{" "}
                     <span className="font-light">
@@ -144,7 +147,7 @@ const DetailsMovieMainMobile = ({id, mediaType, backdrop, poster, title, rating,
                 </div>
 
                 <Link
-                    href={`/title/${mediaType}/${id + "-" + title.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}#`}
+                    href={`${url}#`}
                     className="flex items-center gap-2 ml-10 text-main hover:text-light-2"
                 >
                     <FaPlay className="text-2xl"/>

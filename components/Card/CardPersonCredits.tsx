@@ -5,15 +5,17 @@ import moment from "moment";
 import { FallbackImage } from "@components";
 
 import { ICardPersonCredits } from "@types";
-import { roundedToFixed } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@helpers/helpers";
 
 const CardPersonCredits = ({id, mediaType, title, character, 
     releaseDate, poster, vote}: ICardPersonCredits) => {
+
+  const url = `/title/${mediaType}/${id}-${slugify(title)}`
+  
   return (
     <div key={id} className="w-full h-36 py-2 flex border-b">
         <Link 
-            href={`/title/${mediaType}/${id + "-" + 
-                title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+            href={url}
             className="relative group w-24 max-sm:w-[85px] h-full bg-dark"
         >
             <FallbackImage
@@ -42,8 +44,7 @@ const CardPersonCredits = ({id, mediaType, title, character,
                 </Link>
 
                 <Link 
-                    href={`/title/${mediaType}/${id + "-" + 
-                        title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`}
+                    href={url}
                     className="pt-1"
                 >
                     <h4 className="line-clamp-1 text-main max-sm:text-sm
@@ -93,4 +94,4 @@ const CardPersonCredits = ({id, mediaType, title, character,
   )
 }
 
-export default CardPersonCredits
+export default CardPersonCredits;

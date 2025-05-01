@@ -5,13 +5,16 @@ import { FallbackImage } from "@components";
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 
+import { slugify } from "@helpers/helpers";
+
 const Photos = ({personId, name, images}: 
     {personId: string, name: string, images: any}) => {
+  
+  const route = `/name/${personId}-${slugify(name)}`;
 
   return (
     <>
-      <Link href={`/name/${personId + "-" 
-          + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`} 
+      <Link href={`${route}/photogallery`} 
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
@@ -50,9 +53,9 @@ const Photos = ({personId, name, images}:
         ))}
 
         {images.slice(4, 5).map((item: any, index: number) => (
-          <Link key={index} 
-            href={`/name/${personId + "-" 
-              + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+          <Link 
+            key={index} 
+            href={`${route}/photogallery`}
             className="relative bg-black col-span-2 
               group rounded-md"
           >

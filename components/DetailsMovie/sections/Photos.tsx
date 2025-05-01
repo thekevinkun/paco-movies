@@ -6,9 +6,10 @@ import { FallbackImage } from "@components";
 
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
+import { slugify } from "@helpers/helpers";
 
 const getLessPhotos = (movieId: number, mediaType: string, 
-    title: string, posters: any, backdrops: any) => {
+    title: string, posters: any, backdrops: any, route: string) => {
 
   return (
     <div className="grid grid-cols-11 max-md:grid-cols-10
@@ -37,8 +38,7 @@ const getLessPhotos = (movieId: number, mediaType: string,
       {backdrops.slice(0, 1).map((item: any) => (
         <Link 
           key="last-backdrops"
-          href={`/title/${mediaType}/${movieId + "-" 
-            + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+          href={`${route}/photogallery`} 
           className="col-span-3 max-md:col-span-2 relative group bg-dark rounded-md"
         >
           <FallbackImage
@@ -63,7 +63,7 @@ const getLessPhotos = (movieId: number, mediaType: string,
 }
 
 const getPhotos = (movieId: number, mediaType: string, 
-        title: string, posters: any, backdrops: any) => {
+        title: string, posters: any, backdrops: any, route: string) => {
     return (
       <div className="grid-photos">
         {posters.slice(0, 4).map((item: any, index: number) => (
@@ -107,8 +107,7 @@ const getPhotos = (movieId: number, mediaType: string,
           {backdrops.slice(3, 4).map((item: any) => (
             <Link 
               key="last-backdrops"
-              href={`/title/${mediaType}/${movieId + "-" 
-                + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`}
+              href={`${route}/photogallery`} 
               className="last-backdrop relative group bg-dark rounded-md"
             >
               <FallbackImage
@@ -135,11 +134,12 @@ const getPhotos = (movieId: number, mediaType: string,
 const Photos = ({movieId, mediaType, title, posters, backdrops}: 
     {movieId: number, mediaType: string, title: string, posters: any, backdrops: any}) => {
   
+  const route = `/title/${mediaType}/${movieId}-${slugify(title)}`;
+  
   return (
     <>
       <Link 
-        href={`/title/${mediaType}/${movieId + "-" 
-          + title?.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}/photogallery`} 
+        href={`${route}/photogallery`} 
         className="group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Photos</h3>
@@ -153,9 +153,9 @@ const Photos = ({movieId, mediaType, title, posters, backdrops}:
 
       <div className="pt-7">
         {(posters.length > 4 && backdrops.length > 4) ?
-          getPhotos(movieId, mediaType, title, posters, backdrops)
+          getPhotos(movieId, mediaType, title, posters, backdrops, route)
         :
-          getLessPhotos(movieId, mediaType, title, posters, backdrops) 
+          getLessPhotos(movieId, mediaType, title, posters, backdrops, route) 
         }
       </div>
     </>

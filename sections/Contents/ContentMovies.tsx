@@ -31,7 +31,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
   }, [])
   
   return (
-    <section className="relative z-20 mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
+    <section className="relative mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv 
         variants={parentStaggerVariants}
         initial="hidden"
