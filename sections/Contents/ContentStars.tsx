@@ -1,12 +1,21 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-
-import { CardPerson, MotionDiv, LoadMore } from "@components";
-
 import { dedupeResults } from "@helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
+
+import { Spinner, MotionDiv } from "@components";
+
+const CardPerson = dynamic(() => import("@components/Card/CardPerson"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
+const LoadMore = dynamic(() => import("@components/LoadMore"), {
+  ssr: false,
+  loading: () => null
+});
 
 const ContentStars = ({ data, mediaType, category }: 
     {data: any, mediaType: string, category: string}) => {

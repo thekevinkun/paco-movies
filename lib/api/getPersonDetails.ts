@@ -1,6 +1,7 @@
 "use server"
 
 import { options } from "@lib/api/data";
+import { dedupeResults } from "@helpers/helpers";
 
 export const getPersonDetails = async (mediaType: string, nameId: number) => {
     let response: any = {};
@@ -19,20 +20,40 @@ export const getPersonDetails = async (mediaType: string, nameId: number) => {
         throw new Error(credits.status_message);
     }
 
-    const cast = credits.cast.map((obj: any) => {
+    let cast = credits.cast.map((obj: any) => {
         if (obj.first_air_date) {
             obj.release_date = obj.first_air_date
             delete obj.first_air_date
         }
         return obj;
     })
+    cast = cast.sort((a: any, b: any) => {
+        if (a.release_date === "") return 1;
+        if (b.release_date === "") return -1;
 
-    const crew = credits.crew.map((obj: any) => {
+        const dateA = new Date(a.release_date).getTime();
+        const dateB = new Date(b.release_date).getTime();
+
+        if (dateA === dateB) return 0;
+        return dateB - dateA;
+    })
+
+    let crew = credits.crew.map((obj: any) => {
         if (obj.first_air_date) {
             obj.release_date = obj.first_air_date
             delete obj.first_air_date
         }
         return obj;
+    })
+    crew = crew.sort((a: any, b: any) => {
+        if (a.release_date === "") return 1;
+        if (b.release_date === "") return -1;
+
+        const dateA = new Date(a.release_date).getTime();
+        const dateB = new Date(b.release_date).getTime();
+
+        if (dateA === dateB) return 0;
+        return dateB - dateA;
     })
 
     // Get images
@@ -52,26 +73,8 @@ export const getPersonDetails = async (mediaType: string, nameId: number) => {
     const data = {
         details: details,
         credits: {
-            cast: cast.sort((a: any, b: any) => {
-                if (a.release_date === "") return 1;
-                if (b.release_date === "") return -1;
-
-                const dateA = new Date(a.release_date).getTime();
-                const dateB = new Date(b.release_date).getTime();
-
-                if (dateA === dateB) return 0;
-                return dateB - dateA;
-            }),
-            crew: crew.sort((a: any, b: any) => {
-                if (a.release_date === "") return 1;
-                if (b.release_date === "") return -1;
-
-                const dateA = new Date(a.release_date).getTime();
-                const dateB = new Date(b.release_date).getTime();
-
-                if (dateA === dateB) return 0;
-                return dateB - dateA;
-            })
+            cast: dedupeResults(cast),
+            crew: dedupeResults(crew)
         },
         images: images.profiles,
         externalIds: externalIds

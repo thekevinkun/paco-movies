@@ -7,8 +7,8 @@ import { SiWikidata } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import { RxExternalLink } from "react-icons/rx";
 
-const Details = ({mediaType, details, releaseDate, ratings, originCountry, externalIds}: 
-    {mediaType: any, details: any, releaseDate?: any, ratings?: any, originCountry: any, externalIds: any}) => {
+const Details = ({mediaType, details, releaseDate, tvratings, originCountry, externalIds}: 
+    {mediaType: any, details: any, releaseDate?: any, tvratings?: any, originCountry: any, externalIds: any}) => {
 
   return (
     <>
@@ -25,7 +25,7 @@ const Details = ({mediaType, details, releaseDate, ratings, originCountry, exter
               {mediaType === "movie" ? "Release Date" : "First Air Date"}
           </h3>
 
-          {mediaType === "movie" && releaseDate ? 
+          {mediaType === "movie" && releaseDate.date ? 
             <p className="max-md:text-sm max-sm:text-xs">
               {moment(releaseDate.date).format("LL")}
               <span>
@@ -36,7 +36,7 @@ const Details = ({mediaType, details, releaseDate, ratings, originCountry, exter
             <p className="max-md:text-sm max-sm:text-xs">
               {moment(details.first_air_date).format("LL")}
               <span>
-                {" "}({ratings.iso_3166_1})
+                {" "}({tvratings.iso_3166_1.native_name})
               </span>
             </p>
           :

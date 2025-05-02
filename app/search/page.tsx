@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { ContentSearch } from "@sections";
+import { ContentSearchClient } from "@components/Clients";
 
 import { getSearch } from "@lib/api";
 
@@ -21,7 +21,7 @@ const Search = async ({searchParams, mediaType="multi"}: {searchParams: any, med
   const searchData = await getSearch(mediaType, query);
 
   return (
-    <ContentSearch 
+    <ContentSearchClient 
       data={searchData} 
       mediaType={mediaType}
       query={query}

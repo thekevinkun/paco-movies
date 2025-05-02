@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { ContentStars } from "@sections";
+import { ContentStarsClient } from "@components/Clients";
 
 import { getCategory } from "@lib/api";
 
@@ -13,7 +13,7 @@ const StarsPopular = async ({mediaType="stars", category="popular"}) => {
   const data = await getCategory(mediaType, category);
 
   return (
-    <ContentStars
+    <ContentStarsClient
       data={data}
       mediaType={mediaType}
       category={category}

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { ContentDetails } from "@sections";
+import { ContentDetailsClient } from "@components/Clients";
 
 import { getCachedDetails } from "@lib/cache";
 import { isNumeric } from "@helpers/helpers";
@@ -26,9 +26,9 @@ const TitleMovie = async ({params, mediaType="movie"}: {params: any, mediaType: 
   const data = await getCachedDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
 
   return (
-    <ContentDetails 
-        data={data}
-        mediaType={mediaType}
+    <ContentDetailsClient 
+      data={data}
+      mediaType={mediaType}
     />
   )
 }

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { ContentMovies } from "@sections";
+import { ContentMoviesClient } from "@components/Clients";
 
 import { getCategory } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
@@ -15,7 +15,7 @@ const TvPopular = async ({mediaType="tv", category="popular"}) => {
   const genreData = await getCachedGenres(mediaType);
   
   return (
-    <ContentMovies 
+    <ContentMoviesClient 
       data={tvData}
       genre={genreData}
       mediaType={mediaType}

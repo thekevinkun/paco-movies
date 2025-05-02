@@ -1,12 +1,22 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-
-import { CardSearch, MotionDiv, LoadMore } from "@components";
-
 import { dedupeResults } from "@helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
+
+import { Spinner, MotionDiv } from "@components";
+
+const CardSearch = dynamic(() => import("@components/Card/CardSearch"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const LoadMore = dynamic(() => import("@components/LoadMore"), {
+  ssr: false,
+  loading: () => null
+});
+
 
 const ContentSearch = ({ data, mediaType, query }: 
     {data: any, mediaType: string, query: string}) => {
@@ -64,7 +74,7 @@ const ContentSearch = ({ data, mediaType, query }:
               photo={item.poster_path || item.profile_path}
               mediaType={item.media_type}
               releaseDate={item.release_date || item.first_air_date}
-              vote={item.vote_average || item.popularity}
+              vote={item.media_type === "person" ? item.popularity : item.vote_average}
               overview={item.overview}
               department={item.known_for_department}
               works={item.known_for}

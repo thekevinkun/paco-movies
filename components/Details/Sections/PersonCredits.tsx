@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
 
-import { CardPersonCredits } from "@components";
-
+const CardPersonCredits = dynamic(() => import("@components/Card/CardPersonCredits"), {ssr: false});
 
 const getCredits = (creditsType: string, credits: any, endIndexNumber: number) => {
   let filtered = [];

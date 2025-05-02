@@ -1,6 +1,11 @@
-import { PersonKnownFor, PersonPhotos, PersonCredits } from "@components/Details/Sections";
+"use client"
 
+import dynamic from "next/dynamic";
 import { IDetailsPersonMore } from "@types";
+
+const PersonKnownFor = dynamic(() => import("@components/Details/Sections/PersonKnownFor"), { ssr: false });
+const PersonPhotos = dynamic(() => import("@components/Details/Sections/PersonPhotos"), { ssr: false });
+const PersonCredits = dynamic(() => import("@components/Details/Sections/PersonCredits"), { ssr: false });
 
 const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
   return (

@@ -1,12 +1,25 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-
-import { CardMovieTop, CardMovie, MotionDiv, LoadMore } from "@components";
-
 import { dedupeResults } from "@helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
+
+import { Spinner, MotionDiv } from "@components";
+
+const CardMovieTop = dynamic(() => import("@components/Card/CardMovieTop"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const CardMovie = dynamic(() => import("@components/Card/CardMovie"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const LoadMore = dynamic(() => import("@components/LoadMore"), {
+  ssr: false,
+  loading: () => null
+});
 
 const ContentMovies = ({ data, genre, mediaType, category }: 
     {data: any, genre?: any, mediaType: string, category: string}) => {
@@ -30,6 +43,32 @@ const ContentMovies = ({ data, genre, mediaType, category }:
     handleChangeCategory(category);
   }, [])
   
+  // DYNAMIC RESIZE SCREEN SETUP
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 768px)").matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+  
+    const media = window.matchMedia("(max-width: 768px)");
+  
+    const handleChange = () => {
+      setIsMobile(media.matches);
+    };
+  
+    // Listen for changes
+    media.addEventListener("change", handleChange);
+  
+    // Clean up
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  const startIndexVideoSlider = isMobile ? 0 : 1;
+
   return (
     <section className="relative mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv 
@@ -57,7 +96,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
           grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
           gap-x-3 gap-y-5 max-md:gap-y-4"
       >
-          {useData?.results.slice(1).map((item: any) => (
+          {useData?.results.slice(startIndexVideoSlider).map((item: any) => (
             <CardMovie
               key={item.id}
               id={item.id}

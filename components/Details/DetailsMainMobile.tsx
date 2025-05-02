@@ -115,7 +115,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                     text-light-1 font-normal flex flex-col items-center justify-center gap-1"
                 >
                     {/* MOVIE TV RATE & RELEASE DATE COUNTRY */}
-                    {mediaType === "movie" ?
+                    {mediaType === "movie" && releaseDate ?
                         <div className="flex items-center gap-2">
                             {certification && 
                                 <span className="px-1 text-sm font-medium

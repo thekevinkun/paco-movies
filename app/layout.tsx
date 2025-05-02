@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import "@styles/globals.css";
 import "@styles/utilities.css";
 
-import { Header, Footer } from "@sections";
-import { Navbar, VideoModal } from "@components";
 import { Providers } from "./providers";
+
+import { Navbar } from "@components";
+import { Header, Footer } from "@sections";
+import { VideoModalClient } from "@components/Clients";
 
 export const metadata: Metadata = {
   title: "PacoMovies",
@@ -29,7 +31,7 @@ export default function RootLayout({
             </section>
           </main>
 
-          <VideoModal />
+          <VideoModalClient />
         </Providers>
       </body>
     </html>

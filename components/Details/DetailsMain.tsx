@@ -76,7 +76,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                             flex items-center gap-2 max-xl:gap-1"
                         >
                             {/* MOVIE TV RATE & RELEASE DATE COUNTRY */}
-                            {mediaType === "movie" ?
+                            {mediaType === "movie" && releaseDate ?
                                 <div className="flex items-center gap-2 max-xl:gap-1">
                                     {certification && 
                                         <span className="px-1 text-sm max-lg:text-base 
@@ -90,22 +90,27 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                         {releaseDate && `${moment(releaseDate).format("L")}`}    
                                         {` (${country.iso_3166_1})`}
                                     </span>
+
+                                    <span>|</span>
+                            
                                 </div>
                             :
                                 <>
                                 {tvrating && 
+                                    <>
                                     <span className="px-1 text-sm max-lg:text-base 
                                         font-medium bg-dark border border-gray-500"
                                     >
                                         {tvrating}
                                     </span>
+
+                                    <span>|</span>
+                                    </>
                                 }
                                 </>
                             }
-
-                            {/* SHOW GENRES */}
-                            <span>|</span>
                             
+                            {/* SHOW GENRES */}
                             <div>
                                 <GenreList 
                                     mediaType={mediaType}

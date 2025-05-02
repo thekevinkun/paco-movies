@@ -30,6 +30,6 @@ export const getCachedDetails = async (mediaType: string, id: number) => {
         if (expiredCache) return expiredCache;
 
         // Error if no cache at all
-        throw new Error("Failed to fetch trending and no cached data available.");
+        throw new Error("Failed to fetch details and no cached data available.");
     }
 }

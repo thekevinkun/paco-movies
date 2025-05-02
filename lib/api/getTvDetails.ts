@@ -29,35 +29,28 @@ export const getTvDetails = async (mediaType: string, titleId: number) => {
         throw new Error(ratings.status_message);
     }
 
-    if (ratings.results.length > 1) {
-        ratings = ratings.results.filter((item: any) => {
-            if (details.production_countries.some((c: any) => c.iso_3166_1 === "US")) {
-                return item.iso_3166_1 === "US";
-            } else {
-                return details.production_countries.some((c: any) => {
-                    if (c.iso_3166_1 === item.iso_3166_1) {
-                        if (item.rating)
-                            return item.iso_3166_1;
-                    }
-                    return false
-                })
-            }
-        });
+    let releaseInfo: any = null;
+
+    // Try to find "US" release first
+    const usRelease = ratings.results.find((item: any) => item.iso_3166_1 === "US");
+    if (usRelease) {
+        releaseInfo = usRelease;
     } else {
-        ratings = ratings.results;
+        // Look for a production country match with valid certification
+        releaseInfo = ratings.results.find((item: any) =>
+            details.production_countries.some(
+              (country: any) => country.iso_3166_1 === item.iso_3166_1 && item.rating
+            )
+        );
     }
 
-    let country = details.production_countries.map((country: any) => {
-        if (country.iso_3166_1 === ratings[0].iso_3166_1)
-            return country
-        return ""
-    })
+    const countryCode = releaseInfo.iso_3166_1 || null;
+
+    const releaseDateCountry = countries.find((c: any) => c.iso_3166_1 === countryCode);
 
     ratings = {
-        descriptors: ratings[0].descriptors,
-        iso_3166_1: ratings[0].iso_3166_1,
-        name: country[0].name,
-        rating: ratings[0].rating
+        iso_3166_1: releaseDateCountry,
+        rating: releaseInfo.rating
     }
 
     // Get credits

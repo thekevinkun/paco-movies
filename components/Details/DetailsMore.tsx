@@ -1,9 +1,19 @@
-import { Seasons, Videos, MoviePhotos, TvPhotos, Credits, 
-    Reviews, Details, BoxOffice, Recommendations } from "@components/Details/Sections";
+"use client"
 
+import dynamic from "next/dynamic";
 import { IDetailsMore } from "@types";
 
-const DetailsMore = ({mediaType, details, releaseDate, ratings, originCountry, videos, 
+const Seasons = dynamic(() => import("@components/Details/Sections/Seasons"), { ssr: false });
+const Videos = dynamic(() => import("@components/Details/Sections/Videos"), { ssr: false });
+const MoviePhotos = dynamic(() => import("@components/Details/Sections/MoviePhotos"), { ssr: false });
+const TvPhotos = dynamic(() => import("@components/Details/Sections/TvPhotos"), { ssr: false });
+const Credits = dynamic(() => import("@components/Details/Sections/Credits"), { ssr: false });
+const Reviews = dynamic(() => import("@components/Details/Sections/Reviews"), { ssr: false });
+const Details = dynamic(() => import("@components/Details/Sections/Details"), { ssr: false });
+const BoxOffice = dynamic(() => import("@components/Details/Sections/BoxOffice"), { ssr: false });
+const Recommendations = dynamic(() => import("@components/Details/Sections/Recommendations"), { ssr: false });
+
+const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry, videos, 
       posters, backdrops, credits, externalIds, reviews, recommendations}: IDetailsMore) => {
   
   return (
@@ -82,7 +92,7 @@ const DetailsMore = ({mediaType, details, releaseDate, ratings, originCountry, v
             mediaType={mediaType}
             details={details}
             releaseDate={releaseDate}
-            ratings={ratings}
+            tvratings={tvratings}
             originCountry={originCountry}
             externalIds={externalIds}
           />

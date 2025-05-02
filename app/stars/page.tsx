@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { ContentStars } from "@sections";
+import { ContentStarsClient } from "@components/Clients";
 
 import { getTrending } from "@lib/api";
 
@@ -13,7 +13,7 @@ const Stars = async ({mediaType="stars", category="trending"}) => {
   const data = await getTrending(mediaType);
 
   return (
-    <ContentStars 
+    <ContentStarsClient 
       data={data}
       mediaType={mediaType}
       category={category}

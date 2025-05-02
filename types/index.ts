@@ -156,7 +156,7 @@ export interface IDetailsMore {
     mediaType: string;
     details: any;
     releaseDate?: any;
-    ratings?: any;
+    tvratings?: any;
     originCountry: any;
     videos: any;
     posters: any;

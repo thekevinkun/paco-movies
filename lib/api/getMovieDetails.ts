@@ -10,6 +10,7 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
     const details = await response.json();
     if (!response.ok || details.success === false)
         throw new Error(details.status_message);
+    // console.log("details: ", details);
 
     // Get origin country of movie
     response = await fetch("https://api.themoviedb.org/3/configuration/countries?language=en-US", options);
@@ -20,43 +21,63 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
     const originCountry = details.origin_country
         .map((code: any) => countries.find((country: any) => country.iso_3166_1 === code))
         .filter((country: any): country is typeof countries[number] => country !== undefined);
+    // console.log("originCountry: ", originCountry);
 
     // Get release date and certification
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${titleId}/release_dates`, options);
     let releaseDate = await response.json();
     if (!response.ok || releaseDate.success === false)
         throw new Error(releaseDate.status_message);
+    // console.log("releaseDate: ", releaseDate);
 
-    if (releaseDate.results.length > 1) {
-        releaseDate = releaseDate.results.filter((item: any) => {
-            if (details.production_countries.some((c: any) => c.iso_3166_1 === "US")) {
-                return item.iso_3166_1 === "US";
-            } else {
-                return details.production_countries.some((c: any) => {
-                    if (c.iso_3166_1 === item.iso_3166_1) {
-                        let checkCertification = item.release_dates.filter((cr: any) => cr.certification !== "");
-                        if (checkCertification.length > 0)
-                            return item.iso_3166_1;
-                    }
-                    return false
-                })
-            }
-        });
+    let releaseInfo: any = null;
+
+    // Try to find "US" release first
+    const usRelease = releaseDate.results.find((item: any) => item.iso_3166_1 === "US");
+    if (usRelease) {
+        releaseInfo = usRelease;
     } else {
-        releaseDate = releaseDate.results;
+        // Look for a production country match with valid certification
+        releaseInfo = releaseDate.results.find((item: any) => {
+          const isProductionCountry = details.production_countries.some(
+            (country: any) => country.iso_3166_1 === item.iso_3166_1
+          );
+      
+          const hasValidCertification = item.release_dates.some(
+            (rd: any) => rd.certification && rd.certification.trim() !== ""
+          );
+      
+          return isProductionCountry && hasValidCertification;
+        });
     }
+
+    // Step 3: Extract the release_date and certification (if available)
+    let releaseDateValue: string | null = null;
+    let certification: string | null = null;
     
-    const filterReleaseDate = releaseDate[0].release_dates.length > 1 ? 
-        releaseDate[0].release_dates.filter((item: any) => item.certification !== "").slice(0, 1)[0]
-        : releaseDate[0].release_dates[0];
+    if (releaseInfo) {
+        const validEntry = releaseInfo.release_dates.find(
+          (rd: any) => rd.certification && rd.certification.trim() !== ""
+        );
+      
+        // If found a valid entry, use its release_date and certification
+        if (validEntry) {
+          releaseDateValue = validEntry.release_date;
+          certification = validEntry.certification;
+        }
+    }
+
+    const countryCode = releaseInfo?.iso_3166_1 || null;
     
-    const releaseDateCountry = countries.find((c: any) => c.iso_3166_1 === releaseDate[0].iso_3166_1);
+    const releaseDateCountry = countries.find((c: any) => c.iso_3166_1 === countryCode);
 
     releaseDate = {
         iso_3166_1: releaseDateCountry,
-        date: filterReleaseDate.release_date,
-        certification: filterReleaseDate.certification
+        date: releaseDateValue,
+        certification: certification
     };
+
+    // console.log("last releaseDate: ", releaseDate);
     
     // Get credits
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${titleId}/credits?language=en-US`, options);

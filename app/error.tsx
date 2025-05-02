@@ -1,6 +1,6 @@
 "use client"
 
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Error — PacoMovies",
@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 const Error = () => {
     return (
       <>
-          <div className="h-[92vh] flex flex-col items-center justify-center">
-            <h2 className="font-medium text-lg text-danger">
-              Something went wrong! Please try again later.
-            </h2>
-          </div>
+        <div className="h-[92vh] flex flex-col items-center justify-center">
+          <h2 className="font-medium text-lg text-danger">
+            Something went wrong! Please try again later.
+          </h2>
+        </div>
       </>
     );
   }

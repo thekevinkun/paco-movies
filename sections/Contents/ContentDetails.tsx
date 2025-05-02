@@ -1,11 +1,31 @@
 "use client"
 
 import { useEffect } from "react";
-
-import { DetailsMain, DetailsMainMobile, 
-    DetailsMore, DetailsPersonMain, DetailsPersonMore} from "@components";
-
+import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
+
+import { Spinner } from "@components";
+
+const DetailsMain = dynamic(() => import("@components/Details/DetailsMain"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
+const DetailsMainMobile = dynamic(() => import("@components/Details/DetailsMainMobile"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
+const DetailsMore = dynamic(() => import("@components/Details/DetailsMore"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
+const DetailsPersonMain = dynamic(() => import("@components/Details/DetailsPersonMain"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
+const DetailsPersonMore = dynamic(() => import("@components/Details/DetailsPersonMore"), {
+    ssr: false,
+    loading: () => <Spinner />
+});
 
 const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
@@ -65,7 +85,7 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     mediaType={mediaType} 
                     details={data.details}
                     releaseDate={data?.releaseDate || undefined}
-                    ratings={data?.ratings || undefined}
+                    tvratings={data?.ratings || undefined}
                     originCountry={data.originCountry}
                     videos={data.media.videos}
                     posters={data.media.posters}
