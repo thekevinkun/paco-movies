@@ -13,14 +13,11 @@ import VideoModal from "@components/VideoModal";
 import VideoAction from "@components/VideoAction";
 import LoadMore from "@components/LoadMore";
 
-import DetailsMovieMain from "@components/DetailsMovie/DetailsMovieMain";
-import DetailsMovieMainMobile from "@components/DetailsMovie/DetailsMovieMainMobile";
-import DetailsMovieMore from "@components/DetailsMovie/DetailsMovieMore";
-import DetailsPersonMain from "@components/DetailsPerson/DetailsPersonMain";
-import DetailsPersonMore from "@components/DetailsPerson/DetailsPersonMore";
-import DetailsTvMain from "@components/DetailsTv/DetailsTvMain";
-import DetailsTvMainMobile from "@components/DetailsTv/DetailsTvMainMobile";
-import DetailsTvMore from "@components/DetailsTv/DetailsTvMore";
+import DetailsMain from "@components/Details/DetailsMain";
+import DetailsMainMobile from "@components/Details/DetailsMainMobile";
+import DetailsMore from "@components/Details/DetailsMore";
+import DetailsPersonMain from "@components/Details/DetailsPersonMain";
+import DetailsPersonMore from "@components/Details/DetailsPersonMore";
 
 import { MotionDiv } from "@components/MotionDiv";
 import ThemeSwitcher from "@components/ThemeSwitcher";
@@ -41,14 +38,11 @@ export {
     VideoAction,
     LoadMore,
 
-    DetailsMovieMain,
-    DetailsMovieMainMobile,
-    DetailsMovieMore,
+    DetailsMain,
+    DetailsMainMobile,
+    DetailsMore,
     DetailsPersonMain,
     DetailsPersonMore,
-    DetailsTvMain,
-    DetailsTvMainMobile,
-    DetailsTvMore,
 
     MotionDiv,
     ThemeSwitcher

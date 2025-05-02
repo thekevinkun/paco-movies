@@ -44,6 +44,42 @@ export interface FallbackImageProps extends Omit<ImageProps, "src"> {
     sizes?: string;
 }
 
+interface Person {
+  id: number;
+  name: string;
+  job?: string;
+}
+
+export interface ICreditListProps {
+  items: Person[];
+  filterJobs?: string[];
+}
+
+export interface IDirectorProps {
+  crews: Person[];
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface IGenreProps {
+  mediaType: string;
+  genres: Genre[];
+}
+
+interface Network {
+  id: number;
+  logo_path: string;
+  name: string;
+}
+
+export interface INetworkProps {
+  mediaType: string;
+  networks: Network[];
+}
+
 export interface ICardMovieTop {
     id: number;
     poster: string;
@@ -95,7 +131,7 @@ export interface ICardPersonCredits {
     vote: number;
 }
 
-export interface IDetailsMovieMain {
+export interface IDetailsMain {
     id: number;
     mediaType: string;
     backdrop: string;
@@ -103,51 +139,24 @@ export interface IDetailsMovieMain {
     title: string;
     rating: number;
     releaseDate: any;
-    country: any;
-    certification: string;
-    runtime: number;
     genres: any;
     tagline: string;
     overview: string;
     credits: any;
+    country?: any;
+    certification?: string;
+    runtime?: number;
+    tvrating?: number;
+    status?: string;
+    networks?: any;
+    creators?: any;
 }
 
-export interface IDetailsMovieMore {
+export interface IDetailsMore {
     mediaType: string;
     details: any;
-    releaseDate: any;
-    originCountry: any;
-    videos: any;
-    posters: any;
-    backdrops: any;
-    credits: any;
-    externalIds: any;
-    reviews: any;
-    recommendations: any;
-}
-
-export interface IDetailsTvMain {
-    id: number;
-    mediaType: string;
-    backdrop: string;
-    poster: string;
-    name: string;
-    rating: number;
-    releaseDate: any;
-    tvrating: number;
-    status: string;
-    networks: any;
-    genres: any;
-    tagline: string;
-    overview: string;
-    creators: any;
-    stars: any;
-}
-
-export interface IDetailsTvMore {
-    mediaType: string;
-    details: any;
-    ratings: number;
+    releaseDate?: any;
+    ratings?: any;
     originCountry: any;
     videos: any;
     posters: any;

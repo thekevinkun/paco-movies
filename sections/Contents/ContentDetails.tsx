@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { DetailsMovieMain, DetailsMovieMainMobile, DetailsMovieMore, DetailsPersonMain, 
-    DetailsPersonMore, DetailsTvMain, DetailsTvMainMobile, DetailsTvMore } from "@components";
+import { DetailsMain, DetailsMainMobile, 
+    DetailsMore, DetailsPersonMain, DetailsPersonMore} from "@components";
 
 import { useMenu } from "@contexts/MenuContext";
 
@@ -17,98 +17,55 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
 
   return (
     <section className="relative mt-16 max-lg:mt-14">
-        {mediaType === "movie" ?
+        {mediaType === "movie" || mediaType === "tv" ?
             <div>
-                <DetailsMovieMain
+                <DetailsMain
                     id={data.details.id}
                     mediaType={mediaType}
                     backdrop={data.details.backdrop_path}
                     poster={data.details.poster_path}
-                    title={data.details.title}
+                    title={data?.details?.title || data?.details?.name}
                     rating={data.details.vote_average}
-                    releaseDate={data.releaseDate.date}
-                    country={data.releaseDate.iso_3166_1}
-                    certification={data.releaseDate.certification}
-                    runtime={data.details.runtime}
+                    releaseDate={data?.releaseDate?.date || data.details?.first_air_date}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
                     overview={data.details.overview}
                     credits={data.credits}
+                    country={data?.releaseDate?.iso_3166_1 || undefined}
+                    certification={data?.releaseDate?.certification || undefined}
+                    runtime={data?.details?.runtime || undefined}
+                    tvrating={data?.ratings?.rating || undefined}
+                    status={data?.details?.status || undefined}
+                    networks={data?.details?.networks || undefined}
+                    creators={data?.details?.created_by || undefined}
                 />
 
-                <DetailsMovieMainMobile 
+                <DetailsMainMobile
                     id={data.details.id}
                     mediaType={mediaType}
                     backdrop={data.details.backdrop_path}
                     poster={data.details.poster_path}
-                    title={data.details.title}
+                    title={data?.details?.title || data?.details?.name}
                     rating={data.details.vote_average}
-                    releaseDate={data.releaseDate.date}
-                    country={data.releaseDate.iso_3166_1}
-                    certification={data.releaseDate.certification}
-                    runtime={data.details.runtime}
+                    releaseDate={data?.releaseDate?.date || data?.details?.first_air_date}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
                     overview={data.details.overview}
                     credits={data.credits}
+                    country={data?.releaseDate?.iso_3166_1 || undefined}
+                    certification={data?.releaseDate?.certification || undefined}
+                    runtime={data?.details?.runtime || undefined}
+                    tvrating={data?.ratings?.rating || undefined}
+                    status={data?.details?.status || undefined}
+                    networks={data?.details?.networks || undefined}
+                    creators={data?.details?.created_by || undefined}
                 />
 
-                <DetailsMovieMore
+                <DetailsMore
                     mediaType={mediaType} 
                     details={data.details}
-                    releaseDate={data.releaseDate}
-                    originCountry={data.originCountry}
-                    videos={data.media.videos}
-                    posters={data.media.posters}
-                    backdrops={data.media.backdrops}
-                    credits={data.credits}
-                    externalIds={data.externalIds}
-                    reviews={data.reviews}
-                    recommendations={data.recommendations}
-                />
-            </div>
-        : mediaType === "tv" ?
-            <div>
-                <DetailsTvMain 
-                    id={data.details.id}
-                    mediaType={mediaType}
-                    backdrop={data.details.backdrop_path}
-                    poster={data.details.poster_path}
-                    name={data.details.name}
-                    rating={data.details.vote_average}
-                    releaseDate={data.details.first_air_date}
-                    tvrating={data.ratings.rating}
-                    status={data.details.status}
-                    networks={data.details.networks}
-                    genres={data.details.genres}
-                    tagline={data.details.tagline}
-                    overview={data.details.overview}
-                    creators={data.details.created_by}
-                    stars={data.credits.cast}
-                />
-
-                <DetailsTvMainMobile 
-                    id={data.details.id}
-                    mediaType={mediaType}
-                    backdrop={data.details.backdrop_path}
-                    poster={data.details.poster_path}
-                    name={data.details.name}
-                    rating={data.details.vote_average}
-                    releaseDate={data.details.first_air_date}
-                    tvrating={data.ratings.rating}
-                    status={data.details.status}
-                    networks={data.details.networks}
-                    genres={data.details.genres}
-                    tagline={data.details.tagline}
-                    overview={data.details.overview}
-                    creators={data.details.created_by}
-                    stars={data.credits.cast}
-                />  
-
-                <DetailsTvMore 
-                    mediaType={mediaType} 
-                    details={data.details}
-                    ratings={data.ratings}
+                    releaseDate={data?.releaseDate || undefined}
+                    ratings={data?.ratings || undefined}
                     originCountry={data.originCountry}
                     videos={data.media.videos}
                     posters={data.media.posters}
