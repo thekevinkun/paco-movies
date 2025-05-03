@@ -22,7 +22,7 @@
   --tale-0: 0, 128, 128;
   --tale-1: 0, 128, 128, 0.20;
 
-  --danger: 179, 2, 2;
+  --danger: 219, 9, 9;
 
   transition: all .5s ease-in-out;
 }
@@ -45,7 +45,7 @@
   --tale-0: 0, 128, 128;
   --tale-1: 0, 128, 128, 0.20;
 
-  --danger: 179, 2, 2;
+  --danger: 219, 9, 9;
 
   transition: all .5s ease-in-out;
 }

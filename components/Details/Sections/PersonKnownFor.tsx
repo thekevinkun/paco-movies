@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { FallbackImage } from "@components";
 
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const PersonKnownFor = ({works}: any) => {
   const sortedWorks = works.slice().

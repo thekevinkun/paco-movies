@@ -12,7 +12,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FallbackImage } from "@components";
 
 import { IDetailsPersonMain } from "@types";
-import { calculateAge } from "@helpers/helpers";
+import { calculateAge } from "@lib/helpers/helpers";
 
 const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
   const [readMore, setReadMore] = useState(false);

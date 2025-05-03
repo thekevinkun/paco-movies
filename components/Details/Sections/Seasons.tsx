@@ -12,7 +12,7 @@ import { useKeenSlider } from "keen-slider/react";
 
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 const getSeasonsSlider = (seasons: any) => {
   return seasons.filter((item: any) => item.season_number !== 0).map((season: any) => (

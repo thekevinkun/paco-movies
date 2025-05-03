@@ -13,7 +13,7 @@ import { FaPlay } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const getRecommendations = (data: any) => {
   return data.slice(0, 10).map((item: any) => (
@@ -73,12 +73,13 @@ const getRecommendations = (data: any) => {
             </h2>
           </Link>
                     
-          <div className="pt-5 pb-3 max-md:pt-4 max-md:pb-2 max-sm:pt-3 px-7 
+          <div className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 max-sm:pt-2 px-7 
               flex items-center justify-between"
           >
             <Link
               href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}#`}
-              className="flex items-center gap-2 max-sm:text-sm text-dark hover:text-light-2"
+              className="py-1 px-2 flex items-center gap-2 max-sm:text-sm text-dark
+               bg-transparent hover:bg-tale/75 transition-colors duration-100 rounded-md"
             >
               <FaPlay/>
               <span className="font-medium">Trailer</span>

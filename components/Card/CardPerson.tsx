@@ -6,7 +6,7 @@ import { FallbackImage, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { ICardPerson } from "@types";
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerson) => {
   const url = `/name/${id}-${slugify(name)}`

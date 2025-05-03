@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-import { dedupeResults } from "@helpers/helpers";
+import { dedupeResults } from "@lib/helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
 
 import { Spinner, MotionDiv } from "@components";
@@ -26,6 +26,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
 
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
   const [useData, setUseData] = useState<any>(data);
+  const firstResult = data.firstResult;
 
   const handleNextPage = (newData: any) => {
     const oldResults = useData.results;
@@ -77,14 +78,15 @@ const ContentMovies = ({ data, genre, mediaType, category }:
         animate="visible"
       >
         <CardMovieTop 
-          id={useData?.results[0].id}
-          poster={useData?.results[0].poster_path}
-          backDrop={useData?.results[0].backdrop_path}
-          title={useData?.results[0].title || useData?.results[0].name}
-          overview={useData?.results[0].overview}
-          mediaType={useData?.results[0].media_type || mediaType}
-          releaseDate={useData?.results[0].release_date || useData?.results[0].first_air_date}
-          rating={useData?.results[0].vote_average}
+          id={firstResult.result.id}
+          poster={firstResult.result.poster_path}
+          backDrop={firstResult.result.backdrop_path}
+          title={firstResult.result.title || firstResult.result.name}
+          overview={firstResult.result.overview}
+          mediaType={firstResult.result.media_type || mediaType}
+          releaseDate={firstResult.result.release_date || firstResult.result.first_air_date}
+          rating={firstResult.result.vote_average}
+          trailer={firstResult.officialTrailer}
         />
       </MotionDiv>
       

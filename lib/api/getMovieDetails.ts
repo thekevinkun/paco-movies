@@ -97,6 +97,17 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
     if (!response.ok || videos.success === false)
         throw new Error(videos.status_message);
 
+    // Get main trailer
+    const trailers = videos.results
+        .filter((v: any) => v.type === "Trailer" && v.official)
+        .sort((a: any, b: any) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+
+    const teasers = videos.results
+        .filter((v: any) => v.type === "Teaser" && v.official)
+        .sort((a: any, b: any) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+    
+    const officialTrailer = trailers[0] || teasers[0] || null;
+
     // Get External Ids
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${titleId}/external_ids`, options);
     const externalIds = await response.json();
@@ -118,6 +129,7 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
     const data = {
         details: details,
         releaseDate: releaseDate,
+        officialTrailer: officialTrailer,
         originCountry: originCountry,
         credits: credits,
         media: {

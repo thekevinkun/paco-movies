@@ -1,7 +1,7 @@
 "use server"
 
 import { options } from "@lib/api/data";
-import { dedupeResults } from "@helpers/helpers";
+import { dedupeResults } from "@lib/helpers/helpers";
 
 export const getPersonDetails = async (mediaType: string, nameId: number) => {
     let response: any = {};

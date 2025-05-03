@@ -6,8 +6,8 @@ import Image from "next/image";
 import { useMenu } from "@contexts/MenuContext";
 
 import { IShowMobileMenu } from "@types";
-import { slugify } from "@helpers/helpers";
-import { MEDIA_TYPE } from "@helpers/constants";
+import { slugify } from "@lib/helpers/helpers";
+import { MEDIA_TYPE } from "@lib/utils/constants";
 
 const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
   const { activeMediaType, activeCategory, showCategories, showGenres } = useMenu();

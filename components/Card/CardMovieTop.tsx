@@ -2,15 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { FallbackImage, MotionDiv } from "@components";
+import { FallbackImage, MotionDiv, VideoAction } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { FaPlay } from "react-icons/fa";
 import { ICardMovieTop } from "@types";
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardMovieTop = ({id, poster, backDrop, title, 
-      overview, mediaType, releaseDate, rating}: ICardMovieTop) => {
+      overview, mediaType, releaseDate, rating, trailer}: ICardMovieTop) => {
         
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
@@ -100,14 +100,18 @@ const CardMovieTop = ({id, poster, backDrop, title,
                </span>
             </div>
 
-            {mediaType !== "person" &&
-              <Link
-                href={`${routeMovie}#`}
-                className="flex items-center gap-2 ml-10 text-light hover:text-light-2"
+            {(mediaType !== "person" && trailer) &&
+              <VideoAction
+                href={`${routeMovie}#play=${trailer.key}`}
+                videoKey={trailer.key}
+                videoTitle={trailer.name}
+                containerStyles="py-1 px-1.5 flex items-center gap-2 ml-10
+                  bg-transparent text-light hover:bg-tale/80 rounded-md
+                  transition-colors duration-100"
               >
-                <FaPlay className="text-lg "/>
+                <FaPlay className="text-lg"/>
                 <span className="font-semibold">Play Trailer</span>
-              </Link>
+              </VideoAction>
             }
           </div>
 

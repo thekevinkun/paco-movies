@@ -1,4 +1,4 @@
-import { formatCurrency } from "@helpers/helpers";
+import { formatCurrency } from "@lib/helpers/helpers";
 
 const BoxOffice = ({details}: any) => {
   return (

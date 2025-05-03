@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FallbackImage } from "@components";
 
 import { INetworkProps } from "@types";
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 const NetworkList = ({ mediaType, networks }: INetworkProps) => {
   return (

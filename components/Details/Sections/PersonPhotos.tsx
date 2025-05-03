@@ -5,7 +5,7 @@ import { FallbackImage } from "@components";
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 const PersonPhotos = ({personId, name, images}: 
     {personId: string, name: string, images: any}) => {

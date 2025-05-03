@@ -17,7 +17,7 @@ export const getCachedTrending = async (mediaType: string, category: string) => 
             data = await getCategory(mediaType, category);
         else
             data = await getTrending(mediaType);
-
+        
         await saveToCache(subPath, cacheKey, data);
         return data;
     } catch(error) {

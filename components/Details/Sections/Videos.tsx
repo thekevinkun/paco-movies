@@ -11,7 +11,7 @@ import { VideoAction } from "@components";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 const getMainVideos = (videos: any, route: string) => {
   return (

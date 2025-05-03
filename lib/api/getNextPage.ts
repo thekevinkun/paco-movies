@@ -1,5 +1,5 @@
 import { options } from "@lib/api/data";
-import { isNumeric } from "@helpers/helpers";
+import { isNumeric } from "@lib/helpers/helpers";
 
 export const getNextPage = async (mediaType: string, category: string, query: string, page: number) => {
     if (mediaType === "stars") mediaType = "person";

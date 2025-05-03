@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-import { dedupeResults } from "@helpers/helpers";
+import { dedupeResults } from "@lib/helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
 
 import { Spinner, MotionDiv } from "@components";

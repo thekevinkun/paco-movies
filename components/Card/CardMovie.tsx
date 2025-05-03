@@ -7,7 +7,7 @@ import { cardMovieVariants } from "@lib/utils/motion";
 
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { ICardMovie } from "@types";
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
   const fullRoute = id + "-" + `${slugify(title)}`;

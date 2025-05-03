@@ -8,7 +8,7 @@ import { CreditList, Director } from "@components/Common";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 const getCasts = (casts: any) => {
   return (

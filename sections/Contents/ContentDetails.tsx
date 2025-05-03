@@ -47,6 +47,7 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     title={data?.details?.title || data?.details?.name}
                     rating={data.details.vote_average}
                     releaseDate={data?.releaseDate?.date || data.details?.first_air_date}
+                    officialTrailer={data?.officialTrailer}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
                     overview={data.details.overview}
@@ -68,6 +69,7 @@ const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {
                     title={data?.details?.title || data?.details?.name}
                     rating={data.details.vote_average}
                     releaseDate={data?.releaseDate?.date || data?.details?.first_air_date}
+                    officialTrailer={data?.officialTrailer}
                     genres={data.details.genres}
                     tagline={data.details.tagline}
                     overview={data.details.overview}

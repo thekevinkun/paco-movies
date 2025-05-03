@@ -8,7 +8,7 @@ import { FallbackImage, MotionDiv } from "@components";
 
 import { ICardSearch } from "@types";
 import { cardMovieVariants } from "@lib/utils/motion";
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardSearch = ({ id, name, photo, mediaType, 
     releaseDate, vote, overview, department, works }: ICardSearch) => {

@@ -9,7 +9,7 @@ import moment from "moment";
 import { FallbackImage } from "@components";
 
 import { MdArrowForwardIos } from "react-icons/md";
-import { roundedToFixed, slugify } from "@helpers/helpers";
+import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const Reviews = ({id, mediaType, title, reviews}: 
       {id: number, mediaType: string, title: string, reviews: any}) => {

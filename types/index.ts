@@ -89,6 +89,7 @@ export interface ICardMovieTop {
     mediaType: string;
     releaseDate: string;
     rating: number;
+    trailer: any;
 }
 
 export interface ICardMovie {
@@ -139,6 +140,7 @@ export interface IDetailsMain {
     title: string;
     rating: number;
     releaseDate: any;
+    officialTrailer: any;
     genres: any;
     tagline: string;
     overview: string;

@@ -1,7 +1,7 @@
 // components/common/Director.tsx
 import React from "react";
 import Link from "next/link";
-import { slugify } from "@helpers/helpers";
+import { slugify } from "@lib/helpers/helpers";
 
 import { IDirectorProps } from "@types";
 

@@ -4,15 +4,15 @@ import Image from "next/image";
 import moment from "moment";
 import { FaPlay } from "react-icons/fa";
 
-import { FallbackImage } from "@components";
+import { FallbackImage, VideoAction } from "@components";
 
 import { IDetailsMain } from "@types";
-import { convertRuntime, roundedToFixed, slugify } from "@helpers/helpers";
+import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 import { CreditList, GenreList, NetworkList, Director } from "@components/Common";
 
 const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
-    genres, tagline, overview, credits, country, certification, runtime, 
+    officialTrailer, genres, tagline, overview, credits, country, certification, runtime, 
     tvrating, status, networks, creators}: IDetailsMain) => {
 
     const url = `/title/${mediaType}/${id}-${slugify(title)}`;
@@ -171,13 +171,19 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                             }
                             
                             {/* PLAY TRAILER */}
-                            <Link
-                                href={`${url}#`}
-                                className="flex items-center gap-2 ml-10 text-light hover:text-light-2"
-                            >
-                                <FaPlay className="text-2xl"/>
-                                <span className="font-semibold">Play Trailer</span>
-                            </Link>
+                            {officialTrailer &&
+                                <VideoAction
+                                    href={`${url}#play=${officialTrailer.key}`}
+                                    videoKey={officialTrailer.key}
+                                    videoTitle={officialTrailer.name}
+                                    containerStyles="py-1 px-1.5 flex items-center gap-2 ml-10
+                                        bg-transparent text-light hover:bg-tale/80 rounded-md
+                                        transition-colors duration-100"
+                                >
+                                    <FaPlay className="text-2xl"/>
+                                    <span className="font-semibold">Play Trailer</span>
+                                </VideoAction>
+                            }
                         </div>
 
                         {/* TAGLINE */}

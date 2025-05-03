@@ -4,7 +4,7 @@ import { ContentMoviesClient } from "@components/Clients";
 
 import { getByGenre } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
-import { isNumeric } from "@helpers/helpers";
+import { isNumeric } from "@lib/helpers/helpers";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   params = await params;

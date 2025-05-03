@@ -65,7 +65,7 @@ const VideoModal = () => {
                         />
 
                         <RxCross2 
-                            className="absolute top-[-9%] max-lg:top-[-10.5%]
+                            className="absolute top-[-8.5%] max-xl:top-[-9%] max-lg:top-[-10.5%]
                                 max-md:top-[-12%] max-sm:top-[-14%] max-xs:top-[-15%]
                                 right-1 max-xs:right-0 text-4xl max-[548px]:text-3xl
                                 text-danger cursor-pointer hover:text-danger/55"

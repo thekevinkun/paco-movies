@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 
 import { IMenuContext } from "@types";
 
-import { MEDIA_TYPE } from "@helpers/constants";
+import { MEDIA_TYPE } from "@lib/utils/constants";
 
 const MenuContextDefaultValues: IMenuContext = {
     activeMediaType: "all",
