@@ -7,9 +7,22 @@ import { Providers } from "./providers";
 import { Header, Navbar, Footer } from "@sections";
 import { VideoModalClient } from "@components/Clients";
 
+export const viewport = {
+  theme_color: "#008080"
+};
+
 export const metadata: Metadata = {
   title: "PacoMovies",
-  description: "Search for every film",
+  description: "Find and explore movies and tv shows",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    other: [
+      { rel: "icon", url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { rel: "icon", url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
+  manifest: '/manifest.webmanifest',
 };
 
 export default function RootLayout({

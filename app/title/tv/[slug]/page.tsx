@@ -14,8 +14,8 @@ export async function generateMetadata({params, mediaType="tv"}:
     const title = data.details.name;
 
     return {
-    title: title + " — PacoMovies",
-    description: title + " details page",
+      title: title + " — PacoMovies",
+      description: title + " details page",
     };
 }
 
