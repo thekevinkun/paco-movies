@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { Spinner } from "@components";
 
-const ContentSearch = dynamic(() => import("@sections/Contents/ContentSearch"), {
+const ContentSearch = dynamic(() => import("@contents/ContentSearch"), {
   ssr: false,
   loading: () => <Spinner />,
 });

@@ -1,10 +1,8 @@
 import Menu from "@components/Menu";
-import Navbar from "@components/Navbar";
 import SearchBar from "@components/SearchBar";
 
 import FallbackImage from "@components/FallbackImage";
 import VideoAction from "@components/VideoAction";
-
 import LoadMore from "@components/LoadMore";
 
 import Spinner from "@components/Spinner";
@@ -13,7 +11,6 @@ import ThemeSwitcher from "@components/ThemeSwitcher";
 
 export {
     Menu,
-    Navbar,
     SearchBar,
 
     FallbackImage,

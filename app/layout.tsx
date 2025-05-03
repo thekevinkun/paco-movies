@@ -4,8 +4,7 @@ import "@styles/utilities.css";
 
 import { Providers } from "./providers";
 
-import { Navbar } from "@components";
-import { Header, Footer } from "@sections";
+import { Header, Navbar, Footer } from "@sections";
 import { VideoModalClient } from "@components/Clients";
 
 export const metadata: Metadata = {
