@@ -1,11 +1,23 @@
 "use client"
 
 import dynamic from "next/dynamic";
+
+import { Spinner } from "@components";
+
 import { IDetailsPersonMore } from "@types";
 
-const PersonKnownFor = dynamic(() => import("@components/Details/Sections/PersonKnownFor"), { ssr: false });
-const PersonPhotos = dynamic(() => import("@components/Details/Sections/PersonPhotos"), { ssr: false });
-const PersonCredits = dynamic(() => import("@components/Details/Sections/PersonCredits"), { ssr: false });
+const PersonKnownFor = dynamic(() => import("@components/Details/Sections/PersonKnownFor"), { 
+  ssr: false,
+  loading: () => <Spinner />
+});
+const PersonPhotos = dynamic(() => import("@components/Details/Sections/PersonPhotos"), { 
+  ssr: false, 
+  loading: () => <Spinner />
+});
+const PersonCredits = dynamic(() => import("@components/Details/Sections/PersonCredits"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
 
 const DetailsPersonMore = ({details, credits, images}: IDetailsPersonMore) => {
   return (

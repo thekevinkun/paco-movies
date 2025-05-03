@@ -16,7 +16,7 @@ const DetailsMainMobile = dynamic(() => import("@components/Details/DetailsMainM
 });
 const DetailsMore = dynamic(() => import("@components/Details/DetailsMore"), {
     ssr: false,
-    loading: () => <Spinner />
+    loading: () => null
 });
 const DetailsPersonMain = dynamic(() => import("@components/Details/DetailsPersonMain"), {
     ssr: false,
@@ -24,7 +24,7 @@ const DetailsPersonMain = dynamic(() => import("@components/Details/DetailsPerso
 });
 const DetailsPersonMore = dynamic(() => import("@components/Details/DetailsPersonMore"), {
     ssr: false,
-    loading: () => <Spinner />
+    loading: () => null
 });
 
 const ContentDetails = ({data, mediaType}: {data: any, mediaType: string}) => {

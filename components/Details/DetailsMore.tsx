@@ -1,17 +1,47 @@
 "use client"
 
 import dynamic from "next/dynamic";
+
+import { Spinner } from "@components";
+
 import { IDetailsMore } from "@types";
 
-const Seasons = dynamic(() => import("@components/Details/Sections/Seasons"), { ssr: false });
-const Videos = dynamic(() => import("@components/Details/Sections/Videos"), { ssr: false });
-const MoviePhotos = dynamic(() => import("@components/Details/Sections/MoviePhotos"), { ssr: false });
-const TvPhotos = dynamic(() => import("@components/Details/Sections/TvPhotos"), { ssr: false });
-const Credits = dynamic(() => import("@components/Details/Sections/Credits"), { ssr: false });
-const Reviews = dynamic(() => import("@components/Details/Sections/Reviews"), { ssr: false });
-const Details = dynamic(() => import("@components/Details/Sections/Details"), { ssr: false });
-const BoxOffice = dynamic(() => import("@components/Details/Sections/BoxOffice"), { ssr: false });
-const Recommendations = dynamic(() => import("@components/Details/Sections/Recommendations"), { ssr: false });
+const Seasons = dynamic(() => import("@components/Details/Sections/Seasons"), {
+  ssr: false,
+  loading: () => <Spinner /> 
+});
+const Videos = dynamic(() => import("@components/Details/Sections/Videos"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const MoviePhotos = dynamic(() => import("@components/Details/Sections/MoviePhotos"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const TvPhotos = dynamic(() => import("@components/Details/Sections/TvPhotos"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const Credits = dynamic(() => import("@components/Details/Sections/Credits"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const Reviews = dynamic(() => import("@components/Details/Sections/Reviews"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const Details = dynamic(() => import("@components/Details/Sections/Details"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const BoxOffice = dynamic(() => import("@components/Details/Sections/BoxOffice"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
+const Recommendations = dynamic(() => import("@components/Details/Sections/Recommendations"), {
+  ssr: false,
+  loading: () => <Spinner />
+});
 
 const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry, videos, 
       posters, backdrops, credits, externalIds, reviews, recommendations}: IDetailsMore) => {
@@ -20,13 +50,13 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
     <section className="py-12 px-5 max-md:px-3">
         {(mediaType === "tv" && details.number_of_seasons > 0) &&
             <div className="pb-16 max-sm:pb-12">
-                <Seasons 
-                  id={details.id}
-                  mediaType={mediaType} 
-                  name={details.name}
-                  seasons={details.number_of_seasons}
-                  seasonList={details.seasons}
-                />
+              <Seasons 
+                id={details.id}
+                mediaType={mediaType} 
+                name={details.name}
+                seasons={details.number_of_seasons}
+                seasonList={details.seasons}
+              />
             </div>
         }
 
@@ -44,13 +74,13 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
         {(posters.length > 0 || backdrops.length > 0) &&
           <div className="pb-16 max-sm:pb-12">
             {mediaType === "movie" ?
-               <MoviePhotos 
-                id={details.id}
-                mediaType={mediaType} 
-                title={details.title}
-                posters={posters} 
-                backdrops={backdrops} 
-              />
+              <MoviePhotos 
+              id={details.id}
+              mediaType={mediaType} 
+              title={details.title}
+              posters={posters} 
+              backdrops={backdrops} 
+            />
             :
               <TvPhotos 
                 id={details.id}

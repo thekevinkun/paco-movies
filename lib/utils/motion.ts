@@ -2,7 +2,7 @@ export const parentStaggerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.25,
+      staggerChildren: 0.15,
       staggerDirection: 1, // forward order
     },
   },
@@ -15,7 +15,7 @@ export const cardMovieVariants = {
     y: 0,
     transition: {
       ease: "easeInOut",
-      duration: 0.5,
+      duration: 0.25,
     },
   },
 }

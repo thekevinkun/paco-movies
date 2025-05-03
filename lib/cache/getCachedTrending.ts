@@ -1,9 +1,9 @@
-import { getTrending } from "@lib/api";
+import { getTrending, getCategory } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
 export const getCachedTrending = async (mediaType: string, category: string) => {
-    const subPath = `${mediaType}/${category}`; 
-    const cacheKey = `${category}_1`; 
+    const subPath = mediaType === "stars" ? `${mediaType}` : `${mediaType}/${category}`; 
+    const cacheKey = mediaType === "stars" ? `${mediaType}_1` : `${category}_1`; 
     const maxAgeMs = 60 * 60 * 1000;
 
     const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
@@ -11,7 +11,13 @@ export const getCachedTrending = async (mediaType: string, category: string) => 
     
     try {
         // Try fetching from API
-        const data = await getTrending(mediaType);
+        let data: any = {}
+
+        if (mediaType === "stars")
+            data = await getCategory(mediaType, category);
+        else
+            data = await getTrending(mediaType);
+
         await saveToCache(subPath, cacheKey, data);
         return data;
     } catch(error) {

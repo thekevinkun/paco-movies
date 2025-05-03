@@ -1,4 +1,4 @@
-import { ContentMovies } from "@sections";
+import { ContentMoviesClient } from "@components/Clients";
 
 import { getCachedTrending } from "@lib/cache";
 
@@ -6,7 +6,7 @@ const Home = async ({mediaType="all", category="trending"}) => {
   const data = await getCachedTrending(mediaType, category);
 
   return (
-    <ContentMovies 
+    <ContentMoviesClient 
       data={data}
       mediaType={mediaType}
       category={category}

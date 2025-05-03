@@ -2,18 +2,18 @@ import { Metadata } from "next";
 
 import { ContentStarsClient } from "@components/Clients";
 
-import { getTrending } from "@lib/api";
+import { getCachedTrending } from "@lib/cache";
 
 export const metadata: Metadata = {
   title: "Stars — PacoMovies",
-  description: "Star collection's page"
+  description: "Stars collection's page"
 };
 
-const Stars = async ({mediaType="stars", category="trending"}) => {
-  const data = await getTrending(mediaType);
-
+const Stars = async ({mediaType="stars", category="popular"}) => {
+  const data = await getCachedTrending(mediaType, category);
+  
   return (
-    <ContentStarsClient 
+    <ContentStarsClient
       data={data}
       mediaType={mediaType}
       category={category}

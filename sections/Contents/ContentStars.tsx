@@ -39,6 +39,34 @@ const ContentStars = ({ data, mediaType, category }:
     handleChangeCategory(category);
   }, [])
 
+  const [columns, setColumns] = useState(3); // Default to desktop (4 columns)
+  
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const checkSize = () => {
+      const width = window.innerWidth;
+  
+      if (width <= 768) {
+        setColumns(2); // Tablet to mobile
+      } else if (width <= 1024) {
+        setColumns(3); // Tablet
+      } else if (width <= 1280) {
+        setColumns(2);
+      } else {
+        setColumns(3); // Desktop
+      }
+    };
+
+    checkSize(); // Initial run
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+  
+  // Hero movie shown only on desktop
+  const remainder = useData?.results.length % columns;
+  const placeholders = remainder === 0 ? 0 : columns - remainder;
+
   return (
     <section className="relative mt-14 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv 
@@ -58,6 +86,11 @@ const ContentStars = ({ data, mediaType, category }:
             popularity={item.popularity}
             works={item.known_for}
           />
+        ))}
+
+        {/* Add invisible placeholders for last empty column */}
+        {Array.from({ length: placeholders }).map((_, i) => (
+          <div key={`placeholder-${i}`} className="invisible" />
         ))}
       </MotionDiv>
       

@@ -5,9 +5,9 @@ export const getCachedNextPage = async (
     mediaType: string, category: string, 
     query: string, page: number
   ) => {
-    const subPath = `${mediaType}/${category}`;
-    const cacheKey = `${category}_${page}`; 
-    const maxAgeMs = 30 * 60 * 1000;
+    const subPath =  mediaType === "stars" ? `${mediaType}` : `${mediaType}/${category}`; 
+    const cacheKey = mediaType === "stars" ? `${mediaType}_${page}` : `${category}_${page}`; 
+    const maxAgeMs = 60 * 60 * 1000;
 
     const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;

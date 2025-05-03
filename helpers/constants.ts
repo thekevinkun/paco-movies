@@ -25,9 +25,7 @@ const MEDIA_TYPE = [
       id: "stars",
       title: "Stars",
       icon: "/icons/people.svg",
-      categories: [
-        {id: "popular", title: "Popular", icon: "/images/popular.svg"}
-      ]
+      categories: []
     },
 ];
 

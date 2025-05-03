@@ -14,7 +14,7 @@ const CardMovieTop = dynamic(() => import("@components/Card/CardMovieTop"), {
 });
 const CardMovie = dynamic(() => import("@components/Card/CardMovie"), {
   ssr: false,
-  loading: () => <Spinner />
+  loading: () => null
 });
 const LoadMore = dynamic(() => import("@components/LoadMore"), {
   ssr: false,
@@ -42,32 +42,32 @@ const ContentMovies = ({ data, genre, mediaType, category }:
     handleChangeMediaType(mediaType, genre);
     handleChangeCategory(category);
   }, [])
-  
-  // DYNAMIC RESIZE SCREEN SETUP
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(max-width: 768px)").matches;
-    }
-    return false;
-  });
+
+  const [columns, setColumns] = useState(4); // Default to desktop (4 columns)
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-  
-    const media = window.matchMedia("(max-width: 768px)");
-  
-    const handleChange = () => {
-      setIsMobile(media.matches);
+
+    const checkSize = () => {
+      const width = window.innerWidth;
+      if (width <= 640) {
+        setColumns(2); // Mobile
+      } else if (width <= 768) {
+        setColumns(3); // Tablet
+      } else {
+        setColumns(4); // Desktop
+      }
     };
-  
-    // Listen for changes
-    media.addEventListener("change", handleChange);
-  
-    // Clean up
-    return () => media.removeEventListener("change", handleChange);
+
+    checkSize(); // Initial run
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
   }, []);
 
-  const startIndexVideoSlider = isMobile ? 0 : 1;
+  // Hero movie shown only on desktop
+  const gridMovies = useData?.results.slice(columns <= 3 ? 0 : 1); 
+  const remainder = gridMovies.length % columns;
+  const placeholders = remainder === 0 ? 0 : columns - remainder;
 
   return (
     <section className="relative mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
@@ -96,7 +96,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
           grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
           gap-x-3 gap-y-5 max-md:gap-y-4"
       >
-          {useData?.results.slice(startIndexVideoSlider).map((item: any) => (
+          {gridMovies.map((item: any) => (
             <CardMovie
               key={item.id}
               id={item.id}
@@ -107,6 +107,25 @@ const ContentMovies = ({ data, genre, mediaType, category }:
               rating={item.vote_average}
             />
           ))}
+
+          {/* Add placeholders for last blank column */}
+          {Array.from({ length: placeholders }).map((_, i) => {
+            const fallbackPoster = gridMovies[i % gridMovies.length]?.poster_path;
+
+            return (
+              <div
+                key={`placeholder-${i}`}
+                className="rounded overflow-hidden h-full bg-gray-800 opacity-25 blur-sm"
+                style={{
+                  backgroundImage: fallbackPoster
+                    ? `url(https://image.tmdb.org/t/p/w342${fallbackPoster})`
+                    : undefined,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+            );
+          })}
       </MotionDiv>
       
       {useData?.page < useData?.total_pages &&
