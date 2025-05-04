@@ -4,10 +4,11 @@ import { slugify } from "@lib/helpers/helpers";
 
 import { ICreditListProps } from "@types";
 
-const CreditList = ({ items, filterJobs }: ICreditListProps) => {
+const CreditList = ({ items, filterJobs, containerStyles, childStyles, handleClick }: ICreditListProps) => {
     const filtered = filterJobs
         ? items.filter((person) => filterJobs.includes(person.job || ""))
         : items;
+    if (!filtered) return null;
 
     return (
         <>
@@ -15,13 +16,15 @@ const CreditList = ({ items, filterJobs }: ICreditListProps) => {
                 <React.Fragment key={item.id}>
                     <Link
                         href={`/name/${item.id}-${slugify(item.name)}`}
-                        className="hover:underline hover:text-tale"
+                        className={`hover:underline hover:text-tale
+                            ${containerStyles}`}
+                        onClick={handleClick}
                     >
-                        <p className="max-xl:text-sm max-sm:text-xs">
+                        <p className={childStyles}>
                             {item.name}
                         </p>
                     </Link>
-                    <span className="max-xl:text-sm max-sm:text-xs bullet-separator"> &#8226; </span>
+                    <span className={`bullet-separator ${childStyles}`}> &#8226; </span>
                 </React.Fragment>
             ))}
         </>

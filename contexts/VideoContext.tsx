@@ -35,12 +35,6 @@ export const VideoProvider = ({ children } : Readonly<{children: ReactNode;}>) =
         setVideoKey(key);
         setVideoTitle(videoTitle);
 
-        // Prevent scroll jump
-        const scrollY = window.scrollY;
-        document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = "100%";
-
         window.history.replaceState(null, "", `${pathname}#play=${key}`);
     }, [pathname]);
 
@@ -49,20 +43,8 @@ export const VideoProvider = ({ children } : Readonly<{children: ReactNode;}>) =
         setVideoKey(null);
         setVideoTitle("");
 
-        const scrollY = document.body.style.top;
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-
         // Use history.replaceState to clean the hash without re-render
         window.history.replaceState(null, "", pathname);
-
-        // Delay scroll restore to ensure it overrides browser behavior
-        requestAnimationFrame(() => {
-            if (scrollY) {
-            window.scrollTo(0, parseInt(scrollY || "0") * -1);
-            }
-        });
     }, [pathname]);
 
     return (

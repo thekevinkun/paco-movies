@@ -96,6 +96,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                             <NetworkList 
                                 mediaType={mediaType}
                                 networks={networks}
+                                containerStyles="w-[53px] h-[30px]"
                             />
                         </div>
                     }
@@ -166,6 +167,8 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                         <GenreList 
                             mediaType={mediaType}
                             genres={genres}
+                            containerStyles="text-sm max-xl:text-xs max-lg:text-sm"
+                            childStyles="text-sm max-xl:text-xs max-lg:text-sm"
                         />
                     </div>
                 </div>
@@ -197,11 +200,13 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                         {mediaType === "movie" ? 
                             <Director 
                                 crews={credits.crew}
+                                childStyles="max-xl:text-sm max-sm:text-xs"
                             />
                         :
                             <div className="flex items-center gap-2">
                                 <CreditList 
                                     items={creators} 
+                                    childStyles="max-xl:text-sm max-sm:text-xs"
                                 />
                             </div> 
                         }
@@ -220,6 +225,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                                 <CreditList 
                                     items={credits.crew} 
                                     filterJobs={["Writer", "Screenplay", "Characters"]} 
+                                    childStyles="max-xl:text-sm max-sm:text-xs"
                                 />
                             </div>
                         </div>
@@ -236,6 +242,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                         <div className="flex items-center gap-2">
                             <CreditList 
                                 items={credits.cast} 
+                                childStyles="max-xl:text-sm max-sm:text-xs"
                             />
                         </div>
                     </div>

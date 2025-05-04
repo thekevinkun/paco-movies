@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-import { FallbackImage, MotionDiv } from "@components";
+import { FallbackImage, PreviewAction, MotionDiv } from "@components";
 import { cardMovieVariants } from "@lib/utils/motion";
 
 import { AiOutlineExclamationCircle } from "react-icons/ai";
@@ -83,11 +83,16 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
           <p className="ml-auto text-main-1 text-xs">
             {releaseDate && `${moment(releaseDate).format("ll")}`}
           </p>
-
-          <AiOutlineExclamationCircle
-            className="ml-2 text-lg text-main-1 hover:text-gray-700 cursor-pointer"
-            onClick={() => {}}
-          />
+          
+          {mediaType !== "person" &&
+            <PreviewAction
+              mediaType={mediaType}
+              id={id}
+              containerStyles="ml-2 text-lg text-main-1 hover:text-gray-700"
+            >
+              <AiOutlineExclamationCircle />
+            </PreviewAction>
+          }
         </div>
       </div>
     </MotionDiv>

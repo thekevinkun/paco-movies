@@ -3,6 +3,7 @@ import SearchBar from "@components/SearchBar";
 
 import FallbackImage from "@components/FallbackImage";
 import VideoAction from "@components/VideoAction";
+import PreviewAction from "@components/PreviewAction";
 import LoadMore from "@components/LoadMore";
 
 import Spinner from "@components/Spinner";
@@ -15,6 +16,7 @@ export {
 
     FallbackImage,
     VideoAction,
+    PreviewAction,
     LoadMore,
 
     Spinner,

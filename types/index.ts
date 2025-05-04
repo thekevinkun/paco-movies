@@ -21,10 +21,24 @@ export interface IVideoContext {
     close: () => void;
 }
 
+export interface IPreviewContext {
+    previewId: number | null;
+    previewMediaType: string;
+    open: (mediaType: string, id: number) => void;
+    close: () => void;
+}
+
 export interface IVideoAction {
     href: string;
     videoKey: string;
     videoTitle: string;
+    containerStyles: string;
+    children: ReactNode;
+}
+
+export interface IPreviewAction {
+    mediaType: string;
+    id: number;
     containerStyles: string;
     children: ReactNode;
 }
@@ -53,10 +67,16 @@ interface Person {
 export interface ICreditListProps {
   items: Person[];
   filterJobs?: string[];
+  containerStyles?: string;
+  childStyles?: string;
+  handleClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export interface IDirectorProps {
   crews: Person[];
+  containerStyles?: string;
+  childStyles?: string;
+  handleClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 interface Genre {
@@ -67,6 +87,9 @@ interface Genre {
 export interface IGenreProps {
   mediaType: string;
   genres: Genre[];
+  containerStyles?: string;
+  childStyles?: string;
+  handleClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 interface Network {
@@ -78,6 +101,8 @@ interface Network {
 export interface INetworkProps {
   mediaType: string;
   networks: Network[];
+  containerStyles?: string;
+  childStyles?: string;
 }
 
 export interface ICardMovieTop {

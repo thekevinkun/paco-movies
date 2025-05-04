@@ -6,14 +6,18 @@ import { FallbackImage } from "@components";
 import { INetworkProps } from "@types";
 import { slugify } from "@lib/helpers/helpers";
 
-const NetworkList = ({ mediaType, networks }: INetworkProps) => {
+const NetworkList = ({ mediaType, networks, containerStyles }: INetworkProps) => {
+  if (!networks) return null;
+  
   return (
     <>
       {networks.map((network: any) => (
         <Link 
           key={network.id} 
           href={`https://www.${slugify(network.name)}.com`} 
-          className="bg-white p-1 rounded-sm w-[53px] h-[30px]"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`bg-white p-1 rounded-sm ${containerStyles}`}
         >
           <FallbackImage 
             src={network.logo_path}
@@ -21,7 +25,7 @@ const NetworkList = ({ mediaType, networks }: INetworkProps) => {
             alt="logo"
             width={0}
             height={0}
-            sizes="53px"
+            sizes="50px"
             className="w-full h-full object-contain"
           />
         </Link>

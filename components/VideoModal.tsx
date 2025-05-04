@@ -1,9 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useVideo } from "@contexts/VideoContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { RxCross2 } from "react-icons/rx";
+
+import { useVideo } from "@contexts/VideoContext";
+
+import { parentModalVariants, previewModalVariants } from "@lib/utils/motion";
 
 const VideoModal = () => {
     const { videoKey, videoTitle, close } = useVideo();
@@ -30,31 +33,31 @@ const VideoModal = () => {
             {isOpen && (
                 <motion.div
                     key="modal"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
+                    variants={parentModalVariants(0.15)}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
                     className="fixed inset-0 z-[9999] flex items-center justify-center"
                 >
                     {/* Blurred background */}
                     <motion.div
+                        variants={parentModalVariants()}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"
-                        onClick={close}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
                     />
 
                     {/* Modal content */}
                     <motion.div
+                        variants={previewModalVariants()}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
                         className="relative z-10 w-full 
                             max-w-4xl max-xl:max-w-3xl max-lg:max-w-2xl max-md:max-w-xl
                             max-sm:max-w-lg max-[548px]:max-w-md max-xs:max-w-sm
                             max-[417px]:max-w-xs aspect-video"
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.95, opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     >
                         <iframe
                             className="w-full h-full rounded-lg border-none"

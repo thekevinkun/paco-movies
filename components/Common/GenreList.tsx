@@ -4,20 +4,20 @@ import { slugify } from "@lib/helpers/helpers";
 
 import { IGenreProps } from "@types";
 
-const GenreList = ({ mediaType, genres }: IGenreProps) => {
+const GenreList = ({ mediaType, genres, containerStyles, childStyles, handleClick }: IGenreProps) => {
   return (
     <>
       {genres.map((genre) => (
         <React.Fragment key={genre.id}>
           <Link
             href={`/genre/${mediaType}/${genre.id}-${slugify(genre.name)}`}
-            className="inline-block font-normal text-sm max-xl:text-xs
-                max-lg:text-sm hover:text-tale"
+            className={`inline-block font-normal hover:text-tale
+              ${containerStyles}`}
+            onClick={handleClick}
           >
             {genre.name}
           </Link>
-          <span className="bullet-separator text-sm
-            max-xl:text-xs max-lg:text-sm font-normal"
+          <span className={`bullet-separator font-normal ${childStyles}`}
           >
             {" "}&#8226;{" "}
           </span>

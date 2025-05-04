@@ -6,16 +6,18 @@ import { slugify } from "@lib/helpers/helpers";
 import { IDirectorProps } from "@types";
 
 
-const Director = ({ crews }: IDirectorProps) => {
+const Director = ({ crews, containerStyles, childStyles, handleClick }: IDirectorProps) => {
   const director = crews.find((person) => person.job === "Director");
   if (!director) return null;
 
   return (
     <Link 
       href={`/name/${director.id}-${slugify(director.name)}`}
-      className="hover:underline hover:text-tale"
+      className={`hover:underline hover:text-tale
+        ${containerStyles}`}
+      onClick={handleClick}
     > 
-      <p className="max-xl:text-sm max-sm:text-xs">
+      <p className={childStyles}>
         {director.name}
       </p>
     </Link>

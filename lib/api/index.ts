@@ -7,6 +7,7 @@ import { getNextPage } from '@lib/api/getNextPage';
 import { getMovieDetails } from "@lib/api/getMovieDetails";
 import { getTvDetails } from "@lib/api/getTvDetails";
 import { getPersonDetails } from "@lib/api/getPersonDetails";
+import { getPreviewDetails } from "@lib/api/getPreviewDetails";
 
 export {    
     getTrending,
@@ -17,5 +18,6 @@ export {
     getNextPage,
     getMovieDetails,
     getTvDetails,
-    getPersonDetails
+    getPersonDetails,
+    getPreviewDetails
 }

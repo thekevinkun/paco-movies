@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { FallbackImage } from "@components";
+import { FallbackImage, PreviewAction } from "@components";
 
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -84,11 +84,14 @@ const getRecommendations = (data: any) => {
               <FaPlay/>
               <span className="font-medium">Trailer</span>
             </Link>
-
-            <AiOutlineExclamationCircle
-              className="text-2xl max-sm:text-xl text-dark-1 hover:text-light-2 cursor-pointer"
-              onClick={() => {}}
-            />
+              
+            <PreviewAction
+              mediaType={item.media_type}
+              id={item.id}
+              containerStyles="text-2xl max-sm:text-xl text-dark-1 hover:text-light-2"
+            >
+              <AiOutlineExclamationCircle />
+            </PreviewAction>
           </div>
         </div>
       </div>

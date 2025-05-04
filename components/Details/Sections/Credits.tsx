@@ -153,11 +153,13 @@ const Credits = ({id, mediaType, title, casts, crews, creators}:
           {mediaType === "movie" ? 
               <Director 
                 crews={crews}
+                childStyles="max-xl:text-sm max-sm:text-xs"
               />
           :
               <div className="flex items-center gap-2">
                 <CreditList 
                   items={creators} 
+                  childStyles="max-xl:text-sm max-sm:text-xs"
                 />
               </div> 
           }
@@ -175,6 +177,7 @@ const Credits = ({id, mediaType, title, casts, crews, creators}:
                 <CreditList 
                   items={crews} 
                   filterJobs={["Writer", "Screenplay", "Characters"]} 
+                  childStyles="max-xl:text-sm max-sm:text-xs"
                 />
             </div>
           </div>

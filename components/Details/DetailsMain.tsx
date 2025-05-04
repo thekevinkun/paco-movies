@@ -115,6 +115,8 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                 <GenreList 
                                     mediaType={mediaType}
                                     genres={genres}
+                                    containerStyles="text-sm max-xl:text-xs max-lg:text-sm"
+                                    childStyles="text-sm max-xl:text-xs max-lg:text-sm"
                                 />
                             </div>
 
@@ -166,6 +168,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                     <NetworkList 
                                         mediaType={mediaType}
                                         networks={networks}
+                                        containerStyles="w-[53px] h-[30px]"
                                     />
                                 </div>
                             }
@@ -223,11 +226,13 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                     {mediaType === "movie" ? 
                                         <Director 
                                             crews={credits.crew}
+                                            childStyles="max-xl:text-sm max-sm:text-xs"
                                         />
                                     :
                                         <div className="flex items-center gap-2">
                                             <CreditList 
-                                                items={creators} 
+                                                items={creators}
+                                                childStyles="max-xl:text-sm max-sm:text-xs"
                                             />
                                         </div> 
                                     }
@@ -249,6 +254,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                         <CreditList 
                                             items={credits.crew} 
                                             filterJobs={["Writer", "Screenplay", "Characters"]} 
+                                            childStyles="max-xl:text-sm max-sm:text-xs"
                                         />
                                     </div>
                                 </div>
@@ -268,6 +274,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                     <div className="flex items-center gap-2">
                                         <CreditList 
                                             items={credits.cast} 
+                                            childStyles="max-xl:text-sm max-sm:text-xs"
                                         />
                                     </div>
                                 </div>

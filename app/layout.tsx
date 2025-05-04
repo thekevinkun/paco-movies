@@ -5,7 +5,7 @@ import "@styles/utilities.css";
 import { Providers } from "./providers";
 
 import { Header, Navbar, Footer } from "@sections";
-import { VideoModalClient } from "@components/Clients";
+import { VideoModalClient, PreviewModalClient } from "@components/Clients";
 
 export const viewport = {
   theme_color: "#008080"
@@ -43,6 +43,7 @@ export default function RootLayout({
             </section>
           </main>
 
+          <PreviewModalClient />
           <VideoModalClient />
         </Providers>
       </body>

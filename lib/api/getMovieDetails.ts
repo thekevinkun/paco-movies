@@ -65,6 +65,11 @@ export const getMovieDetails = async (mediaType: string, titleId: number) => {
           releaseDateValue = validEntry.release_date;
           certification = validEntry.certification;
         }
+    // Otherwise, just get the very first result of releaseDate
+    } else {
+        releaseInfo = releaseDate.results[0];
+        releaseDateValue = releaseInfo.release_dates[0].release_date;
+        certification = releaseInfo.release_dates[0].certification;
     }
 
     const countryCode = releaseInfo?.iso_3166_1 || null;
