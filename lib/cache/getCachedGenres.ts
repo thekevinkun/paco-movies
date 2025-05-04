@@ -4,7 +4,7 @@ import { getFromCache, saveToCache } from "@lib/cache/cache";
 export async function getCachedGenres(mediaType: string) {
   const subPath = `genres/${mediaType}`;
   const cacheKey = `genres`; 
-  const maxAgeMs = 24 * 60 * 60 * 1000; // expire in 24 hours
+  const maxAgeMs = 72 * 60 * 60 * 1000;
 
   const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
   if (cached) return cached;

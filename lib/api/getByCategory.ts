@@ -1,13 +1,15 @@
 import { options } from "@lib/api/data";
 
-export const getByGenre = async (mediaType: string, genre: string) => {
-    const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&with_genres=${genre}`, options);
+export const getByCategory = async (mediaType: string, category: string) => {
+    if (mediaType === "stars") mediaType = "person";
+
+    const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US`, options);
 
     const data = await response.json();
 
     if (!response.ok || data.success === false)
         throw new Error(data.status_message);
-
+    
     let firstResult: any = {};
 
     // Get first movie or tv data
@@ -36,7 +38,7 @@ export const getByGenre = async (mediaType: string, genre: string) => {
             officialTrailer: officialTrailer
         }
     }   
-
+    
     return {
         page: data.page,
         firstResult: firstResult,

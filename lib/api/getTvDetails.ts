@@ -29,28 +29,33 @@ export const getTvDetails = async (mediaType: string, titleId: number) => {
         throw new Error(ratings.status_message);
     }
 
-    let releaseInfo: any = null;
+    let ratingsInfo: any = null;
 
     // Try to find "US" release first
     const usRelease = ratings.results.find((item: any) => item.iso_3166_1 === "US");
     if (usRelease) {
-        releaseInfo = usRelease;
+        ratingsInfo = usRelease;
     } else {
         // Look for a production country match with valid certification
-        releaseInfo = ratings.results.find((item: any) =>
+        ratingsInfo = ratings.results.find((item: any) =>
             details.production_countries.some(
               (country: any) => country.iso_3166_1 === item.iso_3166_1 && item.rating
             )
         );
     }
 
-    const countryCode = releaseInfo.iso_3166_1 || null;
+    // Otherwise, just get the very first result of releaseDate
+    if (!ratingsInfo) {
+        ratingsInfo = ratings.results[0];
+    }
+
+    const countryCode = ratingsInfo.iso_3166_1 || null;
 
     const releaseDateCountry = countries.find((c: any) => c.iso_3166_1 === countryCode);
 
     ratings = {
         iso_3166_1: releaseDateCountry,
-        rating: releaseInfo.rating
+        rating: ratingsInfo.rating
     }
 
     // Get credits

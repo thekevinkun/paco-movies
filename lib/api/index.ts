@@ -1,5 +1,5 @@
 import { getTrending } from "@lib/api/getTrending";
-import { getCategory } from "@lib/api/getCategory";
+import { getByCategory } from "@lib/api/getByCategory";
 import { getGenres } from "@lib/api/getGenres";
 import { getByGenre } from "@lib/api/getByGenre";
 import { getSearch } from "@lib/api/getSearch";
@@ -11,7 +11,7 @@ import { getPreviewDetails } from "@lib/api/getPreviewDetails";
 
 export {    
     getTrending,
-    getCategory,
+    getByCategory,
     getGenres,
     getByGenre,
     getSearch,

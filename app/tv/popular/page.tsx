@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ContentMoviesClient } from "@components/Clients";
 
-import { getCategory } from "@lib/api";
+import { getByCategory } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const TvPopular = async ({mediaType="tv", category="popular"}) => {
-  const tvData = await getCategory(mediaType, category);
+  const tvData = await getByCategory(mediaType, category);
   const genreData = await getCachedGenres(mediaType);
   
   return (

@@ -1,4 +1,4 @@
-import { getTrending, getCategory } from "@lib/api";
+import { getTrending, getByCategory } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
 export const getCachedTrending = async (mediaType: string, category: string) => {
@@ -14,7 +14,7 @@ export const getCachedTrending = async (mediaType: string, category: string) => 
         let data: any = {}
 
         if (mediaType === "stars")
-            data = await getCategory(mediaType, category);
+            data = await getByCategory(mediaType, category);
         else
             data = await getTrending(mediaType);
         
