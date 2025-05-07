@@ -1,3 +1,5 @@
+import type { CreditItem, MediaItem } from "@types";
+
 const isNumeric = (value: string) => {
     return /^\d+$/.test(value);
 }
@@ -10,13 +12,13 @@ const toTitleCase = (str: string) => {
 }
 
 const roundedToFixed = (input: number, digits: number) => {
-    var rounder = Math.pow(10, digits);
+    const rounder = Math.pow(10, digits);
     return (Math.round(input * rounder) / rounder).toFixed(digits);
 }
 
 const convertRuntime = (n: number) => {
-    var hours = Math.trunc(n / 60);
-    var minutes = n % 60;
+    const hours = Math.trunc(n / 60);
+    const minutes = n % 60;
     return hours +"h"+ " " + minutes + "m";
 }
 
@@ -28,10 +30,10 @@ const formatCurrency = new Intl.NumberFormat("en-US", {
 });
 
 const calculateAge = (date: string) => {
-    var today = new Date();
-    var birthDate = new Date(date);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
+    const today = new Date();
+    const birthDate = new Date(date);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
     
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
@@ -40,8 +42,8 @@ const calculateAge = (date: string) => {
     return age;
 }
 
-const dedupeResults = (results: any) => {
-    return results.filter((result: any, index: number, self: any) => index == self.findIndex((r: any) => r.id === result.id))
+const dedupeResults = (results: CreditItem[] | MediaItem[]) => {
+    return results.filter((result, index: number, self) => index == self.findIndex((r) => r.id === result.id))
 }
 
 const slugify = (text: string): string => {

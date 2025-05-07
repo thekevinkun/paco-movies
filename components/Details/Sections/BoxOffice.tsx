@@ -1,6 +1,8 @@
+import type { IBoxOfficeProps } from "@types";
+
 import { formatCurrency } from "@lib/helpers/helpers";
 
-const BoxOffice = ({details}: any) => {
+const BoxOffice = ({details}: IBoxOfficeProps) => {
   return (
     <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
@@ -14,7 +16,7 @@ const BoxOffice = ({details}: any) => {
             Budget
           </h3>
 
-          <p className={`font-normal ${!details.budget && "italic"} max-md:text-sm`}>
+          <p className={`font-normal ${details.budget && "italic"} max-md:text-sm`}>
             {details.budget ? formatCurrency.format(details.budget) : "Unknown yet"}
           </p>
         </div>
@@ -25,7 +27,7 @@ const BoxOffice = ({details}: any) => {
             Revenue
           </h3>
 
-          <p className={`font-normal ${!details.revenue && "italic"} max-md:text-sm max-sm:text-xs`}>
+          <p className={`font-normal ${details.revenue && "italic"} max-md:text-sm max-sm:text-xs`}>
             {details.revenue ? formatCurrency.format(details.revenue) : "Unknown yet"}
           </p>
         </div>

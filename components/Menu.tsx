@@ -5,11 +5,12 @@ import Image from "next/image";
 
 import { useMenu } from "@contexts/MenuContext";
 
-import { IShowMobileMenu } from "@types";
+import type { ShowMobileMenuProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
 import { MEDIA_TYPE } from "@lib/utils/constants";
 
-const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
+const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : ShowMobileMenuProps) => {
   const { activeMediaType, activeCategory, showCategories, showGenres } = useMenu();
   
   const toggleMenu = () => {
@@ -23,12 +24,13 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
         <Link key={item.id} id={item.id} href={`/${item.id}`}
           className={`w-full py-3 max-lg:px-3
           ${activeMediaType !== item.id ? "hover:bg-tale-1" : "pointer-events-none"}`}
-          onClick={(e) => {toggleMenu();}}
+          onClick={() => toggleMenu()}
         >
             <div className="flex flex-col items-center 
                 max-lg:flex-row max-lg:items-center max-lg:gap-3 pointer-events-none"
             >
               <Image
+                priority
                 src={item.icon}
                 alt="icon"
                 width={28}
@@ -61,6 +63,7 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                   onClick={() => toggleMenu()}
                 >
                   <Image
+                    priority
                     src={item.icon}
                     alt="Icon"
                     width={28}
@@ -99,7 +102,8 @@ const Menu = ({isShowMobileMenu, setIsShowMobileMenu} : IShowMobileMenu) => {
                   onClick={() => toggleMenu()}
                 >
                   <Image
-                    src={`/images/${item.name.toLowerCase()}.svg`}
+                    priority
+                    src={`/images/${slugify(item.name)}.svg`}
                     alt="Icon"
                     width={28}
                     height={28}

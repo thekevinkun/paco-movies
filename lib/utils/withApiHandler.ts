@@ -1,15 +1,13 @@
 import { NextResponse } from "next/server";
 
-export const withApiHandler = (handler: Function) => {
+export const withApiHandler = (handler: (req: Request) => Promise<unknown>) => {
   return async (req: Request) => {
     try {
       const result = await handler(req);
       return NextResponse.json(result);
-    } catch (error: any) {
-      return NextResponse.json(
-        { error: error.message || "Something went wrong" },
-        { status: 500 }
-      );
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Something went wrong";
+      return NextResponse.json({ error: message }, { status: 500 });
     }
   };
 };

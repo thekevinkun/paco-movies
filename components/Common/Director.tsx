@@ -1,10 +1,10 @@
 // components/common/Director.tsx
 import React from "react";
 import Link from "next/link";
+
+import type { IDirectorProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
-
-import { IDirectorProps } from "@types";
-
 
 const Director = ({ crews, containerStyles, childStyles, handleClick }: IDirectorProps) => {
   const director = crews.find((person) => person.job === "Director");
@@ -12,7 +12,7 @@ const Director = ({ crews, containerStyles, childStyles, handleClick }: IDirecto
 
   return (
     <Link 
-      href={`/name/${director.id}-${slugify(director.name)}`}
+      href={`/name/${director.id}-${slugify(director.name ?? "")}`}
       className={`hover:underline hover:text-tale
         ${containerStyles}`}
       onClick={handleClick}

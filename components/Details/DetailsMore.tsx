@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { Spinner } from "@components";
 
-import { IDetailsMore } from "@types";
+import type { IDetailsMore, IDetailsProps } from "@types";
 
 const Seasons = dynamic(() => import("@components/Details/Sections/Seasons"), {
   ssr: false,
@@ -48,12 +48,12 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
   
   return (
     <section className="py-12 px-5 max-md:px-3">
-        {(mediaType === "tv" && details.number_of_seasons > 0) &&
+        {(mediaType === "tv" && (details.number_of_seasons && details.number_of_seasons > 0)) &&
             <div className="pb-16 max-sm:pb-12">
               <Seasons 
                 id={details.id}
                 mediaType={mediaType} 
-                name={details.name}
+                name={details.name ?? ""}
                 seasons={details.number_of_seasons}
                 seasonList={details.seasons}
               />
@@ -65,7 +65,7 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
             <Videos 
               id={details.id}
               mediaType={mediaType} 
-              title={details.title || details.name}
+              title={details.title || details.name || "Untitled"}
               videos={videos} 
             />
           </div>
@@ -77,7 +77,7 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
               <MoviePhotos 
               id={details.id}
               mediaType={mediaType} 
-              title={details.title}
+              title={details.title ?? "Untitled"}
               posters={posters} 
               backdrops={backdrops} 
             />
@@ -85,7 +85,7 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
               <TvPhotos 
                 id={details.id}
                 mediaType={mediaType} 
-                name={details.name}
+                name={details.name ?? "Untitled"}
                 posters={posters} 
                 backdrops={backdrops} 
               />
@@ -98,10 +98,10 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
             <Credits
               id={details.id}
               mediaType={mediaType} 
-              title={details.title || details.name}
+              title={details.title || details.name || "Untitled"}
               casts={credits.cast} 
               crews={credits.crew}
-              creators={details.created_by}
+              creators={details.created_by ?? []}
             />
           </div>
         }
@@ -111,7 +111,7 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
             <Reviews 
               id={details.id}
               mediaType={mediaType} 
-              title={details.title || details.name}
+              title={details.title || details.name || "Untitled"}
               reviews={reviews}
             />
           </div>
@@ -120,7 +120,7 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
         <div className="pb-16 max-sm:pb-12">
           <Details
             mediaType={mediaType}
-            details={details}
+            details={details as IDetailsProps["details"]}
             releaseDate={releaseDate}
             tvratings={tvratings}
             originCountry={originCountry}
@@ -130,9 +130,10 @@ const DetailsMore = ({mediaType, details, releaseDate, tvratings, originCountry,
         
         {mediaType === "movie" &&
             <div className="pb-16 max-sm:pb-12">
-              <BoxOffice 
-                details={details}
-              />
+              <BoxOffice details={{
+                budget: details.budget,
+                revenue: details.revenue
+              }} />
             </div>
         }
         

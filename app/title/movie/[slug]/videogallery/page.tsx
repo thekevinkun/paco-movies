@@ -1,18 +1,13 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
-export async function generateMetadata({params, mediaType="movie"}: 
-    {params: any, mediaType: string}): Promise<Metadata> {
-
+export async function generateMetadata(): Promise<Metadata> {
     return {
         title: "Page on building..." + " — PacoMovies",
         description: "Movie Trailers and Video",
     };
 }
 
-const MovieVideoGallery = async ({params, mediaType="movie"}: {params: any, mediaType: string}) => {
-  params = await params;
-  const titleId = params.slug.substring(0, params.slug.indexOf("-"));
-
+const MovieVideoGallery = async () => {
   return (
     <>
         <div className="h-[92vh] flex flex-col items-center justify-center">

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { Spinner } from "@components";
 
-import { IDetailsPersonMore } from "@types";
+import type { IDetailsPersonMore } from "@types";
 
 const PersonKnownFor = dynamic(() => import("@components/Details/Sections/PersonKnownFor"), { 
   ssr: false,

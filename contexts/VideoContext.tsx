@@ -1,16 +1,16 @@
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { IVideoContext } from "@types";
+import type { IVideoContextProps } from "@types";
 
-const VideoContextDefaultValues: IVideoContext = {
+const VideoContextDefaultValues: IVideoContextProps = {
     videoKey: null,
     videoTitle: "",
     open: (key: string, videoTitle: string) => {},
     close: () => {},
 }
 
-const VideoContext = createContext<IVideoContext>(VideoContextDefaultValues);
+const VideoContext = createContext<IVideoContextProps>(VideoContextDefaultValues);
 
 export const VideoProvider = ({ children } : Readonly<{children: ReactNode;}>) => {
     const router = useRouter();

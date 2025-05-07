@@ -4,11 +4,12 @@ import moment from "moment";
 
 import { FallbackImage } from "@components";
 
-import { ICardPersonCredits } from "@types";
+import type { ICardPersonCreditsProps } from "@types";
+
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardPersonCredits = ({id, mediaType, title, character, 
-    releaseDate, poster, vote}: ICardPersonCredits) => {
+    releaseDate, poster, vote}: ICardPersonCreditsProps) => {
 
   const url = `/title/${mediaType}/${id}-${slugify(title)}`
   

@@ -11,7 +11,8 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 import { FallbackImage } from "@components";
 
-import { IDetailsPersonMain } from "@types";
+import type { IDetailsPersonMain } from "@types";
+
 import { calculateAge } from "@lib/helpers/helpers";
 
 const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
@@ -128,7 +129,7 @@ const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
                   <span className="text-sm font-light
                     max-sm:block max-sm:text-center"
                 > 
-                    {" "}({calculateAge(details.birthday)} years old)
+                    {" "}({calculateAge(details.birthday ?? "")} years old)
                   </span>
                 </p>
               </div>

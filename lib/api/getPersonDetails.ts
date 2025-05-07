@@ -3,54 +3,60 @@
 import { options } from "@lib/api/data";
 import { dedupeResults } from "@lib/helpers/helpers";
 
-export const getPersonDetails = async (mediaType: string, nameId: number) => {
-    let response: any = {};
+import type {
+    IGetPersonDetailsResponse,
+    ITMDBError,
+    PersonDetails,
+    ImagesPersonResponse,
+    CreditsMovie,
+    CreditItem,
+    ExternalIds,
+} from "@types";
+
+export const getPersonDetails = async (mediaType: string, nameId: number): Promise<IGetPersonDetailsResponse> => {
+    let response: Response;
 
     // Get details
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${nameId}?language=en-US`, options);
-    const details = await response.json();
+    const details: PersonDetails & Partial<ITMDBError> = await response.json();
     if (!response.ok || details.success === false) {
         throw new Error(details.status_message);
     }
 
     // Get credits
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${nameId}/combined_credits?language=en-US`, options);
-    const credits = await response.json();
+    const credits: CreditsMovie & Partial<ITMDBError> = await response.json();
     if (!response.ok || credits.success === false) {
         throw new Error(credits.status_message);
     }
 
-    let cast = credits.cast.map((obj: any) => {
-        if (obj.first_air_date) {
-            obj.release_date = obj.first_air_date
-            delete obj.first_air_date
-        }
-        return obj;
-    })
-    cast = cast.sort((a: any, b: any) => {
+    let cast = credits.cast.map((obj): CreditItem => ({
+        ...obj,
+        release_date: obj.first_air_date || obj.release_date || "",
+    }));
+
+    cast = cast.sort((a, b) => {
         if (a.release_date === "") return 1;
         if (b.release_date === "") return -1;
 
-        const dateA = new Date(a.release_date).getTime();
-        const dateB = new Date(b.release_date).getTime();
+        const dateA = new Date(a.release_date ?? "").getTime();
+        const dateB = new Date(b.release_date ?? "").getTime();
 
         if (dateA === dateB) return 0;
         return dateB - dateA;
     })
 
-    let crew = credits.crew.map((obj: any) => {
-        if (obj.first_air_date) {
-            obj.release_date = obj.first_air_date
-            delete obj.first_air_date
-        }
-        return obj;
-    })
-    crew = crew.sort((a: any, b: any) => {
+    let crew = credits.crew.map((obj): CreditItem => ({
+        ...obj,
+        release_date: obj.first_air_date || obj.release_date || "",
+    }));
+
+    crew = crew.sort((a, b) => {
         if (a.release_date === "") return 1;
         if (b.release_date === "") return -1;
 
-        const dateA = new Date(a.release_date).getTime();
-        const dateB = new Date(b.release_date).getTime();
+        const dateA = new Date(a.release_date ?? "").getTime();
+        const dateB = new Date(b.release_date ?? "").getTime();
 
         if (dateA === dateB) return 0;
         return dateB - dateA;
@@ -58,14 +64,14 @@ export const getPersonDetails = async (mediaType: string, nameId: number) => {
 
     // Get images
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${nameId}/images`, options);
-    const images = await response.json();
-    if (!response.ok || images.success === false) {
-        throw new Error(images.status_message);
+    const imagesPerson: ImagesPersonResponse & Partial<ITMDBError> = await response.json();
+    if (!response.ok || imagesPerson.success === false) {
+        throw new Error(imagesPerson.status_message);
     }
 
     // Get contacts
     response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${nameId}/external_ids`, options);
-    const externalIds = await response.json();
+    const externalIds: ExternalIds & Partial<ITMDBError> = await response.json();
     if (!response.ok || externalIds.success === false) {
         throw new Error(externalIds.status_message);
     }
@@ -76,7 +82,7 @@ export const getPersonDetails = async (mediaType: string, nameId: number) => {
             cast: dedupeResults(cast),
             crew: dedupeResults(crew)
         },
-        images: images.profiles,
+        images: imagesPerson.profiles,
         externalIds: externalIds
     }
 

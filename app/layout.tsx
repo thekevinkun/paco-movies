@@ -13,7 +13,7 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: "PacoMovies",
-  description: "Find and explore movies and tv shows",
+  description: "Discover movies and tv shows around the world.",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",

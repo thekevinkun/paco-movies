@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import Image from "next/image";
 import { IoMdPlay } from "react-icons/io";
@@ -8,19 +8,21 @@ import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
 import { VideoAction } from "@components";
 
+import type { VideoItem, IVideosProps } from "@types";
+
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-
+import { useKeenSliderWithArrows } from "@lib/utils/useKeenSlider";
 import { slugify } from "@lib/helpers/helpers";
 
-const getMainVideos = (videos: any, route: string) => {
+const getMainVideos = (videos: VideoItem[], route: string) => {
   return (
     <div 
       className="grid grid-cols-8 gap-x-[15px]
         grid-rows-[275px] max-xl:grid-rows-[255px] 
         max-md:grid-rows-[220px] max-sm:grid-rows-[165px]"
     >
-      {videos.slice(0, 2).map((video: any) => (
+      {videos.slice(0, 2).map((video) => (
         <div key={video.key} className="relative bg-dark col-span-4 rounded-xl">
           <Image
             unoptimized
@@ -56,8 +58,8 @@ const getMainVideos = (videos: any, route: string) => {
   )
 }
 
-const getVideosSlider = (start: number, videos: any, route: string) => {
-  return videos.slice(start, 10).map((video: any) => (
+const getVideosSlider = (start: number, videos: VideoItem[], route: string) => {
+  return videos.slice(start, 10).map((video) => (
     <div
       key={video.id}
       style={{
@@ -88,39 +90,13 @@ const getVideosSlider = (start: number, videos: any, route: string) => {
   ));
 }
 
-const Videos = ({id, mediaType, title, videos}: 
-      {id: number, mediaType: string, title: string, videos: any}) => {
-    
-  // DYNAMIC RESIZE SCREEN SETUP
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(max-width: 1024px)").matches;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-  
-    const media = window.matchMedia("(max-width: 1024px)");
-  
-    const handleChange = () => {
-      setIsMobile(media.matches);
-    };
-  
-    // Listen for changes
-    media.addEventListener("change", handleChange);
-  
-    // Clean up
-    return () => media.removeEventListener("change", handleChange);
-  }, []);
+const Videos = ({id, mediaType, title, videos}: IVideosProps) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
   const startIndexVideoSlider = isMobile ? 0 : 2;
 
   // KEEN SLIDER SETUP
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [perView, setPerView] = useState(1);
-  const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
+  const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
 
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
@@ -141,31 +117,9 @@ const Videos = ({id, mediaType, title, videos}:
       updateArrows(s)
     },
     slideChanged(s) {
-      setCurrentSlide(s.track.details.rel);
       updateArrows(s);
     }
   });
-
-  const updateArrows = (s: any) => {
-    const rel = s.track.details.rel;
-    const slideCount = s.track.details.slides.length;
-
-    let dynamicPerView = 1;
-    const slidesOption = s.options?.slides;
-
-    if (typeof slidesOption?.perView === "number") {
-      dynamicPerView = slidesOption.perView;
-    } else if (typeof slidesOption?.perView === "function") {
-      dynamicPerView = slidesOption.perView(window.innerWidth, s.track.details.slides);
-    }
-
-    setPerView(dynamicPerView);
-
-    const atStart = rel === 0;
-    const atEnd = rel >= slideCount - Math.ceil(dynamicPerView - 1);
-
-    setArrowDisabled({ prev: atStart, next: atEnd });
-  }
 
   const scrollLeft = () => slider.current?.prev();
   const scrollRight = () => slider.current?.next();
@@ -179,7 +133,7 @@ const Videos = ({id, mediaType, title, videos}:
         className="mb-7 group flex items-center w-fit"
       >
         <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Videos</h3>
-        <span className="pl-3 text-xs text-main-1">{videos.length}</span>
+        <span className="pl-3 text-xs text-main-1">{videos?.length}</span>
 
         <MdArrowForwardIos 
           className="text-main text-3xl max-sm:text-2xl font-semibold 
@@ -189,11 +143,11 @@ const Videos = ({id, mediaType, title, videos}:
 
       <div>
         {/* Two main video */}
-        <div className={`${videos.length > 2 && "mb-5 max-lg:hidden "}`}>
-          {getMainVideos(videos, route)}
+        <div className={`${(videos && videos.length > 2) && "mb-5 max-lg:hidden "}`}>
+          {getMainVideos(videos!, route)}
         </div>
         
-        {videos.length > 2 &&
+        {(videos && videos.length > 2) &&
           <div className={`${(videos.length > 5 || (videos.length >= 3 && isMobile)) && 
                   "px-3 max-md:px-0"}
               relative w-full max-w-[calc(100vw-(288px+55px))]

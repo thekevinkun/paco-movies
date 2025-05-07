@@ -2,7 +2,12 @@ import { ContentMoviesClient } from "@components/Clients";
 
 import { getCachedTrending } from "@lib/cache";
 
-const Home = async ({mediaType="all", category="trending"}) => {
+export const dynamic = "force-dynamic";
+
+const Home = async () => {
+  const mediaType="all";
+  const category="trending";
+  
   const data = await getCachedTrending(mediaType, category);
 
   return (

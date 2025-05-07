@@ -1,21 +1,21 @@
 "use client"
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
 import { FallbackImage } from "@components";
 
+import type { SeasonItem, ISeasonsProps } from "@types";
+
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-
-import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
-
+import { useKeenSliderWithArrows } from "@lib/utils/useKeenSlider";
 import { slugify } from "@lib/helpers/helpers";
 
-const getSeasonsSlider = (seasons: any) => {
-  return seasons.filter((item: any) => item.season_number !== 0).map((season: any) => (
+const getSeasonsSlider = (seasons: SeasonItem[]) => {
+  return seasons.filter((item) => item.season_number !== 0).map((season) => (
       <div
         key={season.id}
         className="keen-slider__slide min-w-0 shrink-0
@@ -87,13 +87,9 @@ const getSeasonsSlider = (seasons: any) => {
   ))
 }
 
-const Seasons = ({id, mediaType, name, seasons, seasonList}: 
-        {id: string, mediaType: string, name: string, seasons: any, seasonList: any}) => {
-
+const Seasons = ({id, mediaType, name, seasons, seasonList}: ISeasonsProps) => {
     // KEEN SLIDER SETUP
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [perView, setPerView] = useState(1);
-    const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
+    const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
 
     const [sliderRef, slider] = useKeenSlider({
         loop: false,
@@ -123,31 +119,9 @@ const Seasons = ({id, mediaType, name, seasons, seasonList}:
             updateArrows(s)
         },
         slideChanged(s) {
-            setCurrentSlide(s.track.details.rel);
             updateArrows(s);
         }
     });
-
-    const updateArrows = (s: any) => {
-      const rel = s.track.details.rel;
-      const slideCount = s.track.details.slides.length;
-
-      let dynamicPerView = 1;
-      const slidesOption = s.options?.slides;
-
-      if (typeof slidesOption?.perView === "number") {
-          dynamicPerView = slidesOption.perView;
-      } else if (typeof slidesOption?.perView === "function") {
-          dynamicPerView = slidesOption.perView(window.innerWidth, s.track.details.slides);
-      }
-
-      setPerView(dynamicPerView);
-
-      const atStart = rel === 0;
-      const atEnd = rel >= slideCount - Math.ceil(dynamicPerView - 1);
-
-      setArrowDisabled({ prev: atStart, next: atEnd });
-    }
 
     const scrollLeft = () => slider.current?.prev();
     const scrollRight = () => slider.current?.next();

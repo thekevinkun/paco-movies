@@ -4,11 +4,13 @@ import moment from "moment";
 
 import { FallbackImage } from "@components";
 
+import type { CreditItem, IPersonKnownForProps } from "@types";
+
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const PersonKnownFor = ({works}: any) => {
+const PersonKnownFor = ({works}: IPersonKnownForProps) => {
   const sortedWorks = works.slice().
-      sort((a: any, b: any) => b.vote_count - a.vote_count || b.popularity - a.popularity);
+      sort((a: CreditItem, b: CreditItem) => b.vote_count - a.vote_count || (b.popularity ?? 0) - (a.popularity ?? 0));
 
   return (
     <>
@@ -21,7 +23,7 @@ const PersonKnownFor = ({works}: any) => {
           max-lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] 
           gap-y-3 gap-x-[15px] max-md:gap-x-[8px]"
       >
-        {sortedWorks.slice(0, 4).map((work: any, index: number) => (
+        {sortedWorks.slice(0, 4).map((work, index: number) => (
           // POSTER
           <div 
             key={work.id} 
@@ -31,12 +33,12 @@ const PersonKnownFor = ({works}: any) => {
               ${index >= 2 && "max-md:hidden"}`}
           >
             <Link 
-              href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name)}`}
+              href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name || "Untitled")}`}
               className="relative w-[20%] max-md:w-[25%] h-full bg-dark group rounded-bl-xl"
             >
               <FallbackImage
                 src={work.poster_path}
-                mediaType={work.media_type}
+                mediaType={work.media_type ?? ""}
                 alt="poster"
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
@@ -52,7 +54,7 @@ const PersonKnownFor = ({works}: any) => {
               <div className="flex justify-between">
                 {/* Title */}
                 <Link 
-                  href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name)}`}
+                  href={`/title/${work.media_type}/${work.id}-${slugify(work.title || work.name || "Untitled")}`}
                 >
                   <h4 className="line-clamp-1 font-semibold
                     capitalize hover:text-tale">
@@ -72,11 +74,11 @@ const PersonKnownFor = ({works}: any) => {
                   />
 
                   <span 
-                    className={`text-dark-1 ${work.vote_average > 0 ? 
+                    className={`text-dark-1 ${work.vote_average && work.vote_average > 0 ? 
                         "font-semibold" : "font-normal italic"}`
                     }
                   >
-                    {work.vote_average > 0 ? roundedToFixed(work.vote_average, 1) : "NaN"}
+                    {work.vote_average && work.vote_average > 0 ? roundedToFixed(work.vote_average, 1) : "NaN"}
                   </span>
                 </div>
               </div>
@@ -99,11 +101,11 @@ const PersonKnownFor = ({works}: any) => {
                   />
         
                   <span 
-                    className={`text-dark-1 ${work.vote_average > 0 ? 
+                    className={`text-dark-1 ${work.vote_average && work.vote_average > 0 ? 
                         "font-semibold" : "font-normal italic"}`
                     }
                   >
-                    {work.vote_average > 0 ? roundedToFixed(work.vote_average, 1) : "NaN"}
+                    {work.vote_average && work.vote_average > 0 ? roundedToFixed(work.vote_average, 1) : "NaN"}
                   </span>
                 </div>
 

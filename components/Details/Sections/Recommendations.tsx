@@ -1,35 +1,35 @@
 "use client"
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-import { FallbackImage, PreviewAction } from "@components";
-
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
-
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
+import { FallbackImage, PreviewAction } from "@components";
+
+import type { CreditItem, IRecommendationsProps } from "@types";
+
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import { useKeenSliderWithArrows } from "@lib/utils/useKeenSlider";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const getRecommendations = (data: any) => {
-  return data.slice(0, 10).map((item: any) => (
+const getRecommendations = (data: CreditItem[]) => {
+  return data.slice(0, 10).map((item) => (
     <div 
       key={item.id} 
       className="keen-slider__slide min-w-0 shrink-0"
     >
       <div className="flex flex-col">
         <Link
-          href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}`}
+          href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}`}
           className="relative bg-dark w-full h-[335px] 
             max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
         >
           <FallbackImage
             src={item.poster_path}
-            mediaType={item.media_type}
+            mediaType={item.media_type!}
             alt="poster"
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
@@ -55,14 +55,14 @@ const getRecommendations = (data: any) => {
 
             <span 
               className={`text-dark-1
-                ${item.vote_average > 0 ? "font-medium" : "font-normal italic"}`}
+                ${item.vote_average && item.vote_average > 0 ? "font-medium" : "font-normal italic"}`}
             >
-              {item.vote_average > 0 ? roundedToFixed(item.vote_average, 1) : "NaN"}
+              {item.vote_average && item.vote_average > 0 ? roundedToFixed(item.vote_average, 1) : "NaN"}
             </span>
           </div>
 
           <Link 
-            href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}`}
+            href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}`}
             title={item.title || item.name} 
             className="pt-3 inline-block w-fit"
           >
@@ -77,7 +77,7 @@ const getRecommendations = (data: any) => {
               flex items-center justify-between"
           >
             <Link
-              href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name)}#`}
+              href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}#`}
               className="py-1 px-2 flex items-center gap-2 max-sm:text-sm text-dark
                bg-transparent hover:bg-tale/75 transition-colors duration-100 rounded-md"
             >
@@ -86,7 +86,7 @@ const getRecommendations = (data: any) => {
             </Link>
               
             <PreviewAction
-              mediaType={item.media_type}
+              mediaType={item.media_type!}
               id={item.id}
               containerStyles="text-2xl max-sm:text-xl text-dark-1 hover:text-light-2"
             >
@@ -99,12 +99,10 @@ const getRecommendations = (data: any) => {
   ))
 }
 
-const Recommendations = ({recommendations}: any) => {
+const Recommendations = ({recommendations}: IRecommendationsProps) => {
   // KEEN SLIDER SETUP
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [perView, setPerView] = useState(1);
-  const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
-  
+  const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
+
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
     breakpoints: {
@@ -145,31 +143,9 @@ const Recommendations = ({recommendations}: any) => {
       updateArrows(s)
     },
     slideChanged(s) {
-      setCurrentSlide(s.track.details.rel);
       updateArrows(s);
     }
   })
-
-  const updateArrows = (s: any) => {
-    const rel = s.track.details.rel;
-    const slideCount = s.track.details.slides.length;
-
-    let dynamicPerView = 1;
-    const slidesOption = s.options?.slides;
-
-    if (typeof slidesOption?.perView === "number") {
-      dynamicPerView = slidesOption.perView;
-    } else if (typeof slidesOption?.perView === "function") {
-      dynamicPerView = slidesOption.perView(window.innerWidth, s.track.details.slides);
-    }
-
-    setPerView(dynamicPerView);
-
-    const atStart = rel === 0;
-    const atEnd = rel >= slideCount - Math.ceil(dynamicPerView - 1);
-
-    setArrowDisabled({ prev: atStart, next: atEnd });
-  }
 
   const scrollLeft = () => slider.current?.prev();
   const scrollRight = () => slider.current?.next();

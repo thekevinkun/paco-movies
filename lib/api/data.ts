@@ -1,4 +1,4 @@
-import { IApiOptions } from "@types"
+import type { IApiOptions } from "@types"
 
 export const options: IApiOptions = {
     method: "GET",

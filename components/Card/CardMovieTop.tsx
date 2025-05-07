@@ -1,16 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import { FaPlay } from "react-icons/fa";
 
 import { FallbackImage, MotionDiv, VideoAction } from "@components";
-import { cardMovieVariants } from "@lib/utils/motion";
 
-import { FaPlay } from "react-icons/fa";
-import { ICardMovieTop } from "@types";
+import type { ICardMovieTopProps } from "@types";
+
+import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardMovieTop = ({id, poster, backDrop, title, 
-      overview, mediaType, releaseDate, rating, trailer}: ICardMovieTop) => {
+      overview, mediaType, releaseDate, rating, popularity, trailer}: ICardMovieTopProps) => {
         
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
@@ -28,7 +29,9 @@ const CardMovieTop = ({id, poster, backDrop, title,
         <FallbackImage
           src={poster}
           mediaType={mediaType}
-          alt="poster"
+          alt={mediaType === "movie" 
+            || mediaType === "tv" ? "poster" : "profile"
+          }
           fill
           sizes="(min-width: 1280px) 288px"
           placeholder="blur"
@@ -43,7 +46,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backDrop}")`
+          backgroundImage: `url("https://image.tmdb.org/t/p/w780${backDrop}")`
         }}
         className="relative w-full rounded-r-md max-xl:rounded-md p-8"
       >
@@ -82,23 +85,43 @@ const CardMovieTop = ({id, poster, backDrop, title,
 
           {/* Features */}
           <div className="flex items-center pt-8">
-            <div className="flex items-center gap-1.5">
-              <Image
-                src="/icons/star.svg"
-                alt="rating star"
-                width={25}
-                height={25}
-                sizes="25px"
-                className="relative object-contain bottom-[1.2px]"
-              />
+            {mediaType === "movie" || mediaType === "tv" ?
+              <div className="flex items-center gap-1.5">
+                <Image
+                  src="/icons/star.svg"
+                  alt="rating star"
+                  width={25}
+                  height={25}
+                  sizes="25px"
+                  className="relative object-contain bottom-[1.2px]"
+                />
 
-               <span 
-                className={`text-[17px] text-light
-                  ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
-               >
-                  {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
-               </span>
-            </div>
+                <span 
+                  className={`text-[17px] text-light
+                    ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
+                >
+                    {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
+                </span>
+              </div>
+            :  
+              <div className="flex items-center gap-1.5">
+                <Image
+                  src="/icons/popularity.svg"
+                  alt="rating star"
+                  width={28}
+                  height={28}
+                  sizes="28px"
+                  className="relative object-contain bottom-[1px]"
+                />
+
+                <span 
+                  className={`text-[17px] text-light
+                    ${popularity && popularity > 0 ? "font-semibold" : "font-normal italic"}`}
+                >
+                    {popularity && popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
+                </span>
+              </div>
+            }
 
             {(mediaType !== "person" && trailer) &&
               <VideoAction

@@ -2,15 +2,15 @@
 
 import { usePreview } from "@contexts/PreviewContext";
 
-import { IPreviewAction } from "@types";
+import type { PreviewActionProps } from "@types";
 
-export default function PreviewAction({mediaType, id, containerStyles, children}: IPreviewAction) {
+export default function PreviewAction({mediaType, id, containerStyles, children}: PreviewActionProps) {
     const { open } = usePreview();
 
     return (
       <button 
         className={`cursor-pointer ${containerStyles}`}
-        onClick={(e) => open(mediaType, id)}
+        onClick={() => open(mediaType, id)}
       >
         {children}
       </button>

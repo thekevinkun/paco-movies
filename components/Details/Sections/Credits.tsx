@@ -5,24 +5,25 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { FallbackImage } from "@components";
 import { CreditList, Director } from "@components/Common";
 
+import type { ICreditsProps, CreditItem } from "@types";
+
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-
 import { slugify } from "@lib/helpers/helpers";
 
-const getCasts = (casts: any) => {
+const getCasts = (casts: CreditItem[]) => {
   return (
     <div className="grid grid-cols-2 gap-y-5">
-      {casts.slice(0, 18).map((cast: any) => (
+      {casts.slice(0, 18).map((cast) => (
         <div key={cast.id} className="flex items-center gap-5">
           <Link 
-            href={`/name/${cast.id}-${slugify(cast.name)}`} 
+            href={`/name/${cast.id}-${slugify(cast.name ?? "")}`} 
             className="relative w-32 h-32 bg-dark rounded-full group"
           >
             <FallbackImage
               src={cast.profile_path}
               mediaType="person"
-              alt="Photo Profile"
+              alt="profile"
               fill
               sizes="128px"
               placeholder="blur"
@@ -34,7 +35,7 @@ const getCasts = (casts: any) => {
 
           <div>
             <Link 
-              href={`/name/${cast.id}-${slugify(cast.name)}`}
+              href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
               className="text-main hover:text-tale"
             >
               <p>{cast.name}</p>
@@ -48,15 +49,15 @@ const getCasts = (casts: any) => {
   )
 }
 
-const getCastsMobile = (casts: any) => {
-  return casts.slice(0, 11).map((cast: any) => (
+const getCastsMobile = (casts: CreditItem[]) => {
+  return casts.slice(0, 11).map((cast) => (
     <div 
       key={cast.id} 
       className="keen-slider__slide flex-shrink-0"
     >
       <div className="flex flex-col gap-3">
         <Link 
-          href={`/name/${cast.id}-${slugify(cast.name)}`} 
+          href={`/name/${cast.id}-${slugify(cast.name ?? "")}`} 
           className="relative w-full aspect-square bg-black rounded-full group"
         >
           <FallbackImage
@@ -74,7 +75,7 @@ const getCastsMobile = (casts: any) => {
 
         <div className="text-center">
           <Link 
-            href={`/name/${cast.id}-${slugify(cast.name)}`}
+            href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
             className="line-clamp-1 text-main hover:text-tale max-sm:text-sm"
           >
             <p>{cast.name}</p>
@@ -89,9 +90,7 @@ const getCastsMobile = (casts: any) => {
   ))
 }
 
-const Credits = ({id, mediaType, title, casts, crews, creators}: 
-    {id: number, mediaType: string, title: string, casts: any, crews?: any, creators?: any}) => {
-  
+const Credits = ({id, mediaType, title, casts, crews, creators}: ICreditsProps) => {
   const [sliderRef] = useKeenSlider({
     loop: false,
     breakpoints: {
@@ -152,13 +151,13 @@ const Credits = ({id, mediaType, title, casts, crews, creators}:
 
           {mediaType === "movie" ? 
               <Director 
-                crews={crews}
+                crews={crews || []}
                 childStyles="max-xl:text-sm max-sm:text-xs"
               />
           :
               <div className="flex items-center gap-2">
                 <CreditList 
-                  items={creators} 
+                  items={creators || []} 
                   childStyles="max-xl:text-sm max-sm:text-xs"
                 />
               </div> 
@@ -175,7 +174,7 @@ const Credits = ({id, mediaType, title, casts, crews, creators}:
         
             <div className="flex items-center gap-2">
                 <CreditList 
-                  items={crews} 
+                  items={crews || []} 
                   filterJobs={["Writer", "Screenplay", "Characters"]} 
                   childStyles="max-xl:text-sm max-sm:text-xs"
                 />

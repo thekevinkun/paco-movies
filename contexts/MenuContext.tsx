@@ -1,20 +1,20 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
 
-import { IMenuContext } from "@types";
+import type { IMenuContextProps, Category, Genre } from "@types";
 
 import { MEDIA_TYPE } from "@lib/utils/constants";
 
-const MenuContextDefaultValues: IMenuContext = {
+const MenuContextDefaultValues: IMenuContextProps = {
     activeMediaType: "all",
     activeCategory: "trending",
-    handleChangeMediaType: (mediaType: string, genre?: any) => {},
+    handleChangeMediaType: (mediaType: string, genre?: Genre[]) => {},
     handleChangeCategory: (name: string) => {},
     showCategories: [],
     showGenres: []
 }
 
-const MenuContext = createContext<IMenuContext>(MenuContextDefaultValues);
+const MenuContext = createContext<IMenuContextProps>(MenuContextDefaultValues);
 
 export function useMenu() {
     return useContext(MenuContext);
@@ -23,16 +23,16 @@ export function useMenu() {
 export const MenuProvider = ({ children } : Readonly<{children: React.ReactNode;}>) => {
     const [activeMediaType, setActiveMediaType] = useState<string>("all");
     const [activeCategory, setActiveCategory] = useState<string>("trending");
-    const [showCategories, setShowCategories] = useState<{ id: string; title: string; icon: string; }[] | undefined>(undefined);
-    const [showGenres, setShowGenres] = useState<{id: number, name: string}[] | undefined>(undefined);
+    const [showCategories, setShowCategories] = useState<Category[] | null>(null);
+    const [showGenres, setShowGenres] = useState<Genre[] | null>(null);
 
-    const handleChangeMediaType = (mediaType: string, genre?: any) => {
+    const handleChangeMediaType = (mediaType: string, genre?: Genre[]) => {
         const objMediaType = MEDIA_TYPE.find(item => item.id === mediaType);
         const getMediaTypeCategory = objMediaType && objMediaType["categories"];
 
         setActiveMediaType(mediaType);
-        setShowCategories(getMediaTypeCategory);
-        setShowGenres(genre);
+        setShowCategories(getMediaTypeCategory ?? null);
+        setShowGenres(genre ?? null);
     }
 
     const handleChangeCategory = (name: string) => {

@@ -1,15 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 import { FallbackImage, PreviewAction, MotionDiv } from "@components";
-import { cardMovieVariants } from "@lib/utils/motion";
 
-import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { ICardMovie } from "@types";
+import type { ICardMovieProps } from "@types";
+
+import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovie) => {
+const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovieProps) => {
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
@@ -27,7 +28,9 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
         <FallbackImage
           src={poster}
           mediaType={mediaType}
-          alt="poster"
+          alt={mediaType === "movie" 
+            || mediaType === "tv" ? "poster" : "profile"
+          }
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           placeholder="blur"

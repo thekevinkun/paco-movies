@@ -1,18 +1,19 @@
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
-import { IPreviewContext } from "@types";
+import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 
-const PreviewContextDefaultValues: IPreviewContext = {
+import type { IPreviewContextProps } from "@types";
+
+const PreviewContextDefaultValues: IPreviewContextProps = {
     previewId: null,
     previewMediaType: "",
     open: (mediaType: string, id: number) => {},
     close: () => {},
 }
 
-const PreviewContext = createContext<IPreviewContext>(PreviewContextDefaultValues);
+const PreviewContext = createContext<IPreviewContextProps>(PreviewContextDefaultValues);
 
 export const PreviewProvider = ({ children } : Readonly<{children: ReactNode;}>) => {
     const [previewId, setPreviewId] = useState<number | null>(null);
-    const [previewMediaType, setPreviewMediaType] = useState<any>(null);
+    const [previewMediaType, setPreviewMediaType] = useState<string>("");
 
     // Open modal and get data
     const open = useCallback((mediaType: string, id: number) => {        
@@ -24,7 +25,7 @@ export const PreviewProvider = ({ children } : Readonly<{children: ReactNode;}>)
      // Close modal and remove hash
      const close = useCallback(() => {
         setPreviewId(null);
-        setPreviewMediaType(null);
+        setPreviewMediaType("");
     }, []);
 
     return (

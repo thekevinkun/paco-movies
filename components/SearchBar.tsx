@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 
-const SearchBar = ({widthClass, margin} : {widthClass: String, margin: String}) => {
+const SearchBar = ({widthClass, margin} : {widthClass: string, margin: string}) => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 

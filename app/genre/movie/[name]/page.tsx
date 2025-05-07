@@ -1,30 +1,40 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { ContentMoviesClient } from "@components/Clients";
 
+import type { Genre } from "@types";
+
 import { getByGenre } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
-import { isNumeric } from "@lib/helpers/helpers";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  params = await params;
-  const genreId = params.name.substring(0, params.name.indexOf("-"));
+export const dynamic = "force-static";
 
-  const genre = await getCachedGenres("movie");
-  const genreFind = genre.find((g: any) => g.id.toString() === genreId);
+// REQUIRED to avoid build/runtime param bugs
+export async function generateStaticParams() {
+  return []; // Prevents runtime "await params" error
+}
+
+export async function generateMetadata({ params }: {params: Promise<{ name: string }>}): Promise<Metadata> {
+  const mediaType = "movie";
+  const { name } = await params;
+  const genreId = name.split("-")[0];
+
+  const genre = await getCachedGenres(mediaType) as Genre[];
+  const genreFind = genre.find((g) => g.id.toString() === genreId);
   const genreName = genreFind ? genreFind.name : "Unknown Genre";
 
   return {
     title: genreName + " Movies — PacoMovies",
-    description: genreName + " Movie collection's page",
+    description: "Discover " + genreName + " TV Shows."
   };
 }
 
-const GenreMovie = async ({params, mediaType="movie"}: {params: any, mediaType: string}) => {
-  params = await params;
-  const genreId = await params.name.substring(0, params.name.indexOf("-"));
+const GenreMovie = async ({ params }: {params: Promise<{ name: string }>}) => {
+  const mediaType = "movie";
+  const { name } = await params;
+  const genreId = name.split("-")[0];
 
-  const movieData = await getByGenre(mediaType, !isNumeric(params.name) ? genreId : params.name);
+  const movieData = await getByGenre(mediaType, genreId);
   const genreData = await getCachedGenres(mediaType);
 
   return (

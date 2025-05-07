@@ -3,12 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { FallbackImage, MotionDiv } from "@components";
-import { cardMovieVariants } from "@lib/utils/motion";
 
-import { ICardPerson } from "@types";
+import type { ICardPersonProps } from "@types";
+
+import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerson) => {
+const CardPerson = ({id, name, photo, department, popularity, works}: ICardPersonProps) => {
   const url = `/name/${id}-${slugify(name)}`
   
   return (
@@ -79,8 +80,8 @@ const CardPerson = ({id, name, photo, department, popularity, works}: ICardPerso
         </div>
 
         <div className="mt-auto pt-5 leading-5">
-            {works?.map((work: any) => {
-                const title = work.title || work.name
+            {works?.map((work) => {
+                const title = work.title ?? work.name ?? "untitled"
                 const route = `/title/${work.media_type}/${work.id}-${slugify(title)}`
                 
                 return (

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { ContentStarsClient } from "@components/Clients";
 
@@ -6,10 +6,15 @@ import { getCachedTrending } from "@lib/cache";
 
 export const metadata: Metadata = {
   title: "Stars — PacoMovies",
-  description: "Stars collection's page"
+  description: "Discover popular stars around the world."
 };
 
-const Stars = async ({mediaType="stars", category="popular"}) => {
+export const dynamic = "force-dynamic";
+
+const Stars = async () => {
+  const mediaType="stars"; 
+  const category="popular";
+
   const data = await getCachedTrending(mediaType, category);
   
   return (

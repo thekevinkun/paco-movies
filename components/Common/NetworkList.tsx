@@ -3,15 +3,16 @@ import Link from "next/link";
 
 import { FallbackImage } from "@components";
 
-import { INetworkProps } from "@types";
+import type { INetworkListProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
 
-const NetworkList = ({ mediaType, networks, containerStyles }: INetworkProps) => {
+const NetworkList = ({ mediaType, networks, containerStyles }: INetworkListProps) => {
   if (!networks) return null;
   
   return (
     <>
-      {networks.map((network: any) => (
+      {networks.map((network) => (
         <Link 
           key={network.id} 
           href={`https://www.${slugify(network.name)}.com`} 

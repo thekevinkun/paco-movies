@@ -4,9 +4,9 @@ const MEDIA_TYPE = [
       title: "Movies",
       icon: "/icons/movie.svg",
       categories: [
-        {id: "now-playing", title: "Now Playing", icon: "/images/now playing.svg"}, 
+        {id: "now-playing", title: "Now Playing", icon: "/images/now-playing.svg"}, 
         {id: "popular", title: "Popular", icon: "/images/popular.svg"},
-        {id: "top-rated", title: "Top Rated", icon: "/images/top rated.svg"},
+        {id: "top-rated", title: "Top Rated", icon: "/images/top-rated.svg"},
         {id: "upcoming", title: "Upcoming", icon: "/images/upcoming.svg"}
       ]
     },
@@ -15,10 +15,10 @@ const MEDIA_TYPE = [
       title: "Tv Shows",
       icon: "/icons/tv.svg",
       categories: [
-        {id: "airing-today", title: "Airing Today", icon: "/images/airing today.svg"}, 
-        {id: "on-the-air", title: "On The Air", icon: "/images/on the air.svg"},
+        {id: "airing-today", title: "Airing Today", icon: "/images/airing-today.svg"}, 
+        {id: "on-the-air", title: "On The Air", icon: "/images/on-the-air.svg"},
         {id: "popular", title: "Popular", icon: "/images/popular.svg"},
-        {id: "top-rated", title: "Top Rated", icon: "/images/top rated.svg"}
+        {id: "top-rated", title: "Top Rated", icon: "/images/top-rated.svg"}
       ]
     },
     {

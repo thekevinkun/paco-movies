@@ -5,15 +5,16 @@ import moment from "moment";
 import { FaPlay } from "react-icons/fa";
 
 import { FallbackImage, VideoAction } from "@components";
-
-import { IDetailsMain } from "@types";
-import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
-
 import { CreditList, GenreList, NetworkList, Director } from "@components/Common";
 
+import type { IDetailsMainProps } from "@types";
+
+import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
+
+
 const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
-        officialTrailer, genres, tagline, overview, credits, country, certification, runtime, 
-        tvrating, status, networks, creators}: IDetailsMain) => {
+        officialTrailer, genres, overview, credits, country, certification, runtime, 
+        tvrating, status, networks, creators}: IDetailsMainProps) => {
     
     const url = `/title/${mediaType}/${id}-${slugify(title)}`;
             
@@ -24,7 +25,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
+                    backgroundImage: `url("https://image.tmdb.org/t/p/w780${backdrop}")`,
                 }}
                 className="relative w-full h-72 max-sm:h-64"
             >
@@ -134,7 +135,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                             
                             <span className="text-sm">
                                 {releaseDate && `${moment(releaseDate).format("L")}`}    
-                                {` (${country.iso_3166_1})`}
+                                {` (${country?.iso_3166_1 ?? ""})`}
                             </span>
                         </div>
                     :
@@ -205,7 +206,7 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                         :
                             <div className="flex items-center gap-2">
                                 <CreditList 
-                                    items={creators} 
+                                    items={creators ?? []} 
                                     childStyles="max-xl:text-sm max-sm:text-xs"
                                 />
                             </div> 

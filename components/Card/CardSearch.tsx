@@ -6,12 +6,13 @@ import moment from "moment";
 
 import { FallbackImage, MotionDiv } from "@components";
 
-import { ICardSearch } from "@types";
+import type { ICardSearchProps } from "@types";
+
 import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const CardSearch = ({ id, name, photo, mediaType, 
-    releaseDate, vote, overview, department, works }: ICardSearch) => {
+    releaseDate, vote, overview, department, works }: ICardSearchProps) => {
 
     const fullRoute = id + "-" + `${slugify(name)}`;
     const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
@@ -27,7 +28,7 @@ const CardSearch = ({ id, name, photo, mediaType,
             {/* PHOTO */}
             <Link 
                 href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-                className="relative group bg-dark 
+                className="relative group bg-dark
                     w-[138px] max-md:w-[127px] max-xs:w-[115px] h-full"
             >
                 <FallbackImage
@@ -128,8 +129,8 @@ const CardSearch = ({ id, name, photo, mediaType,
                 
                 { works &&
                     <div className="pt-3 pr-7">
-                        {works?.map((work: any) => {
-                            const title = work.title || work.name
+                        {works?.map((work) => {
+                            const title = work.title ?? work.name ?? "untitled"
                             const route = `/title/${work.media_type}/${work.id}-${slugify(title)}`
                             
                             return (

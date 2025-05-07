@@ -1,29 +1,39 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { ContentDetailsClient } from "@components/Clients";
 
-import { getCachedDetails } from "@lib/cache";
-import { isNumeric } from "@lib/helpers/helpers";
+import type { IGetMovieDetailsResponse } from "@types";
 
-export async function generateMetadata({params, mediaType="movie"}: 
-      {params: any, mediaType: string}): Promise<Metadata> {
-  params = await params;
-  const titleId = params.slug.substring(0, params.slug.indexOf("-"));
+import { getCachedDetails } from "@lib/cache";
+
+export const dynamic = "force-static";
+
+// REQUIRED to avoid build/runtime param bugs
+export async function generateStaticParams() {
+  return []; // Prevents runtime "await params" error
+}
+
+export async function generateMetadata({ params }: {params: Promise<{ slug: string }>}): Promise<Metadata> {
+  const mediaType = "movie";
+  const { slug } = await params;
+  const titleId = Number(slug.split("-")[0]);
   
-  const data = await getCachedDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
+  const data = await getCachedDetails(mediaType, titleId) as IGetMovieDetailsResponse;
   const title = data.details.title;
+  const overview = data.details.overview;
 
   return {
     title: title + " — PacoMovies",
-    description: title + " details page",
+    description: overview,
   };
 }
 
-const TitleMovie = async ({params, mediaType="movie"}: {params: any, mediaType: string}) => {
-  params = await params;
-  const titleId = params.slug.substring(0, params.slug.indexOf("-"));
+const TitleMovie = async ({ params }: {params: Promise<{ slug: string }>}) => {
+  const mediaType = "movie";
+  const { slug } = await params;
+  const titleId = Number(slug.split("-")[0]);
 
-  const data = await getCachedDetails(mediaType, !isNumeric(params.slug) ? titleId : params.slug);
+  const data = await getCachedDetails(mediaType, titleId);
 
   return (
     <ContentDetailsClient 

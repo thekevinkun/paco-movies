@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-import { dedupeResults } from "@lib/helpers/helpers";
-import { parentStaggerVariants } from "@lib/utils/motion";
 
 import { Spinner, MotionDiv } from "@components";
+
+import { IContentStarsProps, IGetStarsResponse } from "@types";
+
+import { dedupeResults } from "@lib/helpers/helpers";
+import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardPerson = dynamic(() => import("@components/Card/CardPerson"), {
     ssr: false,
@@ -17,14 +20,12 @@ const LoadMore = dynamic(() => import("@components/LoadMore"), {
   loading: () => null
 });
 
-const ContentStars = ({ data, mediaType, category }: 
-    {data: any, mediaType: string, category: string}) => {
-
+const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
-  const [useData, setUseData] = useState<any>(data);
+  const [useData, setUseData] = useState<IGetStarsResponse>(data);
 
-  const handleNextPage = (newData: any) => {
-    const oldResults = useData.results;
+  const handleNextPage = (newData: IGetStarsResponse) => {
+    const oldResults = useData?.results;
     const combinedResults = [...oldResults, ...newData.results];
     const uniqueResults = dedupeResults(combinedResults);
 
@@ -35,8 +36,8 @@ const ContentStars = ({ data, mediaType, category }:
   }
 
   useEffect(() => {
-    handleChangeMediaType(mediaType);
-    handleChangeCategory(category);
+    handleChangeMediaType(mediaType ?? "");
+    handleChangeCategory(category ?? "");
   }, [])
 
   const [columns, setColumns] = useState(3); // Default to desktop (4 columns)
@@ -76,14 +77,14 @@ const ContentStars = ({ data, mediaType, category }:
         className="grid grid-rows-1 grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-3 
           max-md:grid-cols-2 gap-x-3 gap-y-10 max-md:gap-x-5 max-md:gap-y-7 pt-8 pb-12"
       >
-        {useData?.results.map((item: any) => (
+        {useData?.results.map((item) => (
           <CardPerson
             key={item.id}
             id={item.id}
-            name={item.name}
+            name={item.name ?? ""}
             photo={item.profile_path}
             department={item.known_for_department}
-            popularity={item.popularity}
+            popularity={item.popularity ?? 0}
             works={item.known_for}
           />
         ))}
@@ -98,7 +99,7 @@ const ContentStars = ({ data, mediaType, category }:
         <LoadMore 
           page={useData.page}
           mediaType={mediaType}
-          category={category}
+          category={category ?? ""}
           onNextPage={handleNextPage}
         />
       }

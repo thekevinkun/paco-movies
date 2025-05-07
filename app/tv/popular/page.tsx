@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { ContentMoviesClient } from "@components/Clients";
 
@@ -6,11 +6,16 @@ import { getByCategory } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
 
 export const metadata: Metadata = {
-  title: "TV Shows Popular — PacoMovies",
-  description: "TV Show popular collection's page"
+  title: "Popular TV Shows — PacoMovies",
+  description: "Discover Popular TV shows."
 };
 
-const TvPopular = async ({mediaType="tv", category="popular"}) => {
+export const dynamic = "force-dynamic";
+
+const TvPopular = async () => {
+  const mediaType="tv";
+  const category="popular";
+
   const tvData = await getByCategory(mediaType, category);
   const genreData = await getCachedGenres(mediaType);
   

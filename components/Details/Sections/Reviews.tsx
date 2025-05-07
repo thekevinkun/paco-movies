@@ -5,14 +5,15 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import { MdArrowForwardIos } from "react-icons/md";
 
 import { FallbackImage } from "@components";
 
-import { MdArrowForwardIos } from "react-icons/md";
+import type { IReviewsProps } from "@types";
+
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const Reviews = ({id, mediaType, title, reviews}: 
-      {id: number, mediaType: string, title: string, reviews: any}) => {
+const Reviews = ({id, mediaType, title, reviews}: IReviewsProps) => {
 
   const paragraphRef = useRef<HTMLParagraphElement | null>(null);
   
@@ -22,7 +23,7 @@ const Reviews = ({id, mediaType, title, reviews}:
 
   useEffect(() => {
     setRandomReview(Math.floor(Math.random() * reviews.length));
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const el = paragraphRef.current;
@@ -94,10 +95,10 @@ const Reviews = ({id, mediaType, title, reviews}:
           
                       <span 
                         className={`text-lg text-dark 
-                          ${reviews[randomReview]?.author_details?.rating > 0 ? 
-                          "font-medium" : "font-normal italic"}`}
+                          ${reviews[randomReview].author_details.rating && reviews[randomReview].author_details.rating > 0 ? 
+                            "font-medium" : "font-normal italic"}`}
                       >
-                          {reviews[randomReview]?.author_details?.rating > 0 
+                          {reviews[randomReview].author_details.rating && reviews[randomReview].author_details.rating > 0 
                             ? roundedToFixed(reviews[randomReview]?.author_details?.rating, 1) : "NaN"}
                       </span>
                   </div>

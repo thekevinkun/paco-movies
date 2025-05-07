@@ -6,14 +6,15 @@ import { FaPlay } from "react-icons/fa";
 
 import { FallbackImage, VideoAction } from "@components";
 
-import { IDetailsMain } from "@types";
+import type { IDetailsMainProps } from "@types";
+
 import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 import { CreditList, GenreList, NetworkList, Director } from "@components/Common";
 
 const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
     officialTrailer, genres, tagline, overview, credits, country, certification, runtime, 
-    tvrating, status, networks, creators}: IDetailsMain) => {
+    tvrating, status, networks, creators}: IDetailsMainProps) => {
 
     const url = `/title/${mediaType}/${id}-${slugify(title)}`;
     
@@ -88,7 +89,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                     
                                     <span className="text-sm max-xl:text-xs max-lg:text-sm">
                                         {releaseDate && `${moment(releaseDate).format("L")}`}    
-                                        {` (${country.iso_3166_1})`}
+                                        {` (${country?.iso_3166_1 ?? ""})`}
                                     </span>
 
                                     <span>|</span>
@@ -211,7 +212,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                         {/* CREDITS */}
                         <div className="pt-7 text-light">
                             {/* DIRECTOR or CREATORS */}
-                            {(credits.crew.length > 0 || creators.length > 0) &&
+                            {(credits.crew.length > 0 || creators?.length && creators.length > 0) &&
                                 <div className="py-2 flex items-center font-semibold
                                     border-b border-gray-500"
                                 >
@@ -231,7 +232,7 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                     :
                                         <div className="flex items-center gap-2">
                                             <CreditList 
-                                                items={creators}
+                                                items={creators ?? []}
                                                 childStyles="max-xl:text-sm max-sm:text-xs"
                                             />
                                         </div> 

@@ -12,6 +12,7 @@ import { FallbackImage } from "@components";
 import { CreditList, Director, GenreList, NetworkList } from "@components/Common";
 
 import { usePreview } from "@contexts/PreviewContext";
+import { IGetMovieDetailsResponse } from "@types";
 
 import { parentModalVariants, previewModalVariants } from "@lib/utils/motion";
 import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
@@ -19,11 +20,11 @@ import { convertRuntime, roundedToFixed, slugify } from "@lib/helpers/helpers";
 const PreviewModal = () => {
   const { previewId, previewMediaType, close } = usePreview();
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<any>(null);
+
+  const [data, setData] = useState<IGetMovieDetailsResponse | null>(null);
   
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
-  // Handle escape key and body scroll lock
   useEffect(() => {
     const loadPreview = async () => {
       try {
@@ -46,7 +47,7 @@ const PreviewModal = () => {
     if (previewId) {
       loadPreview();
     }
-  }, [previewId]);
+  }, [previewId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Handle escape key and body scroll lock
   useEffect(() => {
@@ -63,7 +64,7 @@ const PreviewModal = () => {
     window.addEventListener("keydown", esc);
 
     return () => window.removeEventListener("keydown", esc);
-  }, [previewId, close]);
+  }, [previewId, close])
 
   return (
     <AnimatePresence>
@@ -115,7 +116,7 @@ const PreviewModal = () => {
                         <div className="flex flex-1 flex-col">
                             {/* TITLE */}
                             <Link 
-                                href={`/title/${previewMediaType}/${previewId}-${slugify(data.details.title || data.details.name)}`}  
+                                href={`/title/${previewMediaType}/${previewId}-${slugify(data.details.title || data.details.name || "untitled")}`}  
                                 title={data.details.title || data.details.name} 
                                 className="inline-block w-fit"
                                 onClick={close}
@@ -132,56 +133,68 @@ const PreviewModal = () => {
                                 flex items-center gap-2"
                             >
                                 {/* RELEASE DATE */}
-                                {previewMediaType === "movie" && data.releaseDate ?
+                                {previewMediaType === "movie" && data?.releaseDate?.date ?
                                     <p>
-                                        {data.releaseDate.date && `${moment(data.releaseDate.date).format("YYYY")}`}
+                                        {moment(data.releaseDate.date).format("YYYY")}
                                     </p>
-                                : (previewMediaType === "tv" && data.details) &&
+                                : (previewMediaType === "tv" && data?.details?.first_air_date) &&
                                     <p>
-                                        {data.details.first_air_date && `${moment(data.details.first_air_date).format("YYYY")}`}
+                                        {moment(data.details.first_air_date).format("YYYY")}
                                     </p>
                                 }
                                 
+                                {((previewMediaType === "movie" && data?.releaseDate?.date) || 
+                                    (previewMediaType === "tv" && data.details.first_air_date))
+                                    && 
+                                 ((previewMediaType === "movie" && (data.details.runtime && data.details.runtime > 0)) || 
+                                 (previewMediaType === "tv" && (data.details.number_of_seasons && data.details.number_of_seasons > 0)))
+                                 &&
+                                    <span className="">&#8226;</span>
+                                }
+
                                 {/* RUNTIME OR SEASONS */}
-                               
-                                {previewMediaType === "movie" && data.details.runtime > 0 ?
-                                    <>
-                                        <span className="">&#8226;</span>
-                                        <p className="">
-                                            {convertRuntime(data.details.runtime)}
-                                        </p>
-                                    </>
+                                {previewMediaType === "movie" && (data.details.runtime && data.details.runtime > 0) ?
+                                    <p className="">
+                                        {convertRuntime(data.details.runtime)}
+                                    </p>
                                     
-                                : (previewMediaType === "tv" && data.details.number_of_seasons > 0) &&
-                                    <>
-                                        <span className="">&#8226;</span>
-                                        <p>
-                                            {`${data.details.number_of_seasons} Seasons`}
-                                        </p>
-                                    </>                 
+                                : (previewMediaType === "tv" && (data.details.number_of_seasons && data.details.number_of_seasons > 0)) &&
+                                    <p>
+                                        {`${data.details.number_of_seasons} Seasons`}
+                                    </p>              
+                                }
+
+                                {((previewMediaType === "movie" && (data.details.runtime && data.details.runtime > 0)) || 
+                                 (previewMediaType === "tv" && (data.details.number_of_seasons && data.details.number_of_seasons > 0)))
+                                    && 
+                                ((previewMediaType === "movie" && data?.releaseDate?.certification) || 
+                                (previewMediaType === "tv" && data?.ratings?.rating))
+                                &&
+                                    <span className="">&#8226;</span>
                                 }
 
                                 {/* RATING */}
-                                {previewMediaType === "movie" && data.releaseDate.certification ?
-                                    <>
-                                        <span className="">&#8226;</span>
-                                        <p className="">
-                                            {data.releaseDate.certification}
-                                        </p>
-                                    </>
-                                : (previewMediaType === "tv" && data.ratings.rating) &&
-                                    <>
-                                        <span className="">&#8226;</span>
-                                        <p className="">
-                                            {data.ratings.rating}
-                                        </p>
-                                    </>
+                                {previewMediaType === "movie" && data?.releaseDate?.certification ?
+                                    <p className="">
+                                        {data.releaseDate.certification}
+                                    </p>
+                                : (previewMediaType === "tv" && data?.ratings?.rating) &&
+                                    <p className="">
+                                        {data.ratings.rating}
+                                    </p>
+                                }
+
+                                {((previewMediaType === "movie" && data?.releaseDate?.certification) || 
+                                (previewMediaType === "tv" && data?.ratings?.rating))
+                                    && 
+                                (previewMediaType === "tv" && data.details.networks)
+                                &&
+                                    <span className="">&#8226;</span>
                                 }
 
                                 {/* NETWORKS FOR TV */}
                                 {(previewMediaType === "tv" && data.details.networks) &&
                                     <>
-                                        <span className="">&#8226;</span>
                                         <NetworkList 
                                             mediaType={previewMediaType}
                                             networks={data.details.networks}
@@ -218,11 +231,11 @@ const PreviewModal = () => {
                 
                                 <span 
                                     className={`text-lg max-sm:text-base text-light-1
-                                        ${data.details.vote_average > 0 ? 
+                                        ${data.details.vote_average && data.details.vote_average > 0 ? 
                                         "font-semibold" : "font-normal italic"}`
                                     }
                                 >
-                                    {data.details.vote_average  > 0 ? roundedToFixed(data.details.vote_average, 1) : "NaN"}
+                                    {data.details.vote_average && data.details.vote_average > 0 ? roundedToFixed(data.details.vote_average, 1) : "NaN"}
                                 </span>
                             </div>
                         </div>
@@ -254,7 +267,7 @@ const PreviewModal = () => {
                                 :
                                     <div className="text-xs flex items-center gap-2">
                                         <CreditList 
-                                            items={data.details.created_by} 
+                                            items={data.details.created_by ?? []} 
                                             childStyles="text-xs max-sm:text-[0.675rem]"
                                             handleClick={close}
                                         />

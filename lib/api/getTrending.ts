@@ -1,44 +1,56 @@
 import { options } from "@lib/api/data";
 
-export const getTrending = async (mediaType: string) => {
+import type { MediaItem, VideoItem, IGetByCategoryResponse } from "@types";
+
+export const getTrending = async (mediaType: string): Promise<IGetByCategoryResponse> => {
     if (mediaType === "stars") mediaType = "person";
     
-    const response = await 
-        fetch(`https://api.themoviedb.org/3/trending/${mediaType}/day?language=en-US`, options);
+    const response = await fetch(`https://api.themoviedb.org/3/trending/${mediaType}/day?language=en-US`, options);
 
     const data = await response.json();
-    
+
     if (!response.ok || data.success === false)
-        throw new Error(data.status_message || "Failed to fetch trending");
+        throw new Error(data.status_message || "Failed to fetch trending data.");
 
-    let firstResult: any = {};
+    if (!Array.isArray(data.results) || data.results.length === 0) 
+        throw new Error("No results found for this category.");
 
-    // Get first movie or tv data
-    if (mediaType !== "person") {
-        const getFirstData = data.results.slice(0, 1)[0];
+    let firstResult: IGetByCategoryResponse["firstResult"] = undefined;
 
+    const firstItem: MediaItem = data.results[0];
+        
+    if (!firstItem || !firstItem.id)
+        throw new Error("Invalid first result: missing ID or Media Type.");
+
+    // Only get trailer for movie/tv (not person)
+    if (firstItem.media_type !== "person") {
         // Get video
-        const response = await fetch(`https://api.themoviedb.org/3/${getFirstData.media_type}/${getFirstData.id}/videos?language=en-US`, options);
-        const videos = await response.json();
-        if (!response.ok || videos.success === false)
-            throw new Error(videos.status_message);
+        const videoRes = await fetch(`https://api.themoviedb.org/3/${firstItem.media_type}/${firstItem.id}/videos?language=en-US`, options);
+        const videoData = await videoRes.json();
+        if (!videoRes.ok || videoData.success === false)
+            throw new Error(videoData.status_message || "Failed to fetch videos.");
 
         // Get main trailer
-        const trailers = videos.results
-            .filter((v: any) => v.type === "Trailer" && v.official)
-            .sort((a: any, b: any) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+        const trailers = (videoData.results as VideoItem[])
+            .filter((v: VideoItem) => v.type === "Trailer" && v.official)
+            .sort((a, b) => new Date(b.published_at ?? "").getTime() - new Date(a.published_at ?? "").getTime());
 
-        const teasers = videos.results
-            .filter((v: any) => v.type === "Teaser" && v.official)
-            .sort((a: any, b: any) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
+        const teasers = (videoData.results as VideoItem[])
+            .filter((v: VideoItem) => v.type === "Teaser" && v.official)
+            .sort((a, b) => new Date(b.published_at ?? "").getTime() - new Date(a.published_at ?? "").getTime());
 
         const officialTrailer = trailers[0] || teasers[0] || null;
 
         firstResult = {
-            result: getFirstData,
+            result: firstItem,
             officialTrailer: officialTrailer
         }
-    }   
+    } else {
+        firstResult = {
+            result: firstItem,
+            officialTrailer: null
+        }
+    }  
 
     return {
         page: data.page,

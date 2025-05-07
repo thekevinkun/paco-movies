@@ -7,8 +7,10 @@ import { SiWikidata } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import { RxExternalLink } from "react-icons/rx";
 
-const Details = ({mediaType, details, releaseDate, tvratings, originCountry, externalIds}: 
-    {mediaType: any, details: any, releaseDate?: any, tvratings?: any, originCountry: any, externalIds: any}) => {
+import type { IDetailsProps } from "@types";
+
+const Details = ({mediaType, details, releaseDate,
+    tvratings, originCountry, externalIds}: IDetailsProps) => {
 
   return (
     <>
@@ -25,18 +27,22 @@ const Details = ({mediaType, details, releaseDate, tvratings, originCountry, ext
               {mediaType === "movie" ? "Release Date" : "First Air Date"}
           </h3>
 
-          {mediaType === "movie" && releaseDate.date ? 
+          {mediaType === "movie" && releaseDate?.date ? 
             <p className="max-md:text-sm max-sm:text-xs">
               {moment(releaseDate.date).format("LL")}
               <span>
-                {" "}({releaseDate.iso_3166_1.native_name})
+                {" "}({releaseDate?.iso_3166_1?.native_name || ""})
               </span>
             </p>
-          : mediaType === "tv" && details.first_air_date ? 
+          : mediaType === "tv" && details?.first_air_date ? 
             <p className="max-md:text-sm max-sm:text-xs">
               {moment(details.first_air_date).format("LL")}
               <span>
-                {" "}({tvratings.iso_3166_1.native_name})
+                {" "}
+                { typeof tvratings?.iso_3166_1 === "object" && "native_name" in tvratings?.iso_3166_1
+                  ? `(${tvratings?.iso_3166_1?.native_name || ""})`
+                : ""
+                }
               </span>
             </p>
           :
@@ -55,8 +61,8 @@ const Details = ({mediaType, details, releaseDate, tvratings, originCountry, ext
           </h3>
 
           <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {originCountry.slice(0, 3).map((country: any) => (
-              <React.Fragment key={country.iso_3166_1}>
+            {originCountry.slice(0, 3).map((country, index) => (
+              <React.Fragment key={country?.iso_3166_1 || index}>
                 <p>
                   {country.native_name}
                 </p>
@@ -153,7 +159,7 @@ const Details = ({mediaType, details, releaseDate, tvratings, originCountry, ext
           </h3>
           
           <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.spoken_languages.slice(0, 3).map((lang: any) => (
+            {details.spoken_languages.slice(0, 3).map((lang) => (
               <React.Fragment key={lang.name}>
                 <p>
                   {lang.name || lang.english_name}
@@ -173,7 +179,7 @@ const Details = ({mediaType, details, releaseDate, tvratings, originCountry, ext
           </h3>
 
           <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
-            {details.production_companies.slice(0, 3).map((company: any, index: number) => (
+            {details.production_companies.slice(0, 3).map((company, index: number) => (
               <React.Fragment key={company.id}>
                 <p className={`${index >= 1 && "max-md:hidden"}`}>
                   {company.name}

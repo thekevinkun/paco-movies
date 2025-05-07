@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useVideo } from "@contexts/VideoContext";
 
-import { IVideoAction } from "@types";
+import type { VideoActionProps } from "@types";
 
 export default function VideoAction({
     href,
@@ -11,7 +11,7 @@ export default function VideoAction({
     videoTitle,
     containerStyles,
     children,
-  }: IVideoAction) {
+  }: VideoActionProps) {
     const { open } = useVideo();
 
     return (

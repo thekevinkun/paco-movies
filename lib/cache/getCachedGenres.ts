@@ -12,9 +12,11 @@ export async function getCachedGenres(mediaType: string) {
   try {
     // Try fetching from API
     const data = await getGenres(mediaType);
-    await saveToCache(subPath, cacheKey, data);
-    return data;
+    await saveToCache(subPath, cacheKey, data.genres);
+    return data.genres;
   } catch(error) {
+    console.error("API fetch error:", error);
+
     // Fallback to expired cache if possible
     const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
     if (expiredCache) return expiredCache;

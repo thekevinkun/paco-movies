@@ -44,7 +44,7 @@ export const getFromCache = async (
     }
 }
 
-export async function saveToCache(subPath: string, key: string, data: any) {
+export async function saveToCache<T>(subPath: string, key: string, data: T): Promise<void> {
     // Combines .cache/ folder with a subpath folder like movie/details and check
     const dirPath = path.join(CACHE_DIR, subPath);
     ensureDir(dirPath);

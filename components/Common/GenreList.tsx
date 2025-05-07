@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
+
+import type { IGenreListProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
 
-import { IGenreProps } from "@types";
-
-const GenreList = ({ mediaType, genres, containerStyles, childStyles, handleClick }: IGenreProps) => {
+const GenreList = ({ mediaType, genres, containerStyles, childStyles, handleClick }: IGenreListProps) => {
   return (
     <>
       {genres.map((genre) => (

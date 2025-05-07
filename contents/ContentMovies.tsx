@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-import { dedupeResults } from "@lib/helpers/helpers";
-import { parentStaggerVariants } from "@lib/utils/motion";
 
 import { Spinner, MotionDiv } from "@components";
+
+import { IContentMoviesProps, IGetByCategoryResponse } from "@types";
+
+import { dedupeResults } from "@lib/helpers/helpers";
+import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardMovieTop = dynamic(() => import("@components/Card/CardMovieTop"), {
   ssr: false,
@@ -21,14 +24,12 @@ const LoadMore = dynamic(() => import("@components/LoadMore"), {
   loading: () => null
 });
 
-const ContentMovies = ({ data, genre, mediaType, category }: 
-    {data: any, genre?: any, mediaType: string, category: string}) => {
-
+const ContentMovies = ({ data, genre, mediaType, category }: IContentMoviesProps) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
-  const [useData, setUseData] = useState<any>(data);
+  const [useData, setUseData] = useState<IGetByCategoryResponse>(data);
   const firstResult = data.firstResult;
 
-  const handleNextPage = (newData: any) => {
+  const handleNextPage = (newData: IGetByCategoryResponse) => {
     const oldResults = useData.results;
     const combinedResults = [...oldResults, ...newData.results];
     const uniqueResults = dedupeResults(combinedResults);
@@ -41,7 +42,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
 
   useEffect(() => {
     handleChangeMediaType(mediaType, genre);
-    handleChangeCategory(category);
+    handleChangeCategory(category ?? "");
   }, [])
 
   const [columns, setColumns] = useState(4); // Default to desktop (4 columns)
@@ -78,15 +79,16 @@ const ContentMovies = ({ data, genre, mediaType, category }:
         animate="visible"
       >
         <CardMovieTop 
-          id={firstResult.result.id}
-          poster={firstResult.result.poster_path}
-          backDrop={firstResult.result.backdrop_path}
-          title={firstResult.result.title || firstResult.result.name}
-          overview={firstResult.result.overview}
-          mediaType={firstResult.result.media_type || mediaType}
-          releaseDate={firstResult.result.release_date || firstResult.result.first_air_date}
-          rating={firstResult.result.vote_average}
-          trailer={firstResult.officialTrailer}
+          id={firstResult?.result.id || undefined!}
+          poster={firstResult?.result.poster_path ?? ""}
+          backDrop={firstResult?.result.backdrop_path ?? ""}
+          title={firstResult?.result.title || firstResult?.result.name || "Untitled"}
+          overview={firstResult?.result.overview ?? ""}
+          mediaType={firstResult?.result.media_type || mediaType}
+          releaseDate={firstResult?.result.release_date || firstResult?.result.first_air_date || ""}
+          rating={firstResult?.result.vote_average || 0}
+          popularity={firstResult?.result.popularity || 0}
+          trailer={firstResult?.officialTrailer || null}
         />
       </MotionDiv>
       
@@ -98,15 +100,15 @@ const ContentMovies = ({ data, genre, mediaType, category }:
           grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
           gap-x-3 gap-y-5 max-md:gap-y-4"
       >
-          {gridMovies.map((item: any) => (
+          {gridMovies.map((item) => (
             <CardMovie
               key={item.id}
               id={item.id}
-              poster={item.poster_path}
-              title={item.title || item.name}
+              poster={item.poster_path ?? ""}
+              title={item.title || item.name || "Untitled"}
               mediaType={item.media_type || mediaType}
-              releaseDate={item.release_date || item.first_air_date}
-              rating={item.vote_average}
+              releaseDate={item?.release_date || item?.first_air_date || ""}
+              rating={item?.vote_average ?? 0}
             />
           ))}
 
@@ -134,7 +136,7 @@ const ContentMovies = ({ data, genre, mediaType, category }:
         <LoadMore 
           page={useData.page}
           mediaType={mediaType}
-          category={category}
+          category={category ?? ""}
           onNextPage={handleNextPage}
         />
       }

@@ -1,14 +1,14 @@
 import Link from "next/link";
-
-import { FallbackImage } from "@components";
-
 import { FiPlus } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 
+import { FallbackImage } from "@components";
+
+import type { IPersonPhotosProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
 
-const PersonPhotos = ({personId, name, images}: 
-    {personId: string, name: string, images: any}) => {
+const PersonPhotos = ({personId, name, images}: IPersonPhotosProps) => {
   
   const route = `/name/${personId}-${slugify(name)}`;
 
@@ -33,7 +33,7 @@ const PersonPhotos = ({personId, name, images}:
           h-[280px] max-xl:h-[250px] max-lg:h-[255px] 
           max-md:h-[250px] max-sm:h-[195px] max-xs:h-[180px]"
       >
-        {images.slice(0, 4).map((item: any, index: number) => (
+        {images.slice(0, 4).map((item, index: number) => (
           <div 
             key={index} 
             className={`relative col-span-2 bg-dark rounded-md
@@ -52,7 +52,7 @@ const PersonPhotos = ({personId, name, images}:
           </div>
         ))}
 
-        {images.slice(4, 5).map((item: any, index: number) => (
+        {images.slice(4, 5).map((item, index: number) => (
           <Link 
             key={index} 
             href={`${route}/photogallery`}

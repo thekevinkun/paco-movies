@@ -7,7 +7,7 @@ export const getCachedNextPage = async (
   ) => {
     const subPath =  mediaType === "stars" ? `${mediaType}` : `${mediaType}/${category}`; 
     const cacheKey = mediaType === "stars" ? `${mediaType}_${page}` : `${category}_${page}`; 
-    const maxAgeMs = 60 * 60 * 1000;
+    const maxAgeMs = 30 * 60 * 1000;
 
     const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;
@@ -22,6 +22,8 @@ export const getCachedNextPage = async (
         
         return data;
     } catch(error) {
+        console.error("API fetch error:", error);
+
         // Fallback to expired cache if possible
         const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
         if (expiredCache) return expiredCache;

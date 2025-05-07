@@ -2,29 +2,25 @@
 
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-
 import Image from "next/image";
 
-const LoadMore = ({page, mediaType, category, query, onNextPage}: 
-    { 
-      page: number, mediaType: string, 
-      category: string, query?: string, onNextPage: (items: any) => void
-    }) => {
+import type { LoadMoreProps, CachedNextPageResponse, ITMDBError } from "@types";
 
+const LoadMore = ({page, mediaType, category, query, onNextPage}: LoadMoreProps) => {
   const { ref, inView } = useInView();
-  
+
   useEffect(() => {
     const loadNextPage = async () => {
       try {
         const response = await fetch(
           `/api/next-page?mediaType=${mediaType}&category=${category}&query=${query || ""}&page=${page + 1}`
         );
-        const data = await response.json();
+        const data: CachedNextPageResponse & Partial<ITMDBError> = await response.json();
 
         if (response.ok) {
           onNextPage(data);
         } else {
-          console.error(data.error);
+          console.error(data.status_message);
         }
       } catch (error) {
         console.error("Error fetching next page:", error);
@@ -34,7 +30,7 @@ const LoadMore = ({page, mediaType, category, query, onNextPage}:
     if (inView) {
       loadNextPage();
     }
-  }, [inView]);
+  }, [inView]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

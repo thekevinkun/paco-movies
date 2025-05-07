@@ -1,7 +1,9 @@
+import { CachedResponse, IGetMovieDetailsResponse, IGetPersonDetailsResponse } from "@types";
+
 import { getMovieDetails, getTvDetails, getPersonDetails } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
-export const getCachedDetails = async (mediaType: string, id: number) => {
+export const getCachedDetails = async (mediaType: string, id: number): Promise<CachedResponse> => {
     const subPath = mediaType === "person" 
             ? `name` : `title/${mediaType}`;  // e.g., title/movie or title/movie
     const cacheKey = `${mediaType}_${id}`;   // e.g., movie_157336
@@ -12,19 +14,23 @@ export const getCachedDetails = async (mediaType: string, id: number) => {
     
     try {
         // Try fetching from API
-        let data: any = {}
+        let data: CachedResponse;   
 
         if (mediaType === "movie")
-            data = await getMovieDetails(mediaType, id);
+            data = await getMovieDetails(mediaType, id) as IGetMovieDetailsResponse;
         else if (mediaType === "tv")
-            data = await getTvDetails(mediaType, id);
+            data = await getTvDetails(mediaType, id) as IGetMovieDetailsResponse;
         else if (mediaType === "person")
-            data = await getPersonDetails(mediaType, id);
+            data = await getPersonDetails(mediaType, id) as IGetPersonDetailsResponse;
+        else
+            throw new Error("Invalid mediaType");
 
         await saveToCache(subPath, cacheKey, data);
 
         return data;
     } catch(error) {
+        console.error("API fetch error:", error);
+        
         // Fallback to expired cache if possible
         const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
         if (expiredCache) return expiredCache;

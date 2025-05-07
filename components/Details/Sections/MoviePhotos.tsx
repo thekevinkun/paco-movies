@@ -1,23 +1,25 @@
 import "@styles/photos.css";
 
 import Link from "next/link";
+import { FiPlus } from "react-icons/fi";
+import { MdArrowForwardIos } from "react-icons/md";
 
 import { FallbackImage } from "@components";
 
-import { FiPlus } from "react-icons/fi";
-import { MdArrowForwardIos } from "react-icons/md";
+import type { IMoviePhotoProps } from "@types";
+
 import { slugify } from "@lib/helpers/helpers";
 
-const getLessPhotos = (id: number, mediaType: string, 
-    title: string, posters: any, backdrops: any, route: string) => {
-
+const getLessPhotos = (props: IMoviePhotoProps & { route: string }) => {
+  const { mediaType, posters, backdrops, route } = props;
+  
   return (
     <div className="grid grid-cols-11 max-md:grid-cols-10
         gap-[15px] max-md:gap-[8px] w-full 
         h-[240px] max-xl:h-[200px] max-lg:h-[190px] 
         max-md:h-[175px] max-sm:h-[125px]"
     >
-      {posters.slice(0, 4).map((item: any, index: number) => (
+      {posters.slice(0, 4).map((item, index: number) => (
         <div 
           key={(index + 1) + "-posters"} 
           className="col-span-2 relative bg-dark rounded-md"
@@ -35,7 +37,7 @@ const getLessPhotos = (id: number, mediaType: string,
         </div>
       ))}
 
-      {backdrops.slice(0, 1).map((item: any) => (
+      {backdrops.slice(0, 1).map((item) => (
         <Link 
           key="last-backdrops"
           href={`${route}/photogallery`} 
@@ -62,34 +64,54 @@ const getLessPhotos = (id: number, mediaType: string,
   )
 }
 
-const getPhotos = (id: number, mediaType: string, 
-        title: string, posters: any, backdrops: any, route: string) => {
-    return (
-      <div className="grid-photos">
-        {posters.slice(0, 4).map((item: any, index: number) => (
-          <div 
-            key={(index + 1) + "-posters"} 
-            className={`relative bg-dark rounded-md
-              ${`photo-${index + 1}`}`}
-          >
-            <FallbackImage
-              src={item.file_path}
-              mediaType={mediaType}
-              alt="poster"
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-              placeholder="blur"
-              blurDataURL="/images/blur.jpg"
-              className="object-cover rounded-md opacity-80"
-            />
-          </div>
-        ))}
-        
-        {backdrops.slice(0, 3).map((item: any, index: number) => (
-          <div 
-            key={(index + 1) + "-backdrops"} 
-            className={`relative bg-dark rounded-md 
-              ${`backdrop-${index + 1}`}`}
+const getPhotos = (props: IMoviePhotoProps & { route: string }) => {
+  const { mediaType, posters, backdrops, route } = props;
+
+  return (
+    <div className="grid-photos">
+      {posters.slice(0, 4).map((item, index: number) => (
+        <div 
+          key={(index + 1) + "-posters"} 
+          className={`relative bg-dark rounded-md
+            ${`photo-${index + 1}`}`}
+        >
+          <FallbackImage
+            src={item.file_path}
+            mediaType={mediaType}
+            alt="poster"
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            placeholder="blur"
+            blurDataURL="/images/blur.jpg"
+            className="object-cover rounded-md opacity-80"
+          />
+        </div>
+      ))}
+      
+      {backdrops.slice(0, 3).map((item, index: number) => (
+        <div 
+          key={(index + 1) + "-backdrops"} 
+          className={`relative bg-dark rounded-md 
+            ${`backdrop-${index + 1}`}`}
+        >
+          <FallbackImage
+            src={item.file_path}
+            mediaType={mediaType}
+            alt="backdrop"
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            placeholder="blur"
+            blurDataURL="/images/blur.jpg"
+            className="object-cover rounded-md opacity-80"
+          />
+        </div>
+      ))}
+
+        {backdrops.slice(3, 4).map((item) => (
+          <Link 
+            key="last-backdrops"
+            href={`${route}/photogallery`} 
+            className="last-backdrop relative group bg-dark rounded-md"
           >
             <FallbackImage
               src={item.file_path}
@@ -99,40 +121,20 @@ const getPhotos = (id: number, mediaType: string,
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
-              className="object-cover rounded-md opacity-80"
+              className="object-cover rounded-md opacity-50 
+                transition-opacity duration-200 group-hover:opacity-30"
             />
-          </div>
-        ))}
 
-          {backdrops.slice(3, 4).map((item: any) => (
-            <Link 
-              key="last-backdrops"
-              href={`${route}/photogallery`} 
-              className="last-backdrop relative group bg-dark rounded-md"
-            >
-              <FallbackImage
-                src={item.file_path}
-                mediaType={mediaType}
-                alt="backdrop"
-                fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                placeholder="blur"
-                blurDataURL="/images/blur.jpg"
-                className="object-cover rounded-md opacity-50 
-                  transition-opacity duration-200 group-hover:opacity-30"
-              />
-
-              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <FiPlus className="text-light text-5xl"/>
-              </span>
-            </Link>
-        ))}
-      </div>
-    )
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <FiPlus className="text-light text-5xl"/>
+            </span>
+          </Link>
+      ))}
+    </div>
+  )
 }
 
-const MoviePhotos = ({id, mediaType, title, posters, backdrops}: 
-    {id: number, mediaType: string, title: string, posters: any, backdrops: any}) => {
+const MoviePhotos = ({id, mediaType, title, posters, backdrops}: IMoviePhotoProps) => {
   
   const route = `/title/${mediaType}/${id}-${slugify(title)}`;
   
@@ -153,9 +155,9 @@ const MoviePhotos = ({id, mediaType, title, posters, backdrops}:
 
       <div className="pt-7">
         {(posters.length > 4 && backdrops.length > 4) ?
-          getPhotos(id, mediaType, title, posters, backdrops, route)
+          getPhotos({id, mediaType, title, posters, backdrops, route})
         :
-          getLessPhotos(id, mediaType, title, posters, backdrops, route) 
+          getLessPhotos({id, mediaType, title, posters, backdrops, route}) 
         }
       </div>
     </>

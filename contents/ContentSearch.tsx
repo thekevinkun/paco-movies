@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
-import { dedupeResults } from "@lib/helpers/helpers";
-import { parentStaggerVariants } from "@lib/utils/motion";
 
 import { Spinner, MotionDiv } from "@components";
+
+import { IContentSearchProps, IGetSearchResponse } from "@types";
+
+import { dedupeResults } from "@lib/helpers/helpers";
+import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardSearch = dynamic(() => import("@components/Card/CardSearch"), {
   ssr: false,
@@ -17,21 +20,19 @@ const LoadMore = dynamic(() => import("@components/LoadMore"), {
   loading: () => null
 });
 
-
-const ContentSearch = ({ data, mediaType, query }: 
-    {data: any, mediaType: string, query: string}) => {
+const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
 
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
-  const [useData, setUseData] = useState<any>(data);
+  const [useData, setUseData] = useState<IGetSearchResponse>(data);
 
-  const handleNextPage = (newData: any) => {
+  const handleNextPage = (newData: IGetSearchResponse) => {
     const oldResults = useData.results;
     const combinedResults = [...oldResults, ...newData.results];
     const uniqueResults = dedupeResults(combinedResults);
 
     setUseData({
       ...newData,
-      results: uniqueResults,
+      results: uniqueResults
     });
   }
   
@@ -66,15 +67,15 @@ const ContentSearch = ({ data, mediaType, query }:
           initial="hidden"
           animate="visible"className="pt-4 pb-12 flex flex-col"
         >
-          {useData?.results.map((item: any) => (
+          {useData?.results.map((item) => (
             <CardSearch
               key={item.id}
               id={item.id}
-              name={item.title || item.name}
+              name={item.title || item.name || "Untitled"}
               photo={item.poster_path || item.profile_path}
-              mediaType={item.media_type}
-              releaseDate={item.release_date || item.first_air_date}
-              vote={item.media_type === "person" ? item.popularity : item.vote_average}
+              mediaType={item.media_type ?? ""}
+              releaseDate={item.release_date || item.first_air_date || ""}
+              vote={item.media_type === "person" ? item.popularity ?? 0 : item.vote_average ?? 0}
               overview={item.overview}
               department={item.known_for_department}
               works={item.known_for}

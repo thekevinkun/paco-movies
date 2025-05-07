@@ -1,3 +1,5 @@
+import { IGetPreviewDetailsResponse } from "@types";
+
 import { getPreviewDetails } from "@lib/api";
 import { getFromCache, saveToCache } from "@lib/cache/cache";
 
@@ -11,12 +13,14 @@ export const getCachedPreview = async (mediaType: string, id: number) => {
 
     try {
         // Try fetching from API
-        const data = await getPreviewDetails(mediaType, id);
+        const data = await getPreviewDetails(mediaType, id) as IGetPreviewDetailsResponse;
 
         await saveToCache(subPath, cacheKey, data);
         
         return data;
     } catch(error) {
+        console.error("API fetch error:", error);
+
         // Fallback to expired cache if possible
         const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
         if (expiredCache) return expiredCache;

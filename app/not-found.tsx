@@ -1,10 +1,8 @@
-"use client"
-
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Page Not Found — PacoMovies",
-  description: "Not found page",
+  description: "404 | Page is not found",
 };
 
 const NotFound = () => {
@@ -16,7 +14,6 @@ const NotFound = () => {
         </h2>
       </div>
     </>
-    
   )
 }
 
