@@ -27,12 +27,12 @@ const CardPerson = ({
       {/* PHOTO */}
       <Link
         href={url}
-        className="relative aspect-square w-72 h-72 
-                max-lg:w-60 max-lg:h-60 
-                max-[867px]:w-56 max-[867px]:h-56
-                max-[576px]:w-48 max-[576px]:h-48
-                max-xs:w-44 max-xs:h-44 
-                bg-dark rounded-full"
+        className="relative w-72 aspect-square
+             max-lg:w-60 max-lg:aspect-square
+             max-[867px]:w-56 max-[867px]:aspect-square
+             max-[576px]:w-48 max-[576px]:aspect-square
+             max-xs:w-44 max-xs:aspect-square
+             bg-dark rounded-full"
       >
         <FallbackImage
           src={photo}

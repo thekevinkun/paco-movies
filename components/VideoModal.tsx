@@ -54,10 +54,9 @@ const VideoModal = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="relative z-10 w-full 
+            className="relative z-10 w-full max-sm:px-3
                             max-w-4xl max-xl:max-w-3xl max-lg:max-w-2xl max-md:max-w-xl
-                            max-sm:max-w-lg max-[548px]:max-w-md max-xs:max-w-sm
-                            max-[417px]:max-w-xs aspect-video"
+                            max-sm:max-w-full aspect-video"
           >
             <iframe
               className="w-full h-full rounded-lg border-none"
@@ -68,9 +67,9 @@ const VideoModal = () => {
             />
 
             <RxCross2
-              className="absolute top-[-8.5%] max-xl:top-[-9%] max-lg:top-[-10.5%]
+              className="absolute max-sm:mr-3 top-[-8.5%] max-xl:top-[-9%] max-lg:top-[-10.5%]
                                 max-md:top-[-12%] max-sm:top-[-14%] max-xs:top-[-15%]
-                                right-1 max-xs:right-0 text-4xl max-[548px]:text-3xl
+                                right-1 max-xs:right-0 text-4xl max-xs:text-3xl
                                 text-danger cursor-pointer hover:text-danger/55"
               onClick={close}
             />

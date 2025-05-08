@@ -294,7 +294,7 @@ const DetailsMain = ({
                     Writers
                   </h3>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <CreditList
                       items={credits.crew}
                       filterJobs={["Writer", "Screenplay", "Characters"]}
@@ -317,7 +317,7 @@ const DetailsMain = ({
                     Stars
                   </h3>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <CreditList
                       items={credits.cast}
                       childStyles="max-xl:text-sm max-sm:text-xs"

@@ -70,7 +70,7 @@ const getVideosSlider = (start: number, videos: VideoItem[], route: string) => {
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`,
       }}
       className="keen-slider__slide min-w-0 shrink-0
-        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px]"
+        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px] max-xs:h-[138px]"
     >
       <div className="h-full flex items-center justify-center">
         <VideoAction

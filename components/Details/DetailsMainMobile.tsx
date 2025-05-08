@@ -218,8 +218,7 @@ const DetailsMainMobile = ({
                             border-b border-gray-500"
             >
               <h3
-                className="basis-[15%] max-xl:basis-[20%] 
-                                max-lg:basis-[15%] text-lg max-xl:text-base"
+                className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm"
               >
                 Director
               </h3>
@@ -237,10 +236,7 @@ const DetailsMainMobile = ({
               className="py-2 flex items-center font-semibold
                             border-b border-gray-500"
             >
-              <h3
-                className="basis-[15%] max-xl:basis-[20%] 
-                                max-lg:basis-[15%] text-lg max-xl:text-base"
-              >
+              <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">
                 Creators
               </h3>
 
@@ -259,9 +255,9 @@ const DetailsMainMobile = ({
               className="py-2 flex items-center font-semibold
                             border-b border-gray-500"
             >
-              <h3 className="basis-[20%]">Writers</h3>
+              <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">Writers</h3>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <CreditList
                   items={credits.crew}
                   filterJobs={["Writer", "Screenplay", "Characters"]}
@@ -276,9 +272,9 @@ const DetailsMainMobile = ({
             className="py-2 flex items-center font-semibold
                         border-b border-gray-500"
           >
-            <h3 className="basis-[20%]">Stars</h3>
+            <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">Stars</h3>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <CreditList
                 items={credits.cast}
                 childStyles="max-xl:text-sm max-sm:text-xs"

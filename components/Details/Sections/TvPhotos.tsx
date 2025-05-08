@@ -55,7 +55,7 @@ const getLessPhotos = (props: ITvPhotoProps & { route: string }) => {
           />
 
           <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <FiPlus className="text-light text-5xl" />
+            <FiPlus className="text-light text-5xl max-sm:text-4xl" />
           </span>
         </Link>
       ))}
@@ -129,7 +129,7 @@ const getPhotos = (props: ITvPhotoProps & { route: string }) => {
           />
 
           <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <FiPlus className="text-light text-5xl" />
+            <FiPlus className="text-light text-5xl max-sm:text-4xl" />
           </span>
         </Link>
       ))}

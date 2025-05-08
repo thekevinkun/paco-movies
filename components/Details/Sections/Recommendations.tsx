@@ -17,14 +17,15 @@ import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const getRecommendations = (data: CreditItem[]) => {
   return data.slice(0, 10).map((item) => (
-    <div key={item.id} className="keen-slider__slide min-w-0 shrink-0">
-      <div className="flex flex-col">
+    <div key={item.id} className="keen-slider__slide min-w-0 shrink-0 h-full">
+      <div className="flex flex-col h-full">
         <Link
           href={`/title/${item.media_type}/${item.id}-${slugify(
             item.title || item.name || "Untitled"
           )}`}
           className="relative bg-dark w-full h-[335px] 
-            max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
+            max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]
+            max-[425px]:h-[220px]"
         >
           <FallbackImage
             src={item.poster_path}
@@ -54,7 +55,7 @@ const getRecommendations = (data: CreditItem[]) => {
             />
 
             <span
-              className={`text-dark-1
+              className={`text-dark-1 max-sm:text-sm
                 ${
                   item.vote_average && item.vote_average > 0
                     ? "font-medium"
@@ -75,22 +76,23 @@ const getRecommendations = (data: CreditItem[]) => {
             className="pt-3 inline-block w-fit"
           >
             <h2
-              className="line-clamp-1 text-dark 
-                max-md:text-sm font-semibold hover:text-tale"
+              className="line-clamp-1 max-h-[1.5em] text-dark 
+                max-md:text-sm max-sm:text-xs font-semibold hover:text-tale"
             >
               {item.title || item.name}
             </h2>
           </Link>
 
           <div
-            className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 max-sm:pt-2 px-7 
+            className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 
+              max-sm:pt-2 px-7 max-sm:px-5 max-[425px]:px-3
               flex items-center justify-between"
           >
             <Link
               href={`/title/${item.media_type}/${item.id}-${slugify(
                 item.title || item.name || "Untitled"
               )}#`}
-              className="py-1 px-2 flex items-center gap-2 max-sm:text-sm text-dark
+              className="py-1 px-2 flex items-center gap-2 max-sm:text-xs text-dark
                bg-transparent hover:bg-tale/75 transition-colors duration-100 rounded-md"
             >
               <FaPlay />
@@ -100,7 +102,7 @@ const getRecommendations = (data: CreditItem[]) => {
             <PreviewAction
               mediaType={item.media_type!}
               id={item.id}
-              containerStyles="text-2xl max-sm:text-xl text-dark-1 hover:text-light-2"
+              containerStyles="text-2xl max-sm:text-lg text-dark-1 hover:text-light-2"
             >
               <AiOutlineExclamationCircle />
             </PreviewAction>
