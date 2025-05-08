@@ -16,8 +16,10 @@ export const getCachedNextPage = async (
         // Try fetching from API
         const data = await getNextPage(mediaType, category, query, page);
 
-        // No need to cache search data
-        if (!query || category !== "search") 
+        // Only cache if trending or stars
+        const isCacheable = category === "trending" || mediaType === "stars";
+
+        if (isCacheable)
             await saveToCache(subPath, cacheKey, data, maxAgeMs);
         
         return data;
