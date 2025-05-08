@@ -1,4 +1,4 @@
-import { getCachedNextPage } from "@lib/cache/getCachedNextPage";
+import { getCachedNextPage } from "@lib/redis/getCachedNextPage";
 import { withApiHandler } from "@lib/utils/withApiHandler";
 
 export const GET = withApiHandler(async (req: Request) => {

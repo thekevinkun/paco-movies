@@ -191,30 +191,43 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
 
                 {/* CREDITS */}
                 <div className="px-3 pt-7 text-main">
-                    {/* DIRECTOR or CREATORS */}
-                    <div className="py-2 flex items-center font-semibold
-                        border-b border-gray-500"
-                    >
-                        <h3 className="basis-[20%]">
-                            {mediaType === "movie" ?
-                                "Director" : "Creators"
-                            }
-                        </h3>
-                        
-                        {mediaType === "movie" ? 
+                    {/* DIRECTOR for Movie */}
+                     {mediaType === "movie" && credits.crew.length > 0 &&
+                        <div className="py-2 flex items-center font-semibold
+                            border-b border-gray-500"
+                        >
+                            <h3 className="basis-[15%] max-xl:basis-[20%] 
+                                max-lg:basis-[15%] text-lg max-xl:text-base"
+                            >
+                                Director
+                            </h3>
+
                             <Director 
                                 crews={credits.crew}
                                 childStyles="max-xl:text-sm max-sm:text-xs"
                             />
-                        :
+                        </div>
+                    }
+                    
+                    {/* or CREATORS for tv */}
+                    {mediaType === "tv" && (creators && creators.length > 0) &&
+                        <div className="py-2 flex items-center font-semibold
+                            border-b border-gray-500"
+                        >
+                            <h3 className="basis-[15%] max-xl:basis-[20%] 
+                                max-lg:basis-[15%] text-lg max-xl:text-base"
+                            >
+                                Creators
+                            </h3>
+                            
                             <div className="flex items-center gap-2">
                                 <CreditList 
-                                    items={creators ?? []} 
+                                    items={creators ?? []}
                                     childStyles="max-xl:text-sm max-sm:text-xs"
                                 />
                             </div> 
-                        }
-                    </div>
+                        </div>
+                    }
 
                     {/* WRITERS */}
                     {mediaType === "movie" &&

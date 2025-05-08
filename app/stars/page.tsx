@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { ContentStarsClient } from "@components/Clients";
 
-import { getCachedTrending } from "@lib/cache";
+import { getCachedTrending } from "@lib/redis";
 
 export const metadata: Metadata = {
   title: "Stars — PacoMovies",

@@ -5,7 +5,7 @@ import { ContentMoviesClient } from "@components/Clients";
 import type { Genre } from "@types";
 
 import { getByGenre } from "@lib/api";
-import { getCachedGenres } from "@lib/cache";
+import { getCachedGenres } from "@lib/redis";
 
 export const dynamic = "force-dynamic";
 

@@ -1,5 +1,5 @@
 import { getNextPage } from "@lib/api";
-import { getFromCache, saveToCache } from "@lib/cache/cache";
+import { getFromCache, saveToCache } from "@lib/redis/cache";
 
 export const getCachedNextPage = async (
     mediaType: string, category: string, 

@@ -1,14 +1,14 @@
 import { IGetPreviewDetailsResponse } from "@types";
 
 import { getPreviewDetails } from "@lib/api";
-import { getFromCache, saveToCache } from "@lib/cache/cache";
+import { getFromCache, saveToCache } from "@lib/redis/cache";
 
-export const getCachedPreview = async (mediaType: string, id: number) => {
+export const getCachedPreview = async (mediaType: string, id: number): Promise<IGetPreviewDetailsResponse> => {
     const subPath =  `previews/${mediaType}`; 
     const cacheKey = `preview_${id}`; 
     const maxAgeMs = 24 * 60 * 60 * 1000;
 
-    const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
+    const cached = await getFromCache<IGetPreviewDetailsResponse>(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;
 
     try {
@@ -22,7 +22,7 @@ export const getCachedPreview = async (mediaType: string, id: number) => {
         console.error("API fetch error:", error);
 
         // Fallback to expired cache if possible
-        const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
+        const expiredCache = await getFromCache<IGetPreviewDetailsResponse>(subPath, cacheKey, maxAgeMs, true);
         if (expiredCache) return expiredCache;
 
         // Error if no cache at all

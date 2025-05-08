@@ -1,4 +1,4 @@
-import { getCachedPreview } from "@lib/cache/getCachedPreview";
+import { getCachedPreview } from "@lib/redis/getCachedPreview";
 import { withApiHandler } from "@lib/utils/withApiHandler";
 
 export const GET = withApiHandler(async (req: Request) => {

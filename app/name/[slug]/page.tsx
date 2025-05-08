@@ -4,7 +4,7 @@ import { ContentDetailsClient } from "@components/Clients";
 
 import type { IGetPersonDetailsResponse } from "@types";
 
-import { getCachedDetails } from "@lib/cache";
+import { getCachedDetails } from "@lib/redis";
 
 export const dynamic = "force-dynamic";
 

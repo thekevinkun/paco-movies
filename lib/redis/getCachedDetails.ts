@@ -1,7 +1,7 @@
 import { CachedResponse, IGetMovieDetailsResponse, IGetPersonDetailsResponse } from "@types";
 
 import { getMovieDetails, getTvDetails, getPersonDetails } from "@lib/api";
-import { getFromCache, saveToCache } from "@lib/cache/cache";
+import { getFromCache, saveToCache } from "@lib/redis/cache";
 
 export const getCachedDetails = async (mediaType: string, id: number): Promise<CachedResponse> => {
     const subPath = mediaType === "person" 
@@ -9,7 +9,7 @@ export const getCachedDetails = async (mediaType: string, id: number): Promise<C
     const cacheKey = `${mediaType}_${id}`;   // e.g., movie_157336
     const maxAgeMs = 24 * 60 * 60 * 1000;   // 24 hour
 
-    const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
+    const cached = await getFromCache<CachedResponse>(subPath, cacheKey, maxAgeMs);
     if (cached) return cached;
     
     try {
@@ -32,7 +32,7 @@ export const getCachedDetails = async (mediaType: string, id: number): Promise<C
         console.error("API fetch error:", error);
         
         // Fallback to expired cache if possible
-        const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
+        const expiredCache = await getFromCache<CachedResponse>(subPath, cacheKey, maxAgeMs, true);
         if (expiredCache) return expiredCache;
 
         // Error if no cache at all

@@ -212,31 +212,39 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                         {/* CREDITS */}
                         <div className="pt-7 text-light">
                             {/* DIRECTOR or CREATORS */}
-                            {(credits.crew.length > 0 || creators?.length && creators.length > 0) &&
+                            {mediaType === "movie" && credits.crew.length > 0 &&
                                 <div className="py-2 flex items-center font-semibold
                                     border-b border-gray-500"
                                 >
                                     <h3 className="basis-[15%] max-xl:basis-[20%] 
                                         max-lg:basis-[15%] text-lg max-xl:text-base"
                                     >
-                                        {mediaType === "movie" ?
-                                            "Director" : "Creators"
-                                        }
+                                        Director
+                                    </h3>
+
+                                    <Director 
+                                        crews={credits.crew}
+                                        childStyles="max-xl:text-sm max-sm:text-xs"
+                                    />
+                                </div>
+                            }
+
+                            {mediaType === "tv" && (creators && creators.length > 0) &&
+                                <div className="py-2 flex items-center font-semibold
+                                    border-b border-gray-500"
+                                >
+                                    <h3 className="basis-[15%] max-xl:basis-[20%] 
+                                        max-lg:basis-[15%] text-lg max-xl:text-base"
+                                    >
+                                        Creators
                                     </h3>
                                     
-                                    {mediaType === "movie" ? 
-                                        <Director 
-                                            crews={credits.crew}
+                                    <div className="flex items-center gap-2">
+                                        <CreditList 
+                                            items={creators ?? []}
                                             childStyles="max-xl:text-sm max-sm:text-xs"
                                         />
-                                    :
-                                        <div className="flex items-center gap-2">
-                                            <CreditList 
-                                                items={creators ?? []}
-                                                childStyles="max-xl:text-sm max-sm:text-xs"
-                                            />
-                                        </div> 
-                                    }
+                                    </div> 
                                 </div>
                             }
                             

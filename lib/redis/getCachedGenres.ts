@@ -1,5 +1,5 @@
 import { getGenres } from "@lib/api";
-import { getFromCache, saveToCache } from "@lib/cache/cache";
+import { getFromCache, saveToCache } from "@lib/redis/cache";
 
 export async function getCachedGenres(mediaType: string) {
   const subPath = `genres/${mediaType}`;

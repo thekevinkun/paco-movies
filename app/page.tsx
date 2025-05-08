@@ -1,6 +1,6 @@
 import { ContentMoviesClient } from "@components/Clients";
 
-import { getCachedTrending } from "@lib/cache";
+import { getCachedTrending } from "@lib/redis";
 
 export const dynamic = "force-dynamic";
 

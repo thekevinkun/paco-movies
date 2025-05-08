@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ContentMoviesClient } from "@components/Clients";
 
 import { getByCategory } from "@lib/api";
-import { getCachedGenres } from "@lib/cache";
+import { getCachedGenres } from "@lib/redis";
 
 export const metadata: Metadata = {
   title: "TV Shows Airing Today — PacoMovies",

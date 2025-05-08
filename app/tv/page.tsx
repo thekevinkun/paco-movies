@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { ContentMoviesClient } from "@components/Clients";
 
-import { getCachedTrending, getCachedGenres } from "@lib/cache";
+import { getCachedTrending, getCachedGenres } from "@lib/redis";
 
 export const metadata: Metadata = {
   title: "Trending TV Shows — PacoMovies",
