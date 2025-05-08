@@ -5,11 +5,11 @@ import { getFromCache, saveToCache } from "@lib/redis/cache";
 
 export const getCachedDetails = async (mediaType: string, id: number): Promise<CachedResponse> => {
     const subPath = mediaType === "person" 
-            ? `name` : `title/${mediaType}`;  // e.g., title/movie or title/movie
+            ? `name` : `title:${mediaType}`;  // e.g., title:movie or title:movie
     const cacheKey = `${mediaType}_${id}`;   // e.g., movie_157336
-    const maxAgeMs = 24 * 60 * 60 * 1000;   // 24 hour
+    const maxAgeMs = 72 * 60 * 60;   // 48 hour
 
-    const cached = await getFromCache<CachedResponse>(subPath, cacheKey, maxAgeMs);
+    const cached = await getFromCache<CachedResponse>(subPath, cacheKey);
     if (cached) return cached;
     
     try {
@@ -25,17 +25,12 @@ export const getCachedDetails = async (mediaType: string, id: number): Promise<C
         else
             throw new Error("Invalid mediaType");
 
-        await saveToCache(subPath, cacheKey, data);
+        await saveToCache(subPath, cacheKey, data, maxAgeMs);
 
         return data;
     } catch(error) {
-        console.error("API fetch error:", error);
-        
-        // Fallback to expired cache if possible
-        const expiredCache = await getFromCache<CachedResponse>(subPath, cacheKey, maxAgeMs, true);
-        if (expiredCache) return expiredCache;
-
         // Error if no cache at all
+        console.error("API fetch error:", error);
         throw new Error("Failed to fetch details and no cached data available.");
     }
 }

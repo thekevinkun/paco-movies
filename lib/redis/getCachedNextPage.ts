@@ -5,11 +5,11 @@ export const getCachedNextPage = async (
     mediaType: string, category: string, 
     query: string, page: number
   ) => {
-    const subPath =  mediaType === "stars" ? `${mediaType}` : `${mediaType}/${category}`; 
+    const subPath =  mediaType === "stars" ? `${mediaType}` : `${mediaType}:${category}`; 
     const cacheKey = mediaType === "stars" ? `${mediaType}_${page}` : `${category}_${page}`; 
-    const maxAgeMs = 30 * 60 * 1000;
+    const maxAgeMs = 60 * 60;  // 1 hour
 
-    const cached = await getFromCache(subPath, cacheKey, maxAgeMs);
+    const cached = await getFromCache(subPath, cacheKey);
     if (cached) return cached;
 
     try {
@@ -18,17 +18,12 @@ export const getCachedNextPage = async (
 
         // No need to cache search data
         if (!query || category !== "search") 
-            await saveToCache(subPath, cacheKey, data);
+            await saveToCache(subPath, cacheKey, data, maxAgeMs);
         
         return data;
     } catch(error) {
-        console.error("API fetch error:", error);
-
-        // Fallback to expired cache if possible
-        const expiredCache = await getFromCache(subPath, cacheKey, maxAgeMs, true);
-        if (expiredCache) return expiredCache;
-
         // Error if no cache at all
+        console.error("API fetch error:", error);
         throw new Error("Failed to fetch trending and no cached data available.");
     }
 }

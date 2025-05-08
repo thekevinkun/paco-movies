@@ -5,9 +5,7 @@ import { redis } from "@lib/redis/redis";
 // Read cached data (If it's expired or not)
 export const getFromCache = async <T>(
     subPath: string,
-    cacheKey: string,
-    maxAgeMs: number,
-    allowExpired: boolean = false
+    cacheKey: string
 ): Promise<T | null> => {
     try {
         const redisKey = `${subPath}:${cacheKey}`;
@@ -34,20 +32,14 @@ export const getFromCache = async <T>(
             timestamp: number;
         };
 
-        const age = Date.now() - parsed.timestamp;
-
-        if (age < maxAgeMs || allowExpired) {
-            return parsed.data;
-        }
-
-        return null;
+        return parsed.data;
     } catch (error) {
         console.error("Redis getFromCache error:", error);
         return null;
     }
 }
 
-export async function saveToCache<T>(subPath: string, cacheKey: string, data: T): Promise<void> {
+export async function saveToCache<T>(subPath: string, cacheKey: string, data: T, ttlSeconds?: number): Promise<void> {
     try {
         const redisKey = `${subPath}:${cacheKey}`;
 
@@ -56,8 +48,13 @@ export async function saveToCache<T>(subPath: string, cacheKey: string, data: T)
             timestamp: Date.now(),
         };
 
-        // Save data without TTL, because we handle expiration manually (mtime equivalent)
-        await redis.set(redisKey, JSON.stringify(wrappedData));
+        if (ttlSeconds) {
+            await redis.set(redisKey, JSON.stringify(wrappedData), {
+                ex: ttlSeconds,
+            });
+        } else {
+            await redis.set(redisKey, JSON.stringify(wrappedData));
+        }
     } catch (error) {
         console.error("Redis saveToCache error:", error);
     }
