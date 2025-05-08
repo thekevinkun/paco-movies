@@ -65,13 +65,13 @@ export const getTvDetails = async (mediaType: string, titleId: number): Promise<
         ratingsInfo = ratings.results[0];
     }
 
-    const countryCode = ratingsInfo.iso_3166_1 || null;
+    const countryCode = ratingsInfo?.iso_3166_1 || null;
 
     const releaseDateCountry = countries.find((c) => c.iso_3166_1 === countryCode);
 
     const tvRatingsInfo: TvRatings = {
         iso_3166_1: releaseDateCountry,
-        rating: ratingsInfo.rating
+        rating: ratingsInfo?.rating || ""
     }
 
     // Get credits

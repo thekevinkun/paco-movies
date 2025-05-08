@@ -67,7 +67,7 @@ export const getMovieDetails = async (mediaType: string, titleId: number): Promi
           return isProductionCountry && hasValidCertification;
         }) ?? null;
     }
-
+    
     // Step 3: Extract the release_date and certification (if available)
     let releaseDateValue: string | null = null;
     let certification: string | null = null;
@@ -81,14 +81,18 @@ export const getMovieDetails = async (mediaType: string, titleId: number): Promi
         if (validEntry) {
           releaseDateValue = validEntry.release_date;
           certification = validEntry.certification;
+        } else {
+            releaseInfo = releaseDateApiResponse.results[0];
+            releaseDateValue = releaseInfo?.release_dates[0]?.release_date || "";
+            certification = releaseInfo?.release_dates[0]?.certification || "";
         }
     // Otherwise, just get the very first result of releaseDate
     } else {
         releaseInfo = releaseDateApiResponse.results[0];
-        releaseDateValue = releaseInfo.release_dates[0].release_date;
-        certification = releaseInfo.release_dates[0].certification;
+        releaseDateValue = releaseInfo?.release_dates[0]?.release_date || "";
+        certification = releaseInfo?.release_dates[0]?.certification || "";
     }
-
+   
     const countryCode = releaseInfo?.iso_3166_1 || null;
     
     const releaseDateCountry = countries.find((c) => c.iso_3166_1 === countryCode);

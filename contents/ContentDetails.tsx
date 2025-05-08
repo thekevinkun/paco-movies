@@ -56,7 +56,7 @@ const ContentDetails = ({ data, mediaType }: IContentDetailsProps) => {
         tagline={movieData.details.tagline}
         overview={movieData.details.overview ?? ""}
         credits={movieData.credits}
-        country={movieData.releaseDate?.iso_3166_1 || undefined}
+        country={movieData.releaseDate?.iso_3166_1 || null}
         certification={movieData.releaseDate?.certification ?? ""}
         runtime={movieData.details.runtime}
         tvrating={movieData.ratings?.rating ?? ""}
@@ -77,7 +77,7 @@ const ContentDetails = ({ data, mediaType }: IContentDetailsProps) => {
         genres={movieData.details.genres}
         overview={movieData.details.overview ?? ""}
         credits={movieData.credits}
-        country={movieData.releaseDate?.iso_3166_1}
+        country={movieData.releaseDate?.iso_3166_1 || null}
         certification={movieData.releaseDate?.certification ?? ""}
         runtime={movieData.details.runtime}
         tvrating={movieData.ratings?.rating ?? ""}

@@ -7,7 +7,7 @@ import type { Genre } from "@types";
 import { getByGenre } from "@lib/api";
 import { getCachedGenres } from "@lib/cache";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 // REQUIRED to avoid build/runtime param bugs
 export async function generateStaticParams() {
@@ -19,14 +19,22 @@ export async function generateMetadata({ params }: {params: Promise<{ name: stri
   const { name } = await params;
   const genreId = name.split("-")[0];
 
-  const genre = await getCachedGenres(mediaType) as Genre[];
-  const genreFind = genre.find((g) => g.id.toString() === genreId);
-  const genreName = genreFind ? genreFind.name : "Unknown Genre";
+  try {
+    const genre = await getCachedGenres(mediaType) as Genre[];
+    const genreFind = genre.find((g) => g.id.toString() === genreId);
+    const genreName = genreFind ? genreFind.name : "Unknown Genre";
 
-  return {
-    title: genreName + " Movies — PacoMovies",
-    description: "Discover " + genreName + " TV Shows."
-  };
+    return {
+      title: genreName + " Movies — PacoMovies",
+      description: "Discover " + genreName + " Movies."
+    };
+  } catch (error) {
+    console.error("generateMetadata error:", error);
+    return {
+        title: "Error — PacoMovies",
+        description: "Failed to load genre.",
+    };
+  }
 }
 
 const GenreMovie = async ({ params }: {params: Promise<{ name: string }>}) => {

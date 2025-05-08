@@ -51,7 +51,7 @@ const PersonPhotos = ({personId, name, images}: IPersonPhotosProps) => {
             />
           </div>
         ))}
-
+        
         {images.slice(4, 5).map((item, index: number) => (
           <Link 
             key={index} 
@@ -67,13 +67,17 @@ const PersonPhotos = ({personId, name, images}: IPersonPhotosProps) => {
               sizes="(min-width: 768px) 20vw, 25vw"
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
-              className="object-cover rounded-md opacity-50 
-                transition-opacity duration-200 group-hover:opacity-30"
+              className={`object-cover rounded-md
+                ${images.length > 5 ? 
+                  "opacity-50 transition-opacity duration-200 group-hover:opacity-30" 
+                  : "opacity-80"}`}
             />
 
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <FiPlus className="text-light text-5xl max-md:text-4xl max-xs:text-3xl"/>
-            </span>
+            {images.length > 5 &&
+              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <FiPlus className="text-light text-5xl max-md:text-4xl max-xs:text-3xl"/>
+              </span>
+            }
           </Link>
         ))}
       </div>

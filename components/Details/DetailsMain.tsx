@@ -15,7 +15,7 @@ import { CreditList, GenreList, NetworkList, Director } from "@components/Common
 const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDate, 
     officialTrailer, genres, tagline, overview, credits, country, certification, runtime, 
     tvrating, status, networks, creators}: IDetailsMainProps) => {
-
+    
     const url = `/title/${mediaType}/${id}-${slugify(title)}`;
     
     return (
@@ -99,13 +99,13 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                                 <>
                                 {tvrating && 
                                     <>
-                                    <span className="px-1 text-sm max-lg:text-base 
-                                        font-medium bg-dark border border-gray-500"
-                                    >
-                                        {tvrating}
-                                    </span>
+                                        <span className="px-1 text-sm max-lg:text-base 
+                                            font-medium bg-dark border border-gray-500"
+                                        >
+                                            {tvrating}
+                                        </span>
 
-                                    <span>|</span>
+                                        <span>|</span>
                                     </>
                                 }
                                 </>
@@ -122,23 +122,23 @@ const DetailsMain = ({id, mediaType, backdrop, poster, title, rating, releaseDat
                             </div>
 
                             {/* RUNTIME MOVIE or TV STATUS AIR */}
-                            {mediaType === "movie" ? 
-                                (runtime && runtime > 0) &&
-                                    <>
-                                        <span>|</span>
-                                        
-                                        <span className="text-sm max-xl:text-xs max-lg:text-sm">
-                                            {convertRuntime(runtime)}
-                                        </span>
-                                    </>
-                            :
-                                status &&
-                                    <>
-                                        <span>|</span>
-                                        <span className="italic text-sm max-xl:text-xs max-lg:text-sm">
-                                            {status}
-                                        </span>
-                                    </>
+                            {mediaType === "movie" && (typeof runtime === "number" && runtime > 0) &&
+                                <>
+                                    <span>|</span>
+                                    
+                                    <span className="text-sm max-xl:text-xs max-lg:text-sm">
+                                        {convertRuntime(runtime)}
+                                    </span>
+                                </>
+                            }
+                        
+                            {(mediaType === "tv" && status) &&
+                                <>
+                                    <span>|</span>
+                                    <span className="italic text-sm max-xl:text-xs max-lg:text-sm">
+                                        {status}
+                                    </span>
+                                </>
                             }
                         </div>
                         

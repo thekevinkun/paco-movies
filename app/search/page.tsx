@@ -14,11 +14,11 @@ export async function generateMetadata({ searchParams }: {searchParams: Promise<
   const newQuery = query.replace(/-/g, "+");
   const title = newQuery.replace(/\+/g, " ");
   
-    return {
-      title: title + " — PacoMovies",
-      description: "Results of " + title
-    };
-  }
+  return {
+    title: title + " — PacoMovies",
+    description: "Results of " + title
+  };
+}
 
 const Search = async ({ searchParams }: {searchParams: Promise<{ query?: string }>}) => {
   const mediaType = "multi";

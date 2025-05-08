@@ -151,16 +151,19 @@ const DetailsMainMobile = ({id, mediaType, backdrop, poster, title, rating, rele
                     }
 
                      {/* RUNTIME MOVIE or TV STATUS AIR */}
-                    {mediaType === "movie" ? 
-                        (runtime && runtime > 0) &&  
-                            <span className="text-sm">
-                                {convertRuntime(runtime)}
-                            </span>
-                    :
-                        status &&                    
+                    {mediaType === "movie" && (typeof runtime === "number" && runtime > 0) &&
+                        <span className="text-sm">
+                            {convertRuntime(runtime)}
+                        </span>
+                    }
+                
+                    {(mediaType === "tv" && status) &&
+                        <>
+                            <span>|</span>
                             <span className="italic text-sm">
                                 {status}
                             </span>
+                        </>
                     }
 
                     {/* SHOW GENRES */}

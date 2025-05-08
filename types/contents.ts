@@ -47,7 +47,7 @@ export interface IDetailsMainProps {
     tagline?: string;
     overview: string;
     credits: CreditsMovie;
-    country?: Country;
+    country?: Country | null;
     certification?: string;
     runtime?: number;
     tvrating?: string;

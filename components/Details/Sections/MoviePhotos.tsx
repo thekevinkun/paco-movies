@@ -36,7 +36,7 @@ const getLessPhotos = (props: IMoviePhotoProps & { route: string }) => {
           />
         </div>
       ))}
-
+      
       {backdrops.slice(0, 1).map((item) => (
         <Link 
           key="last-backdrops"
@@ -51,13 +51,17 @@ const getLessPhotos = (props: IMoviePhotoProps & { route: string }) => {
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             placeholder="blur"
             blurDataURL="/images/blur.jpg"
-            className="object-cover rounded-md opacity-50 
-              transition-opacity duration-200 group-hover:opacity-30"
+            className={`object-cover rounded-md
+              ${posters.length + backdrops.length > 5 ? 
+                "opacity-50 transition-opacity duration-200 group-hover:opacity-30" 
+                : "opacity-80"}`}
           />
 
-          <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <FiPlus className="text-light text-5xl"/>
-          </span>
+          {posters.length + backdrops.length > 5 &&
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <FiPlus className="text-light text-5xl"/>
+            </span>
+          }
         </Link>
       ))}
     </div>

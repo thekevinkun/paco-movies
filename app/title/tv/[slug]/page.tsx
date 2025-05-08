@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import moment from "moment";
 
 import { ContentDetailsClient } from "@components/Clients";
 
@@ -6,7 +7,7 @@ import type { IGetMovieDetailsResponse } from "@types";
 
 import { getCachedDetails } from "@lib/cache";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 // REQUIRED to avoid build/runtime param bugs
 export async function generateStaticParams() {
@@ -18,14 +19,28 @@ export async function generateMetadata({ params }: {params: Promise<{ slug: stri
     const { slug } = await params;
     const titleId = Number(slug.split("-")[0]);
 
-    const data = await getCachedDetails(mediaType, titleId) as IGetMovieDetailsResponse;
-    const title = data.details.name;
-    const overview = data.details.overview;
+    try {
+      const data = await getCachedDetails(mediaType, titleId) as IGetMovieDetailsResponse;
+      const title = data.details.name;
+      const overview = data.details.overview;
+      const date = data.details.first_air_date;
 
-    return {
-      title: title + " — PacoMovies",
-      description: overview
-    };
+      const titleHead = date ? 
+        `${title} (${moment(date).format("YYYY")}) — PacoMovies`
+        :
+        `${title} — PacoMovies`
+  
+      return {
+        title: titleHead,
+        description: overview
+      };
+    } catch (error) {
+      console.error("generateMetadata error:", error);
+      return {
+          title: "Error — PacoMovies",
+          description: "Failed to load movie details.",
+      };
+    }
 }
 
 const TitleMovie = async ({ params }: {params: Promise<{ slug: string }>}) => {

@@ -206,7 +206,7 @@ const PreviewModal = () => {
                             </div>
 
                             {/* GENRE */}
-                            <div className="pt-1 text-light-1 flex items-center gap-2">
+                            <div className="pt-1 text-light-1 flex flex-wrap items-center gap-2 gap-y-1">
                                 <GenreList 
                                     mediaType={previewMediaType}
                                     genres={data.details.genres}

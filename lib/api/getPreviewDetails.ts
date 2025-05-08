@@ -75,8 +75,8 @@ export const getPreviewDetails = async (mediaType: string, titleId: number): Pro
         // Otherwise, just get the very first result of releaseDate
         } else {
             releaseInfo = releaseDateApiResponse?.results[0] ?? null;
-            releaseDateValue = releaseInfo?.release_dates[0].release_date ?? null;
-            certification = releaseInfo?.release_dates[0].certification ?? null;
+            releaseDateValue = releaseInfo?.release_dates[0]?.release_date ?? "";
+            certification = releaseInfo?.release_dates[0].certification ?? "";
         }
     
         releaseDateInfo = {
