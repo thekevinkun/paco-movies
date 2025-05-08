@@ -22,9 +22,10 @@ const NowPlayingMovie = async () => {
   return (
     <ContentMoviesClient 
       data={movieData}
-      genre={genreData}
+      genres={genreData}
       mediaType={mediaType}
       category={category}
+      categoryTitle="Now Playing Movies"
     />
   )
 }

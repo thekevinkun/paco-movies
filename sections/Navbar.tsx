@@ -45,7 +45,7 @@ const Navbar = () => {
       </nav>
 
       {/* MENU ICON FOR MOBILE */}
-      <div className="hidden h-16 max-sm:h-14 ml-[18px] max-sm:ml-3 
+      <div className="hidden h-16 max-sm:h-14 ml-[18px] max-md:ml-3 
             fixed top-0 left-0 z-30 max-lg:flex items-center">
         <IoMdMenu 
           className="text-main text-[27px] max-sm:text-[25px] cursor-pointer hover:text-neutral-500 

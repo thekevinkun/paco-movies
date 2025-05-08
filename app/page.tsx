@@ -15,6 +15,7 @@ const Home = async () => {
       data={data}
       mediaType={mediaType}
       category={category}
+      categoryTitle="Trending Movies & TV Shows"
     />
   )
 }

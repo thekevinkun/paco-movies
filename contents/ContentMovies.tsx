@@ -24,7 +24,7 @@ const LoadMore = dynamic(() => import("@components/LoadMore"), {
   loading: () => null
 });
 
-const ContentMovies = ({ data, genre, mediaType, category }: IContentMoviesProps) => {
+const ContentMovies = ({ data, genres, mediaType, category, categoryTitle }: IContentMoviesProps) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
   const [useData, setUseData] = useState<IGetByCategoryResponse>(data);
   const firstResult = data.firstResult;
@@ -41,7 +41,7 @@ const ContentMovies = ({ data, genre, mediaType, category }: IContentMoviesProps
   }
 
   useEffect(() => {
-    handleChangeMediaType(mediaType, genre);
+    handleChangeMediaType(mediaType, genres);
     handleChangeCategory(category ?? "");
   }, [])
 
@@ -92,11 +92,19 @@ const ContentMovies = ({ data, genre, mediaType, category }: IContentMoviesProps
         />
       </MotionDiv>
       
+      <h2 className="hidden max-lg:block w-fit 
+          pl-3 mt-7 max-md:mt-10 max-sm:mt-9
+          font-medium text-main text-xl max-sm:text-lg
+          max-xs:text-base border-l-4 border-tale"
+      >
+        {categoryTitle}
+      </h2>
+
       <MotionDiv 
         variants={parentStaggerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-rows-1 pt-8 pb-12
+        className="grid grid-rows-1 pt-7 max-sm:pt-6 pb-12
           grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
           gap-x-3 gap-y-5 max-md:gap-y-4"
       >

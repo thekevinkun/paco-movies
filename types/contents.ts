@@ -14,11 +14,12 @@ import {
 interface Content {
   mediaType: string;
   category?: string;
+  categoryTitle?: string;
 }
 
 export interface IContentMoviesProps extends Content {
   data: IGetByCategoryResponse; 
-  genre?: Genre[];
+  genres?: Genre[];
 }
 
 export interface IContentStarsProps extends Content {

@@ -45,12 +45,16 @@ const GenreMovie = async ({ params }: {params: Promise<{ name: string }>}) => {
   const movieData = await getByGenre(mediaType, genreId);
   const genreData = await getCachedGenres(mediaType);
 
+  const genreFind = genreData.find((g) => g.id.toString() === genreId);
+  const genreName = genreFind ? genreFind.name : "Unknown Genre";
+
   return (
     <ContentMoviesClient 
       data={movieData}
-      genre={genreData}
+      genres={genreData}
       mediaType={mediaType}
       category={genreId}
+      categoryTitle={genreName + " Movies"}
     />
   )
 }

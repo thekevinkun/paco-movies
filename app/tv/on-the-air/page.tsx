@@ -22,9 +22,10 @@ const TvOnTheAir = async () => {
   return (
     <ContentMoviesClient 
       data={tvData}
-      genre={genreData}
+      genres={genreData}
       mediaType={mediaType}
       category={category}
+      categoryTitle="On The Air TV Shows"
     />
   )
 }

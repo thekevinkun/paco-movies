@@ -3,7 +3,7 @@ import { Category, Genre } from "@types";
 export interface IMenuContextProps {
   activeMediaType: string;
   activeCategory: string;
-  handleChangeMediaType: (mediaType: string, genre?: Genre[]) => void;
+  handleChangeMediaType: (mediaType: string, genres?: Genre[]) => void;
   handleChangeCategory: (name: string) => void;
   showCategories?: Category[] | null;
   showGenres?: Genre[] | null;

@@ -22,9 +22,10 @@ const TvTopRated = async () => {
   return (
     <ContentMoviesClient 
       data={tvData}
-      genre={genreData}
+      genres={genreData}
       mediaType={mediaType}
       category={category}
+      categoryTitle="Top Rated TV Shows"
     />
   )
 }

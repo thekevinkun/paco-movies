@@ -22,9 +22,10 @@ const TvAiringToday = async () => {
   return (
     <ContentMoviesClient 
       data={tvData}
-      genre={genreData}
+      genres={genreData}
       mediaType={mediaType}
       category={category}
+      categoryTitle="Airing Today TV Shows"
     />
   )
 }
