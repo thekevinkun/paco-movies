@@ -10,26 +10,32 @@ import type { ICardMovieProps } from "@types";
 import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMovieProps) => {
+const CardMovie = ({
+  id,
+  poster,
+  title,
+  mediaType,
+  releaseDate,
+  rating,
+}: ICardMovieProps) => {
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
 
   return (
-    <MotionDiv
-      variants={cardMovieVariants}
-      className="flex flex-col"
-    >
+    <MotionDiv variants={cardMovieVariants} className="flex flex-col">
       {/* POSTER */}
       <Link
-        href={mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
+        href={
+          mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson
+        }
         className="relative w-full aspect-[2/3] bg-dark rounded-tr-lg"
       >
         <FallbackImage
           src={poster}
           mediaType={mediaType}
-          alt={mediaType === "movie" 
-            || mediaType === "tv" ? "poster" : "profile"
+          alt={
+            mediaType === "movie" || mediaType === "tv" ? "poster" : "profile"
           }
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
@@ -42,12 +48,17 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
       {/* DETAILS */}
       <div className="p-2 max-md:py-3 bg-card bg-opacity-95 rounded-br-lg">
         <div className="flex justify-between items-center">
-          <Link 
-            href={ mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson}  
-            title={title} 
+          <Link
+            href={
+              mediaType === "movie" || mediaType === "tv"
+                ? routeMovie
+                : routePerson
+            }
+            title={title}
             className="inline-block w-fit pr-3"
           >
-            <h2 className="line-clamp-1 text-main 
+            <h2
+              className="line-clamp-1 text-main 
               max-md:text-sm font-semibold hover:text-tale"
             >
               {title}
@@ -58,9 +69,7 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
             href={`/${mediaType}`}
             className="rounded-sm border border-gray-500 px-1"
           >
-            <span className="text-main-1 text-[11px]">
-              {mediaType}
-            </span>
+            <span className="text-main-1 text-[11px]">{mediaType}</span>
           </Link>
         </div>
 
@@ -75,7 +84,7 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
               className="relative object-contain bottom-[0.4px]"
             />
 
-            <span 
+            <span
               className={`text-main-1 text-sm
                 ${rating > 0 ? "font-medium" : "font-normal italic"}`}
             >
@@ -86,8 +95,8 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
           <p className="ml-auto text-main-1 text-xs">
             {releaseDate && `${moment(releaseDate).format("ll")}`}
           </p>
-          
-          {mediaType !== "person" &&
+
+          {mediaType !== "person" && (
             <PreviewAction
               mediaType={mediaType}
               id={id}
@@ -95,11 +104,11 @@ const CardMovie = ({id, poster, title, mediaType, releaseDate, rating}: ICardMov
             >
               <AiOutlineExclamationCircle />
             </PreviewAction>
-          }
+          )}
         </div>
       </div>
     </MotionDiv>
-  )
-}
+  );
+};
 
 export default CardMovie;

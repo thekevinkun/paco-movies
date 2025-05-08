@@ -11,15 +11,13 @@ import { MotionDiv } from "@components/MotionDiv";
 import ThemeSwitcher from "@components/ThemeSwitcher";
 
 export {
-    Menu,
-    SearchBar,
-
-    FallbackImage,
-    VideoAction,
-    PreviewAction,
-    LoadMore,
-
-    Spinner,
-    MotionDiv,
-    ThemeSwitcher
-}
+  Menu,
+  SearchBar,
+  FallbackImage,
+  VideoAction,
+  PreviewAction,
+  LoadMore,
+  Spinner,
+  MotionDiv,
+  ThemeSwitcher,
+};

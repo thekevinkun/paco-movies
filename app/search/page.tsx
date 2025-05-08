@@ -9,18 +9,26 @@ export async function generateStaticParams() {
   return []; // Prevents runtime "await params" error
 }
 
-export async function generateMetadata({ searchParams }: {searchParams: Promise<{ query?: string }>}): Promise<Metadata> {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ query?: string }>;
+}): Promise<Metadata> {
   const { query = "" } = await searchParams;
   const newQuery = query.replace(/-/g, "+");
   const title = newQuery.replace(/\+/g, " ");
-  
+
   return {
     title: title + " — PacoMovies",
-    description: "Results of " + title
+    description: "Results of " + title,
   };
 }
 
-const Search = async ({ searchParams }: {searchParams: Promise<{ query?: string }>}) => {
+const Search = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ query?: string }>;
+}) => {
   const mediaType = "multi";
   const { query = "" } = await searchParams;
   const queryData = query.replace(/-/g, "+");
@@ -29,12 +37,12 @@ const Search = async ({ searchParams }: {searchParams: Promise<{ query?: string 
   const searchData = await getSearch(mediaType, queryData);
 
   return (
-    <ContentSearchClient 
-      data={searchData} 
+    <ContentSearchClient
+      data={searchData}
       mediaType={mediaType}
       query={newQuery || ""}
     />
-  )
-}
+  );
+};
 
 export default Search;

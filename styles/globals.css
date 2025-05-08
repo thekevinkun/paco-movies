@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,9 +7,9 @@
 
 .dark {
   --background: 18, 18, 18;
-  
+
   --bg-header-color-1: 18, 18, 18, 1;
-  --bg-header-color-2: 0, 0, 0, .90;
+  --bg-header-color-2: 0, 0, 0, 0.9;
 
   --bg-nav-color-1: 0, 0, 0, 1;
   --bg-nav-color-2: 26, 26, 26, 1;
@@ -20,21 +20,21 @@
   --text-1: 206, 206, 251;
 
   --tale-0: 0, 128, 128;
-  --tale-1: 0, 128, 128, 0.20;
+  --tale-1: 0, 128, 128, 0.2;
 
   --danger: 219, 9, 9;
 
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .light {
   --background: 255, 255, 255;
 
-  --bg-header-color-1: 235, 236, 237, .25;
-  --bg-header-color-2: 235, 236, 237, .75;
+  --bg-header-color-1: 235, 236, 237, 0.25;
+  --bg-header-color-2: 235, 236, 237, 0.75;
 
-  --bg-nav-color-1: 240, 240, 240, .85;
-  --bg-nav-color-2: 150, 151, 153, .70;
+  --bg-nav-color-1: 240, 240, 240, 0.85;
+  --bg-nav-color-2: 150, 151, 153, 0.7;
   --bg-nav-shadow: 0px 70px 60px 5px rgba(0, 0, 0, 0.25);
 
   --bg-card-color: 205, 205, 205;
@@ -43,11 +43,11 @@
   --text-1: 36, 36, 36;
 
   --tale-0: 0, 128, 128;
-  --tale-1: 0, 128, 128, 0.20;
+  --tale-1: 0, 128, 128, 0.2;
 
   --danger: 219, 9, 9;
 
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 * {
@@ -57,7 +57,7 @@
   scroll-behavior: smooth;
 }
 
-@layer base { 
+@layer base {
   body {
     font-family: "Montserrat", serif;
     font-optical-sizing: auto;
@@ -86,4 +86,3 @@
     @apply bg-tale/15 pointer-events-none;
   }
 }
-

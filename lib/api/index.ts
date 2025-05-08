@@ -10,16 +10,16 @@ import { getTvDetails } from "@lib/api/getTvDetails";
 import { getPersonDetails } from "@lib/api/getPersonDetails";
 import { getPreviewDetails } from "@lib/api/getPreviewDetails";
 
-export {    
-    getTrending,
-    getStars,
-    getByCategory,
-    getGenres,
-    getByGenre,
-    getSearch,
-    getNextPage,
-    getMovieDetails,
-    getTvDetails,
-    getPersonDetails,
-    getPreviewDetails
-}
+export {
+  getTrending,
+  getStars,
+  getByCategory,
+  getGenres,
+  getByGenre,
+  getSearch,
+  getNextPage,
+  getMovieDetails,
+  getTvDetails,
+  getPersonDetails,
+  getPreviewDetails,
+};

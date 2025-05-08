@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
@@ -9,29 +9,38 @@ import { Spinner } from "@components";
 import {
   IContentDetailsProps,
   IGetMovieDetailsResponse,
-  IGetPersonDetailsResponse
+  IGetPersonDetailsResponse,
 } from "@types";
 
 const DetailsMain = dynamic(() => import("@components/Details/DetailsMain"), {
   ssr: false,
   loading: () => <Spinner />,
 });
-const DetailsMainMobile = dynamic(() => import("@components/Details/DetailsMainMobile"), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
+const DetailsMainMobile = dynamic(
+  () => import("@components/Details/DetailsMainMobile"),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  }
+);
 const DetailsMore = dynamic(() => import("@components/Details/DetailsMore"), {
   ssr: false,
   loading: () => null,
 });
-const DetailsPersonMain = dynamic(() => import("@components/Details/DetailsPersonMain"), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
-const DetailsPersonMore = dynamic(() => import("@components/Details/DetailsPersonMore"), {
-  ssr: false,
-  loading: () => null,
-});
+const DetailsPersonMain = dynamic(
+  () => import("@components/Details/DetailsPersonMain"),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  }
+);
+const DetailsPersonMore = dynamic(
+  () => import("@components/Details/DetailsPersonMore"),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 const ContentDetails = ({ data, mediaType }: IContentDetailsProps) => {
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
@@ -50,7 +59,9 @@ const ContentDetails = ({ data, mediaType }: IContentDetailsProps) => {
         poster={movieData.details.poster_path ?? ""}
         title={movieData.details.title || movieData.details.name || "Untitled"}
         rating={movieData.details.vote_average ?? 0}
-        releaseDate={movieData.releaseDate?.date || movieData.details.first_air_date || ""}
+        releaseDate={
+          movieData.releaseDate?.date || movieData.details.first_air_date || ""
+        }
         officialTrailer={movieData.officialTrailer || null}
         genres={movieData.details.genres}
         tagline={movieData.details.tagline}
@@ -72,7 +83,9 @@ const ContentDetails = ({ data, mediaType }: IContentDetailsProps) => {
         poster={movieData.details.poster_path ?? ""}
         title={movieData.details.title || movieData.details.name || "Untitled"}
         rating={movieData.details.vote_average ?? 0}
-        releaseDate={movieData.releaseDate?.date || movieData.details.first_air_date || ""}
+        releaseDate={
+          movieData.releaseDate?.date || movieData.details.first_air_date || ""
+        }
         officialTrailer={movieData.officialTrailer || null}
         genres={movieData.details.genres}
         overview={movieData.details.overview ?? ""}

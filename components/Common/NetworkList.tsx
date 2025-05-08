@@ -7,20 +7,24 @@ import type { INetworkListProps } from "@types";
 
 import { slugify } from "@lib/helpers/helpers";
 
-const NetworkList = ({ mediaType, networks, containerStyles }: INetworkListProps) => {
+const NetworkList = ({
+  mediaType,
+  networks,
+  containerStyles,
+}: INetworkListProps) => {
   if (!networks) return null;
-  
+
   return (
     <>
       {networks.map((network) => (
-        <Link 
-          key={network.id} 
-          href={`https://www.${slugify(network.name)}.com`} 
+        <Link
+          key={network.id}
+          href={`https://www.${slugify(network.name)}.com`}
           target="_blank"
           rel="noopener noreferrer"
           className={`bg-white p-1 rounded-sm ${containerStyles}`}
         >
-          <FallbackImage 
+          <FallbackImage
             src={network.logo_path}
             mediaType={mediaType}
             alt="logo"

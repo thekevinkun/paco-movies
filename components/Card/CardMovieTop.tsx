@@ -10,27 +10,37 @@ import type { ICardMovieTopProps } from "@types";
 import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const CardMovieTop = ({id, poster, backDrop, title, 
-      overview, mediaType, releaseDate, rating, popularity, trailer}: ICardMovieTopProps) => {
-        
+const CardMovieTop = ({
+  id,
+  poster,
+  backDrop,
+  title,
+  overview,
+  mediaType,
+  releaseDate,
+  rating,
+  popularity,
+  trailer,
+}: ICardMovieTopProps) => {
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
   const routePerson = "/name" + `/${fullRoute}`;
 
   return (
-    <MotionDiv 
+    <MotionDiv
       variants={cardMovieVariants}
       className="flex h-[410px] max-md:hidden"
     >
       {/* Poster on left side */}
-      <div className="max-xl:hidden relative w-72 h-auto 
+      <div
+        className="max-xl:hidden relative w-72 h-auto 
         bg-dark rounded-l-md grow shrink-0 basis-auto"
       >
         <FallbackImage
           src={poster}
           mediaType={mediaType}
-          alt={mediaType === "movie" 
-            || mediaType === "tv" ? "poster" : "profile"
+          alt={
+            mediaType === "movie" || mediaType === "tv" ? "poster" : "profile"
           }
           fill
           sizes="(min-width: 1280px) 288px"
@@ -46,7 +56,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundImage: `url("https://image.tmdb.org/t/p/w780${backDrop}")`
+          backgroundImage: `url("https://image.tmdb.org/t/p/w780${backDrop}")`,
         }}
         className="relative w-full rounded-r-md max-xl:rounded-md p-8"
       >
@@ -62,14 +72,17 @@ const CardMovieTop = ({id, poster, backDrop, title,
         {/* Details content */}
         <div className="relative w-full h-full flex flex-col justify-center z-30">
           {/* Title */}
-          <Link 
-            href={ mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson} 
-            title={title} 
+          <Link
+            href={
+              mediaType === "movie" || mediaType === "tv"
+                ? routeMovie
+                : routePerson
+            }
+            title={title}
             className="inline-block w-fit"
           >
             <h2 className="text-2xl text-light font-extrabold capitalize hover:text-tale">
               {title}{" "}
-
               <span className="font-light">
                 {releaseDate && `(${moment(releaseDate).format("YYYY")})`}
               </span>
@@ -85,7 +98,7 @@ const CardMovieTop = ({id, poster, backDrop, title,
 
           {/* Features */}
           <div className="flex items-center pt-8">
-            {mediaType === "movie" || mediaType === "tv" ?
+            {mediaType === "movie" || mediaType === "tv" ? (
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/star.svg"
@@ -96,14 +109,14 @@ const CardMovieTop = ({id, poster, backDrop, title,
                   className="relative object-contain bottom-[1.2px]"
                 />
 
-                <span 
+                <span
                   className={`text-[17px] text-light
                     ${rating > 0 ? "font-semibold" : "font-normal italic"}`}
                 >
-                    {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
+                  {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
                 </span>
               </div>
-            :  
+            ) : (
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/popularity.svg"
@@ -114,16 +127,22 @@ const CardMovieTop = ({id, poster, backDrop, title,
                   className="relative object-contain bottom-[1px]"
                 />
 
-                <span 
+                <span
                   className={`text-[17px] text-light
-                    ${popularity && popularity > 0 ? "font-semibold" : "font-normal italic"}`}
+                    ${
+                      popularity && popularity > 0
+                        ? "font-semibold"
+                        : "font-normal italic"
+                    }`}
                 >
-                    {popularity && popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
+                  {popularity && popularity > 0
+                    ? roundedToFixed(popularity, 2)
+                    : "NaN"}
                 </span>
               </div>
-            }
+            )}
 
-            {(mediaType !== "person" && trailer) &&
+            {mediaType !== "person" && trailer && (
               <VideoAction
                 href={`${routeMovie}#play=${trailer.key}`}
                 videoKey={trailer.key}
@@ -132,25 +151,25 @@ const CardMovieTop = ({id, poster, backDrop, title,
                   bg-transparent text-light hover:bg-tale/80 rounded-md
                   transition-colors duration-100"
               >
-                <FaPlay className="text-lg"/>
+                <FaPlay className="text-lg" />
                 <span className="font-semibold">Play Trailer</span>
               </VideoAction>
-            }
+            )}
           </div>
 
           {/* Overview */}
-          {mediaType !== "person" && 
+          {mediaType !== "person" && (
             <div className="pt-8">
               <h3 className="font-semibold text-lg text-light">Overview</h3>
               <p className="line-clamp-3 text-light font-normal pt-2">
                 {overview}
               </p>
             </div>
-          }
+          )}
         </div>
       </div>
     </MotionDiv>
-  )
-}
+  );
+};
 
 export default CardMovieTop;

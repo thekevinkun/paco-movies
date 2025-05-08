@@ -1,14 +1,10 @@
 import { 
-  Cast, Crew, Country, CreditItem, ExternalIds, 
-  Genre, MediaItem, ImageSet, ReleaseDate, 
-  ReviewItem, SpokenLanguage, SeasonItem, 
-  ProductionCompany, TvRatings, VideoItem,
+  Country, CreditItem, CreditsMovie, ExternalIds, 
+  Genre, ImageSet, MediaItem, Network, PersonDetails,
+  ProductionCompany, ReleaseDate, ReviewItem, 
+  SpokenLanguage, SeasonItem, TvRatings, VideoItem,
   IGetByCategoryResponse, IGetSearchResponse,
   IGetMovieDetailsResponse, IGetPersonDetailsResponse,
-  PersonDetails,
-  CreditsMovie,
-  MovieDetails,
-  Network
 } from "@types";
 
 interface Content {

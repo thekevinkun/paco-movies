@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 const Error = () => {
   return (
@@ -10,6 +10,6 @@ const Error = () => {
       </div>
     </>
   );
-}
-  
+};
+
 export default Error;

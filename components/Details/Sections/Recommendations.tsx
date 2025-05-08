@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -17,13 +17,12 @@ import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const getRecommendations = (data: CreditItem[]) => {
   return data.slice(0, 10).map((item) => (
-    <div 
-      key={item.id} 
-      className="keen-slider__slide min-w-0 shrink-0"
-    >
+    <div key={item.id} className="keen-slider__slide min-w-0 shrink-0">
       <div className="flex flex-col">
         <Link
-          href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}`}
+          href={`/title/${item.media_type}/${item.id}-${slugify(
+            item.title || item.name || "Untitled"
+          )}`}
           className="relative bg-dark w-full h-[335px] 
             max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]"
         >
@@ -39,7 +38,8 @@ const getRecommendations = (data: CreditItem[]) => {
           />
         </Link>
 
-        <div className="px-2 py-3 w-auto h-auto bg-light 
+        <div
+          className="px-2 py-3 w-auto h-auto bg-light 
           border-b border-gray-300 rounded-b-lg
           shadow-inner shadow-dark-1"
         >
@@ -53,38 +53,50 @@ const getRecommendations = (data: CreditItem[]) => {
               className="relative object-contain bottom-[1px]"
             />
 
-            <span 
+            <span
               className={`text-dark-1
-                ${item.vote_average && item.vote_average > 0 ? "font-medium" : "font-normal italic"}`}
+                ${
+                  item.vote_average && item.vote_average > 0
+                    ? "font-medium"
+                    : "font-normal italic"
+                }`}
             >
-              {item.vote_average && item.vote_average > 0 ? roundedToFixed(item.vote_average, 1) : "NaN"}
+              {item.vote_average && item.vote_average > 0
+                ? roundedToFixed(item.vote_average, 1)
+                : "NaN"}
             </span>
           </div>
 
-          <Link 
-            href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}`}
-            title={item.title || item.name} 
+          <Link
+            href={`/title/${item.media_type}/${item.id}-${slugify(
+              item.title || item.name || "Untitled"
+            )}`}
+            title={item.title || item.name}
             className="pt-3 inline-block w-fit"
           >
-            <h2 className="line-clamp-1 text-dark 
+            <h2
+              className="line-clamp-1 text-dark 
                 max-md:text-sm font-semibold hover:text-tale"
             >
-                {item.title || item.name}
+              {item.title || item.name}
             </h2>
           </Link>
-                    
-          <div className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 max-sm:pt-2 px-7 
+
+          <div
+            className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 max-sm:pt-2 px-7 
               flex items-center justify-between"
           >
             <Link
-              href={`/title/${item.media_type}/${item.id}-${slugify(item.title || item.name || "Untitled")}#`}
+              href={`/title/${item.media_type}/${item.id}-${slugify(
+                item.title || item.name || "Untitled"
+              )}#`}
               className="py-1 px-2 flex items-center gap-2 max-sm:text-sm text-dark
                bg-transparent hover:bg-tale/75 transition-colors duration-100 rounded-md"
             >
-              <FaPlay/>
+              <FaPlay />
               <span className="font-medium">Trailer</span>
             </Link>
-              
+
             <PreviewAction
               mediaType={item.media_type!}
               id={item.id}
@@ -96,10 +108,10 @@ const getRecommendations = (data: CreditItem[]) => {
         </div>
       </div>
     </div>
-  ))
-}
+  ));
+};
 
-const Recommendations = ({recommendations}: IRecommendationsProps) => {
+const Recommendations = ({ recommendations }: IRecommendationsProps) => {
   // KEEN SLIDER SETUP
   const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
 
@@ -129,23 +141,23 @@ const Recommendations = ({recommendations}: IRecommendationsProps) => {
       },
       "(max-width: 540px)": {
         slides: { perView: 2.5, spacing: 12 },
-      }
+      },
     },
     slides: {
       perView: 4.25,
-      spacing: 15
+      spacing: 15,
     },
     mode: "free-snap",
     created(s) {
-      updateArrows(s)
+      updateArrows(s);
     },
     updated(s) {
-      updateArrows(s)
+      updateArrows(s);
     },
     slideChanged(s) {
       updateArrows(s);
-    }
-  })
+    },
+  });
 
   const scrollLeft = () => slider.current?.prev();
   const scrollRight = () => slider.current?.next();
@@ -157,7 +169,8 @@ const Recommendations = ({recommendations}: IRecommendationsProps) => {
       </h3>
 
       {/* SLIDER MOVIE */}
-      <div className="relative w-full px-3 max-md:px-0 
+      <div
+        className="relative w-full px-3 max-md:px-0 
         max-w-[calc(100vw-(288px+55px))]
         max-xl:max-w-[calc(100vw-(256px+55px))]
         max-lg:max-w-full overflow-hidden"
@@ -173,9 +186,13 @@ const Recommendations = ({recommendations}: IRecommendationsProps) => {
           className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
           bg-main/90 hover:bg-main/60 text-tale  
             p-4 rounded-sm transition-opacity duration-200
-            ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+            ${
+              arrowDisabled.prev
+                ? "pointer-events-none !text-dark !opacity-10"
+                : ""
+            }`}
         >
-          <MdArrowBackIosNew className="font-bold text-3xl"/>
+          <MdArrowBackIosNew className="font-bold text-3xl" />
         </button>
 
         {/* Right arrow */}
@@ -184,13 +201,17 @@ const Recommendations = ({recommendations}: IRecommendationsProps) => {
           className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
           bg-main/90 hover:bg-main/60 text-tale  
             p-4 rounded-sm transition-opacity duration-200
-            ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
+            ${
+              arrowDisabled.next
+                ? "pointer-events-none !text-dark !opacity-10"
+                : ""
+            }`}
         >
-          <MdArrowForwardIos className="font-bold text-3xl"/>
+          <MdArrowForwardIos className="font-bold text-3xl" />
         </button>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Recommendations;

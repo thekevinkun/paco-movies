@@ -8,7 +8,7 @@ import { Header, Navbar, Footer } from "@sections";
 import { VideoModalClient, PreviewModalClient } from "@components/Clients";
 
 export const viewport = {
-  theme_color: "#008080"
+  theme_color: "#008080",
 };
 
 export const metadata: Metadata = {
@@ -18,11 +18,21 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     other: [
-      { rel: "icon", url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
-      { rel: "icon", url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+      {
+        rel: "icon",
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        rel: "icon",
+        url: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
   },
-  manifest: '/manifest.webmanifest',
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({

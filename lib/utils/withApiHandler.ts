@@ -6,7 +6,8 @@ export const withApiHandler = (handler: (req: Request) => Promise<unknown>) => {
       const result = await handler(req);
       return NextResponse.json(result);
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Something went wrong";
+      const message =
+        error instanceof Error ? error.message : "Something went wrong";
       return NextResponse.json({ error: message }, { status: 500 });
     }
   };

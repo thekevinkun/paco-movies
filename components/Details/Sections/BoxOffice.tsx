@@ -2,7 +2,7 @@ import type { IBoxOfficeProps } from "@types";
 
 import { formatCurrency } from "@lib/helpers/helpers";
 
-const BoxOffice = ({details}: IBoxOfficeProps) => {
+const BoxOffice = ({ details }: IBoxOfficeProps) => {
   return (
     <>
       <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
@@ -16,24 +16,34 @@ const BoxOffice = ({details}: IBoxOfficeProps) => {
             Budget
           </h3>
 
-          <p className={`font-normal ${details.budget && "italic"} max-md:text-sm`}>
-            {details.budget ? formatCurrency.format(details.budget) : "Unknown yet"}
+          <p
+            className={`font-normal ${
+              details.budget && "italic"
+            } max-md:text-sm`}
+          >
+            {details.budget
+              ? formatCurrency.format(details.budget)
+              : "Unknown yet"}
           </p>
         </div>
 
         {/* MOVIE REVENUE */}
         <div className="py-3 text-main flex flex-col">
-          <h3 className="text-lg max-md:text-base font-semibold">
-            Revenue
-          </h3>
+          <h3 className="text-lg max-md:text-base font-semibold">Revenue</h3>
 
-          <p className={`font-normal ${details.revenue && "italic"} max-md:text-sm max-sm:text-xs`}>
-            {details.revenue ? formatCurrency.format(details.revenue) : "Unknown yet"}
+          <p
+            className={`font-normal ${
+              details.revenue && "italic"
+            } max-md:text-sm max-sm:text-xs`}
+          >
+            {details.revenue
+              ? formatCurrency.format(details.revenue)
+              : "Unknown yet"}
           </p>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default BoxOffice;

@@ -6,10 +6,10 @@ import VideoModalClient from "@components/Clients/VideoModalClient";
 import PreviewModalClient from "@components/Clients/PreviewModalClient";
 
 export {
-    ContentMoviesClient,
-    ContentDetailsClient,
-    ContentStarsClient,
-    ContentSearchClient,
-    PreviewModalClient,
-    VideoModalClient
-}
+  ContentMoviesClient,
+  ContentDetailsClient,
+  ContentStarsClient,
+  ContentSearchClient,
+  PreviewModalClient,
+  VideoModalClient,
+};

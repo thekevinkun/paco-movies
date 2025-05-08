@@ -6,7 +6,7 @@ export const parentStaggerVariants = {
       staggerDirection: 1, // forward order
     },
   },
-}
+};
 
 export const cardMovieVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -18,23 +18,23 @@ export const cardMovieVariants = {
       duration: 0.25,
     },
   },
-}
+};
 
 export const parentModalVariants = (duration?: number) => ({
   hidden: { opacity: 0 },
-  show: { 
+  show: {
     opacity: 1,
     transition: {
-      duration
-    } 
+      duration,
+    },
   },
-  exit: { 
+  exit: {
     opacity: 0,
     transition: {
-      duration
-    } 
+      duration,
+    },
   },
-})
+});
 
 export const previewModalVariants = (isMobile?: boolean | false) => ({
   hidden: {
@@ -62,4 +62,4 @@ export const previewModalVariants = (isMobile?: boolean | false) => ({
       damping: 25,
     },
   },
-})
+});

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,76 +9,76 @@ import { useVideo } from "@contexts/VideoContext";
 import { parentModalVariants, previewModalVariants } from "@lib/utils/motion";
 
 const VideoModal = () => {
-    const { videoKey, videoTitle, close } = useVideo();
-    const [isOpen, setIsOpen] = useState(false);
+  const { videoKey, videoTitle, close } = useVideo();
+  const [isOpen, setIsOpen] = useState(false);
 
-    // Handle escape key and body scroll lock
-    useEffect(() => {
-        if (videoKey) {
-            setIsOpen(true);
-            document.body.classList.add("modal-open");
-        } else {
-            setIsOpen(false);
-            document.body.classList.remove("modal-open");
-        }
+  // Handle escape key and body scroll lock
+  useEffect(() => {
+    if (videoKey) {
+      setIsOpen(true);
+      document.body.classList.add("modal-open");
+    } else {
+      setIsOpen(false);
+      document.body.classList.remove("modal-open");
+    }
 
-        const esc = (e: KeyboardEvent) => e.key === "Escape" && close();
-        window.addEventListener("keydown", esc);
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && close();
+    window.addEventListener("keydown", esc);
 
-        return () => window.removeEventListener("keydown", esc);
-    }, [videoKey, close]);
+    return () => window.removeEventListener("keydown", esc);
+  }, [videoKey, close]);
 
-    return (
-        <AnimatePresence>
-            {isOpen && (
-                <motion.div
-                    key="modal"
-                    variants={parentModalVariants(0.15)}
-                    initial="hidden"
-                    animate="show"
-                    exit="exit"
-                    className="fixed inset-0 z-[9999] flex items-center justify-center"
-                >
-                    {/* Blurred background */}
-                    <motion.div
-                        variants={parentModalVariants()}
-                        initial="hidden"
-                        animate="show"
-                        exit="exit"
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"
-                    />
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="modal"
+          variants={parentModalVariants(0.15)}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="fixed inset-0 z-[9999] flex items-center justify-center"
+        >
+          {/* Blurred background */}
+          <motion.div
+            variants={parentModalVariants()}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"
+          />
 
-                    {/* Modal content */}
-                    <motion.div
-                        variants={previewModalVariants()}
-                        initial="hidden"
-                        animate="show"
-                        exit="exit"
-                        className="relative z-10 w-full 
+          {/* Modal content */}
+          <motion.div
+            variants={previewModalVariants()}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="relative z-10 w-full 
                             max-w-4xl max-xl:max-w-3xl max-lg:max-w-2xl max-md:max-w-xl
                             max-sm:max-w-lg max-[548px]:max-w-md max-xs:max-w-sm
                             max-[417px]:max-w-xs aspect-video"
-                    >
-                        <iframe
-                            className="w-full h-full rounded-lg border-none"
-                            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
-                            title={videoTitle}
-                            allow="autoplay; encrypted-media"
-                            allowFullScreen
-                        />
+          >
+            <iframe
+              className="w-full h-full rounded-lg border-none"
+              src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
+              title={videoTitle}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
 
-                        <RxCross2 
-                            className="absolute top-[-8.5%] max-xl:top-[-9%] max-lg:top-[-10.5%]
+            <RxCross2
+              className="absolute top-[-8.5%] max-xl:top-[-9%] max-lg:top-[-10.5%]
                                 max-md:top-[-12%] max-sm:top-[-14%] max-xs:top-[-15%]
                                 right-1 max-xs:right-0 text-4xl max-[548px]:text-3xl
                                 text-danger cursor-pointer hover:text-danger/55"
-                            onClick={close}
-                        />
-                    </motion.div>
-                </motion.div>
-            )}
-        </AnimatePresence>
-    )
-}
+              onClick={close}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 export default VideoModal;

@@ -6,7 +6,7 @@ import { getCachedTrending, getCachedGenres } from "@lib/redis";
 
 export const metadata: Metadata = {
   title: "Trending Movies — PacoMovies",
-  description: "Discover what's trending today in movies."
+  description: "Discover what's trending today in movies.",
 };
 
 export const dynamic = "force-dynamic";
@@ -17,16 +17,16 @@ const Movie = async () => {
 
   const movieData = await getCachedTrending(mediaType, category);
   const genreData = await getCachedGenres(mediaType);
- 
+
   return (
-    <ContentMoviesClient 
+    <ContentMoviesClient
       data={movieData}
       genres={genreData}
       mediaType={mediaType}
       category={category}
       categoryTitle="Trending Movies"
     />
-  )
-}
+  );
+};
 
 export default Movie;

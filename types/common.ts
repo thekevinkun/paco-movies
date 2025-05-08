@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { Network, Genre, CreditItem } from "./models";
+import { CreditItem, Genre, Network } from "@types";
 
 export interface INetworkListProps {
     mediaType: string;

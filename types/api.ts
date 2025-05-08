@@ -1,10 +1,9 @@
 import { 
   CreditsMovie, CreditItem, Country,
-  ExternalIds, ReleaseDate, ReviewItem, 
-  ReleaseDatePreview, MediaItem, ImageSet, 
-  PersonItem, TvRatings, VideoItem,
-  Genre
-} from "./models";
+  ExternalIds, Genre, ImageSet, MediaItem, 
+  PersonItem, ReleaseDate, ReviewItem, 
+  ReleaseDatePreview, TvRatings, VideoItem
+} from "@types";
 
 
 export interface ITMDBError {

@@ -6,53 +6,53 @@ import type { IMenuContextProps, Category, Genre } from "@types";
 import { MEDIA_TYPE } from "@lib/utils/constants";
 
 const MenuContextDefaultValues: IMenuContextProps = {
-    activeMediaType: "all",
-    activeCategory: "trending",
-    handleChangeMediaType: (mediaType: string, genres?: Genre[]) => {},
-    handleChangeCategory: (name: string) => {},
-    showCategories: [],
-    showGenres: []
-}
+  activeMediaType: "all",
+  activeCategory: "trending",
+  handleChangeMediaType: (mediaType: string, genres?: Genre[]) => {},
+  handleChangeCategory: (name: string) => {},
+  showCategories: [],
+  showGenres: [],
+};
 
 const MenuContext = createContext<IMenuContextProps>(MenuContextDefaultValues);
 
 export function useMenu() {
-    return useContext(MenuContext);
+  return useContext(MenuContext);
 }
 
-export const MenuProvider = ({ children } : Readonly<{children: React.ReactNode;}>) => {
-    const [activeMediaType, setActiveMediaType] = useState<string>("all");
-    const [activeCategory, setActiveCategory] = useState<string>("trending");
-    const [showCategories, setShowCategories] = useState<Category[] | null>(null);
-    const [showGenres, setShowGenres] = useState<Genre[] | null>(null);
+export const MenuProvider = ({
+  children,
+}: Readonly<{ children: React.ReactNode }>) => {
+  const [activeMediaType, setActiveMediaType] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("trending");
+  const [showCategories, setShowCategories] = useState<Category[] | null>(null);
+  const [showGenres, setShowGenres] = useState<Genre[] | null>(null);
 
-    const handleChangeMediaType = (mediaType: string, genres?: Genre[]) => {
-        const objMediaType = MEDIA_TYPE.find(item => item.id === mediaType);
-        const getMediaTypeCategory = objMediaType && objMediaType["categories"];
+  const handleChangeMediaType = (mediaType: string, genres?: Genre[]) => {
+    const objMediaType = MEDIA_TYPE.find((item) => item.id === mediaType);
+    const getMediaTypeCategory = objMediaType && objMediaType["categories"];
 
-        setActiveMediaType(mediaType);
-        setShowCategories(getMediaTypeCategory ?? null);
-        setShowGenres(genres ?? null);
-    }
+    setActiveMediaType(mediaType);
+    setShowCategories(getMediaTypeCategory ?? null);
+    setShowGenres(genres ?? null);
+  };
 
-    const handleChangeCategory = (name: string) => {
-        setActiveCategory(name);
-    }
+  const handleChangeCategory = (name: string) => {
+    setActiveCategory(name);
+  };
 
-    const value = {
-        activeMediaType,
-        handleChangeMediaType,
-        activeCategory,
-        handleChangeCategory,
-        showCategories,
-        showGenres
-    }
+  const value = {
+    activeMediaType,
+    handleChangeMediaType,
+    activeCategory,
+    handleChangeCategory,
+    showCategories,
+    showGenres,
+  };
 
-    return (
-        <>
-            <MenuContext.Provider value={value}>
-                {children}
-            </MenuContext.Provider>
-        </>
-    )
-}
+  return (
+    <>
+      <MenuContext.Provider value={value}>{children}</MenuContext.Provider>
+    </>
+  );
+};

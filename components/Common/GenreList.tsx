@@ -5,7 +5,13 @@ import type { IGenreListProps } from "@types";
 
 import { slugify } from "@lib/helpers/helpers";
 
-const GenreList = ({ mediaType, genres, containerStyles, childStyles, handleClick }: IGenreListProps) => {
+const GenreList = ({
+  mediaType,
+  genres,
+  containerStyles,
+  childStyles,
+  handleClick,
+}: IGenreListProps) => {
   return (
     <>
       {genres.map((genre) => (
@@ -18,9 +24,9 @@ const GenreList = ({ mediaType, genres, containerStyles, childStyles, handleClic
           >
             {genre.name}
           </Link>
-          <span className={`bullet-separator font-normal ${childStyles}`}
-          >
-            {" "}&#8226;{" "}
+          <span className={`bullet-separator font-normal ${childStyles}`}>
+            {" "}
+            &#8226;{" "}
           </span>
         </React.Fragment>
       ))}

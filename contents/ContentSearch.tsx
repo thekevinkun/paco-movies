@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -13,15 +13,14 @@ import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardSearch = dynamic(() => import("@components/Card/CardSearch"), {
   ssr: false,
-  loading: () => <Spinner />
+  loading: () => <Spinner />,
 });
 const LoadMore = dynamic(() => import("@components/LoadMore"), {
   ssr: false,
-  loading: () => null
+  loading: () => null,
 });
 
 const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
-
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
   const [useData, setUseData] = useState<IGetSearchResponse>(data);
 
@@ -32,40 +31,40 @@ const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
 
     setUseData({
       ...newData,
-      results: uniqueResults
+      results: uniqueResults,
     });
-  }
-  
+  };
+
   useEffect(() => {
     setUseData(data);
-  }, [query])
+  }, [query]);
 
   useEffect(() => {
     handleChangeMediaType(mediaType);
     handleChangeCategory("search");
-  }, [])
+  }, []);
 
   return (
     <section className="relative flex-1 mt-20 max-md:mt-[72px] px-6 max-lg:px-5 max-md:px-3.5">
       <h2 className="text-main text-lg font-normal">
-        <span className="font-semibold">
-            Results for: {" "}  
-        </span>{query?.replace(/\+/g, " ")}
+        <span className="font-semibold">Results for: </span>
+        {query?.replace(/\+/g, " ")}
       </h2>
-      
-      { useData.results.length === 0 ?
+
+      {useData.results.length === 0 ? (
         <div className="h-[75vh] flex flex-col items-center justify-center">
           <h2 className="font-medium text-lg text-danger text-center">
-            Sorry, but nothing matched your search criteria. 
-            <br/>
+            Sorry, but nothing matched your search criteria.
+            <br />
             Please try again with some different keywords.
           </h2>
         </div>
-      :
-        <MotionDiv 
+      ) : (
+        <MotionDiv
           variants={parentStaggerVariants}
           initial="hidden"
-          animate="visible"className="pt-4 pb-12 flex flex-col"
+          animate="visible"
+          className="pt-4 pb-12 flex flex-col"
         >
           {useData?.results.map((item) => (
             <CardSearch
@@ -75,26 +74,30 @@ const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
               photo={item.poster_path || item.profile_path}
               mediaType={item.media_type ?? ""}
               releaseDate={item.release_date || item.first_air_date || ""}
-              vote={item.media_type === "person" ? item.popularity ?? 0 : item.vote_average ?? 0}
+              vote={
+                item.media_type === "person"
+                  ? item.popularity ?? 0
+                  : item.vote_average ?? 0
+              }
               overview={item.overview}
               department={item.known_for_department}
               works={item.known_for}
             />
           ))}
         </MotionDiv>
-      }
-      
-      { useData?.page < useData?.total_pages &&
-        <LoadMore 
-            page={useData.page}
-            mediaType={mediaType}
-            category={"search"}
-            query={query}
-            onNextPage={handleNextPage}
+      )}
+
+      {useData?.page < useData?.total_pages && (
+        <LoadMore
+          page={useData.page}
+          mediaType={mediaType}
+          category={"search"}
+          query={query}
+          onNextPage={handleNextPage}
         />
-      } 
+      )}
     </section>
-  )
-}
+  );
+};
 
 export default ContentSearch;

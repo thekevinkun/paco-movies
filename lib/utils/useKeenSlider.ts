@@ -3,16 +3,23 @@ import type { KeenSliderInstance } from "keen-slider/react";
 
 // Type override for slides option
 type SlidesOption =
-| number
-| {
-    perView?: number | "auto" | (() => number | "auto");
-    spacing?: number;
+  | number
+  | {
+      perView?: number | "auto" | (() => number | "auto");
+      spacing?: number;
     }
-| ((size: number, slides: HTMLElement[]) => {
-    perView?: number | "auto";});
+  | ((
+      size: number,
+      slides: HTMLElement[]
+    ) => {
+      perView?: number | "auto";
+    });
 
 export const useKeenSliderWithArrows = () => {
-  const [arrowDisabled, setArrowDisabled] = useState({ prev: true, next: false });
+  const [arrowDisabled, setArrowDisabled] = useState({
+    prev: true,
+    next: false,
+  });
 
   const updateArrows = (s: KeenSliderInstance) => {
     const rel = s.track.details.rel;
@@ -53,6 +60,6 @@ export const useKeenSliderWithArrows = () => {
 
   return {
     arrowDisabled,
-    updateArrows
+    updateArrows,
   };
 };

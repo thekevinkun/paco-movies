@@ -5,7 +5,7 @@ const Footer = () => {
         © 2025 - PacoMovies
       </p>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;

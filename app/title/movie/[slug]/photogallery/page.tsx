@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-    return {
-        title: "Page on building..." + " — PacoMovies",
-        description: "Movie Photo Gallery",
-    };
+  return {
+    title: "Page on building..." + " — PacoMovies",
+    description: "Movie Photo Gallery",
+  };
 }
 
 const MoviePhotoGallery = async () => {
   return (
     <>
-        <div className="h-[92vh] flex flex-col items-center justify-center">
-            <h2 className="font-medium text-lg text-danger">
-                Sorry. This page is still on building.
-            </h2>
-        </div>
-      </>
-  )
-}
+      <div className="h-[92vh] flex flex-col items-center justify-center">
+        <h2 className="font-medium text-lg text-danger">
+          Sorry. This page is still on building.
+        </h2>
+      </div>
+    </>
+  );
+};
 
 export default MoviePhotoGallery;

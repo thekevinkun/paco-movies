@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
@@ -15,74 +15,71 @@ import type { IDetailsPersonMain } from "@types";
 
 import { calculateAge } from "@lib/helpers/helpers";
 
-const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
+const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
   const [readMore, setReadMore] = useState(false);
-  
+
   return (
     <section className="relative pt-8 px-5 max-md:pt-5 max-md:px-3 z-20">
       {/* PERSON's PHOTO and CONTACTS */}
       <div className="flex max-sm:flex-col gap-x-8 max-sm:gap-y-3">
         <div className="flex flex-col max-sm:items-center gap-5">
-          <div 
+          <div
             className="relative w-[308px] max-md:w-[225px]
                 max-sm:w-[255px] aspect-[2/3] rounded-md"
-            >
-              <FallbackImage 
-                src={details.profile_path}
-                mediaType="person"
-                alt="profile"
-                fill
-                sizes="(min-width: 768px) 308px,
+          >
+            <FallbackImage
+              src={details.profile_path}
+              mediaType="person"
+              alt="profile"
+              fill
+              sizes="(min-width: 768px) 308px,
                       (min-width: 640px) 225px, 255px"
-                placeholder="blur"
-                blurDataURL="/images/blur.jpg"
-                className="object-cover rounded-md opacity-90"
-              />
+              placeholder="blur"
+              blurDataURL="/images/blur.jpg"
+              className="object-cover rounded-md opacity-90"
+            />
           </div>
 
-          {externalIds && 
-          <div className="text-main max-sm:pb-2 flex items-center gap-5">
-            {externalIds.twitter_id &&
-                <Link 
+          {externalIds && (
+            <div className="text-main max-sm:pb-2 flex items-center gap-5">
+              {externalIds.twitter_id && (
+                <Link
                   href={`https://twitter.com/${externalIds.twitter_id}`}
                   target="_blank"
                 >
-                  <FaXTwitter className="text-3xl max-lg:text-2xl"/>
+                  <FaXTwitter className="text-3xl max-lg:text-2xl" />
                 </Link>
-            }
+              )}
 
-            {externalIds.facebook_id &&
-                <Link 
+              {externalIds.facebook_id && (
+                <Link
                   href={`https://facebook.com/${externalIds.facebook_id}`}
                   target="_blank"
                 >
-                  <FaFacebook className="text-3xl max-lg:text-2xl"/>
+                  <FaFacebook className="text-3xl max-lg:text-2xl" />
                 </Link>
-            }
+              )}
 
-            {externalIds.instagram_id &&
-                <Link 
+              {externalIds.instagram_id && (
+                <Link
                   href={`https://instagram.com/${externalIds.instagram_id}`}
                   target="_blank"
                 >
-                  <FaInstagram className="text-[34px] max-lg:text-[28px]"/>
+                  <FaInstagram className="text-[34px] max-lg:text-[28px]" />
                 </Link>
-            }
+              )}
 
-            { details.homepage &&
-              <>
-                <span className="text-3xl font-light">|</span>
+              {details.homepage && (
+                <>
+                  <span className="text-3xl font-light">|</span>
 
-                <Link
-                  href={details.homepage}
-                  target="_blank"
-                >
-                  <BsLink className="text-4xl max-lg:text-3xl"/>
-                </Link>
-              </>
-            }
-          </div>
-        }
+                  <Link href={details.homepage} target="_blank">
+                    <BsLink className="text-4xl max-lg:text-3xl" />
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         {/* PERSON DETAILS */}
@@ -93,7 +90,8 @@ const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
           </h2>
 
           {/* BORN, BIRTH AND DEATH */}
-          <div className="pt-7 flex flex-wrap items-center
+          <div
+            className="pt-7 flex flex-wrap items-center
               max-sm:items-start max-sm:justify-center gap-x-8 gap-y-5"
           >
             <div>
@@ -101,104 +99,105 @@ const DetailsPersonMain = ({details, externalIds}: IDetailsPersonMain) => {
                 Born
               </h3>
 
-              {details.birthday ?
+              {details.birthday ? (
                 <p className="font-normal text-main">
                   {moment(details.birthday).format("LL")}
 
-                  {!details.deathday &&
-                    <span className="text-sm font-light max-sm:block max-sm:text-center"> 
-                      {" "}({calculateAge(details.birthday)} years old)
+                  {!details.deathday && (
+                    <span className="text-sm font-light max-sm:block max-sm:text-center">
+                      {" "}
+                      ({calculateAge(details.birthday)} years old)
                     </span>
-                  }
+                  )}
                 </p>
-              :
-                <p className="font-light italic text-main">
-                  Unknown date
-                </p>
-              }
-              
+              ) : (
+                <p className="font-light italic text-main">Unknown date</p>
+              )}
             </div>
 
-            {details?.deathday &&
+            {details?.deathday && (
               <div>
                 <h3 className="font-semibold text-lg text-main max-sm:text-center">
                   Death
                 </h3>
                 <p className="font-normal text-main">
                   {moment(details.deathday).format("LL")}
-                  <span className="text-sm font-light
+                  <span
+                    className="text-sm font-light
                     max-sm:block max-sm:text-center"
-                > 
-                    {" "}({calculateAge(details.birthday ?? "")} years old)
+                  >
+                    {" "}
+                    ({calculateAge(details.birthday ?? "")} years old)
                   </span>
                 </p>
               </div>
-            }
+            )}
 
             <div>
               <h3 className="font-semibold text-lg text-main max-sm:text-center">
                 Place of Birth
               </h3>
 
-              {details.place_of_birth ?
+              {details.place_of_birth ? (
                 <p className="font-normal text-main">
-                  {" "}{details.place_of_birth}
+                  {" "}
+                  {details.place_of_birth}
                 </p>
-              :
-                <p className="font-light italic text-main">
-                  Unknown place
-                </p>
-              }
-              
+              ) : (
+                <p className="font-light italic text-main">Unknown place</p>
+              )}
             </div>
-          </div> 
+          </div>
 
           {/* PERSON BIO */}
           <div className="pt-6 max-sm:pt-10">
             <h3 className="mb-3 font-semibold text-lg text-main max-sm:text-center">
               Biography
             </h3>
-            
-            {details.biography ?
+
+            {details.biography ? (
               <>
-                <p 
+                <p
                   className={`${!readMore ? "!line-clamp-10" : ""}
                     max-sm:px-2 font-normal 
                     text-main text-justify leading-[26.75px]`}
                 >
                   {details.biography}
 
-                  { readMore &&
-                    <span 
+                  {readMore && (
+                    <span
                       className="font-semibold text-main hover:text-tale cursor-pointer"
                       onClick={() => setReadMore(false)}
                     >
-                      {" "}Hide
+                      {" "}
+                      Hide
                     </span>
-                  }
+                  )}
                 </p>
 
-                {!readMore &&
-                  <span 
+                {!readMore && (
+                  <span
                     className="max-sm:px-2 font-semibold text-main hover:text-tale cursor-pointer"
                     onClick={() => setReadMore(true)}
                   >
-                    {" "}Read More
+                    {" "}
+                    Read More
                   </span>
-                }
+                )}
               </>
-            :
-              <p className="mt-[-9px] italic font-light
+            ) : (
+              <p
+                className="mt-[-9px] italic font-light
                 text-main text-justify max-sm:text-center"
               >
                 No biography.
               </p>
-            }
+            )}
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default DetailsPersonMain;

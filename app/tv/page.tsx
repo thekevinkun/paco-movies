@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 const Tv = async () => {
-  const mediaType="tv";
-  const category="trending";
+  const mediaType = "tv";
+  const category = "trending";
 
   const tvData = await getCachedTrending(mediaType, category);
   const genreData = await getCachedGenres(mediaType);
- 
+
   return (
-    <ContentMoviesClient 
+    <ContentMoviesClient
       data={tvData}
       genres={genreData}
       mediaType={mediaType}
       category={category}
       categoryTitle="Trending TV Shows"
     />
-  )
-}
+  );
+};
 
 export default Tv;

@@ -16,8 +16,8 @@ const getCasts = (casts: CreditItem[]) => {
     <div className="grid grid-cols-2 gap-y-5">
       {casts.slice(0, 18).map((cast) => (
         <div key={cast.id} className="flex items-center gap-5">
-          <Link 
-            href={`/name/${cast.id}-${slugify(cast.name ?? "")}`} 
+          <Link
+            href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
             className="relative w-32 h-32 bg-dark rounded-full group"
           >
             <FallbackImage
@@ -34,7 +34,7 @@ const getCasts = (casts: CreditItem[]) => {
           </Link>
 
           <div>
-            <Link 
+            <Link
               href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
               className="text-main hover:text-tale"
             >
@@ -46,18 +46,15 @@ const getCasts = (casts: CreditItem[]) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const getCastsMobile = (casts: CreditItem[]) => {
   return casts.slice(0, 11).map((cast) => (
-    <div 
-      key={cast.id} 
-      className="keen-slider__slide flex-shrink-0"
-    >
+    <div key={cast.id} className="keen-slider__slide flex-shrink-0">
       <div className="flex flex-col gap-3">
-        <Link 
-          href={`/name/${cast.id}-${slugify(cast.name ?? "")}`} 
+        <Link
+          href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
           className="relative w-full aspect-square bg-black rounded-full group"
         >
           <FallbackImage
@@ -74,7 +71,7 @@ const getCastsMobile = (casts: CreditItem[]) => {
         </Link>
 
         <div className="text-center">
-          <Link 
+          <Link
             href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
             className="line-clamp-1 text-main hover:text-tale max-sm:text-sm"
           >
@@ -87,10 +84,17 @@ const getCastsMobile = (casts: CreditItem[]) => {
         </div>
       </div>
     </div>
-  ))
-}
+  ));
+};
 
-const Credits = ({id, mediaType, title, casts, crews, creators}: ICreditsProps) => {
+const Credits = ({
+  id,
+  mediaType,
+  title,
+  casts,
+  crews,
+  creators,
+}: ICreditsProps) => {
   const [sliderRef] = useKeenSlider({
     loop: false,
     breakpoints: {
@@ -100,35 +104,37 @@ const Credits = ({id, mediaType, title, casts, crews, creators}: ICreditsProps) 
     },
     slides: {
       perView: 4.25,
-      spacing: 12
+      spacing: 12,
     },
-    mode: "free-snap"
-  })
-  
+    mode: "free-snap",
+  });
+
   const route = `/title/${mediaType}/${id}-${slugify(title)}`;
 
   return (
     <>
-      <Link 
-        href={`${route}/fullcredits`} 
+      <Link
+        href={`${route}/fullcredits`}
         className="group flex items-center w-fit"
       >
-        <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Top Cast</h3>
-        <span className="pl-3 text-xs text-main-1">{casts.length > 99 ? "99+" : casts.length}</span>
-        
-        <MdArrowForwardIos 
+        <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
+          Top Cast
+        </h3>
+        <span className="pl-3 text-xs text-main-1">
+          {casts.length > 99 ? "99+" : casts.length}
+        </span>
+
+        <MdArrowForwardIos
           className="text-main text-3xl max-sm:text-2xl font-semibold 
             transition-colors duration-200 group-hover:text-tale"
         />
       </Link>
-      
+
       {/* CASTS DESKTOP */}
-      <div className="pt-7 max-md:hidden">
-        {getCasts(casts)}
-      </div>
+      <div className="pt-7 max-md:hidden">{getCasts(casts)}</div>
 
       {/* CASTS MOBILE */}
-      <div 
+      <div
         className="hidden max-md:block relative pt-7 
           max-md:h-full max-w-full overflow-hidden "
       >
@@ -141,59 +147,59 @@ const Credits = ({id, mediaType, title, casts, crews, creators}: ICreditsProps) 
       {/* CREWS CREDITS */}
       <div className="!text-main pt-7 max-sm:pt-5 w-[90%] max-md:w-[100%]">
         <div className="py-3 flex items-center font-semibold border-y border-gray-500">
-          <h3 className="basis-[17%] max-lg:basis-[20%] 
+          <h3
+            className="basis-[17%] max-lg:basis-[20%] 
             text-main text-lg max-md:text-base max-sm:text-sm"
           >
-            {mediaType === "movie" ?
-              "Director" : "Creators"
-            }
+            {mediaType === "movie" ? "Director" : "Creators"}
           </h3>
 
-          {mediaType === "movie" ? 
-              <Director 
-                crews={crews || []}
+          {mediaType === "movie" ? (
+            <Director
+              crews={crews || []}
+              childStyles="max-xl:text-sm max-sm:text-xs"
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <CreditList
+                items={creators || []}
                 childStyles="max-xl:text-sm max-sm:text-xs"
               />
-          :
-              <div className="flex items-center gap-2">
-                <CreditList 
-                  items={creators || []} 
-                  childStyles="max-xl:text-sm max-sm:text-xs"
-                />
-              </div> 
-          }
+            </div>
+          )}
         </div>
-        
-        {mediaType === "movie" &&
+
+        {mediaType === "movie" && (
           <div className="py-3 flex items-center font-semibold border-b border-gray-500">
-            <h3 className="basis-[17%] max-lg:basis-[20%]
+            <h3
+              className="basis-[17%] max-lg:basis-[20%]
               text-main text-lg max-md:text-base max-sm:text-sm"
             >
               Writers
             </h3>
-        
+
             <div className="flex items-center gap-2">
-                <CreditList 
-                  items={crews || []} 
-                  filterJobs={["Writer", "Screenplay", "Characters"]} 
-                  childStyles="max-xl:text-sm max-sm:text-xs"
-                />
+              <CreditList
+                items={crews || []}
+                filterJobs={["Writer", "Screenplay", "Characters"]}
+                childStyles="max-xl:text-sm max-sm:text-xs"
+              />
             </div>
           </div>
-        }
+        )}
 
         <div className="py-3 font-semibold border-b border-gray-500">
-          <Link 
+          <Link
             href={`${route}/fullcredits`}
             className="text-main hover:text-tale max-sm:text-sm flex items-center justify-between"
           >
             <h3>All cast & crew</h3>
-            <MdArrowForwardIos className="text-lg max-md:text-base font-semibold"/>
+            <MdArrowForwardIos className="text-lg max-md:text-base font-semibold" />
           </Link>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Credits;

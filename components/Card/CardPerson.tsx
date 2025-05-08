@@ -9,98 +9,119 @@ import type { ICardPersonProps } from "@types";
 import { cardMovieVariants } from "@lib/utils/motion";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
-const CardPerson = ({id, name, photo, department, popularity, works}: ICardPersonProps) => {
-  const url = `/name/${id}-${slugify(name)}`
-  
+const CardPerson = ({
+  id,
+  name,
+  photo,
+  department,
+  popularity,
+  works,
+}: ICardPersonProps) => {
+  const url = `/name/${id}-${slugify(name)}`;
+
   return (
-    <MotionDiv 
-        variants={cardMovieVariants}
-        className="flex flex-col items-center"
+    <MotionDiv
+      variants={cardMovieVariants}
+      className="flex flex-col items-center"
     >
-        {/* PHOTO */}
-        <Link 
-            href={url} 
-            className="relative aspect-square w-72 h-72 
+      {/* PHOTO */}
+      <Link
+        href={url}
+        className="relative aspect-square w-72 h-72 
                 max-lg:w-60 max-lg:h-60 
                 max-[867px]:w-56 max-[867px]:h-56
                 max-[576px]:w-48 max-[576px]:h-48
                 max-xs:w-44 max-xs:h-44 
                 bg-dark rounded-full"
-        >
-            <FallbackImage
-                src={photo}
-                mediaType="person"
-                alt="profile"
-                fill
-                sizes="(min-width: 1024px) 288px,
+      >
+        <FallbackImage
+          src={photo}
+          mediaType="person"
+          alt="profile"
+          fill
+          sizes="(min-width: 1024px) 288px,
                     (min-width: 867px) 240px,
                     (min-width: 576px) 224px,
                     (min-width: 480px) 192px, 176px"
-                placeholder="blur"
-                blurDataURL="/images/blur.jpg"
-                className="object-cover object-[55%_45%] rounded-full opacity-90"
-            />
+          placeholder="blur"
+          blurDataURL="/images/blur.jpg"
+          className="object-cover object-[55%_45%] rounded-full opacity-90"
+        />
       </Link>
 
       {/* DETAILS */}
       <div className="w-full h-full flex flex-col mt-2 p-2 max-md:py-3 bg-card bg-opacity-95">
-        <Link 
-            href={`/name/${id + "-" + name.toLowerCase().replace(/[^A-Z0-9]+/ig, "-")}`} 
-            title={name} 
-            className="inline-block w-fit"
+        <Link
+          href={`/name/${
+            id + "-" + name.toLowerCase().replace(/[^A-Z0-9]+/gi, "-")
+          }`}
+          title={name}
+          className="inline-block w-fit"
         >
-            <h2 className="text-main text-lg max-lg:text-base max-md:text-sm 
-                    font-semibold hover:text-tale">
-                {name}
-            </h2>
+          <h2
+            className="text-main text-lg max-lg:text-base max-md:text-sm 
+                    font-semibold hover:text-tale"
+          >
+            {name}
+          </h2>
         </Link>
 
         <div className="pt-3 w-full flex items-center gap-5">
-            <div className="flex items-center gap-1">
-                <Image
-                    src="/icons/popularity.svg"
-                    alt="popularity"
-                    width={0}
-                    height={0}
-                    sizes="20px"
-                    className="relative w-5 h-5 object-contain bottom-[0.4px]"
-                />
+          <div className="flex items-center gap-1">
+            <Image
+              src="/icons/popularity.svg"
+              alt="popularity"
+              width={0}
+              height={0}
+              sizes="20px"
+              className="relative w-5 h-5 object-contain bottom-[0.4px]"
+            />
 
-                <span 
-                    className={`text-main-1 text-sm max-[576px]:text-xs
+            <span
+              className={`text-main-1 text-sm max-[576px]:text-xs
                     ${popularity > 0 ? "font-medium" : "font-normal italic"}`}
-                >
-                    {popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
-                </span>
-            </div>
+            >
+              {popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
+            </span>
+          </div>
 
-            <p className="text-main-1 text-sm max-[576px]:text-xs">
-                {department}
-            </p>
+          <p className="text-main-1 text-sm max-[576px]:text-xs">
+            {department}
+          </p>
         </div>
 
         <div className="mt-auto pt-5 leading-5">
-            {works?.map((work) => {
-                const title = work.title ?? work.name ?? "untitled"
-                const route = `/title/${work.media_type}/${work.id}-${slugify(title)}`
-                
-                return (
-                    <React.Fragment key={work.id}>
-                        <Link href={route} title={work.title || work.name} className="inline-block">
-                            <p className="truncate w-fit max-w-[155px] max-md:max-w-[125px] max-sm:max-w-[105px]
+          {works?.map((work) => {
+            const title = work.title ?? work.name ?? "untitled";
+            const route = `/title/${work.media_type}/${work.id}-${slugify(
+              title
+            )}`;
+
+            return (
+              <React.Fragment key={work.id}>
+                <Link
+                  href={route}
+                  title={work.title || work.name}
+                  className="inline-block"
+                >
+                  <p
+                    className="truncate w-fit max-w-[155px] max-md:max-w-[125px] max-sm:max-w-[105px]
                                 text-main-1 hover:text-tale text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"
-                            >
-                                {work.title || work.name}
-                            </p>
-                        </Link>
-                        <span className="bullet-separator align-top text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"> &#8226; </span>
-                    </React.Fragment>
-                )
-            })}
+                  >
+                    {work.title || work.name}
+                  </p>
+                </Link>
+                <span className="bullet-separator align-top text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]">
+                  {" "}
+                  &#8226;{" "}
+                </span>
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
     </MotionDiv>
-  )
-}
+  );
+};
 
 export default CardPerson;

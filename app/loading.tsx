@@ -1,11 +1,9 @@
-"use client"
+"use client";
 
 import { Spinner } from "@components";
 
 const Loading = () => {
-  return (
-    <Spinner />
-  )
-}
+  return <Spinner />;
+};
 
 export default Loading;

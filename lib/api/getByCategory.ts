@@ -2,61 +2,78 @@ import { options } from "@lib/api/data";
 
 import type { MediaItem, VideoItem, IGetByCategoryResponse } from "@types";
 
-export const getByCategory = async (mediaType: string, category: string): Promise<IGetByCategoryResponse> => {
-    if (mediaType === "stars") mediaType = "person";
+export const getByCategory = async (
+  mediaType: string,
+  category: string
+): Promise<IGetByCategoryResponse> => {
+  if (mediaType === "stars") mediaType = "person";
 
-    const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US`, options);
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${mediaType}/${category}?language=en-US`,
+    options
+  );
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (!response.ok || data.success === false)
-        throw new Error(data.status_message || "Failed to fetch category data.");
-    
-    if (!Array.isArray(data.results) || data.results.length === 0) 
-        throw new Error("No results found for this category.");
-    
-    let firstResult: IGetByCategoryResponse["firstResult"] = undefined;
+  if (!response.ok || data.success === false)
+    throw new Error(data.status_message || "Failed to fetch category data.");
 
-    const firstItem: MediaItem = data.results[0];
+  if (!Array.isArray(data.results) || data.results.length === 0)
+    throw new Error("No results found for this category.");
 
-    if (!firstItem || !firstItem.id)
-        throw new Error("Invalid first result: missing ID.");
+  let firstResult: IGetByCategoryResponse["firstResult"] = undefined;
 
-    // Only get trailer for movie/tv (not person)
-    if (firstItem.media_type !== "person") {
-        // Get video
-        const videoRes = await fetch(`https://api.themoviedb.org/3/${mediaType}/${firstItem.id}/videos?language=en-US`, options);
-        const videoData = await videoRes.json();
-        if (!videoRes.ok || videoData.success === false)
-            throw new Error(videoData.status_message || "Failed to fetch videos.");
+  const firstItem: MediaItem = data.results[0];
 
-        // Get main trailer
-        const trailers = (videoData.results as VideoItem[])
-            .filter((v: VideoItem) => v.type === "Trailer" && v.official)
-            .sort((a, b) => new Date(b.published_at ?? "").getTime() - new Date(a.published_at ?? "").getTime());
+  if (!firstItem || !firstItem.id)
+    throw new Error("Invalid first result: missing ID.");
 
-        const teasers = (videoData.results as VideoItem[])
-            .filter((v: VideoItem) => v.type === "Teaser" && v.official)
-            .sort((a, b) => new Date(b.published_at ?? "").getTime() - new Date(a.published_at ?? "").getTime());
+  // Only get trailer for movie/tv (not person)
+  if (firstItem.media_type !== "person") {
+    // Get video
+    const videoRes = await fetch(
+      `https://api.themoviedb.org/3/${mediaType}/${firstItem.id}/videos?language=en-US`,
+      options
+    );
+    const videoData = await videoRes.json();
+    if (!videoRes.ok || videoData.success === false)
+      throw new Error(videoData.status_message || "Failed to fetch videos.");
 
-        const officialTrailer = trailers[0] || teasers[0] || null;
+    // Get main trailer
+    const trailers = (videoData.results as VideoItem[])
+      .filter((v: VideoItem) => v.type === "Trailer" && v.official)
+      .sort(
+        (a, b) =>
+          new Date(b.published_at ?? "").getTime() -
+          new Date(a.published_at ?? "").getTime()
+      );
 
-        firstResult = {
-            result: firstItem,
-            officialTrailer
-        }
-    } else {
-        firstResult = {
-            result: firstItem,
-            officialTrailer: null
-        }
-    } 
-    
-    return {
-        page: data.page,
-        firstResult: firstResult,
-        results: data.results,
-        total_pages: data.total_pages,
-        total_results: data.total_results
-    }; 
-}
+    const teasers = (videoData.results as VideoItem[])
+      .filter((v: VideoItem) => v.type === "Teaser" && v.official)
+      .sort(
+        (a, b) =>
+          new Date(b.published_at ?? "").getTime() -
+          new Date(a.published_at ?? "").getTime()
+      );
+
+    const officialTrailer = trailers[0] || teasers[0] || null;
+
+    firstResult = {
+      result: firstItem,
+      officialTrailer,
+    };
+  } else {
+    firstResult = {
+      result: firstItem,
+      officialTrailer: null,
+    };
+  }
+
+  return {
+    page: data.page,
+    firstResult: firstResult,
+    results: data.results,
+    total_pages: data.total_pages,
+    total_results: data.total_results,
+  };
+};

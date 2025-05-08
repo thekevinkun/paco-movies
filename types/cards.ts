@@ -1,4 +1,4 @@
-import { VideoItem, MediaItem } from "./models";
+import { MediaItem, VideoItem } from "@types";
 
 export interface ICardMovieTopProps {
   id: number;

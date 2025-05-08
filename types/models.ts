@@ -1,4 +1,4 @@
-import { CachedNextPageResponse } from "./api";
+import { CachedNextPageResponse } from "@types";
 
 export interface MediaItem {
   id: number;

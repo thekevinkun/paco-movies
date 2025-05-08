@@ -4,8 +4,8 @@ import { getCachedDetails } from "@lib/redis/getCachedDetails";
 import { getCachedNextPage } from "@lib/redis/getCachedNextPage";
 
 export {
-    getCachedTrending,
-    getCachedGenres,
-    getCachedDetails,
-    getCachedNextPage
-}
+  getCachedTrending,
+  getCachedGenres,
+  getCachedDetails,
+  getCachedNextPage,
+};

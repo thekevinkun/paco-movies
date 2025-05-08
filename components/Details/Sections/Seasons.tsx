@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +15,9 @@ import { useKeenSliderWithArrows } from "@lib/utils/useKeenSlider";
 import { slugify } from "@lib/helpers/helpers";
 
 const getSeasonsSlider = (seasons: SeasonItem[]) => {
-  return seasons.filter((item) => item.season_number !== 0).map((season) => (
+  return seasons
+    .filter((item) => item.season_number !== 0)
+    .map((season) => (
       <div
         key={season.id}
         className="keen-slider__slide min-w-0 shrink-0
@@ -41,26 +43,29 @@ const getSeasonsSlider = (seasons: SeasonItem[]) => {
 
           <div className="p-2 flex flex-1 flex-col">
             <div className="flex items-center gap-3 max-xl:gap-1">
-              <h4 className="font-semibold text-dark max-sm:text-sm">{season.name}</h4>
+              <h4 className="font-semibold text-dark max-sm:text-sm">
+                {season.name}
+              </h4>
               <span>|</span>
-              <p className="text-xs max-sm:text-[0.625rem] text-dark">{season.episode_count} Episodes</p>
+              <p className="text-xs max-sm:text-[0.625rem] text-dark">
+                {season.episode_count} Episodes
+              </p>
             </div>
-            
+
             <p className="pt-1 text-dark-1 text-xs max-sm:text-[0.625rem]">
               {moment(season.air_date).format("ddd, MMM Do, YYYY")}
             </p>
-          
-            {season.overview ?
+
+            {season.overview ? (
               <p className="line-clamp-2 mt-auto text-sm max-lg:text-xs">
                 {season.overview}
               </p>
-            :
-              <p className="mt-auto italic text-sm text-dark-1">
-                No Overview.
-              </p>
-            }
+            ) : (
+              <p className="mt-auto italic text-sm text-dark-1">No Overview.</p>
+            )}
 
-            <div className="pt-3 max-xl:pt-1 max-lg:pt-2 
+            <div
+              className="pt-3 max-xl:pt-1 max-lg:pt-2 
               flex items-center justify-end gap-1"
             >
               <Image
@@ -72,120 +77,135 @@ const getSeasonsSlider = (seasons: SeasonItem[]) => {
                 className="relative object-contain bottom-[1.7px]"
               />
 
-              <span 
-                  className={`text-sm max-sm:text-xs
-                      ${season.vote_average > 0 ? 
-                      "font-semibold" : "font-normal italic"}`
-                  }
+              <span
+                className={`text-sm max-sm:text-xs
+                      ${
+                        season.vote_average > 0
+                          ? "font-semibold"
+                          : "font-normal italic"
+                      }`}
               >
-                  {season.vote_average > 0 ? season.vote_average : "NaN"}
+                {season.vote_average > 0 ? season.vote_average : "NaN"}
               </span>
             </div>
           </div>
         </div>
       </div>
-  ))
-}
+    ));
+};
 
-const Seasons = ({id, mediaType, name, seasons, seasonList}: ISeasonsProps) => {
-    // KEEN SLIDER SETUP
-    const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
+const Seasons = ({
+  id,
+  mediaType,
+  name,
+  seasons,
+  seasonList,
+}: ISeasonsProps) => {
+  // KEEN SLIDER SETUP
+  const { arrowDisabled, updateArrows } = useKeenSliderWithArrows();
 
-    const [sliderRef, slider] = useKeenSlider({
-        loop: false,
-        breakpoints: {
-            "(max-width: 1280px)": {
-              slides: { perView: 2.3, spacing: 15 },
-            },
-            "(max-width: 1024px)": {
-              slides: { perView: 2.5, spacing: 15 },
-            },
-            "(max-width: 856px)": {
-              slides: { perView: 2.25, spacing: 12 },
-            },
-            "(max-width: 640px)": {
-              slides: { perView: 1.75, spacing: 12 },
-            },
-        },
-        slides: {
-            perView: 2.5,
-            spacing: 15
-        },
-        mode: "free-snap",
-        created(s) {
-            updateArrows(s)
-        },
-        updated(s) {
-            updateArrows(s)
-        },
-        slideChanged(s) {
-            updateArrows(s);
-        }
-    });
+  const [sliderRef, slider] = useKeenSlider({
+    loop: false,
+    breakpoints: {
+      "(max-width: 1280px)": {
+        slides: { perView: 2.3, spacing: 15 },
+      },
+      "(max-width: 1024px)": {
+        slides: { perView: 2.5, spacing: 15 },
+      },
+      "(max-width: 856px)": {
+        slides: { perView: 2.25, spacing: 12 },
+      },
+      "(max-width: 640px)": {
+        slides: { perView: 1.75, spacing: 12 },
+      },
+    },
+    slides: {
+      perView: 2.5,
+      spacing: 15,
+    },
+    mode: "free-snap",
+    created(s) {
+      updateArrows(s);
+    },
+    updated(s) {
+      updateArrows(s);
+    },
+    slideChanged(s) {
+      updateArrows(s);
+    },
+  });
 
-    const scrollLeft = () => slider.current?.prev();
-    const scrollRight = () => slider.current?.next();
+  const scrollLeft = () => slider.current?.prev();
+  const scrollRight = () => slider.current?.next();
 
-    const route = `/title/${mediaType}/${id}-${slugify(name)}`;
+  const route = `/title/${mediaType}/${id}-${slugify(name)}`;
 
-    return (
-        <>
-            <Link 
-              href={`${route}/fullseasons`} 
-              className="group flex items-center w-fit"
-              >
-              <h3 className="text-main text-2xl max-sm:text-xl font-semibold">Seasons</h3>
-              <span className="pl-3 text-xs text-main-1">{seasons}</span>
+  return (
+    <>
+      <Link
+        href={`${route}/fullseasons`}
+        className="group flex items-center w-fit"
+      >
+        <h3 className="text-main text-2xl max-sm:text-xl font-semibold">
+          Seasons
+        </h3>
+        <span className="pl-3 text-xs text-main-1">{seasons}</span>
 
-              <MdArrowForwardIos 
-                  className="text-main text-3xl max-sm:text-2xl font-semibold 
+        <MdArrowForwardIos
+          className="text-main text-3xl max-sm:text-2xl font-semibold 
                   transition-colors duration-200 group-hover:text-tale"
-              />
-            </Link>
+        />
+      </Link>
 
-            <div className="pt-7">
-              <div className={`${seasons > 2 &&
-                  "px-3 max-md:px-0"}
+      <div className="pt-7">
+        <div
+          className={`${seasons > 2 && "px-3 max-md:px-0"}
                   relative w-full max-w-[calc(100vw-(288px+55px))]
                   max-xl:max-w-[calc(100vw-(256px+55px))] max-lg:max-w-full overflow-hidden`}
-              >
-                <div 
-                  ref={sliderRef}
-                  className="keen-slider"
-                >
-                  {getSeasonsSlider(seasonList)}
-                </div>
+        >
+          <div ref={sliderRef} className="keen-slider">
+            {getSeasonsSlider(seasonList)}
+          </div>
 
-                {/* Arrow */}
-                {/* Left arrow */}
-                {seasons > 2 &&
-                <>
-                  <button
-                    onClick={scrollLeft}
-                    className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
+          {/* Arrow */}
+          {/* Left arrow */}
+          {seasons > 2 && (
+            <>
+              <button
+                onClick={scrollLeft}
+                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 left-0 z-20
                       bg-main/90 hover:bg-main/60 text-tale  
                         p-3 rounded-sm transition-opacity duration-200
-                        ${arrowDisabled.prev ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-                  >
-                    <MdArrowBackIosNew className="font-bold text-2xl"/>
-                  </button>
+                        ${
+                          arrowDisabled.prev
+                            ? "pointer-events-none !text-dark !opacity-10"
+                            : ""
+                        }`}
+              >
+                <MdArrowBackIosNew className="font-bold text-2xl" />
+              </button>
 
-                  {/* Right arrow */}
-                  <button
-                    onClick={scrollRight}
-                    className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
+              {/* Right arrow */}
+              <button
+                onClick={scrollRight}
+                className={`max-md:hidden absolute top-1/2 -translate-y-1/2 right-0 z-20
                     bg-main/90 hover:bg-main/60 text-tale  
                         p-3 rounded-sm transition-opacity duration-200
-                        ${arrowDisabled.next ? "pointer-events-none !text-dark !opacity-10" : ""}`}
-                  >
-                    <MdArrowForwardIos className="font-bold text-2xl"/>
-                  </button>
-                </>
-                }
-              </div>
-            </div>
-        </>
-    )
-}
+                        ${
+                          arrowDisabled.next
+                            ? "pointer-events-none !text-dark !opacity-10"
+                            : ""
+                        }`}
+              >
+                <MdArrowForwardIos className="font-bold text-2xl" />
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Seasons;

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -12,12 +12,12 @@ import { dedupeResults } from "@lib/helpers/helpers";
 import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardPerson = dynamic(() => import("@components/Card/CardPerson"), {
-    ssr: false,
-    loading: () => <Spinner />
+  ssr: false,
+  loading: () => <Spinner />,
 });
 const LoadMore = dynamic(() => import("@components/LoadMore"), {
   ssr: false,
-  loading: () => null
+  loading: () => null,
 });
 
 const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
@@ -33,21 +33,21 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
       ...newData,
       results: uniqueResults,
     });
-  }
+  };
 
   useEffect(() => {
     handleChangeMediaType(mediaType ?? "");
     handleChangeCategory(category ?? "");
-  }, [])
+  }, []);
 
   const [columns, setColumns] = useState(3); // Default to desktop (4 columns)
-  
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const checkSize = () => {
       const width = window.innerWidth;
-  
+
       if (width <= 768) {
         setColumns(2); // Tablet to mobile
       } else if (width <= 1024) {
@@ -63,17 +63,17 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
     window.addEventListener("resize", checkSize);
     return () => window.removeEventListener("resize", checkSize);
   }, []);
-  
+
   // Hero movie shown only on desktop
   const remainder = useData?.results.length % columns;
   const placeholders = remainder === 0 ? 0 : columns - remainder;
 
   return (
     <section className="relative mt-14 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
-      <MotionDiv 
+      <MotionDiv
         variants={parentStaggerVariants}
         initial="hidden"
-        animate="visible" 
+        animate="visible"
         className="grid grid-rows-1 grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-3 
           max-md:grid-cols-2 gap-x-3 gap-y-10 max-md:gap-x-5 max-md:gap-y-7 pt-8 pb-12"
       >
@@ -94,17 +94,17 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
           <div key={`placeholder-${i}`} className="invisible" />
         ))}
       </MotionDiv>
-      
-      {useData?.page < useData?.total_pages &&
-        <LoadMore 
+
+      {useData?.page < useData?.total_pages && (
+        <LoadMore
           page={useData.page}
           mediaType={mediaType}
           category={category ?? ""}
           onNextPage={handleNextPage}
         />
-      }
+      )}
     </section>
-  )
-}
+  );
+};
 
 export default ContentStars;
