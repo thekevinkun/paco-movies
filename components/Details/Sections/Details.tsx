@@ -184,7 +184,7 @@ const Details = ({
           <div className="flex flex-wrap items-center gap-2 max-md:text-sm max-sm:text-xs">
             {details.production_companies
               .slice(0, 3)
-              .map((company, index: number) => (
+              .map((company) => (
                 <React.Fragment key={company.id}>
                   <p className="">
                     {company.name}
