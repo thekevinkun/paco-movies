@@ -78,7 +78,7 @@ const ContentMovies = ({
   const placeholders = remainder === 0 ? 0 : columns - remainder;
 
   return (
-    <section className="relative mt-20 max-md:mt-10 px-6 max-lg:px-5 max-md:px-3.5">
+    <section className="relative mt-20 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv
         variants={parentStaggerVariants}
         initial="hidden"
@@ -107,8 +107,8 @@ const ContentMovies = ({
       <h2
         className="hidden max-lg:block w-fit 
           pl-3 mt-7 max-md:mt-10 max-sm:mt-9
-          font-medium text-main text-xl max-sm:text-lg
-          max-xs:text-base border-l-4 border-tale"
+          font-semibold text-main text-xl max-sm:text-lg
+          border-l-4 border-tale"
       >
         {categoryTitle}
       </h2>

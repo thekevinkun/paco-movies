@@ -30,8 +30,8 @@ const CardSearch = ({
     <MotionDiv
       variants={cardMovieVariants}
       className="w-full h-52 max-md:h-48 flex 
-                mt-4 border border-gray-500 rounded-tr-lg
-                shadow-inner shadow-dark-1"
+                mt-4 max-md:mt-3 border border-gray-500
+                rounded-tr-lg shadow-inner shadow-dark-1"
     >
       {/* PHOTO */}
       <Link
@@ -147,7 +147,9 @@ const CardSearch = ({
         )}
 
         {works && (
-          <div className="pt-3 pr-7">
+          <div className="pt-3 pr-7 max-md:pt-7 flex flex-wrap max-sm:flex-col
+                items-center max-sm:items-start gap-x-1 gap-y-0.5 max-sm:gap-y-0"
+          >
             {works?.map((work) => {
               const title = work.title ?? work.name ?? "untitled";
               const route = `/title/${work.media_type}/${work.id}-${slugify(
@@ -159,18 +161,18 @@ const CardSearch = ({
                   <Link
                     href={route}
                     title={work.title || work.name}
-                    className="inline-block"
+                    className="w-fit line-clamp-1"
                   >
                     <p
-                      className="text-main text-sm max-md:text-xs max-xs:text-[0.675rem] hover:text-tale
-                                            max-xs:truncate max-xs:w-fit max-xs:max-w-[125px]"
+                      className="text-main text-sm max-md:text-xs max-xs:text-[0.675rem] hover:text-tale"
                     >
                       {work.title || work.name}
                     </p>
                   </Link>
-                  <span className="bullet-separator max-xs:align-top text-main text-sm max-md:text-xs max-xs:text-[0.675rem]">
-                    {" "}
-                    &#8226;{" "}
+                  <span className="max-sm:hidden bullet-separator text-main
+                      text-sm max-md:text-xs max-xs:text-[0.675rem]"
+                  >
+                    &#8226;
                   </span>
                 </React.Fragment>
               );

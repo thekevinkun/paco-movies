@@ -55,7 +55,7 @@ const CardMovie = ({
                 : routePerson
             }
             title={title}
-            className="inline-block w-fit pr-3"
+            className="inline-block w-fit pr-3 max-sm:pr-2"
           >
             <h2
               className="line-clamp-1 text-main 
@@ -67,9 +67,9 @@ const CardMovie = ({
 
           <Link
             href={`/${mediaType}`}
-            className="rounded-sm border border-gray-500 px-1"
+            className="flex item-center rounded-sm border border-gray-500 p-1"
           >
-            <span className="text-main-1 text-[11px]">{mediaType}</span>
+            <span className="text-main-1 text-[11px] max-xs:text-[9px]">{mediaType}</span>
           </Link>
         </div>
 
@@ -78,21 +78,22 @@ const CardMovie = ({
             <Image
               src="/icons/star.svg"
               alt="rating star"
-              width={18}
-              height={18}
+              width={0}
+              height={0}
               sizes="18px"
-              className="relative object-contain bottom-[0.4px]"
+              className="relative w-[18px] h-[18px] 
+                max-sm:w-4 max-sm:h-4 object-contain bottom-[0.4px]"
             />
 
             <span
-              className={`text-main-1 text-sm
+              className={`text-main-1 text-sm max-sm:text-xs
                 ${rating > 0 ? "font-medium" : "font-normal italic"}`}
             >
               {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
             </span>
           </div>
 
-          <p className="ml-auto text-main-1 text-xs">
+          <p className="ml-auto text-main-1 text-xs max-xs:text-[0.685rem]">
             {releaseDate && `${moment(releaseDate).format("ll")}`}
           </p>
 

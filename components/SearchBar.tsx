@@ -54,13 +54,13 @@ const SearchBar = ({
 
       {searchQuery && (
         <RxCross2
-          className="text-2xl text-danger hover:text-red-500 cursor-pointer mr-1"
+          className="mr-1 text-2xl max-sm:text-[26px] text-danger hover:text-red-500 cursor-pointer"
           onClick={() => handleClearSearch()}
         />
       )}
 
       <IoSearch
-        className={`text-xl text-dark hover:text-light-2 cursor-pointer ${
+        className={`text-xl max-sm:text-[22px] text-dark hover:text-light-2 cursor-pointer ${
           !searchQuery && "pointer-events-none"
         }`}
         onClick={() => handleSearch()}

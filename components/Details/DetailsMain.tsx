@@ -48,7 +48,7 @@ const DetailsMain = ({
         backgroundRepeat: "no-repeat",
         backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
       }}
-      className="relative w-full h-svh max-md:hidden"
+      className="relative w-full h-auto max-md:hidden"
     >
       {/* Background image gradient */}
       <div
@@ -60,7 +60,7 @@ const DetailsMain = ({
       ></div>
 
       {/* ALL INFORMATION */}
-      <div className="relative pt-10 pb-2 px-5 z-20">
+      <div className="relative pt-10 pb-16 px-5 z-20">
         <div className="flex gap-10">
           {/* POSTER */}
           <div
@@ -243,7 +243,7 @@ const DetailsMain = ({
               {/* DIRECTOR or CREATORS */}
               {mediaType === "movie" && credits.crew.length > 0 && (
                 <div
-                  className="py-2 flex items-center font-semibold
+                  className="py-2 flex items-baseline font-semibold
                                     border-b border-gray-500"
                 >
                   <h3
@@ -262,7 +262,7 @@ const DetailsMain = ({
 
               {mediaType === "tv" && creators && creators.length > 0 && (
                 <div
-                  className="py-2 flex items-center font-semibold
+                  className="py-2 flex items-baseline font-semibold
                                     border-b border-gray-500"
                 >
                   <h3
@@ -284,7 +284,7 @@ const DetailsMain = ({
               {/* WRITERS */}
               {mediaType === "movie" && credits.crew.length > 0 && (
                 <div
-                  className="py-2 flex items-center font-semibold
+                  className="py-2 flex items-baseline font-semibold
                                     border-b border-gray-500"
                 >
                   <h3
@@ -307,7 +307,7 @@ const DetailsMain = ({
               {/* STARS */}
               {credits.cast.length > 0 && (
                 <div
-                  className="py-2 flex items-center font-semibold
+                  className="py-2 flex items-baseline font-semibold
                                     border-b border-gray-500"
                 >
                   <h3

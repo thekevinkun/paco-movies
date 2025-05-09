@@ -56,11 +56,11 @@ const Navbar = () => {
 
       {/* MENU ICON FOR MOBILE */}
       <div
-        className="hidden h-16 max-sm:h-14 ml-[18px] max-md:ml-3 
+        className="hidden h-16 ml-[18px] max-md:ml-3 
             fixed top-0 left-0 z-30 max-lg:flex items-center"
       >
         <IoMdMenu
-          className="text-main text-[27px] max-sm:text-[25px] cursor-pointer hover:text-neutral-500 
+          className="text-main text-[27px] cursor-pointer hover:text-neutral-500 
                 transition-colors duration-200"
           onClick={() => setIsShowMobileMenu(true)}
         />
@@ -72,7 +72,7 @@ const Navbar = () => {
         className={`${
           isShowMobileMenu && "nav-glass"
         } fixed top-0 left-0 transition-all z-30 
-        ${isShowMobileMenu ? "w-96 max-xs:w-80" : "w-0"}`}
+        ${isShowMobileMenu ? "w-96 max-sm:w-80 max-xs:w-72" : "w-0"}`}
       >
         <div className="nav-menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">
           <div className="mb-3 p-3">
@@ -87,7 +87,7 @@ const Navbar = () => {
 
         <RxCross2
           className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} 
-                object-contain absolute top-[13px] right-[-45px] 
+                object-contain absolute top-[15.28px] right-[-45px] 
                 text-[32px] text-danger bg-main/85 hover:bg-main/75 cursor-pointer`}
           onClick={() => setIsShowMobileMenu(false)}
         />

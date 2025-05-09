@@ -25,7 +25,7 @@ const Details = ({
 
       <div className="pt-5 w-[90%] max-md:w-[100%]">
         {/* RELEASE DATE */}
-        <div className="py-3 text-main flex items-center border-y border-gray-500">
+        <div className="py-3 text-main flex items-baseline border-y border-gray-500">
           <h3
             className="basis-[30%] max-lg:basis-[35%] 
                 text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -55,7 +55,7 @@ const Details = ({
         </div>
 
         {/* MOVIE COUNTRIES */}
-        <div className="py-3 text-main flex items-center border-b border-gray-500">
+        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
           <h3
             className="basis-[30%] max-lg:basis-[35%]
               text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -75,7 +75,7 @@ const Details = ({
 
         {/* MOVIE HOMEPAGE */}
         {details.homepage && (
-          <div className="py-3 text-main flex items-center border-b border-gray-500">
+          <div className="py-3 text-main flex items-baseline border-b border-gray-500">
             <h3
               className="basis-[30%] max-lg:basis-[35%]
                 text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -97,7 +97,7 @@ const Details = ({
         )}
 
         {/* MOVIE EXTERNAL SITES */}
-        <div className="py-3 text-main flex items-center border-b border-gray-500">
+        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
           <h3
             className="basis-[30%] max-lg:basis-[35%]
               text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -154,7 +154,7 @@ const Details = ({
         </div>
 
         {/* MOVIE LANGUAGE */}
-        <div className="py-3 text-main flex items-center border-b border-gray-500">
+        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
           <h3
             className="basis-[30%] max-lg:basis-[35%]
               text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -173,7 +173,7 @@ const Details = ({
         </div>
 
         {/* MOVIE COMPANIES */}
-        <div className="py-3 text-main flex items-center border-b border-gray-500">
+        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
           <h3
             className="basis-[30%] max-lg:basis-[35%]
                 text-lg max-md:text-base max-sm:text-sm font-semibold"
@@ -186,14 +186,10 @@ const Details = ({
               .slice(0, 3)
               .map((company, index: number) => (
                 <React.Fragment key={company.id}>
-                  <p className={`${index >= 1 && "max-md:hidden"}`}>
+                  <p className="">
                     {company.name}
                   </p>
-                  <span
-                    className={`${
-                      index >= 0 && "max-md:hidden"
-                    } bullet-separator`}
-                  >
+                  <span className="bullet-separator">
                     {" "}
                     &#8226;{" "}
                   </span>

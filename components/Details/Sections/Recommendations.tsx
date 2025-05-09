@@ -16,7 +16,7 @@ import { useKeenSliderWithArrows } from "@lib/utils/useKeenSlider";
 import { roundedToFixed, slugify } from "@lib/helpers/helpers";
 
 const getRecommendations = (data: CreditItem[]) => {
-  return data.slice(0, 10).map((item) => (
+  return data.map((item) => (
     <div key={item.id} className="keen-slider__slide min-w-0 shrink-0 h-full">
       <div className="flex flex-col h-full">
         <Link
@@ -24,8 +24,8 @@ const getRecommendations = (data: CreditItem[]) => {
             item.title || item.name || "Untitled"
           )}`}
           className="relative bg-dark w-full h-[335px] 
-            max-lg:h-[285px] max-md:h-[265px] max-sm:h-[235px]
-            max-[425px]:h-[220px]"
+            max-lg:h-[285px] max-md:h-[265px] max-sm:h-[230px]
+            max-[425px]:h-[210px]"
         >
           <FallbackImage
             src={item.poster_path}
@@ -73,19 +73,19 @@ const getRecommendations = (data: CreditItem[]) => {
               item.title || item.name || "Untitled"
             )}`}
             title={item.title || item.name}
-            className="pt-3 inline-block w-fit"
+            className="w-fit pt-3 line-clamp-1"
           >
             <h2
-              className="line-clamp-1 max-h-[1.5em] text-dark 
-                max-md:text-sm max-sm:text-xs font-semibold hover:text-tale"
+              className="font-semibold text-dark max-md:text-sm
+                max-sm:text-xs hover:text-tale"
             >
               {item.title || item.name}
             </h2>
           </Link>
 
           <div
-            className="pt-4 pb-3 max-md:pt-3 max-md:pb-2 
-              max-sm:pt-2 px-7 max-sm:px-5 max-[425px]:px-3
+            className="pt-7 pb-3 max-md:pb-2 
+              px-7 max-[830px]:px-5 max-sm:pt-5 max-[425px]:px-3
               flex items-center justify-between"
           >
             <Link

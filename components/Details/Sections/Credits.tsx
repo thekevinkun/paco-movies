@@ -50,7 +50,7 @@ const getCasts = (casts: CreditItem[]) => {
 };
 
 const getCastsMobile = (casts: CreditItem[]) => {
-  return casts.slice(0, 11).map((cast) => (
+  return casts.slice(0, 18).map((cast) => (
     <div key={cast.id} className="keen-slider__slide flex-shrink-0">
       <div className="flex flex-col gap-3">
         <Link
@@ -146,31 +146,42 @@ const Credits = ({
 
       {/* CREWS CREDITS */}
       <div className="!text-main pt-7 max-sm:pt-5 w-[90%] max-md:w-[100%]">
-        <div className="py-3 flex items-center font-semibold border-y border-gray-500">
-          <h3
-            className="basis-[17%] max-lg:basis-[20%] 
-            text-main text-lg max-md:text-base max-sm:text-sm"
-          >
-            {mediaType === "movie" ? "Director" : "Creators"}
-          </h3>
+        {mediaType === "movie" && crews.length > 0 &&
+          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
+            <h3
+              className="basis-[17%] max-lg:basis-[20%] 
+              text-main text-lg max-md:text-base max-sm:text-sm"
+            >
+              Director
+            </h3>
 
-          {mediaType === "movie" ? (
             <Director
               crews={crews || []}
               childStyles="max-xl:text-sm max-sm:text-xs"
             />
-          ) : (
-            <div className="flex items-center gap-2">
+          </div>
+        }
+
+       {mediaType === "tv" && creators.length > 0 &&
+          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
+            <h3
+              className="basis-[17%] max-lg:basis-[20%] 
+              text-main text-lg max-md:text-base max-sm:text-sm"
+            >
+              Creators
+            </h3>
+
+            <div className="flex flex-wrap items-center gap-2">
               <CreditList
                 items={creators || []}
                 childStyles="max-xl:text-sm max-sm:text-xs"
               />
             </div>
-          )}
-        </div>
+          </div>
+        }
 
         {mediaType === "movie" && (
-          <div className="py-3 flex items-center font-semibold border-b border-gray-500">
+          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
             <h3
               className="basis-[17%] max-lg:basis-[20%]
               text-main text-lg max-md:text-base max-sm:text-sm"
@@ -178,7 +189,7 @@ const Credits = ({
               Writers
             </h3>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <CreditList
                 items={crews || []}
                 filterJobs={["Writer", "Screenplay", "Characters"]}
@@ -188,7 +199,7 @@ const Credits = ({
           </div>
         )}
 
-        <div className="py-3 font-semibold border-b border-gray-500">
+        <div className="py-3 font-semibold border-y border-gray-500">
           <Link
             href={`${route}/fullcredits`}
             className="text-main hover:text-tale max-sm:text-sm flex items-center justify-between"

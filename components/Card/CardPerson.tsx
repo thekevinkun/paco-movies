@@ -90,7 +90,10 @@ const CardPerson = ({
           </p>
         </div>
 
-        <div className="mt-auto pt-5 leading-5">
+        <div
+          className="mt-auto pt-5 flex flex-wrap max-sm:flex-col
+            items-center max-sm:items-start gap-x-1 gap-y-0.5 max-sm:gap-y-0"
+        >
           {works?.map((work) => {
             const title = work.title ?? work.name ?? "untitled";
             const route = `/title/${work.media_type}/${work.id}-${slugify(
@@ -102,18 +105,17 @@ const CardPerson = ({
                 <Link
                   href={route}
                   title={work.title || work.name}
-                  className="inline-block"
+                  className="w-fit line-clamp-1"
                 >
-                  <p
-                    className="truncate w-fit max-w-[155px] max-md:max-w-[125px] max-sm:max-w-[105px]
-                                text-main-1 hover:text-tale text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"
-                  >
+                  <p className="text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem] hover:text-tale">
                     {work.title || work.name}
                   </p>
                 </Link>
-                <span className="bullet-separator align-top text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]">
-                  {" "}
-                  &#8226;{" "}
+                <span
+                  className="bullet-separator max-sm:hidden
+                    text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"
+                >
+                  &#8226;
                 </span>
               </React.Fragment>
             );

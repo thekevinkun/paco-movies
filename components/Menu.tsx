@@ -28,7 +28,7 @@ const Menu = ({
           key={item.id}
           id={item.id}
           href={`/${item.id}`}
-          className={`w-full py-3 max-lg:px-3
+          className={`w-full py-3.5 max-lg:px-3
           ${
             activeMediaType !== item.id
               ? "hover:bg-tale-1"
@@ -38,7 +38,7 @@ const Menu = ({
         >
           <div
             className="flex flex-col items-center 
-                max-lg:flex-row max-lg:items-center max-lg:gap-3 pointer-events-none"
+                max-lg:flex-row max-lg:gap-3 pointer-events-none"
           >
             <Image
               priority
@@ -51,7 +51,7 @@ const Menu = ({
                   ${activeMediaType === item.id && "opacity-50"}`}
             />
             <p
-              className={`text-main font-semibold pt-2.5 pointer-events-none
+              className={`text-main font-semibold pt-2.5 max-lg:pt-1 pointer-events-none
                 ${activeMediaType === item.id && "!text-gray-700"}`}
             >
               {item.title}
@@ -62,7 +62,7 @@ const Menu = ({
 
       <div className="w-full pt-3">
         {showCategories && showCategories.length > 0 && (
-          <div className="py-3 border-t-2 border-gray-500">
+          <div className="py-3.5 border-t-2 border-gray-500">
             <h2 className="px-3 text-light-2">Categories</h2>
 
             <div
@@ -101,7 +101,7 @@ const Menu = ({
                   />
 
                   <p
-                    className={`text-main text-sm font-semibold pt-2.5 ${
+                    className={`text-main text-sm font-semibold pt-2.5 max-lg:pt-0 ${
                       activeCategory === item.id.replace(/-/g, "_") &&
                       "!text-gray-700"
                     }`}
@@ -115,7 +115,7 @@ const Menu = ({
         )}
 
         {showGenres && showGenres.length > 0 && (
-          <div className="py-3 border-t-2 border-gray-500">
+          <div className="py-3.5 border-t-2 border-gray-500">
             <h2 className="px-3 text-light-2">Genres</h2>
 
             <div className="pt-2">
@@ -146,7 +146,7 @@ const Menu = ({
                   />
 
                   <p
-                    className={`text-main text-sm font-semibold pt-2.5 
+                    className={`text-main text-sm font-semibold pt-2.5 max-lg:pt-0
                       ${
                         activeCategory == item.id.toString() && "!text-gray-700"
                       }`}

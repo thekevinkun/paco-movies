@@ -67,15 +67,15 @@
 
 @layer utilities {
   .text-logo {
-    @apply font-guerrilla font-bold text-tale text-[30px] max-sm:text-[26px] tracking-widest;
+    @apply font-guerrilla font-bold text-tale text-[30px] max-sm:text-[27px] tracking-widest;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-[#008080] to-[#171717] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#008080] to-[#545252] bg-clip-text text-transparent;
   }
 
   .search-input {
-    @apply block w-full text-sm font-medium bg-white py-1.5 px-1 text-dark rounded-md border border-gray-700 focus:border-gray-100 focus:outline-none focus:ring-0;
+    @apply block w-full text-sm max-lg:text-base font-medium bg-white py-1.5 px-1 text-dark rounded-md border border-gray-700 focus:border-gray-100 outline-none focus:outline-none focus:ring-0;
   }
 
   .btn-person-credits {

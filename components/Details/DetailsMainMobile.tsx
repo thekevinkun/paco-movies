@@ -93,14 +93,14 @@ const DetailsMainMobile = ({
         {/* RATING, NETWORKS & TRAILER */}
         <div className="pt-7 flex items-center justify-center">
           {/* RATING */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Image
               src="/icons/star-2.svg"
               alt="rating star"
-              width={29}
-              height={29}
-              sizes="29px"
-              className="relative object-contain bottom-[1.7px]"
+              width={27}
+              height={27}
+              sizes="27px"
+              className="relative object-contain bottom-[1.8px]"
             />
 
             <span
@@ -167,7 +167,7 @@ const DetailsMainMobile = ({
             <>
               {tvrating && (
                 <span
-                  className="px-1 text-sm font-medium
+                  className="px-1 mb-1 text-sm font-medium
                                 bg-dark border border-gray-500"
                 >
                   {tvrating}
@@ -185,7 +185,6 @@ const DetailsMainMobile = ({
 
           {mediaType === "tv" && status && (
             <>
-              <span>|</span>
               <span className="italic text-sm">{status}</span>
             </>
           )}
@@ -214,11 +213,11 @@ const DetailsMainMobile = ({
           {/* DIRECTOR for Movie */}
           {mediaType === "movie" && credits.crew.length > 0 && (
             <div
-              className="py-2 flex items-center font-semibold
+              className="py-2 flex items-baseline font-semibold
                             border-b border-gray-500"
             >
               <h3
-                className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm"
+                className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm"
               >
                 Director
               </h3>
@@ -233,10 +232,10 @@ const DetailsMainMobile = ({
           {/* or CREATORS for tv */}
           {mediaType === "tv" && creators && creators.length > 0 && (
             <div
-              className="py-2 flex items-center font-semibold
+              className="py-2 flex items-baseline font-semibold
                             border-b border-gray-500"
             >
-              <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">
+              <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">
                 Creators
               </h3>
 
@@ -252,10 +251,10 @@ const DetailsMainMobile = ({
           {/* WRITERS */}
           {mediaType === "movie" && (
             <div
-              className="py-2 flex items-center font-semibold
+              className="py-2 flex items-baseline font-semibold
                             border-b border-gray-500"
             >
-              <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">Writers</h3>
+              <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">Writers</h3>
 
               <div className="flex flex-wrap items-center gap-2">
                 <CreditList
@@ -269,10 +268,10 @@ const DetailsMainMobile = ({
 
           {/* STARS */}
           <div
-            className="py-2 flex items-center font-semibold
+            className="py-2 flex items-baseline font-semibold
                         border-b border-gray-500"
           >
-            <h3 className="basis-[20%] max-xs:basis-[23%] max-sm:text-sm">Stars</h3>
+            <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">Stars</h3>
 
             <div className="flex flex-wrap items-center gap-2">
               <CreditList

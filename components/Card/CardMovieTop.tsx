@@ -83,9 +83,11 @@ const CardMovieTop = ({
           >
             <h2 className="text-2xl text-light font-extrabold capitalize hover:text-tale">
               {title}{" "}
-              <span className="font-light">
-                {releaseDate && `(${moment(releaseDate).format("YYYY")})`}
-              </span>
+
+              {releaseDate && 
+                <span className="font-light">
+                  {`(${moment(releaseDate).format("YYYY")})`}
+                </span>}
             </h2>
           </Link>
 
@@ -98,7 +100,7 @@ const CardMovieTop = ({
 
           {/* Features */}
           <div className="flex items-center pt-8">
-            {mediaType === "movie" || mediaType === "tv" ? (
+            {(mediaType === "movie" || mediaType === "tv") && rating > 0 ? (
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/star.svg"
@@ -116,7 +118,7 @@ const CardMovieTop = ({
                   {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
                 </span>
               </div>
-            ) : (
+            ) : (mediaType === "person" && (popularity && popularity > 0) &&
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/popularity.svg"
@@ -130,12 +132,12 @@ const CardMovieTop = ({
                 <span
                   className={`text-[17px] text-light
                     ${
-                      popularity && popularity > 0
+                      popularity > 0
                         ? "font-semibold"
                         : "font-normal italic"
                     }`}
                 >
-                  {popularity && popularity > 0
+                  {popularity > 0
                     ? roundedToFixed(popularity, 2)
                     : "NaN"}
                 </span>

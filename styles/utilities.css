@@ -83,8 +83,8 @@ body::-webkit-scrollbar-thumb:hover,
   .header-glass {
     background: linear-gradient(
       45deg,
-      rgba(var(--bg-header-color-1)) 10%,
-      rgba(var(--bg-header-color-2)) 90%
+      rgba(var(--bg-header-color-1)) 40%,
+      rgba(var(--bg-header-color-2)) 85%
     );
   }
 }

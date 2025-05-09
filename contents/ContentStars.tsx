@@ -69,13 +69,13 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
   const placeholders = remainder === 0 ? 0 : columns - remainder;
 
   return (
-    <section className="relative mt-14 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
+    <section className="relative mt-14 max-md:mt-14 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv
         variants={parentStaggerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-rows-1 grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-3 
-          max-md:grid-cols-2 gap-x-3 gap-y-10 max-md:gap-x-5 max-md:gap-y-7 pt-8 pb-12"
+        className="pt-8 pb-12 grid grid-rows-1 grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-3 
+          max-md:grid-cols-2 gap-x-3 gap-y-10 max-md:gap-x-5 max-md:gap-y-7 max-sm:gap-x-4"
       >
         {useData?.results.map((item) => (
           <CardPerson
