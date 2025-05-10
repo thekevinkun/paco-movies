@@ -26,13 +26,14 @@ const PersonKnownFor = ({ works }: IPersonKnownForProps) => {
       <div
         className="pt-7 grid grid-cols-[repeat(auto-fit,_minmax(420px,_1fr))]
           max-lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] 
+          max-2xs:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] 
           gap-y-3 gap-x-[15px] max-md:gap-x-[8px]"
       >
         {sortedWorks.slice(0, 4).map((work, index: number) => (
           // POSTER
           <div
             key={work.id}
-            className={`h-[138px] flex gap-2 bg-light
+            className={`h-[138px] max-xs:h-[132px] flex gap-2 bg-light
               shadow-inner shadow-dark-1
               rounded-tr-xl rounded-bl-xl
               ${index >= 2 && "max-md:hidden"}`}

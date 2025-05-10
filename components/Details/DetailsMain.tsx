@@ -60,7 +60,7 @@ const DetailsMain = ({
       ></div>
 
       {/* ALL INFORMATION */}
-      <div className="relative pt-10 pb-16 px-5 z-20">
+      <div className="relative pt-10 pb-16 max-lg:pt-12 max-lg:pb-[70px] px-5 z-20">
         <div className="flex gap-10">
           {/* POSTER */}
           <div
@@ -99,7 +99,7 @@ const DetailsMain = ({
             {/* FACTS */}
             <div
               className="pt-1 text-light font-normal
-                            flex items-center gap-2 max-xl:gap-1"
+                      flex flex-wrap items-center gap-2 max-xl:gap-1"
             >
               {/* MOVIE TV RATE & RELEASE DATE COUNTRY */}
               {mediaType === "movie" && releaseDate ? (
@@ -173,14 +173,14 @@ const DetailsMain = ({
             {/* RATING, NETWORKS & TRAILER */}
             <div className="pt-9 flex items-center">
               {/* RATING */}
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/star-2.svg"
                   alt="rating star"
-                  width={32}
-                  height={32}
-                  sizes="32px"
-                  className="relative object-contain bottom-[1.7px]"
+                  width={30}
+                  height={30}
+                  sizes="30px"
+                  className="relative object-contain bottom-[1.8px]"
                 />
 
                 <span
@@ -241,15 +241,15 @@ const DetailsMain = ({
             {/* CREDITS */}
             <div className="pt-7 text-light">
               {/* DIRECTOR or CREATORS */}
-              {mediaType === "movie" && credits.crew.length > 0 && (
+              {mediaType === "movie" && (credits && credits.crew.length > 0) && (
                 <div
-                  className="py-2 flex items-baseline font-semibold
-                                    border-b border-gray-500"
+                  className="py-2 font-semibold grid grid-cols-[15%_1fr] 
+                      max-[1118px]:grid-cols-[18%_1fr]
+                      max-lg:grid-cols-[15%_1fr]
+                      max-[854px]:grid-cols-[18%_1fr]
+                      items-baseline border-b border-gray-500"
                 >
-                  <h3
-                    className="basis-[15%] max-xl:basis-[20%] 
-                                        max-lg:basis-[15%] text-lg max-xl:text-base"
-                  >
+                  <h3 className="text-lg max-xl:text-base">
                     Director
                   </h3>
 
@@ -262,13 +262,13 @@ const DetailsMain = ({
 
               {mediaType === "tv" && creators && creators.length > 0 && (
                 <div
-                  className="py-2 flex items-baseline font-semibold
-                                    border-b border-gray-500"
+                  className="py-2 font-semibold grid grid-cols-[15%_1fr] 
+                      max-[1118px]:grid-cols-[18%_1fr]
+                      max-lg:grid-cols-[15%_1fr]
+                      max-[854px]:grid-cols-[18%_1fr]
+                      items-baseline border-b border-gray-500"
                 >
-                  <h3
-                    className="basis-[15%] max-xl:basis-[20%] 
-                                        max-lg:basis-[15%] text-lg max-xl:text-base"
-                  >
+                  <h3 className="text-lg max-xl:text-base">
                     Creators
                   </h3>
 
@@ -282,15 +282,15 @@ const DetailsMain = ({
               )}
 
               {/* WRITERS */}
-              {mediaType === "movie" && credits.crew.length > 0 && (
+              {mediaType === "movie" && (credits && credits.crew.length > 0) && (
                 <div
-                  className="py-2 flex items-baseline font-semibold
-                                    border-b border-gray-500"
+                  className="py-2 font-semibold grid grid-cols-[15%_1fr] 
+                      max-[1118px]:grid-cols-[18%_1fr]
+                      max-lg:grid-cols-[15%_1fr]
+                      max-[854px]:grid-cols-[18%_1fr]
+                      items-baseline border-b border-gray-500"
                 >
-                  <h3
-                    className="basis-[15%] max-xl:basis-[20%] 
-                                        max-lg:basis-[15%] text-lg max-xl:text-base"
-                  >
+                  <h3 className="text-lg max-xl:text-base">
                     Writers
                   </h3>
 
@@ -305,15 +305,15 @@ const DetailsMain = ({
               )}
 
               {/* STARS */}
-              {credits.cast.length > 0 && (
+              {(credits && credits.cast.length > 0) && (
                 <div
-                  className="py-2 flex items-baseline font-semibold
-                                    border-b border-gray-500"
+                  className="py-2 font-semibold grid grid-cols-[15%_1fr] 
+                      max-[1118px]:grid-cols-[18%_1fr]
+                      max-lg:grid-cols-[15%_1fr]
+                      max-[854px]:grid-cols-[18%_1fr]
+                      items-baseline border-b border-gray-500"
                 >
-                  <h3
-                    className="basis-[15%] max-xl:basis-[20%] 
-                                        max-lg:basis-[15%] text-lg max-xl:text-base"
-                  >
+                  <h3 className="text-lg max-xl:text-base">
                     Stars
                   </h3>
 

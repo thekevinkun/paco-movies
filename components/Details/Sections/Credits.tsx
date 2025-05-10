@@ -73,12 +73,14 @@ const getCastsMobile = (casts: CreditItem[]) => {
         <div className="text-center">
           <Link
             href={`/name/${cast.id}-${slugify(cast.name ?? "")}`}
-            className="line-clamp-1 text-main hover:text-tale max-sm:text-sm"
+            className="line-clamp-1 text-main hover:text-tale max-sm:text-sm max-[390px]:text-xs"
           >
             <p>{cast.name}</p>
           </Link>
 
-          <p className="line-clamp-1 pt-[2px] font-light text-main-1 text-xs max-sm:text-[0.65rem]">
+          <p className="line-clamp-1 pt-[2px] font-light text-main-1
+                text-xs max-sm:text-[0.65rem] max-[390px]:text-[0.6rem]"
+          >
             {cast.character}
           </p>
         </div>
@@ -98,8 +100,8 @@ const Credits = ({
   const [sliderRef] = useKeenSlider({
     loop: false,
     breakpoints: {
-      "(max-width: 640px)": {
-        slides: { perView: 3.25, spacing: 12 },
+      "(max-width: 641px)": {
+        slides: { perView: 3.35, spacing: 12 },
       },
     },
     slides: {
@@ -147,44 +149,46 @@ const Credits = ({
       {/* CREWS CREDITS */}
       <div className="!text-main pt-7 max-sm:pt-5 w-[90%] max-md:w-[100%]">
         {mediaType === "movie" && crews.length > 0 &&
-          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
-            <h3
-              className="basis-[17%] max-lg:basis-[20%] 
-              text-main text-lg max-md:text-base max-sm:text-sm"
-            >
+          <div className="py-3 font-semibold grid grid-cols-[17%_1fr]
+                  max-lg:grid-cols-[20%_1fr] max-xs:grid-cols-[21%_1fr]
+                  max-xs:gap-x-2 items-baseline border-t border-gray-500"
+          >
+            <h3 className="text-main text-lg max-md:text-base max-sm:text-sm">
               Director
             </h3>
 
             <Director
               crews={crews || []}
-              childStyles="max-xl:text-sm max-sm:text-xs"
+              childStyles="max-md:text-sm max-sm:text-xs"
             />
           </div>
         }
 
        {mediaType === "tv" && creators.length > 0 &&
-          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
-            <h3
-              className="basis-[17%] max-lg:basis-[20%] 
-              text-main text-lg max-md:text-base max-sm:text-sm"
-            >
+          <div className="py-3 font-semibold grid grid-cols-[17%_1fr]
+                  max-lg:grid-cols-[20%_1fr] max-xs:grid-cols-[21%_1fr]
+                  max-xs:gap-x-2 items-baseline border-t border-gray-500"
+          >
+            <h3 className="text-main text-lg max-md:text-base max-sm:text-sm">
               Creators
             </h3>
 
             <div className="flex flex-wrap items-center gap-2">
               <CreditList
                 items={creators || []}
-                childStyles="max-xl:text-sm max-sm:text-xs"
+                childStyles="max-md:text-sm max-sm:text-xs"
               />
             </div>
           </div>
         }
 
         {mediaType === "movie" && (
-          <div className="py-3 flex items-baseline font-semibold border-t border-gray-500">
+          <div className="py-3 font-semibold grid grid-cols-[17%_1fr]
+                max-lg:grid-cols-[20%_1fr] max-xs:grid-cols-[21%_1fr]
+                max-xs:gap-x-2 items-baseline border-t border-gray-500"
+          >
             <h3
-              className="basis-[17%] max-lg:basis-[20%]
-              text-main text-lg max-md:text-base max-sm:text-sm"
+              className="text-main text-lg max-md:text-base max-sm:text-sm"
             >
               Writers
             </h3>
@@ -193,7 +197,7 @@ const Credits = ({
               <CreditList
                 items={crews || []}
                 filterJobs={["Writer", "Screenplay", "Characters"]}
-                childStyles="max-xl:text-sm max-sm:text-xs"
+                childStyles="max-md:text-sm max-sm:text-xs"
               />
             </div>
           </div>

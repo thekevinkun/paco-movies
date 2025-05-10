@@ -70,7 +70,9 @@ const getVideosSlider = (start: number, videos: VideoItem[], route: string) => {
         backgroundImage: `url('https://i.ytimg.com/vi/${video.key}/hqdefault.jpg')`,
       }}
       className="keen-slider__slide min-w-0 shrink-0
-        rounded-xl h-[165px] max-lg:h-[175px] max-md:h-[170px] max-sm:h-[150px] max-xs:h-[138px]"
+        rounded-xl h-[165px] max-lg:h-[175px] 
+        max-md:h-[170px] max-sm:h-[150px] 
+        max-xs:h-[138px] max-[390px]:h-[130px]"
     >
       <div className="h-full flex items-center justify-center">
         <VideoAction
@@ -93,7 +95,7 @@ const getVideosSlider = (start: number, videos: VideoItem[], route: string) => {
 };
 
 const Videos = ({ id, mediaType, title, videos }: IVideosProps) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 1025px)" });
 
   const startIndexVideoSlider = isMobile ? 0 : 2;
 
@@ -103,8 +105,14 @@ const Videos = ({ id, mediaType, title, videos }: IVideosProps) => {
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
     breakpoints: {
-      "(max-width: 768px)": {
+      "(max-width: 769px)": {
         slides: { perView: 2.25, spacing: 12 },
+      },
+      "(max-width: 480px)": {
+        slides: { perView: 1.75, spacing: 12 },
+      },
+      "(max-width: 390px)": {
+        slides: { perView: 1.55, spacing: 12 },
       },
     },
     slides: {

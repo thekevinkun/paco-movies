@@ -43,7 +43,7 @@ export interface IDetailsMainProps {
     genres: Genre[];
     tagline?: string;
     overview: string;
-    credits: CreditsMovie;
+    credits?: CreditsMovie;
     country?: Country | null;
     certification?: string;
     runtime?: number;

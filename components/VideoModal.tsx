@@ -21,11 +21,6 @@ const VideoModal = () => {
       setIsOpen(false);
       document.body.classList.remove("modal-open");
     }
-
-    const esc = (e: KeyboardEvent) => e.key === "Escape" && close();
-    window.addEventListener("keydown", esc);
-
-    return () => window.removeEventListener("keydown", esc);
   }, [videoKey, close]);
 
   return (
@@ -45,7 +40,7 @@ const VideoModal = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           />
 
           {/* Modal content */}

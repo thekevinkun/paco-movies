@@ -28,10 +28,12 @@ const CardPerson = ({
       <Link
         href={url}
         className="relative w-72 aspect-square
+             max-xl:w-56 max-xl:aspect-square
              max-lg:w-60 max-lg:aspect-square
              max-[867px]:w-56 max-[867px]:aspect-square
              max-[576px]:w-48 max-[576px]:aspect-square
              max-xs:w-44 max-xs:aspect-square
+             max-2xs:w-36 max-2xs:aspect-square
              bg-dark rounded-full"
       >
         <FallbackImage
@@ -39,10 +41,12 @@ const CardPerson = ({
           mediaType="person"
           alt="profile"
           fill
-          sizes="(min-width: 1024px) 288px,
-                    (min-width: 867px) 240px,
-                    (min-width: 576px) 224px,
-                    (min-width: 480px) 192px, 176px"
+          sizes="(min-width: 1280px) 288px,
+                  (min-width: 1024px) 224px,
+                  (min-width: 867px) 240px,
+                  (min-width: 576px) 224px,
+                  (min-width: 480px) 192px, 
+                  (min-width: 375px) 176px, 144px"
           placeholder="blur"
           blurDataURL="/images/blur.jpg"
           className="object-cover object-[55%_45%] rounded-full opacity-90"
@@ -59,8 +63,8 @@ const CardPerson = ({
           className="inline-block w-fit"
         >
           <h2
-            className="text-main text-lg max-lg:text-base max-md:text-sm 
-                    font-semibold hover:text-tale"
+            className="font-semibold text-main text-lg max-lg:text-base 
+                  max-md:text-sm max-2xs:text-xs hover:text-tale"
           >
             {name}
           </h2>
@@ -74,18 +78,19 @@ const CardPerson = ({
               width={0}
               height={0}
               sizes="20px"
-              className="relative w-5 h-5 object-contain bottom-[0.4px]"
+              className="relative w-5 h-5 max-2xs:w-4 max-2xs:h-4 
+                  object-contain bottom-[0.4px]"
             />
 
             <span
-              className={`text-main-1 text-sm max-[576px]:text-xs
+              className={`text-main-1 text-sm max-[576px]:text-xs max-2xs:text-[0.625rem]
                     ${popularity > 0 ? "font-medium" : "font-normal italic"}`}
             >
               {popularity > 0 ? roundedToFixed(popularity, 2) : "NaN"}
             </span>
           </div>
 
-          <p className="text-main-1 text-sm max-[576px]:text-xs">
+          <p className="text-main-1 text-sm max-[576px]:text-xs max-2xs:text-[0.625rem]">
             {department}
           </p>
         </div>
@@ -107,13 +112,17 @@ const CardPerson = ({
                   title={work.title || work.name}
                   className="w-fit line-clamp-1"
                 >
-                  <p className="text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem] hover:text-tale">
+                  <p className="text-main-1 text-xs 
+                    max-md:text-[0.675rem] max-xs:text-[0.625rem] 
+                    max-2xs:text-[0.575rem] hover:text-tale"
+                  >
                     {work.title || work.name}
                   </p>
                 </Link>
                 <span
                   className="bullet-separator max-sm:hidden
-                    text-main-1 text-xs max-md:text-[0.675rem] max-xs:text-[0.625rem]"
+                    text-main-1 text-xs max-md:text-[0.675rem] 
+                    max-xs:text-[0.625rem] max-2xs:text-[0.575rem]"
                 >
                   &#8226;
                 </span>

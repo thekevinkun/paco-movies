@@ -25,7 +25,7 @@ const getRecommendations = (data: CreditItem[]) => {
           )}`}
           className="relative bg-dark w-full h-[335px] 
             max-lg:h-[285px] max-md:h-[265px] max-sm:h-[230px]
-            max-[425px]:h-[210px]"
+            max-[425px]:h-[210px] max-[390px]:h-[185px]"
         >
           <FallbackImage
             src={item.poster_path}
@@ -120,30 +120,33 @@ const Recommendations = ({ recommendations }: IRecommendationsProps) => {
   const [sliderRef, slider] = useKeenSlider({
     loop: false,
     breakpoints: {
-      "(max-width: 1280px)": {
+      "(max-width: 1281px)": {
         slides: { perView: 3.85, spacing: 15 },
       },
-      "(max-width: 1198px)": {
+      "(max-width: 1199px)": {
         slides: { perView: 3.65, spacing: 15 },
       },
-      "(max-width: 1118px)": {
+      "(max-width: 1119px)": {
         slides: { perView: 3.25, spacing: 15 },
       },
-      "(max-width: 1024px)": {
+      "(max-width: 1025px)": {
         slides: { perView: 4.25, spacing: 13 },
       },
-      "(max-width: 925px)": {
-        slides: { perView: 3.65, spacing: 13 },
+      "(max-width: 926px)": {
+        slides: { perView: 3.5, spacing: 13 },
       },
-      "(max-width: 768px)": {
+      "(max-width: 769px)": {
         slides: { perView: 3.25, spacing: 12 },
       },
-      "(max-width: 640px)": {
+      "(max-width: 641px)": {
         slides: { perView: 3.15, spacing: 12 },
       },
-      "(max-width: 540px)": {
+      "(max-width: 541px)": {
         slides: { perView: 2.5, spacing: 12 },
       },
+      "(max-width: 390px)": {
+        slides: { perView: 2.35, spacing: 12 },
+      }
     },
     slides: {
       perView: 4.25,

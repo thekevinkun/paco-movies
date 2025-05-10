@@ -29,7 +29,7 @@ const CardSearch = ({
   return (
     <MotionDiv
       variants={cardMovieVariants}
-      className="w-full h-52 max-md:h-48 flex 
+      className="w-full h-52 max-md:h-48 max-2xs:h-40 flex 
                 mt-4 max-md:mt-3 border border-gray-500
                 rounded-tr-lg shadow-inner shadow-dark-1"
     >
@@ -39,7 +39,8 @@ const CardSearch = ({
           mediaType === "movie" || mediaType === "tv" ? routeMovie : routePerson
         }
         className="relative group bg-dark
-                    w-[138px] max-md:w-[127px] max-xs:w-[115px] h-full"
+            h-full w-[138px] max-md:w-[127px] 
+            max-xs:w-[115px]"
       >
         <FallbackImage
           src={photo}
@@ -52,7 +53,7 @@ const CardSearch = ({
           placeholder="blur"
           blurDataURL="/images/blur.jpg"
           className="object-cover opacity-90 transition-opacity
-                        duration-100 group-hover:opacity-55"
+                duration-100 group-hover:opacity-55"
         />
       </Link>
 
@@ -72,19 +73,20 @@ const CardSearch = ({
               <Image
                 src="/icons/popularity.svg"
                 alt="rating popularity"
-                width={19}
-                height={19}
-                sizes="19px"
-                className="relative object-contain"
+                width={0}
+                height={0}
+                sizes="16px"
+                className="w-[19px] h-[19px] max-2xs:w-4 max-2xs:h-4
+                  relative object-contain"
               />
 
               <span
-                className={`text-main-1 text-sm
-                                ${
-                                  vote > 0
-                                    ? "font-medium"
-                                    : "font-normal italic"
-                                }`}
+                className={`text-main-1 text-sm max-2xs:text-xs
+                  ${
+                    vote > 0
+                      ? "font-medium"
+                      : "font-normal italic"
+                  }`}
               >
                 {vote > 0 ? roundedToFixed(vote, 2) : "NaN"}
               </span>
@@ -97,16 +99,17 @@ const CardSearch = ({
                 width={14}
                 height={14}
                 sizes="14px"
-                className="relative object-contain bottom-[0.4px]"
+                className="relative w-[14px] h-[14px] max-2xs:w-3 max-2xs:h-3
+                    object-contain bottom-[0.4px] max-2xs:bottom-[1.2px]"
               />
 
               <span
-                className={`text-main-1 text-sm
-                                ${
-                                  vote > 0
-                                    ? "font-medium"
-                                    : "font-normal italic"
-                                }`}
+                className={`text-main-1 text-sm max-2xs:text-xs
+                    ${
+                      vote > 0
+                        ? "font-medium"
+                        : "font-normal italic"
+                    }`}
               >
                 {vote > 0 ? roundedToFixed(vote, 1) : "NaN"}
               </span>
@@ -123,13 +126,14 @@ const CardSearch = ({
           title={name}
           className="pt-3 inline-block w-fit"
         >
-          <h3 className="text-main max-md:text-sm font-semibold hover:text-tale">
+          <h3 className="font-semibold text-main max-md:text-sm  
+              max-2xs:text-xs hover:text-tale">
             {name}
           </h3>
         </Link>
 
         {releaseDate && (
-          <p className="italic text-main text-xs max-xs:text-[0.675rem]">
+          <p className="italic text-main text-xs max-xs:text-[0.675rem] max-2xs:text-[0.575rem]">
             {moment(releaseDate).format("Do MMMM YYYY")}
           </p>
         )}
@@ -141,7 +145,9 @@ const CardSearch = ({
         )}
 
         {overview && (
-          <p className="line-clamp-3 mt-auto text-main text-sm max-xs:text-xs font-normal">
+          <p className="line-clamp-3 mt-auto font-normal
+              text-main text-sm max-xs:text-xs max-2xs:text-[0.625rem]"
+          >
             {overview}
           </p>
         )}
@@ -164,7 +170,8 @@ const CardSearch = ({
                     className="w-fit line-clamp-1"
                   >
                     <p
-                      className="text-main text-sm max-md:text-xs max-xs:text-[0.675rem] hover:text-tale"
+                      className="text-main text-sm max-md:text-xs 
+                        max-xs:text-[0.675rem] hover:text-tale"
                     >
                       {work.title || work.name}
                     </p>

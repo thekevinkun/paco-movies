@@ -19,13 +19,13 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
   const [readMore, setReadMore] = useState(false);
 
   return (
-    <section className="relative pt-8 px-5 max-md:pt-5 max-md:px-3 z-20">
+    <section className="relative pt-8 px-5 max-md:px-3 z-20">
       {/* PERSON's PHOTO and CONTACTS */}
       <div className="flex max-sm:flex-col gap-x-8 max-sm:gap-y-3">
         <div className="flex flex-col max-sm:items-center gap-5">
           <div
             className="relative w-[308px] max-md:w-[225px]
-                max-sm:w-[255px] aspect-[2/3] rounded-md"
+                max-sm:w-[255px] max-2xs:w-[220px] aspect-[2/3] rounded-md"
           >
             <FallbackImage
               src={details.profile_path}
@@ -33,7 +33,8 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
               alt="profile"
               fill
               sizes="(min-width: 768px) 308px,
-                      (min-width: 640px) 225px, 255px"
+                      (min-width: 640px) 225px, 
+                      (min-width: 375px) 255px, 220px"
               placeholder="blur"
               blurDataURL="/images/blur.jpg"
               className="object-cover rounded-md opacity-90"
@@ -100,18 +101,18 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
               </h3>
 
               {details.birthday ? (
-                <p className="font-normal text-main">
+                <p className="font-normal text-main max-2xs:text-sm">
                   {moment(details.birthday).format("LL")}
 
                   {!details.deathday && (
-                    <span className="text-sm font-light max-sm:block max-sm:text-center">
+                    <span className="text-sm max-2xs:text-xs font-light max-sm:block max-sm:text-center">
                       {" "}
                       ({calculateAge(details.birthday)} years old)
                     </span>
                   )}
                 </p>
               ) : (
-                <p className="font-light italic text-main">Unknown date</p>
+                <p className="font-light italic text-main max-2xs:text-sm">Unknown date</p>
               )}
             </div>
 
@@ -120,10 +121,10 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
                 <h3 className="font-semibold text-lg text-main max-sm:text-center">
                   Death
                 </h3>
-                <p className="font-normal text-main">
+                <p className="font-normal text-main max-2xs:text-sm">
                   {moment(details.deathday).format("LL")}
                   <span
-                    className="text-sm font-light
+                    className="text-sm max-2xs:text-xs font-light
                     max-sm:block max-sm:text-center"
                   >
                     {" "}
@@ -139,12 +140,12 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
               </h3>
 
               {details.place_of_birth ? (
-                <p className="font-normal text-main">
+                <p className="font-normal text-main max-2xs:text-sm">
                   {" "}
                   {details.place_of_birth}
                 </p>
               ) : (
-                <p className="font-light italic text-main">Unknown place</p>
+                <p className="font-light italic text-main max-2xs:text-sm">Unknown place</p>
               )}
             </div>
           </div>
@@ -159,14 +160,14 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
               <>
                 <p
                   className={`${!readMore ? "!line-clamp-10" : ""}
-                    max-sm:px-2 font-normal 
-                    text-main text-justify leading-[26.75px]`}
+                    max-sm:px-2 font-normal text-main 
+                    max-2xs:text-sm text-justify leading-[26.75px] max-2xs:leading-[27.5px]`}
                 >
                   {details.biography}
 
                   {readMore && (
                     <span
-                      className="font-semibold text-main hover:text-tale cursor-pointer"
+                      className="font-semibold text-main max-2xs:text-sm hover:text-tale cursor-pointer"
                       onClick={() => setReadMore(false)}
                     >
                       {" "}
@@ -177,7 +178,7 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
 
                 {!readMore && (
                   <span
-                    className="max-sm:px-2 font-semibold text-main hover:text-tale cursor-pointer"
+                    className="max-sm:px-2 font-semibold text-main max-2xs:text-sm hover:text-tale cursor-pointer"
                     onClick={() => setReadMore(true)}
                   >
                     {" "}
@@ -188,7 +189,7 @@ const DetailsPersonMain = ({ details, externalIds }: IDetailsPersonMain) => {
             ) : (
               <p
                 className="mt-[-9px] italic font-light
-                text-main text-justify max-sm:text-center"
+                text-main max-2xs:text-sm text-justify max-sm:text-center"
               >
                 No biography.
               </p>

@@ -55,11 +55,11 @@ const CardMovie = ({
                 : routePerson
             }
             title={title}
-            className="inline-block w-fit pr-3 max-sm:pr-2"
+            className="inline-block w-fit pr-3 max-lg:pr-1 max-sm:pr-2"
           >
             <h2
               className="line-clamp-1 text-main 
-              max-md:text-sm font-semibold hover:text-tale"
+              max-lg:text-sm max-2xs:text-xs font-semibold hover:text-tale"
             >
               {title}
             </h2>
@@ -67,13 +67,15 @@ const CardMovie = ({
 
           <Link
             href={`/${mediaType}`}
-            className="flex item-center rounded-sm border border-gray-500 p-1"
+            className="p-1 max-2xs:py-0 flex item-center rounded-sm border border-gray-500"
           >
-            <span className="text-main-1 text-[11px] max-xs:text-[9px]">{mediaType}</span>
+            <span className="text-main-1 text-[11px] max-xs:text-[9px] max-2xs:text-[7px]">
+              {mediaType}
+            </span>
           </Link>
         </div>
 
-        <div className="pt-5 w-full flex items-center">
+        <div className="pt-5 max-2xs:pt-4 w-full flex items-center">
           <div className="flex items-center gap-1">
             <Image
               src="/icons/star.svg"
@@ -81,19 +83,22 @@ const CardMovie = ({
               width={0}
               height={0}
               sizes="18px"
-              className="relative w-[18px] h-[18px] 
-                max-sm:w-4 max-sm:h-4 object-contain bottom-[0.4px]"
+              className="relative w-[18px] h-[18px] max-sm:w-4 max-sm:h-4
+                  max-2xs:w-3 max-2xs:h-3 object-contain 
+                  bottom-[0.4px] max-2xs:bottom-[0.5px]"
             />
 
             <span
-              className={`text-main-1 text-sm max-sm:text-xs
+              className={`text-main-1 text-sm max-sm:text-xs max-2xs:text-[0.624rem]
                 ${rating > 0 ? "font-medium" : "font-normal italic"}`}
             >
               {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
             </span>
           </div>
 
-          <p className="ml-auto text-main-1 text-xs max-xs:text-[0.685rem]">
+          <p className="ml-auto max-2xs:pt-[1.2px] text-main-1
+              text-xs max-xs:text-[0.685rem] max-2xs:text-[0.575rem]"
+          >
             {releaseDate && `${moment(releaseDate).format("ll")}`}
           </p>
 
@@ -101,7 +106,7 @@ const CardMovie = ({
             <PreviewAction
               mediaType={mediaType}
               id={id}
-              containerStyles="ml-2 text-lg text-main-1 hover:text-gray-700"
+              containerStyles="ml-2 text-lg max-2xs:text-sm text-main-1 hover:text-gray-700"
             >
               <AiOutlineExclamationCircle />
             </PreviewAction>

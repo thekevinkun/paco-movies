@@ -25,11 +25,12 @@ const Details = ({
 
       <div className="pt-5 w-[90%] max-md:w-[100%]">
         {/* RELEASE DATE */}
-        <div className="py-3 text-main flex items-baseline border-y border-gray-500">
-          <h3
-            className="basis-[30%] max-lg:basis-[35%] 
-                text-lg max-md:text-base max-sm:text-sm font-semibold"
-          >
+        <div className="py-3 text-main grid grid-cols-[30%_1fr]
+            max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
+            max-md:gap-x-3  
+            items-baseline border-b border-gray-500"
+        >
+          <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             {mediaType === "movie" ? "Release Date" : "First Air Date"}
           </h3>
 
@@ -55,11 +56,12 @@ const Details = ({
         </div>
 
         {/* MOVIE COUNTRIES */}
-        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
-          <h3
-            className="basis-[30%] max-lg:basis-[35%]
-              text-lg max-md:text-base max-sm:text-sm font-semibold"
-          >
+        <div className="py-3 text-main grid grid-cols-[30%_1fr]
+            max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
+            max-md:gap-x-3   
+            items-baseline border-b border-gray-500"
+        >
+          <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Countries of Origin
           </h3>
 
@@ -75,11 +77,12 @@ const Details = ({
 
         {/* MOVIE HOMEPAGE */}
         {details.homepage && (
-          <div className="py-3 text-main flex items-baseline border-b border-gray-500">
-            <h3
-              className="basis-[30%] max-lg:basis-[35%]
-                text-lg max-md:text-base max-sm:text-sm font-semibold"
-            >
+          <div className="py-3 text-main grid grid-cols-[30%_1fr]
+              max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
+              max-md:gap-x-3   
+              items-baseline border-b border-gray-500"
+          >
+            <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
               Official Site
             </h3>
 
@@ -97,11 +100,12 @@ const Details = ({
         )}
 
         {/* MOVIE EXTERNAL SITES */}
-        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
-          <h3
-            className="basis-[30%] max-lg:basis-[35%]
-              text-lg max-md:text-base max-sm:text-sm font-semibold"
+        <div className="py-3 text-main grid grid-cols-[30%_1fr]
+              max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
+              max-md:gap-x-3  
+              items-baseline border-b border-gray-500"
           >
+          <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             External Sites
           </h3>
 
@@ -154,11 +158,12 @@ const Details = ({
         </div>
 
         {/* MOVIE LANGUAGE */}
-        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
-          <h3
-            className="basis-[30%] max-lg:basis-[35%]
-              text-lg max-md:text-base max-sm:text-sm font-semibold"
-          >
+        <div className="py-3 text-main grid grid-cols-[30%_1fr]
+              max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr] 
+              max-md:gap-x-3  
+              items-baseline border-b border-gray-500"
+        >
+          <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Language
           </h3>
 
@@ -173,11 +178,12 @@ const Details = ({
         </div>
 
         {/* MOVIE COMPANIES */}
-        <div className="py-3 text-main flex items-baseline border-b border-gray-500">
-          <h3
-            className="basis-[30%] max-lg:basis-[35%]
-                text-lg max-md:text-base max-sm:text-sm font-semibold"
-          >
+        <div className="py-3 text-main grid grid-cols-[30%_1fr]
+            max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
+            max-md:gap-x-3    
+            items-baseline border-b border-gray-500"
+        >
+          <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Production Companies
           </h3>
 

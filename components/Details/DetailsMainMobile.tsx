@@ -6,10 +6,8 @@ import { FaPlay } from "react-icons/fa";
 
 import { FallbackImage, VideoAction } from "@components";
 import {
-  CreditList,
   GenreList,
-  NetworkList,
-  Director,
+  NetworkList
 } from "@components/Common";
 
 import type { IDetailsMainProps } from "@types";
@@ -27,14 +25,12 @@ const DetailsMainMobile = ({
   officialTrailer,
   genres,
   overview,
-  credits,
   country,
   certification,
   runtime,
   tvrating,
   status,
-  networks,
-  creators,
+  networks
 }: IDetailsMainProps) => {
   const url = `/title/${mediaType}/${id}-${slugify(title)}`;
 
@@ -61,7 +57,7 @@ const DetailsMainMobile = ({
 
       <div className="relative pt-4 z-20">
         {/* TITLE */}
-        <Link href={url} className="block w-fit mx-auto">
+        <Link href={url} className="block w-fit mx-auto px-5">
           <h2
             className="text-main text-2xl text-center font-extrabold
                         capitalize hover:text-tale"
@@ -205,80 +201,6 @@ const DetailsMainMobile = ({
           <div>
             <h3 className="text-main text-lg font-semibold">Overview</h3>
             <p className="pt-2 text-main text-sm font-normal">{overview}</p>
-          </div>
-        </div>
-
-        {/* CREDITS */}
-        <div className="px-3 pt-7 text-main">
-          {/* DIRECTOR for Movie */}
-          {mediaType === "movie" && credits.crew.length > 0 && (
-            <div
-              className="py-2 flex items-baseline font-semibold
-                            border-b border-gray-500"
-            >
-              <h3
-                className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm"
-              >
-                Director
-              </h3>
-
-              <Director
-                crews={credits.crew}
-                childStyles="max-xl:text-sm max-sm:text-xs"
-              />
-            </div>
-          )}
-
-          {/* or CREATORS for tv */}
-          {mediaType === "tv" && creators && creators.length > 0 && (
-            <div
-              className="py-2 flex items-baseline font-semibold
-                            border-b border-gray-500"
-            >
-              <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">
-                Creators
-              </h3>
-
-              <div className="flex items-center gap-2">
-                <CreditList
-                  items={creators ?? []}
-                  childStyles="max-xl:text-sm max-sm:text-xs"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* WRITERS */}
-          {mediaType === "movie" && (
-            <div
-              className="py-2 flex items-baseline font-semibold
-                            border-b border-gray-500"
-            >
-              <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">Writers</h3>
-
-              <div className="flex flex-wrap items-center gap-2">
-                <CreditList
-                  items={credits.crew}
-                  filterJobs={["Writer", "Screenplay", "Characters"]}
-                  childStyles="max-xl:text-sm max-sm:text-xs"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* STARS */}
-          <div
-            className="py-2 flex items-baseline font-semibold
-                        border-b border-gray-500"
-          >
-            <h3 className="basis-[20%] max-xs:basis-[22%] max-sm:text-sm">Stars</h3>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <CreditList
-                items={credits.cast}
-                childStyles="max-xl:text-sm max-sm:text-xs"
-              />
-            </div>
           </div>
         </div>
       </div>

@@ -2,8 +2,9 @@
 
 import { useEffect, useState, useRef } from "react";
 
-import { Menu, SearchBar } from "@components";
+import { Menu, MotionDiv, SearchBar } from "@components";
 
+import { parentModalVariants } from "@lib/utils/motion";
 import { IoMdMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 
@@ -12,29 +13,13 @@ const Navbar = () => {
 
   const [isShowMobileMenu, setIsShowMobileMenu] = useState(false);
 
+  // Handle escape key and body scroll lock
   useEffect(() => {
-    if (!isShowMobileMenu) return;
-
-    const handleClickOutsideMobileMenu = (e: CustomEvent<MouseEvent>) => {
-      if (
-        mobileMenu.current &&
-        !mobileMenu.current?.contains(e.target as Node)
-      ) {
-        setIsShowMobileMenu(false);
-      }
-    };
-
-    window.addEventListener(
-      "mousedown",
-      handleClickOutsideMobileMenu as EventListener
-    );
-
-    return () => {
-      window.removeEventListener(
-        "mousedown",
-        handleClickOutsideMobileMenu as EventListener
-      );
-    };
+    if (isShowMobileMenu) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
   }, [isShowMobileMenu]);
 
   return (
@@ -72,11 +57,16 @@ const Navbar = () => {
         className={`${
           isShowMobileMenu && "nav-glass"
         } fixed top-0 left-0 transition-all z-30 
-        ${isShowMobileMenu ? "w-96 max-sm:w-80 max-xs:w-72" : "w-0"}`}
+        ${isShowMobileMenu ? "w-96 max-sm:w-80 max-xs:w-72 max-2xs:w-64" : "w-0"}`}
       >
         <div className="nav-menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">
           <div className="mb-3 p-3">
-            <SearchBar widthClass="w-full" margin="mx-auto" />
+            <SearchBar 
+              widthClass="w-full" 
+              margin="mx-auto" 
+              isShowMobileMenu={isShowMobileMenu}
+              setIsShowMobileMenu={setIsShowMobileMenu}
+            />
           </div>
 
           <Menu
@@ -87,11 +77,23 @@ const Navbar = () => {
 
         <RxCross2
           className={`${isShowMobileMenu ? "w-auto p-1" : "w-0"} 
-                object-contain absolute top-[15.28px] right-[-45px] 
-                text-[32px] text-danger bg-main/85 hover:bg-main/75 cursor-pointer`}
+                object-contain absolute top-[11px] right-[-55px] 
+                text-[42px] text-danger hover:text-red-500 cursor-pointer`}
           onClick={() => setIsShowMobileMenu(false)}
         />
       </nav>
+
+      {/* Blurred background */}
+      {isShowMobileMenu &&
+        <MotionDiv
+          variants={parentModalVariants()}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="w-full min-h-screen absolute inset-0 z-20
+            bg-black/55 backdrop-blur-sm"
+        />
+      }
     </div>
   );
 };

@@ -28,7 +28,7 @@ const PreviewModal = () => {
 
   const [data, setData] = useState<IGetMovieDetailsResponse | null>(null);
 
-  const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 641px)" });
 
   useEffect(() => {
     const loadPreview = async () => {
@@ -64,11 +64,6 @@ const PreviewModal = () => {
       setData(null);
       document.body.classList.remove("modal-open");
     }
-
-    const esc = (e: KeyboardEvent) => e.key === "Escape" && close();
-    window.addEventListener("keydown", esc);
-
-    return () => window.removeEventListener("keydown", esc);
   }, [previewId, close]);
 
   return (
@@ -88,7 +83,7 @@ const PreviewModal = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="absolute inset-0 bg-black/25 backdrop-blur-sm pointer-events-none"
+            className="absolute inset-0 bg-black/25 backdrop-blur-sm"
           />
 
           {/* Modal content */}
@@ -97,7 +92,7 @@ const PreviewModal = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="p-7 py-9 max-sm:py-7 bg-dark-1/75 relative z-10 w-full 
+            className="p-7 py-9 bg-dark-1/75 relative z-10 w-full 
                         max-w-xl max-lg:max-w-lg max-sm:max-w-full
                         rounded-md max-sm:rounded-none"
           >
@@ -128,10 +123,7 @@ const PreviewModal = () => {
                   className="inline-block w-fit"
                   onClick={close}
                 >
-                  <h3
-                    className="font-semibold text-lg
-                                    text-light hover:text-tale"
-                  >
+                  <h3 className="font-semibold text-lg text-light hover:text-tale">
                     {data.details.title || data.details.name}
                   </h3>
                 </Link>
@@ -139,7 +131,7 @@ const PreviewModal = () => {
                 {/* RELEASE & RUNTIME */}
                 <div
                   className="pt-1 text-light-1 text-sm max-sm:text-xs
-                                flex items-center gap-2"
+                      flex flex-wrap items-center gap-2"
                 >
                   {/* RELEASE DATE */}
                   {previewMediaType === "movie" && data?.releaseDate?.date ? (
@@ -213,8 +205,7 @@ const PreviewModal = () => {
                       <NetworkList
                         mediaType={previewMediaType}
                         networks={data.details.networks}
-                        containerStyles="w-[32px] h-[20px]
-                                                max-sm:w-[29px] h-[17px]"
+                        containerStyles="w-[32px] h-[20px] max-sm:w-[29px] h-[17px]"
                       />
                     </>
                   )}
@@ -240,7 +231,7 @@ const PreviewModal = () => {
                     height={0}
                     sizes="18px"
                     className="w-[18px] h-[18px] max-sm:w-4 max-sm:h-4
-                                        relative object-contain bottom-[1.7px]"
+                          relative object-contain bottom-[1.7px]"
                   />
 
                   <span
@@ -270,8 +261,11 @@ const PreviewModal = () => {
             {/* CREDITS */}
             <div className="pt-5 text-light">
               {(data.credits.crew.length > 0 || data.details.created_by) && (
-                <div className="flex items-baseline font-semibold">
-                  <h3 className="text-sm max-sm:text-xs basis-[15%] max-sm:basis-[17%]">
+                <div className="grid grid-cols-[15%_1fr]
+                      max-lg:grid-cols-[18%_1fr] gap-x-2
+                      items-baseline font-semibold"
+                >
+                  <h3 className="text-sm max-sm:text-xs">
                     {previewMediaType === "movie" ? "Director" : "Creators"}
                   </h3>
 
@@ -282,7 +276,7 @@ const PreviewModal = () => {
                       handleClick={close}
                     />
                   ) : (
-                    <div className="text-xs flex items-center gap-2">
+                    <div className="text-xs flex flex-wrap items-center gap-2">
                       <CreditList
                         items={data.details.created_by ?? []}
                         childStyles="text-xs max-sm:text-[0.675rem]"
@@ -294,12 +288,15 @@ const PreviewModal = () => {
               )}
 
               {data.credits.cast.length > 0 && (
-                <div className="pt-2 flex items-baseline font-semibold">
-                  <h3 className="text-sm max-sm:text-xs basis-[15%] max-sm:basis-[17%]">
+                <div className="pt-2 grid grid-cols-[15%_1fr] 
+                      max-lg:grid-cols-[18%_1fr] gap-x-2
+                      items-baseline font-semibold"
+                >
+                  <h3 className="text-sm max-sm:text-xs">
                     Stars
                   </h3>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <CreditList
                       items={data.credits.cast}
                       childStyles="text-xs max-sm:text-[0.675rem]"
@@ -312,8 +309,8 @@ const PreviewModal = () => {
 
             <RxCross2
               className="absolute top-[-11%] max-sm:top-[-13%]
-                            max-xs:top-[-11%] right-1 text-4xl max-xs:text-3xl
-                            text-danger cursor-pointer hover:text-danger/55"
+                  max-xs:top-[-11%] right-1 text-4xl max-xs:text-3xl
+                  text-danger cursor-pointer hover:text-danger/55"
               onClick={close}
             />
           </motion.div>

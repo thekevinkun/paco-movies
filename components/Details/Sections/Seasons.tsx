@@ -24,9 +24,9 @@ const getSeasonsSlider = (seasons: SeasonItem[]) => {
             bg-light text-dark rounded-xl
             shadow-inner shadow-dark-1
             h-[165px] max-xl:h-[150px] max-lg:h-[145px]
-            max-md:h-[140px] max-sm:h-[130px]"
+            max-md:h-[140px] max-sm:h-[130px] max-xs:h-[120px]"
       >
-        <div className="w-full h-full flex gap-3">
+        <div className="w-full h-full flex gap-3 max-sm:gap-1">
           <div className="bg-dark rounded-l-md w-[28%] h-full">
             <FallbackImage
               src={season.poster_path}
@@ -43,11 +43,11 @@ const getSeasonsSlider = (seasons: SeasonItem[]) => {
 
           <div className="p-2 flex flex-1 flex-col">
             <div className="flex items-center gap-3 max-xl:gap-1">
-              <h4 className="font-semibold text-dark max-sm:text-sm">
+              <h4 className="font-semibold text-dark max-sm:text-sm max-xs:text-xs">
                 {season.name}
               </h4>
               <span>|</span>
-              <p className="text-xs max-sm:text-[0.625rem] text-dark">
+              <p className="text-dark text-xs max-sm:text-[0.625rem] max-xs:text-[0.6rem]">
                 {season.episode_count} Episodes
               </p>
             </div>
@@ -57,11 +57,11 @@ const getSeasonsSlider = (seasons: SeasonItem[]) => {
             </p>
 
             {season.overview ? (
-              <p className="line-clamp-2 mt-auto text-sm max-lg:text-xs">
+              <p className="line-clamp-2 mt-auto text-sm max-lg:text-xs max-sm:text-[0.625rem] max-xs:leading-3">
                 {season.overview}
               </p>
             ) : (
-              <p className="mt-auto italic text-sm text-dark-1">No Overview.</p>
+              <p className="mt-auto italic text-sm max-md:text-xs text-dark-1">No Overview.</p>
             )}
 
             <div

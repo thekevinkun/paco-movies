@@ -32,7 +32,8 @@ const PersonPhotos = ({ personId, name, images }: IPersonPhotosProps) => {
         className="pt-7 grid gap-[15px] max-md:gap-[8px] w-full 
           grid-cols-10 grid-rows-[1fr] max-md:grid-cols-8
           h-[280px] max-xl:h-[250px] max-lg:h-[255px] 
-          max-md:h-[250px] max-sm:h-[195px] max-xs:h-[180px]"
+          max-md:h-[250px] max-sm:h-[195px] max-xs:h-[180px]
+          max-2xs:h-[165px]"
       >
         {images.slice(0, 4).map((item, index: number) => (
           <div

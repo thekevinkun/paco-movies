@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 const NotFound = () => {
   return (
     <>
-      <div className="h-[92vh] flex flex-col items-center justify-center">
-        <h2 className="text-danger text-lg font-medium">
+      <div className="max-xs:px-10 h-full mx-auto max-lg:min-h-[94vh] flex flex-col items-center justify-center">
+        <h2 className="font-medium text-danger text-lg max-xs:text-base text-center">
           Sorry, this page could not be found.
         </h2>
       </div>

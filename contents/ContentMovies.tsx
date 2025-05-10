@@ -52,19 +52,30 @@ const ContentMovies = ({
   }, []);
 
   const [columns, setColumns] = useState(4); // Default to desktop (4 columns)
+  const [isChange, setIsChange] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const checkSize = () => {
       const width = window.innerWidth;
-      if (width <= 640) {
-        setColumns(2); // Mobile
+      if (width <= 576) {
+        setColumns(2);
+        setIsChange(true); 
       } else if (width <= 768) {
         setColumns(3); // Tablet
+        setIsChange(true);
+      } else if (width <= 1024) {
+        setColumns(4);
+        setIsChange(false);
+      } else if (width <= 1280) {
+        setColumns(3);
+        setIsChange(false);
       } else {
         setColumns(4); // Desktop
+        setIsChange(false);
       }
+      console.log(width);
     };
 
     checkSize(); // Initial run
@@ -73,7 +84,7 @@ const ContentMovies = ({
   }, []);
 
   // Hero movie shown only on desktop
-  const gridMovies = useData?.results.slice(columns <= 3 ? 0 : 1);
+  const gridMovies = useData?.results.slice(columns  <= 3 && isChange ? 0 : 1);
   const remainder = gridMovies.length % columns;
   const placeholders = remainder === 0 ? 0 : columns - remainder;
 
@@ -108,7 +119,7 @@ const ContentMovies = ({
         className="hidden max-lg:block w-fit 
           pl-3 mt-7 max-md:mt-10 max-sm:mt-9
           font-semibold text-main text-xl max-sm:text-lg
-          border-l-4 border-tale"
+          max-2xs:text-base border-l-4 border-tale"
       >
         {categoryTitle}
       </h2>
@@ -118,7 +129,8 @@ const ContentMovies = ({
         initial="hidden"
         animate="visible"
         className="grid grid-rows-1 pt-7 max-sm:pt-6 pb-12
-          grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 
+          grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-4 
+          max-md:grid-cols-3 max-[576px]:grid-cols-2
           gap-x-3 gap-y-5 max-md:gap-y-4"
       >
         {gridMovies.map((item) => (
