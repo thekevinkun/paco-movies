@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { ContentMoviesClient } from "@components/Clients";
 
-import type { Genre } from "@types";
+import type { Genre, IGetByCategoryResponse } from "@types";
 
 import { getByGenre } from "@lib/api";
 import { getCachedGenres } from "@lib/redis";
+import { slugify } from "@lib/helpers/helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -48,13 +50,23 @@ const GenreMovie = async ({
 }) => {
   const mediaType = "movie";
   const { name } = await params;
-  const genreId = name.split("-")[0];
+  const [genreId, ...slugParts] = name.split("-");
+  const currentSlug = slugParts.join("-");
 
-  const movieData = await getByGenre(mediaType, genreId);
-  const genreData = await getCachedGenres(mediaType);
+  const movieData = (await getByGenre(
+    mediaType, 
+    genreId
+  ))  as IGetByCategoryResponse;
+  
+  const genreData = (await getCachedGenres(
+    mediaType
+  )) as Genre[];
 
   const genreFind = genreData.find((g) => g.id.toString() === genreId);
-  const genreName = genreFind ? genreFind.name : "Unknown Genre";
+  const trueSlug = slugify(genreFind?.name ?? "");
+
+  if (trueSlug && currentSlug !== trueSlug) 
+      redirect(`/genre/${mediaType}/${genreId}-${trueSlug}`);
 
   return (
     <ContentMoviesClient
@@ -62,7 +74,7 @@ const GenreMovie = async ({
       genres={genreData}
       mediaType={mediaType}
       category={genreId}
-      categoryTitle={genreName + " Movies"}
+      categoryTitle={trueSlug + " Movies"}
     />
   );
 };

@@ -19,7 +19,8 @@ export interface ICardMovieProps {
   title: string;
   mediaType: string;
   releaseDate: string;
-  rating: number;
+  rating?: number;
+  popularity?: number;
 }
 
 export interface ICardPersonProps {

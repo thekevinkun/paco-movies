@@ -2,7 +2,7 @@ export const parentStaggerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.25,
       staggerDirection: 1, // forward order
     },
   },

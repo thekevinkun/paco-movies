@@ -2,29 +2,27 @@
 
 import dynamic from "next/dynamic";
 
-import { Spinner } from "@components";
-
 import type { IDetailsPersonMore } from "@types";
 
 const PersonKnownFor = dynamic(
   () => import("@components/Details/Sections/PersonKnownFor"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const PersonPhotos = dynamic(
   () => import("@components/Details/Sections/PersonPhotos"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const PersonCredits = dynamic(
   () => import("@components/Details/Sections/PersonCredits"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 

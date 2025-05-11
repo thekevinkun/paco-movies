@@ -91,7 +91,8 @@ const getRecommendations = (data: CreditItem[]) => {
             <Link
               href={`/title/${item.media_type}/${item.id}-${slugify(
                 item.title || item.name || "Untitled"
-              )}#`}
+              )}`}
+              onClick={(e) => e.preventDefault()}
               className="py-1 px-2 flex items-center gap-2 max-sm:text-xs text-dark
                bg-transparent hover:bg-tale/75 transition-colors duration-100 rounded-md"
             >

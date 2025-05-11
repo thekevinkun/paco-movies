@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
 
-import { Spinner, MotionDiv } from "@components";
+import { MotionDiv } from "@components";
 
 import { IContentStarsProps, IGetStarsResponse } from "@types";
 
@@ -13,7 +13,7 @@ import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardPerson = dynamic(() => import("@components/Card/CardPerson"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const LoadMore = dynamic(() => import("@components/LoadMore"), {
   ssr: false,
@@ -49,11 +49,7 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
       const width = window.innerWidth;
 
       if (width <= 768) {
-        setColumns(2); // Tablet to mobile
-      } else if (width <= 1024) {
-        setColumns(3); // Tablet
-      } else if (width <= 1280) {
-        setColumns(2);
+        setColumns(2); // Tablet
       } else {
         setColumns(3); // Desktop
       }
@@ -67,6 +63,14 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
   // Hero movie shown only on desktop
   const remainder = useData?.results.length % columns;
   const placeholders = remainder === 0 ? 0 : columns - remainder;
+
+  const [hasCardsLoaded, setHasCardsLoaded] = useState(false);
+    
+  useEffect(() => {
+    if (useData.results.length > 0) {
+      setHasCardsLoaded(true);
+    }
+  }, [useData.results]);
 
   return (
     <section className="relative mt-14 max-md:mt-14 px-6 max-lg:px-5 max-md:px-3.5">
@@ -96,7 +100,7 @@ const ContentStars = ({ data, mediaType, category }: IContentStarsProps) => {
         ))}
       </MotionDiv>
 
-      {useData?.page < useData?.total_pages && (
+      {hasCardsLoaded && (useData?.page < useData?.total_pages) && (
         <LoadMore
           page={useData.page}
           mediaType={mediaType}

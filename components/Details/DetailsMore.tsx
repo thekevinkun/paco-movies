@@ -2,56 +2,54 @@
 
 import dynamic from "next/dynamic";
 
-import { Spinner } from "@components";
-
 import type { IDetailsMore, IDetailsProps } from "@types";
 
 const Seasons = dynamic(() => import("@components/Details/Sections/Seasons"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const Videos = dynamic(() => import("@components/Details/Sections/Videos"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const MoviePhotos = dynamic(
   () => import("@components/Details/Sections/MoviePhotos"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const TvPhotos = dynamic(
   () => import("@components/Details/Sections/TvPhotos"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const Credits = dynamic(() => import("@components/Details/Sections/Credits"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const Reviews = dynamic(() => import("@components/Details/Sections/Reviews"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const Details = dynamic(() => import("@components/Details/Sections/Details"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const BoxOffice = dynamic(
   () => import("@components/Details/Sections/BoxOffice"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const Recommendations = dynamic(
   () => import("@components/Details/Sections/Recommendations"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 

@@ -17,6 +17,7 @@ const CardMovie = ({
   mediaType,
   releaseDate,
   rating,
+  popularity
 }: ICardMovieProps) => {
   const fullRoute = id + "-" + `${slugify(title)}`;
   const routeMovie = "/title" + `/${mediaType}` + `/${fullRoute}`;
@@ -76,25 +77,53 @@ const CardMovie = ({
         </div>
 
         <div className="pt-5 max-2xs:pt-4 w-full flex items-center">
-          <div className="flex items-center gap-1">
-            <Image
-              src="/icons/star.svg"
-              alt="rating star"
-              width={0}
-              height={0}
-              sizes="18px"
-              className="relative w-[18px] h-[18px] max-sm:w-4 max-sm:h-4
+          {(mediaType === "movie" || mediaType === "tv") && rating ? (
+            <div className="flex items-center gap-1">
+              <Image
+                src="/icons/star.svg"
+                alt="rating star"
+                width={0}
+                height={0}
+                sizes="18px"
+                className="relative w-[18px] h-[18px] max-sm:w-4 max-sm:h-4
+                    max-2xs:w-3 max-2xs:h-3 object-contain 
+                    bottom-[0.4px] max-2xs:bottom-[0.5px]"
+              />
+
+              <span
+                className={`text-main-1 text-sm max-sm:text-xs max-2xs:text-[0.624rem]
+                  ${rating && rating > 0 ? "font-medium" : "font-normal italic"}`}
+              >
+                {rating && rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
+              </span>
+            </div>
+          ) : ((mediaType === "person" && popularity) &&
+            <div className="flex items-center gap-1">
+              <Image
+                src="/icons/popularity.svg"
+                alt="popularity icon"
+                width={0}
+                height={0}
+                sizes="20px"
+                className="relative w-[18px] h-[18px] max-sm:w-4 max-sm:h-4
                   max-2xs:w-3 max-2xs:h-3 object-contain 
                   bottom-[0.4px] max-2xs:bottom-[0.5px]"
-            />
+              />
 
-            <span
-              className={`text-main-1 text-sm max-sm:text-xs max-2xs:text-[0.624rem]
-                ${rating > 0 ? "font-medium" : "font-normal italic"}`}
-            >
-              {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
-            </span>
-          </div>
+              <span
+                className={`text-main-1 text-sm max-sm:text-xs max-2xs:text-[0.624rem]
+                  ${
+                    popularity > 0
+                      ? "font-medium"
+                      : "font-normal italic"
+                  }`}
+              >
+                {popularity > 0
+                  ? roundedToFixed(popularity, 2)
+                  : "NaN"}
+              </span>
+            </div>
+          )}
 
           <p className="ml-auto max-2xs:pt-[1.2px] text-main-1
               text-xs max-xs:text-[0.685rem] max-2xs:text-[0.575rem]"

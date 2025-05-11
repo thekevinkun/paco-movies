@@ -5,10 +5,10 @@ import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { RxCross2 } from "react-icons/rx";
 
-import { FallbackImage } from "@components";
+import { FallbackImage, MotionDiv } from "@components";
 import {
   CreditList,
   Director,
@@ -69,7 +69,7 @@ const PreviewModal = () => {
   return (
     <AnimatePresence>
       {isOpen && data && (
-        <motion.div
+        <MotionDiv
           key="modal"
           variants={parentModalVariants(0.15)}
           initial="hidden"
@@ -78,7 +78,7 @@ const PreviewModal = () => {
           className="fixed inset-0 z-[9999] flex items-center justify-center max-sm:items-end"
         >
           {/* Blurred background */}
-          <motion.div
+          <MotionDiv
             variants={parentModalVariants()}
             initial="hidden"
             animate="show"
@@ -87,7 +87,7 @@ const PreviewModal = () => {
           />
 
           {/* Modal content */}
-          <motion.div
+          <MotionDiv
             variants={previewModalVariants(isMobile)}
             initial="hidden"
             animate="show"
@@ -313,8 +313,8 @@ const PreviewModal = () => {
                   text-danger cursor-pointer hover:text-danger/55"
               onClick={close}
             />
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

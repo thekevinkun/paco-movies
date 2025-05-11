@@ -100,7 +100,7 @@ const CardMovieTop = ({
 
           {/* Features */}
           <div className="flex items-center pt-8">
-            {(mediaType === "movie" || mediaType === "tv") && rating > 0 ? (
+            {(mediaType === "movie" || mediaType === "tv") && rating ? (
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/star.svg"
@@ -118,11 +118,11 @@ const CardMovieTop = ({
                   {rating > 0 ? roundedToFixed(rating, 1) : "NaN"}
                 </span>
               </div>
-            ) : (mediaType === "person" && (popularity && popularity > 0) &&
+            ) : ((mediaType === "person" && popularity) &&
               <div className="flex items-center gap-1.5">
                 <Image
                   src="/icons/popularity.svg"
-                  alt="rating star"
+                  alt="popularity icon"
                   width={28}
                   height={28}
                   sizes="28px"

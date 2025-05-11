@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { useInView } from "react-intersection-observer";
 import { useMenu } from "@contexts/MenuContext";
 
-import { Spinner, MotionDiv } from "@components";
+import { MotionDiv } from "@components";
 
 import { IContentSearchProps, IGetSearchResponse } from "@types";
 
@@ -13,7 +14,7 @@ import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardSearch = dynamic(() => import("@components/Card/CardSearch"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const LoadMore = dynamic(() => import("@components/LoadMore"), {
   ssr: false,
@@ -21,6 +22,10 @@ const LoadMore = dynamic(() => import("@components/LoadMore"), {
 });
 
 const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
+  const { ref: sentinelSearchRef, inView: isTitleInView } = useInView({
+    threshold: 0, // When it leaves search result title
+  });
+
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
   const [useData, setUseData] = useState<IGetSearchResponse>(data);
 
@@ -46,7 +51,7 @@ const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
 
   return (
     <section className="relative flex-1 mt-20 max-md:mt-[80px] px-6 max-lg:px-5 max-md:px-3.5">
-      <h2 className="text-main text-lg font-normal">
+      <h2 ref={sentinelSearchRef} className="text-main text-lg font-normal">
         <span className="font-semibold">Results for: </span>
         {query?.replace(/\+/g, " ")}
       </h2>
@@ -87,7 +92,7 @@ const ContentSearch = ({ data, mediaType, query }: IContentSearchProps) => {
         </MotionDiv>
       )}
 
-      {useData?.page < useData?.total_pages && (
+      {!isTitleInView && (useData?.page < useData?.total_pages) && (
         <LoadMore
           page={useData.page}
           mediaType={mediaType}

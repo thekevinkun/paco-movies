@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useMenu } from "@contexts/MenuContext";
 
-import { Spinner } from "@components";
-
 import {
   IContentDetailsProps,
   IGetMovieDetailsResponse,
@@ -14,13 +12,13 @@ import {
 
 const DetailsMain = dynamic(() => import("@components/Details/DetailsMain"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const DetailsMainMobile = dynamic(
   () => import("@components/Details/DetailsMainMobile"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const DetailsMore = dynamic(() => import("@components/Details/DetailsMore"), {
@@ -31,7 +29,7 @@ const DetailsPersonMain = dynamic(
   () => import("@components/Details/DetailsPersonMain"),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => null,
   }
 );
 const DetailsPersonMore = dynamic(

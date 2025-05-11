@@ -43,7 +43,7 @@ const DetailsMainMobile = ({
           backgroundRepeat: "no-repeat",
           backgroundImage: `url("https://image.tmdb.org/t/p/w780${backdrop}")`,
         }}
-        className="relative w-full h-72 max-sm:h-64"
+        className="relative w-full h-96 max-sm:h-80 max-xs:h-64"
       >
         {/* Background image gradient */}
         <div

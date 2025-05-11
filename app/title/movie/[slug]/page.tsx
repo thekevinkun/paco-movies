@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import moment from "moment";
 
 import { ContentDetailsClient } from "@components/Clients";
@@ -6,6 +7,7 @@ import { ContentDetailsClient } from "@components/Clients";
 import type { IGetMovieDetailsResponse } from "@types";
 
 import { getCachedDetails } from "@lib/redis";
+import { slugify } from "@lib/helpers/helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -56,9 +58,18 @@ const TitleMovie = async ({
 }) => {
   const mediaType = "movie";
   const { slug } = await params;
-  const titleId = Number(slug.split("-")[0]);
+  const [titleId, ...slugParts] = slug.split("-");
+  const currentSlug = slugParts.join("-");
 
-  const data = await getCachedDetails(mediaType, titleId);
+  const data = (await getCachedDetails(
+    mediaType, 
+    Number(titleId)
+  )) as IGetMovieDetailsResponse;
+
+  const trueSlug = slugify(data.details.title ?? "");
+
+  if (trueSlug && currentSlug !== trueSlug) 
+    redirect(`/title/${mediaType}/${titleId}-${trueSlug}`);
 
   return <ContentDetailsClient data={data} mediaType={mediaType} />;
 };

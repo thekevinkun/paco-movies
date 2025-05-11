@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { RxCross2 } from "react-icons/rx";
 
+import { MotionDiv } from "@components";
 import { useVideo } from "@contexts/VideoContext";
 
 import { parentModalVariants, previewModalVariants } from "@lib/utils/motion";
@@ -26,7 +27,7 @@ const VideoModal = () => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <MotionDiv
           key="modal"
           variants={parentModalVariants(0.15)}
           initial="hidden"
@@ -35,7 +36,7 @@ const VideoModal = () => {
           className="fixed inset-0 z-[9999] flex items-center justify-center"
         >
           {/* Blurred background */}
-          <motion.div
+          <MotionDiv
             variants={parentModalVariants()}
             initial="hidden"
             animate="show"
@@ -44,7 +45,7 @@ const VideoModal = () => {
           />
 
           {/* Modal content */}
-          <motion.div
+          <MotionDiv
             variants={previewModalVariants()}
             initial="hidden"
             animate="show"
@@ -69,8 +70,8 @@ const VideoModal = () => {
                                 text-danger cursor-pointer hover:text-danger/55"
               onClick={close}
             />
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

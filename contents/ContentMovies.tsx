@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { useInView } from "react-intersection-observer";
 import { useMenu } from "@contexts/MenuContext";
 
-import { Spinner, MotionDiv } from "@components";
+import { MotionDiv } from "@components";
 
 import { IContentMoviesProps, IGetByCategoryResponse } from "@types";
 
@@ -13,7 +14,7 @@ import { parentStaggerVariants } from "@lib/utils/motion";
 
 const CardMovieTop = dynamic(() => import("@components/Card/CardMovieTop"), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => null,
 });
 const CardMovie = dynamic(() => import("@components/Card/CardMovie"), {
   ssr: false,
@@ -31,6 +32,10 @@ const ContentMovies = ({
   category,
   categoryTitle,
 }: IContentMoviesProps) => {
+  const { ref: cardTopRef, inView: isCardTopInView } = useInView({
+    threshold: 0, // When it leaves card top viewport
+  });
+
   const { handleChangeMediaType, handleChangeCategory } = useMenu();
   const [useData, setUseData] = useState<IGetByCategoryResponse>(data);
   const firstResult = data.firstResult;
@@ -91,13 +96,14 @@ const ContentMovies = ({
   return (
     <section className="relative mt-20 max-md:mt-12 px-6 max-lg:px-5 max-md:px-3.5">
       <MotionDiv
+        ref={cardTopRef}
         variants={parentStaggerVariants}
         initial="hidden"
         animate="visible"
       >
         <CardMovieTop
           id={firstResult?.result.id || undefined!}
-          poster={firstResult?.result.poster_path ?? ""}
+          poster={firstResult?.result.poster_path || firstResult?.result.profile_path || ""}
           backDrop={firstResult?.result.backdrop_path ?? ""}
           title={
             firstResult?.result.title || firstResult?.result.name || "Untitled"
@@ -137,11 +143,12 @@ const ContentMovies = ({
           <CardMovie
             key={item.id}
             id={item.id}
-            poster={item.poster_path ?? ""}
+            poster={item.poster_path || item.profile_path || ""}
             title={item.title || item.name || "Untitled"}
             mediaType={item.media_type || mediaType}
             releaseDate={item?.release_date || item?.first_air_date || ""}
             rating={item?.vote_average ?? 0}
+            popularity={item?.popularity ?? 0}
           />
         ))}
 
@@ -165,7 +172,7 @@ const ContentMovies = ({
         })}
       </MotionDiv>
 
-      {useData?.page < useData?.total_pages && (
+      {!isCardTopInView && useData?.page < useData?.total_pages && (
         <LoadMore
           page={useData.page}
           mediaType={mediaType}

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { ContentMoviesClient } from "@components/Clients";
 
-import type { Genre } from "@types";
+import type { Genre, IGetByCategoryResponse } from "@types";
 
 import { getByGenre } from "@lib/api";
 import { getCachedGenres } from "@lib/redis";
+import { slugify } from "@lib/helpers/helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -44,21 +46,31 @@ export async function generateMetadata({
 const GenreTv = async ({ params }: { params: Promise<{ name: string }> }) => {
   const mediaType = "tv";
   const { name } = await params;
-  const genreId = name.split("-")[0];
-
-  const tvData = await getByGenre(mediaType, genreId);
-  const genreData = await getCachedGenres(mediaType);
+  const [genreId, ...slugParts] = name.split("-");
+  const currentSlug = slugParts.join("-");
+  
+  const tvData = (await getByGenre(
+    mediaType, 
+    genreId
+  ))  as IGetByCategoryResponse;
+  
+  const genreData = (await getCachedGenres(
+    mediaType
+  )) as Genre[];
 
   const genreFind = genreData.find((g) => g.id.toString() === genreId);
-  const genreName = genreFind ? genreFind.name : "Unknown Genre";
+  const trueSlug = slugify(genreFind?.name ?? "");
 
+  if (trueSlug && currentSlug !== trueSlug) 
+      redirect(`/genre/${mediaType}/${genreId}-${trueSlug}`);
+  
   return (
     <ContentMoviesClient
       data={tvData}
       genres={genreData}
       mediaType={mediaType}
       category={genreId}
-      categoryTitle={genreName + " TV Shows"}
+      categoryTitle={trueSlug + " TV Shows"}
     />
   );
 };

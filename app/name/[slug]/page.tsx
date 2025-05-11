@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { ContentDetailsClient } from "@components/Clients";
 
 import type { IGetPersonDetailsResponse } from "@types";
 
 import { getCachedDetails } from "@lib/redis";
+import { slugify } from "@lib/helpers/helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -50,9 +52,18 @@ const NamePerson = async ({
 }) => {
   const mediaType = "person";
   const { slug } = await params;
-  const nameId = Number(slug.split("-")[0]);
+  const [nameId, ...slugParts] = slug.split("-");
+  const currentSlug = slugParts.join("-");
 
-  const data = await getCachedDetails(mediaType, nameId);
+  const data = (await getCachedDetails(
+    mediaType, 
+    Number(nameId)
+  )) as IGetPersonDetailsResponse;
+
+  const trueSlug = slugify(data.details.name ?? "");
+
+  if (trueSlug && currentSlug !== trueSlug) 
+    redirect(`/name/${nameId}-${trueSlug}`);
 
   return <ContentDetailsClient data={data} mediaType={mediaType} />;
 };
