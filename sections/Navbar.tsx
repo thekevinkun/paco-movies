@@ -28,10 +28,10 @@ const Navbar = () => {
       <nav className="w-72 max-xl:w-64 max-lg:hidden">
         <div
           className="w-72 max-xl:w-64 fixed bottom-0 left-0 
-            flex grow shrink-0 basis-auto flex-col items-center z-30"
+            flex grow shrink-0 basis-auto flex-col items-center z-20"
         >
           <div
-            className="nav-glass nav-menu w-full h-[calc(100vh-64px)] 
+            className="nav-glass nav-menu w-full h-[calc(100dvh-64px)]
             flex flex-col items-center pt-5 overflow-auto"
           >
             <Menu />
@@ -56,10 +56,10 @@ const Navbar = () => {
         ref={mobileMenu}
         className={`${
           isShowMobileMenu && "nav-glass"
-        } fixed top-0 left-0 transition-all z-30 
+        } fixed top-0 left-0 transition-all z-40 
         ${isShowMobileMenu ? "w-96 max-sm:w-80 max-xs:w-72 max-2xs:w-64" : "w-0"}`}
       >
-        <div className="nav-menu h-screen flex flex-col overflow-x-hidden overflow-y-auto">
+        <div className="nav-menu h-dvh flex flex-col overflow-x-hidden overflow-y-auto">
           <div className="mb-3 p-3">
             <SearchBar 
               widthClass="w-full" 
@@ -90,7 +90,7 @@ const Navbar = () => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="w-full min-h-screen absolute inset-0 z-20
+          className="w-full h-screen absolute inset-0 z-30
             bg-black/55 backdrop-blur-sm"
         />
       }

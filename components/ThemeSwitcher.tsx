@@ -24,7 +24,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="ml-auto mr-5 max-lg:pb-0.5 max-lg:mr-[18px] max-md:mr-3 max-lg:absolute max-lg:right-0">
+    <div className="ml-auto mr-5 max-lg:pb-[2.5px] max-lg:mr-[18px] max-md:mr-3 max-lg:absolute max-lg:right-0">
       {whichTheme === "light" ? (
         <MdDarkMode
           className="text-[27px] text-main cursor-pointer hover:text-light-2 

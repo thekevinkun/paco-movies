@@ -48,7 +48,7 @@ const DetailsMain = ({
         backgroundRepeat: "no-repeat",
         backgroundImage: `url("https://image.tmdb.org/t/p/w1280${backdrop}")`,
       }}
-      className="relative w-full h-auto max-md:hidden"
+      className="relative w-full h-auto max-lg:mt-2 max-md:hidden"
     >
       {/* Background image gradient */}
       <div

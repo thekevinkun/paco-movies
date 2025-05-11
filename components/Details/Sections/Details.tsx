@@ -27,8 +27,7 @@ const Details = ({
         {/* RELEASE DATE */}
         <div className="py-3 text-main grid grid-cols-[30%_1fr]
             max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
-            max-md:gap-x-3  
-            items-baseline border-b border-gray-500"
+            max-md:gap-x-3 items-baseline border-b border-gray-500"
         >
           <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             {mediaType === "movie" ? "Release Date" : "First Air Date"}
@@ -58,8 +57,7 @@ const Details = ({
         {/* MOVIE COUNTRIES */}
         <div className="py-3 text-main grid grid-cols-[30%_1fr]
             max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
-            max-md:gap-x-3   
-            items-baseline border-b border-gray-500"
+            max-md:gap-x-3 items-baseline border-b border-gray-500"
         >
           <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Countries of Origin
@@ -79,8 +77,7 @@ const Details = ({
         {details.homepage && (
           <div className="py-3 text-main grid grid-cols-[30%_1fr]
               max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
-              max-md:gap-x-3   
-              items-baseline border-b border-gray-500"
+              max-md:gap-x-3 items-baseline border-b border-gray-500"
           >
             <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
               Official Site
@@ -102,8 +99,7 @@ const Details = ({
         {/* MOVIE EXTERNAL SITES */}
         <div className="py-3 text-main grid grid-cols-[30%_1fr]
               max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
-              max-md:gap-x-3  
-              items-baseline border-b border-gray-500"
+              max-md:gap-x-3 items-baseline border-b border-gray-500"
           >
           <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             External Sites
@@ -115,7 +111,7 @@ const Details = ({
                 href={`https://twitter.com/${externalIds.twitter_id}`}
                 target="_blank"
               >
-                <FaXTwitter className="text-2xl" />
+                <FaXTwitter className="text-2xl max-sm:text-xl" />
               </Link>
             )}
 
@@ -124,7 +120,7 @@ const Details = ({
                 href={`https://facebook.com/${externalIds.facebook_id}`}
                 target="_blank"
               >
-                <FaFacebook className="text-2xl" />
+                <FaFacebook className="text-2xl max-sm:text-xl" />
               </Link>
             )}
 
@@ -133,7 +129,7 @@ const Details = ({
                 href={`https://instagram.com/${externalIds.instagram_id}`}
                 target="_blank"
               >
-                <FaInstagram className="text-2xl" />
+                <FaInstagram className="text-2xl max-sm:text-xl" />
               </Link>
             )}
 
@@ -142,7 +138,7 @@ const Details = ({
                 href={`https://imdb.com/title/${externalIds.imdb_id}`}
                 target="_blank"
               >
-                <FaImdb className="text-2xl" />
+                <FaImdb className="text-2xl max-sm:text-xl" />
               </Link>
             )}
 
@@ -151,7 +147,7 @@ const Details = ({
                 href={`https://wikidata.org/wiki/${externalIds.wikidata_id}`}
                 target="_blank"
               >
-                <SiWikidata className="text-2xl" />
+                <SiWikidata className="text-2xl max-sm:text-xl" />
               </Link>
             )}
           </div>
@@ -160,8 +156,7 @@ const Details = ({
         {/* MOVIE LANGUAGE */}
         <div className="py-3 text-main grid grid-cols-[30%_1fr]
               max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr] 
-              max-md:gap-x-3  
-              items-baseline border-b border-gray-500"
+              max-md:gap-x-3 items-baseline border-b border-gray-500"
         >
           <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Language
@@ -180,8 +175,7 @@ const Details = ({
         {/* MOVIE COMPANIES */}
         <div className="py-3 text-main grid grid-cols-[30%_1fr]
             max-[1178px]:grid-cols-[36%_1fr] max-lg:grid-cols-[35%_1fr]
-            max-md:gap-x-3    
-            items-baseline border-b border-gray-500"
+            max-md:gap-x-3 items-baseline border-b border-gray-500"
         >
           <h3 className="text-lg max-md:text-base max-sm:text-sm font-semibold">
             Production Companies

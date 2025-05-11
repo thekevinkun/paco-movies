@@ -24,25 +24,26 @@ const PersonKnownFor = ({ works }: IPersonKnownForProps) => {
 
       {/* LIST OF WORKS */}
       <div
-        className="pt-7 grid grid-cols-[repeat(auto-fit,_minmax(420px,_1fr))]
-          max-lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] 
-          max-2xs:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] 
-          gap-y-3 gap-x-[15px] max-md:gap-x-[8px]"
+        className="pt-7 grid grid-cols-8 max-xs:grid-cols-1 gap-3"
       >
         {sortedWorks.slice(0, 4).map((work, index: number) => (
           // POSTER
           <div
             key={work.id}
-            className={`h-[138px] max-xs:h-[132px] flex gap-2 bg-light
-              shadow-inner shadow-dark-1
+            className={`col-span-4
+              h-[138px] max-sm:h-[127px] max-xs:h-[128px]
+              max-2xs:h-[120px] flex gap-2 max-sm:gap-1
+              bg-light shadow-inner shadow-dark-1
               rounded-tr-xl rounded-bl-xl
-              ${index >= 2 && "max-md:hidden"}`}
+              ${index >= 2 && "max-sm:hidden"}`}
           >
             <Link
               href={`/title/${work.media_type}/${work.id}-${slugify(
                 work.title || work.name || "Untitled"
               )}`}
-              className="relative w-[20%] max-md:w-[25%] h-full bg-dark group rounded-bl-xl"
+              className="relative w-[20%] max-md:w-[25%]
+                max-xs:w-[23%] h-full
+                bg-dark group rounded-bl-xl"
             >
               <FallbackImage
                 src={work.poster_path}
@@ -67,8 +68,9 @@ const PersonKnownFor = ({ works }: IPersonKnownForProps) => {
                   )}`}
                 >
                   <h4
-                    className="line-clamp-1 font-semibold
-                    capitalize hover:text-tale"
+                    className="line-clamp-2 font-semibold
+                    max-sm:text-sm max-xs:text-base
+                    max-2xs:text-sm capitalize hover:text-tale"
                   >
                     {work.title || work.name}
                   </h4>
@@ -119,7 +121,8 @@ const PersonKnownFor = ({ works }: IPersonKnownForProps) => {
                   />
 
                   <span
-                    className={`text-dark-1 ${
+                    className={`text-dark-1 max-sm:text-sm 
+                        max-xs:text-base max-2xs:text-sm ${
                       work.vote_average && work.vote_average > 0
                         ? "font-semibold"
                         : "font-normal italic"
@@ -131,14 +134,19 @@ const PersonKnownFor = ({ works }: IPersonKnownForProps) => {
                   </span>
                 </div>
 
-                <div className="text-dark-1">
+                <div className="text-dark-1 max-sm:text-sm
+                      max-xs:text-base max-2xs:text-sm">
                   {moment(work.release_date || work.first_air_date).format(
                     "YYYY"
                   )}
                 </div>
               </div>
 
-              <p className="pt-4 font-medium text-dark-1">{work.character}</p>
+              <p className="pt-4 font-medium text-dark-1 
+                    max-md:text-sm max-xs:text-base max-2xs:text-sm"
+              >
+                {work.character}
+              </p>
             </div>
           </div>
         ))}

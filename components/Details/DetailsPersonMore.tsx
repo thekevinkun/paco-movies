@@ -55,7 +55,7 @@ const DetailsPersonMore = ({
         <PersonCredits credits={credits} />
       </div>
 
-      <div className="mb-[-2rem]"></div>
+      <div className="mb-[-1rem]"></div>
     </section>
   );
 };

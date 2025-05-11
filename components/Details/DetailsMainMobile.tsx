@@ -35,7 +35,7 @@ const DetailsMainMobile = ({
   const url = `/title/${mediaType}/${id}-${slugify(title)}`;
 
   return (
-    <section className="hidden max-md:block">
+    <section className="hidden max-md:block max-md:mt-2">
       <div
         style={{
           backgroundPosition: "center",
@@ -128,8 +128,8 @@ const DetailsMainMobile = ({
               videoKey={officialTrailer.key}
               videoTitle={officialTrailer.name}
               containerStyles="py-1 px-1.5 flex items-center gap-2 ml-10
-                                bg-transparent text-light hover:bg-tale/80 rounded-md
-                                transition-colors duration-100"
+                                bg-transparent text-main hover:bg-tale/80 
+                                rounded-md transition-colors duration-100"
             >
               <FaPlay className="text-2xl" />
               <span className="font-semibold">Play Trailer</span>
