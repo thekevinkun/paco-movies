@@ -2,7 +2,7 @@
 
 **PacoMovies** is a modern movie and TV show discovery app powered by the [TMDB API](https://www.themoviedb.org/documentation/api). Search, explore, and watch trailers for your favorite content — from trending movies to the latest TV shows and stars — all in a fast, responsive UI.
 
-🔗 Live Site: [https://paco-movies.vercel.app](https://paco-movies.vercel.app)
+🔗 Live Site: [https://pacomovies.vercel.app](https://pacomovies.vercel.app)
 
 **Desktop**:
 
