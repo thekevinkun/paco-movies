@@ -51,7 +51,7 @@ const SearchBar = ({
     >
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search for movie, tv, or stars..."
         className="search-input !rounded-none !border-none"
         value={searchQuery}
         onChange={({ target }) => setSearchQuery(target.value)}
