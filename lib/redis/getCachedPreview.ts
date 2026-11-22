@@ -9,7 +9,7 @@ export const getCachedPreview = async (
 ): Promise<IGetPreviewDetailsResponse> => {
   const subPath = `previews:${mediaType}`;
   const cacheKey = `preview_${id}`;
-  const maxAgeMs = 72 * 60 * 60; // 48 hour
+  const maxAgeMs = 6 * 60 * 60; // 6 hours
 
   const cached = await getFromCache<IGetPreviewDetailsResponse>(
     subPath,
