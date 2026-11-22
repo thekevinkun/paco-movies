@@ -2,42 +2,34 @@
 
 import { redis } from "@lib/redis/redis";
 
-// Read cached data (If it's expired or not)
 export const getFromCache = async <T>(
   subPath: string,
   cacheKey: string
 ): Promise<T | null> => {
   try {
     const redisKey = `${subPath}:${cacheKey}`;
-
     const cachedData = await redis.get(redisKey);
 
     if (cachedData === null) {
-      console.info(`Cache miss for key: ${redisKey}`);
       return null;
     }
 
-    if (typeof cachedData !== "string") {
-      if (process.env.NODE_ENV === "development") {
-        console.warn(
-          `Unexpected data type from Redis for key ${redisKey}:`,
-          cachedData
-        );
-      } else {
-        console.warn(
-          `Unexpected data type from Redis for key ${redisKey}: type=${typeof cachedData}`
-        );
-      }
-      return null;
+    // Redis may return an already-parsed object or a JSON string.
+    const parsed =
+      typeof cachedData === "string"
+        ? JSON.parse(cachedData)
+        : cachedData;
+
+    if (
+      typeof parsed === "object" &&
+      parsed !== null &&
+      "data" in parsed
+    ) {
+      return parsed.data as T;
     }
 
-    // Parse the stored JSON data
-    const parsed = JSON.parse(cachedData) as {
-      data: T;
-      timestamp: number;
-    };
-
-    return parsed.data;
+    console.warn(`Invalid cache structure for key: ${redisKey}`);
+    return null;
   } catch (error) {
     console.error("Redis getFromCache error:", error);
     return null;
