@@ -13,7 +13,7 @@ export const getCachedDetails = async (
 ): Promise<CachedResponse> => {
   const subPath = mediaType === "person" ? `name` : `title:${mediaType}`; // e.g., title:movie or title:movie
   const cacheKey = `${mediaType}_${id}`; // e.g., movie_157336
-  const maxAgeMs = 72 * 60 * 60; // 48 hour
+  const maxAgeMs = 6 * 60 * 60; // 6 hours
 
   const cached = await getFromCache<CachedResponse>(subPath, cacheKey);
   if (cached) return cached;
