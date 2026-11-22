@@ -14,7 +14,7 @@ export const getCachedTrending = async (
   const subPath =
     mediaType === "stars" ? `${mediaType}` : `${mediaType}:${category}`;
   const cacheKey = mediaType === "stars" ? `${mediaType}_1` : `${category}_1`;
-  const maxAgeMs = 60 * 60; // 1 hour
+  const maxAgeMs = 15 * 60; // 15 minutes
 
   const cached = await getFromCache<CachedCategoryResponse>(subPath, cacheKey);
   if (cached) return cached;
