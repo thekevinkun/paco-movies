@@ -11,7 +11,7 @@ export const getCachedNextPage = async (
     mediaType === "stars" ? `${mediaType}` : `${mediaType}:${category}`;
   const cacheKey =
     mediaType === "stars" ? `${mediaType}_${page}` : `${category}_${page}`;
-  const maxAgeMs = 60 * 60; // 1 hour
+  const maxAgeMs = 15 * 60; // 15 minutes
 
   const cached = await getFromCache(subPath, cacheKey);
   if (cached) return cached;
