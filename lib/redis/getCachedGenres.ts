@@ -5,7 +5,7 @@ import { Genre } from "@types";
 export async function getCachedGenres(mediaType: string): Promise<Genre[]> {
   const subPath = `genres:${mediaType}`;
   const cacheKey = `genres`;
-  const maxAgeMs = 30 * 24 * 60 * 60; // 1 month
+  const maxAgeMs = 7 * 24 * 60 * 60; // 7 days
 
   const cached = await getFromCache<Genre[]>(subPath, cacheKey);
   if (cached) return cached;
